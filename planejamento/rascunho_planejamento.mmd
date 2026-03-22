@@ -1,0 +1,25 @@
+gantt
+    title Ciclo Infinito – Cronograma Geral (52 semanas)
+    dateFormat  YYYY-MM-DD
+    axisFormat  %b/%Y
+
+    section Pré-Produção
+    Demo Final                          :d1, 2026-03-23, 4w
+
+    section Produção – Aprendizado
+    Vertical Slice - Parte 1            :vs1, after d1, 4w
+    Vertical Slice – Parte 2            :vs2, after vs1, 4w
+    Vertical Slice – Consolidação       :vs3, after vs2, 6w
+
+    section Produção – Conteúdo
+    Expansão de Sistemas                :sys, after vs3, 4w
+    Conteúdo Jogável                    :cont, after sys, 4w
+
+    section Polimento
+    Polimento Técnico                   :pol, after cont, 4w
+    Feature Lock                        :lock, after pol, 4w
+
+    section Finalização/Testes
+    Alpha                                :alpha, after lock, 5w
+    Beta                                :beta, after alpha, 5w
+    Release Candidate                   :rc, after beta, 7w
