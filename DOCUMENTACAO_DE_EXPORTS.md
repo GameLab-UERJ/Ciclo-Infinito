@@ -53,7 +53,7 @@ Explique o que cada opção significa na prática, pois o nome do enum costuma s
 ## [br]
 ## [code]VOLTAR[/code]: Volta para o ponto de patrulha.
 ## [code]BUSCAR[/code]: Vai até o último lugar onde viu o jogador.
-@export var comportamento_perda: ComportamentoIA = ComportamentoIA.VOLTAR
+@export var ComportamentoPerda: ComportamentoIA = ComportamentoIA.VOLTAR
 ```
 
 ### NodePath
