@@ -85,16 +85,16 @@ descreva de forma geral
 [ ] Testado via Web Export (ou verificado se utiliza funções não suportadas em HTML5, como Threads específicas ou shaders complexos).
 ```
 
-## Formatting
+## Formatação
 Formatação é uma questão com muitas regras, fazendo com que esse bloco ficaria muito extenso para cobrir todas as regras.  
 Como GDscript é inspirado em python, seu style guide também é inspirado no PEP 8, então será apontado apenas as principais regras.
 
-- use tabs e não spaces para identação
-- a identação deve ser sempre de 1 nível do bloco que o contém.
+- Use tabs e não spaces para identação
+- A identação deve ser sempre de 1 nível do bloco que o contém.
 - Linhas não devem conter mais que 100 characters
 - A continuação da linha deve apresentar 2 níveis de identação para destinguir de blocos de código.
 
-## Order
+## Ordem
 01. @tool, @icon, @static_unload
 02. class_name
 03. extends
@@ -123,7 +123,7 @@ Como GDscript é inspirado em python, seu style guide também é inspirado no PE
 
 >public methods and variables before private ones.
 
-## Naming
+## Nomenclatura
 
 | Type         | Convention    | Example                   |
 |--------------|---------------|---------------------------|
@@ -137,16 +137,19 @@ Como GDscript é inspirado em python, seu style guide também é inspirado no PE
 | Enum names   | PascalCase    | enum Element              |
 | Enum members | CONSTANT_CASE | {EARTH, WATER, AIR, FIRE} |
 
->Prepend a single underscore (_) to virtual methods functions the user must override, private functions, and private variables. ex: `func _load_file()`
+>Preceda (_) a métodos virtuais que devem ser sobrescrita (*overridden*), funções privadas e variáveis privadas. ex: `func _load_file()`
 
 ## Tipagem
 
-### Declared types
-To declare a variable's type, use "\<variable\>: \<type>".
+### Declarar tipo da variável
+
+use "\<variable\>: \<type>".
 
 `var health: int = 0`
 
-To declare the return type of a function, use "-> \<type>":
+### Declarar tipo de retorno de uma função
+
+use "-> \<type>":
 
 `func heal(amount: int) -> void:`
 
