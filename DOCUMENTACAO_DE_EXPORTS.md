@@ -129,8 +129,8 @@ Caso existam exports para diferentes fins, você pode usar categorias para separ
 ## [br]
 ## [b]Unidade:[/b] [Pixels, segundos, pontos, etc].
 ## [b]Aviso:[/b] [O que acontece se o valor for muito alto/baixo].
-@export_range([valor_min], [valor_max], [passo])
-var nome_variavel: float = [valor_padrao]
+@export_range(valor_min, valor_max, passo)
+var nome_variavel: float = valor_padrao
 ```
 
 ### Template para Recursos (Resources)
