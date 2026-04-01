@@ -56,16 +56,6 @@ Explique o que cada opção significa na prática, pois o nome do enum costuma s
 @export var ComportamentoPerda: ComportamentoIA = ComportamentoIA.VOLTAR
 ```
 
-### NodePath
-Diga exatamente que tipo de nó deve ser arrastado.
-
-```gdscript
-## Ponto de saída dos projéteis.
-## [br]
-## [b]Esperado:[/b] Um [Marker2D] filho deste personagem.
-@export var spawn_projeteis: NodePath
-```
-
 ---
 
 ## Organização (Categorias)
@@ -149,14 +139,6 @@ var nome_variavel: float = valor_padrao
 ## [code]OPCAO_1[/code]: [O que essa opção faz na prática].
 ## [code]OPCAO_2[/code]: [O que essa opção faz na prática].
 @export var nome_variavel: NomeDoEnum = NomeDoEnum.OPCAO_PADRAO
-```
-
-### Template para NodePaths
-```gdscript
-## [Resumo curto do que é].
-## [br]
-## [b]Esperado:[/b] Um nó do tipo [TipoDeNode] filho deste objeto.
-@export var nome_variavel: NodePath
 ```
 
 ---
