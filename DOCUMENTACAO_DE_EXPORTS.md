@@ -75,24 +75,24 @@ Caso existam exports para diferentes fins, você pode usar categorias para separ
 ```gdscript
 @export_category("Movimento")
 
-	## Velocidade ao andar.
-	@export var velocidade: float = 200.0
-	
-	## Força do pulo.
-	@export_range(-1000.0, -100.0)
-	var forca_pulo: float = -450.0
+## Velocidade ao andar.
+@export var velocidade: float = 200.0
+
+## Força do pulo.
+@export_range(-1000.0, -100.0)
+var forca_pulo: float = -450.0
 
 @export_subgroup("Gravidade")
 
-	## Multiplicador de queda.
-	@export_range(1.0, 5.0, 0.5)
-	var multiplicador_queda: float = 2.0
+## Multiplicador de queda.
+@export_range(1.0, 5.0, 0.5)
+var multiplicador_queda: float = 2.0
 
 @export_category("Combate")
 
-	## Vida máxima.
-	@export_range(1, 999)
-	var vida_maxima: int = 100
+## Vida máxima.
+@export_range(1, 999)
+var vida_maxima: int = 100
 
 @export_category("") # Reseta o agrupamento
 ```
