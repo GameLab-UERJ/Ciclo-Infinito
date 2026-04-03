@@ -24,11 +24,11 @@ func _ready() -> void:
 		return
 
 	for inimigo in get_children():
-		if not inimigo.has_signal("golem_defeated"):
-			print("Erro: O nó ", inimigo.name, " não tem o sinal 'golem_defeated'!")
+		if not inimigo.has_signal("defeated"):
+			print("Erro: O nó ", inimigo.name, " não tem o sinal 'defeated'!")
 			total_inimigos -= 1
 		else:
-			inimigo.golem_defeated.connect(_on_inimigo_derrotado)
+			inimigo.defeated.connect(_on_inimigo_derrotado)
 			
 
 	_atualizar_label() 

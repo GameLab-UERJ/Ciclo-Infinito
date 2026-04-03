@@ -1,6 +1,9 @@
 class_name PauseScreen
 extends Control
 
+var main_menu = load("uid://downt2rxxaqaf")
+
+
 @onready var resume_button = $MarginContainer/VBoxContainer/MenuPrincipal/resumebutton
 @onready var options_button = $MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton
 @onready var quit_button = $MarginContainer/VBoxContainer/MenuPrincipal/quitbutton
@@ -26,7 +29,7 @@ func _on_optionsbutton_pressed():
 	menu_principal.hide()
 	menu_opcoes.show()
 func _on_quitbutton_pressed():
-	get_tree().change_scene_to_file("res://scene/MainMenu.tscn")
+	get_tree().change_scene_to_packed(main_menu)
 func _on_fullscreenbutton_pressed():
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)

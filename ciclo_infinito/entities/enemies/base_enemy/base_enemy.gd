@@ -1,14 +1,13 @@
 class_name BaseEnemy
 extends CharacterBody2D
 
-#Contador para a tela de vitória
-signal golem_defeated # <-- ADICIONE ESTA LINHA
+
+signal defeated ##Contador para a tela de vitória
 
 
 @export_category("objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null
-@onready var attack_sfx: AudioStreamPlayer = $attack_sfx
 
 @export_category("Movement")
 @export var move_speed: float = 100.0
@@ -18,19 +17,22 @@ signal golem_defeated # <-- ADICIONE ESTA LINHA
 @export_category("Combat")
 @export var attack_damage: float = 20.0
 @export var attack_cooldown: float = 1.5
-var can_attack: bool = true
 
 @export_category("Health")
 @export var max_health: float = 50.0
-var current_health: float
 
+
+var can_attack: bool = true	
+var current_health: float
 var player_ref: Node2D = null
 var _last_facing: String = "down"
 var _is_attacking: bool = false
-
-@onready var attack_cooldown_timer: Timer = $AttackCooldown
 var attack_area: Area2D
 var detect_area: Area2D
+
+
+@onready var attack_sfx: AudioStreamPlayer = $attack_sfx
+@onready var attack_cooldown_timer: Timer = $AttackCooldown
 
 func _ready() -> void:
 	current_health = max_health
@@ -103,7 +105,7 @@ func attack() -> void:
 	attack_sfx.play()
 	print("Golem ataca!")
 
-# Aplica o dano apenas no final da animação de ataque
+
 func apply_attack_damage() -> void:
 	if attack_area == null:
 		return
@@ -117,20 +119,8 @@ func apply_attack_damage() -> void:
 			body.take_damage(attack_damage, hit_direction)
 			print("Dano aplicado em ", body.name)
 
-func _on_attack_cooldown_timeout() -> void:
-	can_attack = true
-
-func _on_anim_animation_finished(animation_name: StringName) -> void:
-	var n := String(animation_name)
-	if n.begins_with("attack_"):
-		# Primeiro aplica o dano (se o alvo ainda estiver na área), depois destrava
-		apply_attack_damage()
-		_is_attacking = false
-		_play_anim("idle_%s" % _last_facing)
-
 
 # ======== Vida / Morte ========
-
 func take_damage(damage: float, hit_direction: Vector2) -> void:
 	current_health -= damage
 	print("Inimigo recebeu dano de ", damage, ". Vida restante: ", current_health)
@@ -141,19 +131,19 @@ func take_damage(damage: float, hit_direction: Vector2) -> void:
 	if current_health <= 0:
 		die()
 
+
 func die() -> void:
 	print("Inimigo foi derrotado!")
-	golem_defeated.emit()
+	defeated.emit()
 	queue_free()
 
 
-
 # ======== Movimento / Animação ========
-
 func _stop() -> void:
 	velocity = velocity.lerp(Vector2.ZERO, accel)
 	move_and_slide()
 	_update_animation_idle()
+
 
 func _update_animation_from_velocity() -> void:
 	if _is_attacking:
@@ -165,10 +155,12 @@ func _update_animation_from_velocity() -> void:
 	_last_facing = dir
 	_play_anim("walk_%s" % dir)
 
+
 func _update_animation_idle() -> void:
 	if _is_attacking:
 		return
 	_play_anim("idle_%s" % _last_facing)
+
 
 func _play_anim(animation_name: String) -> void:
 	if anim == null:
@@ -177,24 +169,13 @@ func _play_anim(animation_name: String) -> void:
 		anim.play(animation_name)
 
 
-# ======== Detecção do Player ========
-
-func _on_detectionarea_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player") or body.name.to_lower() == "player":
-		player_ref = body
-
-func _on_detectionarea_body_exited(body: Node2D) -> void:
-	if body == player_ref:
-		player_ref = null
-
-
 # ======== Util ========
-
 func _dir_string_from_vector(v: Vector2) -> String:
 	if abs(v.x) > abs(v.y):
 		return "right" if v.x > 0.0 else "left"
 	else:
 		return "down" if v.y > 0.0 else "up"
+
 
 func _resolve_area2d(path: String) -> Area2D:
 	if not has_node(path):
@@ -207,3 +188,26 @@ func _resolve_area2d(path: String) -> Area2D:
 	if n.get_parent() and n.get_parent() is Area2D:
 		return n.get_parent() as Area2D
 	return null
+
+
+func _on_detectionarea_body_entered(body: Node2D) -> void:
+	if body.is_in_group("player") or body.name.to_lower() == "player":
+		player_ref = body
+
+
+func _on_detectionarea_body_exited(body: Node2D) -> void:
+	if body == player_ref:
+		player_ref = null
+
+
+func _on_attack_cooldown_timeout() -> void:
+	can_attack = true
+
+
+func _on_anim_animation_finished(animation_name: StringName) -> void:
+	var n := String(animation_name)
+	if n.begins_with("attack_"):
+		# Primeiro aplica o dano (se o alvo ainda estiver na área), depois destrava
+		apply_attack_damage()
+		_is_attacking = false
+		_play_anim("idle_%s" % _last_facing)
