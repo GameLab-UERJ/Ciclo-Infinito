@@ -54,11 +54,16 @@ func conectar_sinais():
 		for enemy in enemies.get_children():
 			enemy.inimigo_derrotado.connect(_on_inimigo_derrotado)
 func _on_falou_com_pedro():
-	print("Pedro falou — avançando missão.")
-	proxima_missao()
+
+	if indice_missao_atual  == 2:
+		proxima_missao()
+	elif indice_missao_atual ==4:
+		proxima_missao()
+	else:
+		print(missoes[indice_missao_atual])
 func _on_inimigo_derrotado():
 	inimigos_derrotados += 1
-	if inimigos_derrotados >= inimigos_totais:
+	if indice_missao_atual ==3 and inimigos_derrotados >= inimigos_totais:
 		print("vasco")
 		print("Todos os inimigos derrotados — avançando missão.")
 		proxima_missao()
