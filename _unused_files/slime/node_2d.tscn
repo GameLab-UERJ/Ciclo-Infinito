@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cuhdej66y3clj"]
+
+[ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="1_ht155"]
+[ext_resource type="PackedScene" uid="uid://b428k5q3uu6me" path="res://_unused_files/slime/mob.tscn" id="2_w8ulc"]
+
+[node name="Node2D" type="Node2D" unique_id=232009751]
+position = Vector2(300, 243)
+
+[node name="player" parent="." unique_id=1109326076 instance=ExtResource("1_ht155")]
+position = Vector2(6, 6)
+
+[node name="Mob" parent="." unique_id=1989325331 instance=ExtResource("2_w8ulc")]
+position = Vector2(133, 33)

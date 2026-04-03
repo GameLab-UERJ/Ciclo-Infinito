@@ -1,0 +1,128 @@
+[gd_scene format=3 uid="uid://cerom0ls1c2wk"]
+
+[ext_resource type="Script" uid="uid://3sojsttqv77" path="res://entities/interactables/npcs/jose/jose.gd" id="1_iebxx"]
+[ext_resource type="Texture2D" uid="uid://b80tuigosseak" path="res://assets/art/npcs/jose/jose_idle.png" id="2_bv1l4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
+size = Vector2(77, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xumeu"]
+atlas = ExtResource("2_bv1l4")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tl1s5"]
+atlas = ExtResource("2_bv1l4")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tm0j6"]
+atlas = ExtResource("2_bv1l4")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jwke"]
+atlas = ExtResource("2_bv1l4")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aumdr"]
+atlas = ExtResource("2_bv1l4")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ea7f"]
+atlas = ExtResource("2_bv1l4")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgete"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xumeu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tl1s5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tm0j6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jwke")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aumdr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ea7f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
+[sub_resource type="Theme" id="Theme_ytjd8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hivs1"]
+bg_color = Color(0.187176, 0.187176, 0.187176, 0.552941)
+
+[sub_resource type="LabelSettings" id="LabelSettings_faxwa"]
+font_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
+size = Vector2(25, 43)
+
+[node name="Jose" type="StaticBody2D" unique_id=1772634627]
+position = Vector2(0.9, 0)
+collision_layer = 3
+script = ExtResource("1_iebxx")
+metadata/_custom_type_script = "uid://3sojsttqv77"
+metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
+metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1898002823]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2061759812]
+position = Vector2(-4.5, 24.5)
+shape = SubResource("RectangleShape2D_gu3sj")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1775995246]
+sprite_frames = SubResource("SpriteFrames_cgete")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.378858
+flip_h = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1984156275]
+
+[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=980316351]
+offset_left = 68.0
+offset_top = 61.0
+offset_right = 768.0
+offset_bottom = 161.0
+theme = SubResource("Theme_ytjd8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=77554889]
+offset_left = 84.0
+offset_top = 74.0
+offset_right = 751.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 15
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=104065868]
+
+[node name="LabelInteração" type="Label" parent="Area2D" unique_id=349860372]
+offset_left = -24.0
+offset_top = -34.0
+offset_right = 37.0
+label_settings = SubResource("LabelSettings_faxwa")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1709931667]
+position = Vector2(-5.5, 22.5)
+shape = SubResource("RectangleShape2D_xxcha")
+debug_color = Color(0.96602, 0, 0.483122, 0.42)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bi04t2jd83mha"]
+
+[ext_resource type="Script" uid="uid://do7gfln6tqyaq" path="res://entities/interactables/lift/lift.gd" id="1_m3uln"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ceqy0"]
+size = Vector2(52, 52)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v4j7h"]
+
+[node name="ElevadorInterativo" type="Area2D" unique_id=1971279796]
+collision_mask = 3
+script = ExtResource("1_m3uln")
+metadata/_custom_type_script = "uid://do7gfln6tqyaq"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1108200143]
+position = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_ceqy0")
+debug_color = Color(0.476749, 0, 0.100846, 0.42)
+
+[node name="LabelInteração" type="Label" parent="." unique_id=714468324]
+offset_top = -14.0
+offset_right = 87.0
+offset_bottom = 17.0
+label_settings = SubResource("LabelSettings_v4j7h")
+autowrap_mode = 2
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
