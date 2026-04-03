@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://sf0ngt0mifqa"]
+[gd_scene format=3 uid="uid://sf0ngt0mifqa"]
 
 [ext_resource type="Script" uid="uid://bu424e6ida6ma" path="res://npc.gd" id="1_ab2no"]
 [ext_resource type="Texture2D" uid="uid://bg0k2qwoehnrc" path="res://assets/sprites/CortesDoMapa/_Idle.png" id="2_8oust"]
@@ -137,28 +137,28 @@ shadow_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
 size = Vector2(25, 71)
 
-[node name="NPC" type="StaticBody2D"]
+[node name="NPC" type="StaticBody2D" unique_id=513358134]
 position = Vector2(0.9, 0)
 collision_layer = 3
 script = ExtResource("1_ab2no")
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=593119842]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2037184835]
 position = Vector2(-4.5, 24.5)
 shape = SubResource("RectangleShape2D_gu3sj")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Area2D"]
+[node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1498940661]
 sprite_frames = SubResource("SpriteFrames_cgete")
 animation = &"idle Vamp"
 autoplay = "idle Vamp"
 frame_progress = 0.895625
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=2138113994]
 
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer"]
+[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=2094623985]
 offset_left = 68.0
 offset_top = 61.0
 offset_right = 768.0
@@ -168,7 +168,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer"]
+[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=542433257]
 offset_left = 84.0
 offset_top = 74.0
 offset_right = 751.0
@@ -177,16 +177,22 @@ theme_override_font_sizes/font_size = 15
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer"]
+[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=911931892]
 
-[node name="LabelInteração" type="Label" parent="Area2D"]
+[node name="PularDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=1827012000]
+offset_left = 588.0
+offset_top = 138.0
+offset_right = 765.0
+offset_bottom = 161.0
+
+[node name="LabelInteração" type="Label" parent="Area2D" unique_id=1562820154]
 offset_left = -24.0
 offset_top = -34.0
 offset_right = 37.0
 label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=256507057]
 position = Vector2(-5.5, 26.5)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)
