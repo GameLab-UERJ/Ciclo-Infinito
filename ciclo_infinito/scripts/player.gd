@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var is_floating: bool = true
 @onready var vida_cheia = $Camera2D/VidaCheia
 
 var vida_textures = [

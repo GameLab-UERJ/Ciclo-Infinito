@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 
-
+@export var is_floating: bool = true
 @export var max_health: float = 30.0
 var current_health: float = max_health
 
@@ -24,5 +24,4 @@ func die():
 	# Coloque aqui a lógica de morte (animação, pontuação, etc.)
 	print("Inimigo foi derrotado!")
 	queue_free()
-	
 	

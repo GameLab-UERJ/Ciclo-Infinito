@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c1t0cprxobugr"]
+[gd_scene format=3 uid="uid://c1t0cprxobugr"]
 
 [ext_resource type="PackedScene" uid="uid://bbf6oefdi3vmk" path="res://scene/Mapa não polido.tscn" id="1_32r3e"]
 [ext_resource type="Script" uid="uid://vfsqlq8qspim" path="res://scene/node.gd" id="1_jobxa"]
@@ -19,107 +19,107 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
 
-[node name="Teste" type="Node2D"]
+[node name="Teste" type="Node2D" unique_id=981049059]
 script = ExtResource("1_tlrdx")
 
-[node name="Node" type="Node" parent="." node_paths=PackedStringArray("label_contador")]
+[node name="Node" type="Node" parent="." unique_id=117129677 node_paths=PackedStringArray("label_contador")]
 script = ExtResource("1_jobxa")
 label_contador = NodePath("../player/enemies")
 
-[node name="golem_azul6" parent="Node" instance=ExtResource("6_to50h")]
+[node name="golem_azul6" parent="Node" unique_id=460090283 instance=ExtResource("6_to50h")]
 position = Vector2(730, 344)
 
-[node name="golem_azul" parent="Node" instance=ExtResource("6_to50h")]
+[node name="golem_azul" parent="Node" unique_id=171522261 instance=ExtResource("6_to50h")]
 position = Vector2(1327, 623)
 
-[node name="golem_2b" parent="Node" instance=ExtResource("4_p1l2g")]
+[node name="golem_2b" parent="Node" unique_id=452900634 instance=ExtResource("4_p1l2g")]
 position = Vector2(1455, 334)
 
-[node name="golem" parent="Node" instance=ExtResource("5_j818a")]
+[node name="golem" parent="Node" unique_id=2018373642 instance=ExtResource("5_j818a")]
 position = Vector2(1125, 562)
 
-[node name="golem2" parent="Node" instance=ExtResource("5_j818a")]
+[node name="golem2" parent="Node" unique_id=21959159 instance=ExtResource("5_j818a")]
 position = Vector2(1476, 791)
 
-[node name="golem3" parent="Node" instance=ExtResource("6_6cdgh")]
+[node name="golem3" parent="Node" unique_id=402782155 instance=ExtResource("6_6cdgh")]
 position = Vector2(471, 785)
 
-[node name="golem4" parent="Node" instance=ExtResource("7_3aenx")]
+[node name="golem4" parent="Node" unique_id=291420659 instance=ExtResource("7_3aenx")]
 position = Vector2(260, 797)
 
-[node name="golem5" parent="Node" instance=ExtResource("6_6cdgh")]
+[node name="golem5" parent="Node" unique_id=1712124448 instance=ExtResource("6_6cdgh")]
 position = Vector2(122, 772)
 
-[node name="golem_azul2" parent="Node" instance=ExtResource("6_to50h")]
+[node name="golem_azul2" parent="Node" unique_id=1396201579 instance=ExtResource("6_to50h")]
 position = Vector2(1274, 248)
 
-[node name="golem_azul3" parent="Node" instance=ExtResource("6_to50h")]
+[node name="golem_azul3" parent="Node" unique_id=1172797250 instance=ExtResource("6_to50h")]
 position = Vector2(1089, 355)
 
-[node name="golem_azul4" parent="Node" instance=ExtResource("6_to50h")]
+[node name="golem_azul4" parent="Node" unique_id=833338449 instance=ExtResource("6_to50h")]
 position = Vector2(1045, 763)
 
-[node name="golem_2b2" parent="Node" instance=ExtResource("4_p1l2g")]
+[node name="golem_2b2" parent="Node" unique_id=1474662084 instance=ExtResource("4_p1l2g")]
 position = Vector2(860, 734)
 
-[node name="golem6" parent="Node" instance=ExtResource("5_j818a")]
+[node name="golem6" parent="Node" unique_id=644410669 instance=ExtResource("5_j818a")]
 position = Vector2(796, 565)
 
-[node name="golem_2b3" parent="Node" instance=ExtResource("4_p1l2g")]
+[node name="golem_2b3" parent="Node" unique_id=1838450292 instance=ExtResource("4_p1l2g")]
 position = Vector2(631, 775)
 
-[node name="golem7" parent="Node" instance=ExtResource("6_6cdgh")]
+[node name="golem7" parent="Node" unique_id=1389502088 instance=ExtResource("6_6cdgh")]
 position = Vector2(505, 461)
 
-[node name="golem8" parent="Node" instance=ExtResource("7_3aenx")]
+[node name="golem8" parent="Node" unique_id=774062922 instance=ExtResource("7_3aenx")]
 position = Vector2(135, 277)
 
-[node name="golem9" parent="Node" instance=ExtResource("7_3aenx")]
+[node name="golem9" parent="Node" unique_id=780586630 instance=ExtResource("7_3aenx")]
 position = Vector2(276, 527)
 
-[node name="golem10" parent="Node" instance=ExtResource("6_6cdgh")]
+[node name="golem10" parent="Node" unique_id=1242779034 instance=ExtResource("6_6cdgh")]
 position = Vector2(94, 486)
 
-[node name="golem_azul5" parent="Node" instance=ExtResource("6_to50h")]
+[node name="golem_azul5" parent="Node" unique_id=1613629225 instance=ExtResource("6_to50h")]
 position = Vector2(1526, 518)
 
-[node name="golem_2b4" parent="Node" instance=ExtResource("4_p1l2g")]
+[node name="golem_2b4" parent="Node" unique_id=47287335 instance=ExtResource("4_p1l2g")]
 position = Vector2(1243, 794)
 
-[node name="golem11" parent="Node" instance=ExtResource("5_j818a")]
+[node name="golem11" parent="Node" unique_id=894994338 instance=ExtResource("5_j818a")]
 position = Vector2(362, 420)
 
-[node name="golem12" parent="Node" instance=ExtResource("5_j818a")]
+[node name="golem12" parent="Node" unique_id=266746477 instance=ExtResource("5_j818a")]
 position = Vector2(204, 407)
 
-[node name="golem_azul7" parent="Node" instance=ExtResource("6_to50h")]
+[node name="golem_azul7" parent="Node" unique_id=1728190462 instance=ExtResource("6_to50h")]
 position = Vector2(730, 344)
 
-[node name="TerrainManager" parent="." instance=ExtResource("1_32r3e")]
+[node name="TerrainManager" parent="." unique_id=439101295 instance=ExtResource("1_32r3e")]
 position = Vector2(-1, 45)
 
-[node name="barreira" type="StaticBody2D" parent="TerrainManager"]
+[node name="barreira" type="StaticBody2D" parent="TerrainManager" unique_id=228410146]
 script = ExtResource("8_ysv2v")
 
-[node name="colisaobarreira" type="CollisionShape2D" parent="TerrainManager/barreira"]
+[node name="colisaobarreira" type="CollisionShape2D" parent="TerrainManager/barreira" unique_id=907129457]
 position = Vector2(405.536, -55.5357)
 shape = SubResource("RectangleShape2D_ysv2v")
 
-[node name="NPC" parent="." instance=ExtResource("7_6yspw")]
+[node name="NPC" parent="." unique_id=1594186263 instance=ExtResource("7_6yspw")]
 position = Vector2(510.9, -118)
 scale = Vector2(0.6, 0.6)
 
-[node name="Label" type="Label" parent="NPC"]
+[node name="Label" type="Label" parent="NPC" unique_id=2005986580]
 offset_left = -26.5
 offset_top = -33.3333
 offset_right = 19.5
 offset_bottom = -10.3333
 text = "Pedro"
 
-[node name="player" parent="." instance=ExtResource("3_m560e")]
+[node name="player" parent="." unique_id=896118141 instance=ExtResource("3_m560e")]
 position = Vector2(574, -278)
 
-[node name="pause" parent="player" instance=ExtResource("13_lo0pi")]
+[node name="pause" parent="player" unique_id=1555638105 instance=ExtResource("13_lo0pi")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -131,7 +131,7 @@ offset_right = 817.0
 offset_bottom = 460.0
 scale = Vector2(0.5, 0.5)
 
-[node name="enemies" type="Label" parent="player"]
+[node name="enemies" type="Label" parent="player" unique_id=1851962350]
 offset_left = -264.545
 offset_top = -125.455
 offset_right = -133.545
@@ -140,7 +140,7 @@ theme_override_colors/font_shadow_color = Color(0.662745, 0.027451, 0.933333, 1)
 theme_override_fonts/font = ExtResource("9_6yspw")
 text = "Inimigos mortos:"
 
-[node name="TextureRect" type="TextureRect" parent="player"]
+[node name="TextureRect" type="TextureRect" parent="player" unique_id=896172603]
 offset_left = 120.909
 offset_top = -153.636
 offset_right = 654.909
@@ -149,7 +149,7 @@ scale = Vector2(0.284224, 0.275615)
 texture = ExtResource("13_ysv2v")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="player/TextureRect"]
+[node name="Label" type="Label" parent="player/TextureRect" unique_id=1918609822]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -164,7 +164,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.74863, 0.959864)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=401154341]
 stream = ExtResource("11_n1k66")
 volume_db = -19.299
 autoplay = true

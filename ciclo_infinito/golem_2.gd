@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var is_floating: bool = true
 @export_category("objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null

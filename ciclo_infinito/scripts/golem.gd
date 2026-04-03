@@ -4,7 +4,7 @@ extends CharacterBody2D
 #Contador para a tela de vitória
 signal golem_defeated # <-- ADICIONE ESTA LINHA
 
-
+@export var is_floating: bool = true
 @export_category("objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null

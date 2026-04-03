@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=4 uid="uid://bgv1wic2ps8oa"]
+[gd_scene format=4 uid="uid://bgv1wic2ps8oa"]
 
 [ext_resource type="Texture2D" uid="uid://cdawsav4cfe3r" path="res://assets/sprites/CortesDoMapa/mapa fractal.png" id="1_b5055"]
 [ext_resource type="Script" uid="uid://dubc07juagfnk" path="res://hall_do_queijo.gd" id="1_dw1uh"]
@@ -276,129 +276,129 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bvks6")
 sources/1 = SubResource("TileSetAtlasSource_qy7ad")
 
-[node name="TerrainManager2" type="Node2D"]
+[node name="TerrainManager2" type="Node2D" unique_id=415598390]
 position = Vector2(-11, -21)
 scale = Vector2(1.4, 1.4)
 script = ExtResource("1_dw1uh")
 metadata/_edit_horizontal_guides_ = [84.0, 724.0, 21.0, -10.0]
 metadata/_edit_vertical_guides_ = [69.0, 1194.0, 1072.0]
 
-[node name="FundoPreto" type="TileMapLayer" parent="."]
+[node name="FundoPreto" type="TileMapLayer" parent="." unique_id=1970366563]
 tile_map_data = PackedByteArray("AAAHAAEAAgABAAEAAAA=")
 tile_set = SubResource("TileSet_dw1uh")
 
-[node name="Piso" type="TileMapLayer" parent="."]
+[node name="Piso" type="TileMapLayer" parent="." unique_id=1471081117]
 tile_map_data = PackedByteArray("AAADAAQAAAAuABEAAAADAAYAAAAuABEAAAADAAgAAAAuABEAAAADAAoAAAAuABEAAAADAAwAAAAuABEAAAADAA4AAAAuABEAAAADABAAAAAuABEAAAAFABAAAAAuABEAAAAHABAAAAAuABEAAAAJABAAAAAuABEAAAALABAAAAAuABEAAAANABAAAAAuABEAAAAPABAAAAAuABEAAAARABAAAAAuABEAAAATABAAAAAuABEAAAAVABAAAAAuABEAAAAXABAAAAAuABEAAAAZABAAAAAuABEAAAADAAIAAAAuABEAAAAFAAQAAAAuABEAAAAHAAQAAAAuABEAAAAJAAQAAAAuABEAAAALAAQAAAAuABEAAAANAAQAAAAuABEAAAAPAAQAAAAuABEAAAARAAQAAAAuABEAAAATAAQAAAAuABEAAAAVAAQAAAAuABEAAAAXAAQAAAAuABEAAAAZAAQAAAAuABEAAAAbAAQAAAAuABEAAAAdAAQAAAAuABEAAAAfAAQAAAAuABEAAAAfABAAAAAuABEAAAAdABAAAAAuABEAAAAbABAAAAAuABEAAAAFAAYAAAAuABEAAAAHAAYAAAAuABEAAAAJAAYAAAAuABEAAAALAAYAAAAuABEAAAAMAAYAAAAuABEAAAANAAYAAAAuABEAAAAPAAYAAAAuABEAAAARAAYAAAAuABEAAAATAAYAAAAuABEAAAAVAAYAAAAuABEAAAAXAAYAAAAuABEAAAAZAAYAAAAuABEAAAAbAAYAAAAuABEAAAAdAAYAAAAuABEAAAAfAAYAAAAuABEAAAAZAAgAAAAuABEAAAAXAAgAAAAuABEAAAAVAAgAAAAuABEAAAATAAgAAAAuABEAAAARAAgAAAAuABEAAAAPAAgAAAAuABEAAAANAAgAAAAuABEAAAALAAgAAAAuABEAAAAJAAgAAAAuABEAAAAHAAgAAAAuABEAAAAFAAgAAAAuABEAAAAFAAoAAAAuABEAAAAFAAwAAAAuABEAAAAFAA4AAAAuABEAAAAHAA4AAAAuABEAAAAHAAwAAAAuABEAAAAHAAoAAAAuABEAAAAJAAoAAAAuABEAAAALAAoAAAAuABEAAAALAAwAAAAuABEAAAAJAAwAAAAuABEAAAAJAA4AAAAuABEAAAALAA4AAAAuABEAAAANAA4AAAAuABEAAAANAAwAAAAuABEAAAANAAoAAAAuABEAAAAPAAoAAAAuABEAAAAPAAwAAAAuABEAAAAPAA4AAAAuABEAAAARAA4AAAAuABEAAAARAAwAAAAuABEAAAARAAoAAAAuABEAAAATAAoAAAAuABEAAAATAAwAAAAuABEAAAATAA4AAAAuABEAAAAVAA4AAAAuABEAAAAVAAwAAAAuABEAAAAVAAoAAAAuABEAAAAXAAoAAAAuABEAAAAXAAwAAAAuABEAAAAXAA4AAAAuABEAAAAZAA4AAAAuABEAAAAZAAwAAAAuABEAAAAZAAoAAAAuABEAAAAfAAwAAAAuABEAAAAdAAwAAAAuABEAAAAbAAwAAAAuABEAAAAbAA4AAAAuABEAAAAdAA4AAAAuABEAAAAfAA4AAAAuABEAAAAFAAIAAAAuABEAAAAHAAIAAAAuABEAAAAJAAIAAAAuABEAAAALAAIAAAAuABEAAAANAAIAAAAuABEAAAAPAAIAAAAuABEAAAARAAIAAAAuABEAAAATAAIAAAAuABEAAAAVAAIAAAAuABEAAAAXAAIAAAAuABEAAAAZAAIAAAAuABEAAAAbAAIAAAAuABEAAAAdAAIAAAAuABEAAAAfAAIAAAAuABEAAAAbAAgAAAAuABEAAAAbAAoAAAAuABEAAAAdAAgAAAAuABEAAAAdAAoAAAAuABEAAAAfAAgAAAAuABEAAAAfAAoAAAAuABEAAAAfAAcAAAAuABEAAAAgAAgAAQAwABIAADAhAAsAAQAwABIAAAAhAAkAAQAwABIAAAAhAAgAAQAwABIAAAAhAAoAAQAwABIAAAAgAAsAAQAwABIAADAgAAkAAQAwABIAADAgAAoAAQAwABIAADAhABAAAAAuABEAAAA=")
 tile_set = SubResource("TileSet_sibso")
 
-[node name="MuroEntrada" type="TileMapLayer" parent="."]
+[node name="MuroEntrada" type="TileMapLayer" parent="." unique_id=1303507452]
 tile_map_data = PackedByteArray("AAADAAQAAgACAA4AAAADAAoAAgACAA4AACADAA0AAgACAA4AACADAAEABAACAA4AAAA=")
 tile_set = SubResource("TileSet_inj64")
 
-[node name="MuretaDoMuro" type="TileMapLayer" parent="."]
+[node name="MuretaDoMuro" type="TileMapLayer" parent="." unique_id=1490824362]
 tile_map_data = PackedByteArray("AAAIAAMAAAACAA8AAFAMAAMAAAACAA8AAFA=")
 tile_set = SubResource("TileSet_v1y88")
 
-[node name="EscadaPequena" type="TileMapLayer" parent="."]
+[node name="EscadaPequena" type="TileMapLayer" parent="." unique_id=1470996797]
 position = Vector2(36, -55)
 tile_map_data = PackedByteArray("AAAGABAAAgAQABMAAAAGAAMAAgAQAAcAAAAGAAkAAgAQAAoAAAAGAAsAAgAQAAoAAAA=")
 tile_set = SubResource("TileSet_61582")
 
-[node name="Elevador" type="TileMapLayer" parent="."]
+[node name="Elevador" type="TileMapLayer" parent="." unique_id=1750770321]
 tile_map_data = PackedByteArray("AAATAPz/AAAuAAYAAAA=")
 tile_set = SubResource("TileSet_xg1u2")
 
-[node name="ElevadorInterativo" parent="." instance=ExtResource("3_p3xb5")]
+[node name="ElevadorInterativo" parent="." unique_id=1883763140 instance=ExtResource("3_p3xb5")]
 position = Vector2(536.429, -133.571)
 target_scene = ExtResource("4_td228")
 
-[node name="ParedeRampa" type="TileMapLayer" parent="."]
+[node name="ParedeRampa" type="TileMapLayer" parent="." unique_id=1759205738]
 position = Vector2(27, -15)
 tile_map_data = PackedByteArray("AAAgAAoAAAAQABAAAAA=")
 tile_set = SubResource("TileSet_ml241")
 
-[node name="Rampa" type="TileMapLayer" parent="."]
+[node name="Rampa" type="TileMapLayer" parent="." unique_id=1188617239]
 position = Vector2(0, -22)
 tile_map_data = PackedByteArray("AAAgAAQAAAA2AAgAAAA=")
 tile_set = SubResource("TileSet_rcsll")
 
-[node name="Rampa 2" type="TileMapLayer" parent="."]
+[node name="Rampa 2" type="TileMapLayer" parent="." unique_id=1774465409]
 position = Vector2(-9, 4)
 tile_map_data = PackedByteArray("AAAhAA0AAAA2AAgAAAA=")
 tile_set = SubResource("TileSet_mr3py")
 
-[node name="Queijo" type="TileMapLayer" parent="."]
+[node name="Queijo" type="TileMapLayer" parent="." unique_id=1862503219]
 tile_map_data = PackedByteArray("AAASAAgAAAARAAMAAAA=")
 tile_set = SubResource("TileSet_d1abf")
 
-[node name="NPC2" parent="." instance=ExtResource("6_dw1uh")]
+[node name="NPC2" parent="." unique_id=1486441006 instance=ExtResource("6_dw1uh")]
 position = Vector2(737.857, 90)
 scale = Vector2(0.5, 0.5)
 
-[node name="Label" type="Label" parent="NPC2"]
+[node name="Label" type="Label" parent="NPC2" unique_id=991176976]
 offset_left = 2.85718
 offset_top = -30.0
 offset_right = 42.8572
 offset_bottom = -6.99999
 text = "Julia"
 
-[node name="LixeirasElevador" type="TileMapLayer" parent="."]
+[node name="LixeirasElevador" type="TileMapLayer" parent="." unique_id=405964407]
 position = Vector2(5, 2)
 tile_map_data = PackedByteArray("AAAsAAEAAwAAAAAAAAAhAAEAAgAAAAAAAAA=")
 tile_set = SubResource("TileSet_bvks6")
 
-[node name="Lixeira parede" type="TileMapLayer" parent="."]
+[node name="Lixeira parede" type="TileMapLayer" parent="." unique_id=1125619791]
 position = Vector2(0, 8)
 tile_map_data = PackedByteArray("AAA4AAEAAAAaACcAAAA=")
 tile_set = SubResource("TileSet_8qd2a")
 
-[node name="BancoAmarelo" type="TileMapLayer" parent="."]
+[node name="BancoAmarelo" type="TileMapLayer" parent="." unique_id=445695304]
 tile_set = SubResource("TileSet_rjjdq")
 
-[node name="Muro" type="TileMapLayer" parent="."]
+[node name="Muro" type="TileMapLayer" parent="." unique_id=250964457]
 position = Vector2(6, 2)
 tile_map_data = PackedByteArray("AAALAP//AQABAAcAAAAaAP//AQABAAcAAAA=")
 tile_set = SubResource("TileSet_vft3r")
 
-[node name="player" parent="." instance=ExtResource("5_inj64")]
+[node name="player" parent="." unique_id=1984727611 instance=ExtResource("5_inj64")]
 position = Vector2(152.857, 284.286)
 
-[node name="pause" parent="player" instance=ExtResource("13_v1y88")]
+[node name="pause" parent="player" unique_id=1182040746 instance=ExtResource("13_v1y88")]
 offset_left = -170.13
 offset_top = -82.4678
 offset_right = 469.87
 offset_bottom = 277.532
 scale = Vector2(0.521822, 0.503862)
 
-[node name="ParedeUerj" type="TileMapLayer" parent="."]
+[node name="ParedeUerj" type="TileMapLayer" parent="." unique_id=769675493]
 tile_map_data = PackedByteArray("AAAFABAAAAABAAQAAAALABAAAQABAAEAAAARABAAAAABAAQAAAAXABAAAQABAAEAAAAdABAAAAABAAQAAAAjABAAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_n24co")
 
-[node name="NPC3" parent="." instance=ExtResource("10_p3xb5")]
+[node name="NPC3" parent="." unique_id=1767009523 instance=ExtResource("10_p3xb5")]
 position = Vector2(687.857, -120.714)
 scale = Vector2(0.5, 0.5)
 
-[node name="Label" type="Label" parent="NPC3"]
+[node name="Label" type="Label" parent="NPC3" unique_id=1110249899]
 offset_left = -15.7139
 offset_top = -31.4292
 offset_right = 24.2861
 offset_bottom = -8.42916
 text = "José"
 
-[node name="NPC4" parent="." instance=ExtResource("11_td228")]
+[node name="NPC4" parent="." unique_id=473818591 instance=ExtResource("11_td228")]
 position = Vector2(432.143, 237.143)
 scale = Vector2(0.5, 0.5)
 
-[node name="Label" type="Label" parent="NPC4"]
+[node name="Label" type="Label" parent="NPC4" unique_id=1242883110]
 offset_left = -22.8574
 offset_top = -31.4289
 offset_right = 22.1426
 offset_bottom = -8.42888
 text = "Maria"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1158301637]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=151780943]
 offset_left = 682.0
 offset_top = 3.0
 offset_right = 1657.0
@@ -406,7 +406,7 @@ offset_bottom = 546.0
 scale = Vector2(0.284224, 0.275615)
 texture = ExtResource("14_v1y88")
 
-[node name="Label" type="Label" parent="CanvasLayer/TextureRect"]
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect" unique_id=1548849482]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -421,7 +421,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2.62175, 1.76895)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=194056068]
 stream = ExtResource("15_7nto0")
 volume_db = -4.952
 autoplay = true

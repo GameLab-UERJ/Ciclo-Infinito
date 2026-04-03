@@ -1,4 +1,4 @@
-[gd_scene load_steps=214 format=3 uid="uid://3qoae7f6uh8o"]
+[gd_scene format=3 uid="uid://3qoae7f6uh8o"]
 
 [ext_resource type="Script" uid="uid://dbg05n786rg21" path="res://scripts/player.gd" id="1_34jf3"]
 [ext_resource type="Texture2D" uid="uid://baw5eohono6a1" path="res://assets/sprites/player/ATTACK 1/attack1_left.png" id="2_4ja17"]
@@ -1432,37 +1432,37 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="player" type="CharacterBody2D" groups=["player"]]
+[node name="player" type="CharacterBody2D" unique_id=283490471 groups=["player"]]
 scale = Vector2(1.1, 1.1)
 collision_layer = 3
 collision_mask = 21
 script = ExtResource("1_34jf3")
 
-[node name="animacoes" type="AnimatedSprite2D" parent="."]
+[node name="animacoes" type="AnimatedSprite2D" parent="." unique_id=1494094156]
 sprite_frames = SubResource("SpriteFrames_to47r")
 animation = &"attack1_down"
 speed_scale = 1.5
 
-[node name="dash_timer" type="Timer" parent="."]
+[node name="dash_timer" type="Timer" parent="." unique_id=1864578922]
 wait_time = 0.1
 one_shot = true
 
-[node name="dash_cooldown" type="Timer" parent="."]
+[node name="dash_cooldown" type="Timer" parent="." unique_id=1549857889]
 one_shot = true
 
-[node name="attack_area" type="Area2D" parent="." groups=["player"]]
+[node name="attack_area" type="Area2D" parent="." unique_id=1200304959 groups=["player"]]
 collision_layer = 8
 collision_mask = 4
 
-[node name="attack_colison" type="CollisionShape2D" parent="attack_area"]
+[node name="attack_colison" type="CollisionShape2D" parent="attack_area" unique_id=2138038640]
 shape = SubResource("RectangleShape2D_jrjdb")
 one_way_collision_margin = 0.0
 
-[node name="player_colision" type="CollisionShape2D" parent="."]
+[node name="player_colision" type="CollisionShape2D" parent="." unique_id=1615793664]
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_4ja17")
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=148939338]
 unique_name_in_owner = true
 visible = false
 offset_left = -70.0
@@ -1473,21 +1473,21 @@ theme_override_styles/background = SubResource("StyleBoxFlat_xhcba")
 theme_override_styles/fill = SubResource("StyleBoxFlat_qgi3f")
 value = 100.0
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(1.6, 1.6)
+[node name="Camera2D" type="Camera2D" parent="." unique_id=861791686]
+zoom = Vector2(1.5, 1.5)
 
-[node name="VidaCheia" type="Sprite2D" parent="Camera2D"]
+[node name="VidaCheia" type="Sprite2D" parent="Camera2D" unique_id=1358621963]
 position = Vector2(-201.352, -135.455)
 scale = Vector2(0.112718, 0.113636)
 texture = ExtResource("27_l1uwf")
 
-[node name="attack_sfxplay" type="AudioStreamPlayer" parent="."]
+[node name="attack_sfxplay" type="AudioStreamPlayer" parent="." unique_id=1555141333]
 stream = ExtResource("27_xsw3c")
 volume_db = -19.858
 pitch_scale = 1.19
 mix_target = 1
 
-[node name="dash_sfx" type="AudioStreamPlayer" parent="."]
+[node name="dash_sfx" type="AudioStreamPlayer" parent="." unique_id=1469392719]
 stream = ExtResource("28_l1uwf")
 volume_db = -34.668
 

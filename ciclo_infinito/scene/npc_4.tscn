@@ -1,7 +1,36 @@
-[gd_scene load_steps=17 format=3 uid="uid://c8528aoh54ot1"]
+[gd_scene format=3 uid="uid://c8528aoh54ot1"]
 
 [ext_resource type="Script" uid="uid://cxsud87xx3vbj" path="res://scene/npc_4.gd" id="1_lm4ag"]
+[ext_resource type="Texture2D" uid="uid://dlo38mh7ugqax" path="res://assets/sprites/player/IdleSaia.png" id="2_kjdye"]
 [ext_resource type="Texture2D" uid="uid://2y8phasy63w" path="res://assets/sprites/player/WalkSaia.png" id="2_lm4ag"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4d865"]
+atlas = ExtResource("2_kjdye")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrjao"]
+atlas = ExtResource("2_kjdye")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vmi34"]
+atlas = ExtResource("2_kjdye")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs3nt"]
+atlas = ExtResource("2_kjdye")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvu5l"]
+atlas = ExtResource("2_kjdye")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygacl"]
+atlas = ExtResource("2_kjdye")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rhyp5"]
+atlas = ExtResource("2_kjdye")
+region = Rect2(768, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kjdye"]
 atlas = ExtResource("2_lm4ag")
@@ -39,6 +68,32 @@ region = Rect2(1408, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_4d865")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrjao")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vmi34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs3nt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvu5l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ygacl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rhyp5")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kjdye")
 }, {
 "duration": 1.0,
@@ -63,7 +118,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_177lu")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"walk",
 "speed": 6.0
 }]
 
@@ -82,28 +137,27 @@ shadow_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
 size = Vector2(25, 43)
 
-[node name="NPC4" type="CharacterBody2D"]
+[node name="NPC4" type="CharacterBody2D" unique_id=1950049490]
 position = Vector2(0.9, 0)
 collision_layer = 3
 script = ExtResource("1_lm4ag")
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=1316048113]
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Area2D"]
+[node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=834532085]
 sprite_frames = SubResource("SpriteFrames_cgete")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.904303
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1732318347]
 position = Vector2(-4.5, 24.5)
 shape = SubResource("RectangleShape2D_gu3sj")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=780544002]
 
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer"]
+[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=1691019752]
 offset_left = 68.0
 offset_top = 61.0
 offset_right = 768.0
@@ -113,7 +167,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
 autowrap_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer"]
+[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=2077484620]
 offset_left = 84.0
 offset_top = 74.0
 offset_right = 751.0
@@ -122,24 +176,24 @@ theme_override_font_sizes/font_size = 15
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer"]
+[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=1621295834]
 
-[node name="LabelInteração" type="Label" parent="Area2D"]
+[node name="LabelInteração" type="Label" parent="Area2D" unique_id=1868290350]
 offset_left = -24.0
 offset_top = -34.0
 offset_right = 37.0
 label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1201588873]
 position = Vector2(-5.5, 22.5)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)
 
-[node name="PontoPatrulhaA" type="Marker2D" parent="."]
+[node name="PontoPatrulhaA" type="Marker2D" parent="." unique_id=944900121]
 position = Vector2(139.1, 6)
 
-[node name="PontoPatrulhaB" type="Marker2D" parent="."]
+[node name="PontoPatrulhaB" type="Marker2D" parent="." unique_id=1456016067]
 position = Vector2(-51.9, 208)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

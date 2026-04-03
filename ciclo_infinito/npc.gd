@@ -6,10 +6,10 @@ extends StaticBody2D
 signal dialogo_concluido
 signal falou_com_pedro
 
-var player_in_area = false
-var falando = false
-var pode_avancar = false
-var fala_index = 0
+var player_in_area: bool = false
+var falando: bool = false
+var pode_avancar: bool = false
+var fala_index: int = 0
 
 var falas = ["Olá, meu chapa. Você infelizmente acabou de entrar em um purgatório da UERJ." , 
 "No quinto andar, moram os golems  monstros que guardam os segredos mais sombrios da engenharia.",
@@ -21,11 +21,13 @@ func _ready() -> void:
 	caixa_de_dialogo.visible = false
 	texto_dialogo.visible = false
 	label_interação.visible = false
+
 func _process(delta) -> void:
 	if player_in_area and not falando and Input.is_action_just_pressed("interact"):
 		iniciar_dialogo()
 	elif falando and pode_avancar and Input.is_action_just_pressed("interact"):
 		proxima_fala()
+
 func iniciar_dialogo():
 	falando = true
 	label_interação.visible = false
@@ -33,6 +35,7 @@ func iniciar_dialogo():
 	texto_dialogo.visible = true
 	fala_index = 0
 	proxima_fala()
+
 func proxima_fala():
 	if fala_index < falas.size():
 		pode_avancar = false
@@ -43,12 +46,16 @@ func proxima_fala():
 		mostrar_texto_com_efeito(texto)
 	else:
 		encerrar_dialogo()
+
 func mostrar_texto_com_efeito(texto: String):
 	await get_tree().create_timer(0.1).timeout
 	for letra in texto:
+		if not falando: # para consertar a fala bugada do pedro quando o jogador sai de perto. O mesmo serve para os demais npcs
+			return # o bug acontecia pq msm saindo de perto, o loop anterior continuava acontecendo e atropelava o novo.
 		texto_dialogo.text += letra
 		await get_tree().create_timer(0.02).timeout
 	pode_avancar = true
+
 func encerrar_dialogo():
 	falando = false
 	pode_avancar = false
@@ -56,6 +63,7 @@ func encerrar_dialogo():
 	texto_dialogo.visible = false
 	emit_signal("dialogo_concluido")
 	emit_signal("falou_com_pedro")  # Emite sinal para avançar missão
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "player":
 		player_in_area = true

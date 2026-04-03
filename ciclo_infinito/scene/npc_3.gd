@@ -5,10 +5,10 @@ extends StaticBody2D
 @onready var label_interação: Label = $Area2D/LabelInteração
 
 signal falou_com_jose
-var player_in_area = false
-var falando = false
-var pode_avancar = false
-var fala_index = 0
+var player_in_area: bool = false
+var falando: bool = false
+var pode_avancar: bool = false
+var fala_index: int = 0
 
 var falas = ["Ora, seja bem-vindo à UERJ! Então você é o novo calouro de Engenharia, não é?
 ", 
@@ -55,6 +55,8 @@ func proxima_fala():
 func mostrar_texto_com_efeito(texto: String):
 	await get_tree().create_timer(0.1).timeout
 	for letra in texto:
+		if not falando: #linha que conserta o diálogo que é atropelado
+			return
 		texto_dialogo.text += letra
 		await get_tree().create_timer(0.02).timeout
 	pode_avancar = true

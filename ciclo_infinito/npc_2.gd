@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 # --- Variáveis de Diálogo ---
 # CUIDADO AQUI: Ajuste estes caminhos se sua cena for diferente!
+@export var is_floating: bool = true
 @onready var caixa_de_dialogo: Label = $Area2D/CanvasLayer/CaixaDeDialogo
 @onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
 @onready var label_interação: Label = $"Area2D/LabelInteraçao" 
@@ -11,10 +12,10 @@ extends CharacterBody2D
 @onready var ponto_patrulha_a: Marker2D = $PontoPatrulhaA
 @onready var ponto_patrulha_b: Marker2D = $PontoPatrulhaB
 
-var player_in_area = false
-var falando = false
-var pode_avancar = false
-var fala_index = 0
+var player_in_area: bool = false
+var falando: bool = false
+var pode_avancar: bool = false
+var fala_index: int = 0
 
 
 #
@@ -26,6 +27,7 @@ var falas = ["Você já segue a página do SPUUD?" , "Lá você consegue achar a
 
 # --- Variáveis de Patrulha ---
 @export var move_speed: float = 50.0
+@export var distancia_segura: float = 60.0 #distancia para a npc detectar o player e parar de andar!!
 
 var pos_a: Vector2
 var pos_b: Vector2
@@ -55,24 +57,29 @@ func _physics_process(delta: float) -> void:
 		iniciar_dialogo()
 	elif falando and pode_avancar and Input.is_action_just_pressed("interact"):
 		proxima_fala()
-
-	# --- Lógica de Movimento ---
-	if falando or not is_moving:
-		# <<<< ADICIONEI ANIMAÇÃO DE IDLE AQUI >>>>
-		if sprite != null:
-			sprite.play("idle") # Troque "idle" pelo nome da sua animação de parado
-		velocity = Vector2.ZERO
-		move_and_slide()
+		
+	 ### novas alteraçoes para tentar resolver o problema do grude nos npcssss. COMEÇA AQ~!!!!!!!
+	var player = get_tree().get_first_node_in_group("player")
+	var muito_perto = false
+		
+	if player:
+		var dist = global_position.distance_to(player.global_position)
+		if dist < distancia_segura:
+			muito_perto = true
+		
+	if falando or muito_perto or not is_moving:
+		_parar_npc()
 		return
 
-	# Lógica de Patrulha
+	# Lógica de Patrulha ( só executa se passar pelo if ! )
 	var direction = (target_position - global_position).normalized()
 	velocity = direction * move_speed
 	
+	# apaguei o if com IDLE q estava aqui pq estava atrapalhando a execuçao do if abaixo
+	
+	
 	if sprite != null:
-		# <<<< ADICIONEI ANIMAÇÃO DE WALK AQUI >>>>
 		sprite.play("walk") # Troque "walk" pelo nome da sua animação de andar
-		
 		if velocity.x > 0.1: 
 			sprite.flip_h = false 
 		elif velocity.x < -0.1:
@@ -85,7 +92,13 @@ func _physics_process(delta: float) -> void:
 			target_position = pos_b
 		else:
 			target_position = pos_a
-
+			
+## isso aq tbnm é novo para o npc parar de andar
+func _parar_npc():
+	velocity = Vector2.ZERO # faz com q ele pare mas respeite a colisão
+	if sprite:
+		sprite.play("idle")
+	move_and_slide()
 
 # --- Funções de Diálogo (sem mudanças) ---
 
@@ -110,6 +123,8 @@ func proxima_fala():
 func mostrar_texto_com_efeito(texto: String):
 	await get_tree().create_timer(0.1).timeout
 	for letra in texto:
+		if not falando: #linha que conserta o diálogo que é atropelado
+			return
 		texto_dialogo.text += letra
 		await get_tree().create_timer(0.02).timeout
 	pode_avancar = true

@@ -1,7 +1,44 @@
-[gd_scene load_steps=21 format=3 uid="uid://12i1ywgpw05p"]
+[gd_scene format=3 uid="uid://12i1ywgpw05p"]
 
 [ext_resource type="Script" uid="uid://crikhcj4uvp0e" path="res://npc_2.gd" id="1_88fjt"]
 [ext_resource type="Texture2D" uid="uid://cw5k3pfja14yo" path="res://assets/sprites/player/WalkMenina.png" id="2_05tp0"]
+[ext_resource type="Texture2D" uid="uid://05mguym0tfks" path="res://assets/sprites/player/IdleMenina.png" id="2_kqc52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe3qy"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_coj5y"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4awc"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a71hr"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d13iq"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5mgey"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jtyo"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vskrt"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqwvq"]
+atlas = ExtResource("2_kqc52")
+region = Rect2(1024, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqc52"]
 atlas = ExtResource("2_05tp0")
@@ -55,6 +92,38 @@ region = Rect2(1408, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_qe3qy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_coj5y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4awc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a71hr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d13iq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5mgey")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jtyo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vskrt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqwvq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kqc52")
 }, {
 "duration": 1.0,
@@ -91,7 +160,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_s5i6s")
 }],
 "loop": true,
-"name": &"Idle",
+"name": &"walk",
 "speed": 5.0
 }]
 
@@ -110,25 +179,25 @@ draw_center = false
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfyt3"]
 size = Vector2(34, 72.75)
 
-[node name="NPC2" type="CharacterBody2D"]
+[node name="NPC2" type="CharacterBody2D" unique_id=823158876]
 script = ExtResource("1_88fjt")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=810606356]
 
-[node name="Sprite" type="AnimatedSprite2D" parent="Area2D"]
+[node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1177909475]
 position = Vector2(17, 3)
 sprite_frames = SubResource("SpriteFrames_aniso")
-animation = &"Idle"
-autoplay = "Idle"
-frame_progress = 0.683238
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.15657617
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1084762695]
 position = Vector2(24.5, 30)
 shape = SubResource("RectangleShape2D_decul")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D"]
+[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=2085344228]
 
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer"]
+[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=1296254016]
 offset_left = 68.0
 offset_top = 61.0
 offset_right = 768.0
@@ -136,7 +205,7 @@ offset_bottom = 161.0
 theme_override_styles/normal = SubResource("StyleBoxFlat_oh27l")
 autowrap_mode = 2
 
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer"]
+[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=775143661]
 offset_left = 84.0
 offset_top = 74.0
 offset_right = 751.0
@@ -145,24 +214,24 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_53jpq")
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer"]
+[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=629574169]
 
-[node name="LabelInteraçao" type="Label" parent="Area2D"]
+[node name="LabelInteraçao" type="Label" parent="Area2D" unique_id=198277077]
 offset_left = -25.0
 offset_top = -37.0
 offset_right = 35.0
 offset_bottom = -9.0
 label_settings = SubResource("LabelSettings_o4hm0")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=599726921]
 position = Vector2(17, 31.375)
 shape = SubResource("RectangleShape2D_dfyt3")
 debug_color = Color(0.505315, 0.0268385, 0.069401, 0.42)
 
-[node name="PontoPatrulhaA" type="Marker2D" parent="."]
+[node name="PontoPatrulhaA" type="Marker2D" parent="." unique_id=1454302771]
 position = Vector2(257, 94)
 
-[node name="PontoPatrulhaB" type="Marker2D" parent="."]
+[node name="PontoPatrulhaB" type="Marker2D" parent="." unique_id=1255397279]
 position = Vector2(56, 333)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
