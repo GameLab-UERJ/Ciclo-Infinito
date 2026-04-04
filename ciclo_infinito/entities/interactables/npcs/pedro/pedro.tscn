@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://sf0ngt0mifqa"]
+
+[ext_resource type="Script" uid="uid://bu424e6ida6ma" path="res://entities/interactables/npcs/pedro/pedro.gd" id="1_5sp64"]
+[ext_resource type="Texture2D" uid="uid://b31qbydqhwrwt" path="res://assets/art/npcs/pedro/pedro_idle.png" id="2_74uy2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
+size = Vector2(77, 49)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
+atlas = ExtResource("2_74uy2")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cgete"]
+atlas = ExtResource("2_74uy2")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gu3sj"]
+atlas = ExtResource("2_74uy2")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ytjd8"]
+atlas = ExtResource("2_74uy2")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hivs1"]
+atlas = ExtResource("2_74uy2")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cgete"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kh24r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cgete")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gu3sj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ytjd8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hivs1")
+}],
+"loop": true,
+"name": &"idle Vamp",
+"speed": 5.0
+}]
+
+[sub_resource type="Theme" id="Theme_ytjd8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hivs1"]
+bg_color = Color(0.187176, 0.187176, 0.187176, 0.552941)
+
+[sub_resource type="LabelSettings" id="LabelSettings_faxwa"]
+font_size = 8
+shadow_color = Color(0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
+size = Vector2(25, 71)
+
+[node name="Pedro" type="StaticBody2D" unique_id=1597397914]
+position = Vector2(0.9, 0)
+collision_layer = 3
+script = ExtResource("1_5sp64")
+metadata/_custom_type_script = "uid://bu424e6ida6ma"
+metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
+metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=2022606982]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1867660891]
+position = Vector2(-4.5, 24.5)
+shape = SubResource("RectangleShape2D_gu3sj")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1546663399]
+sprite_frames = SubResource("SpriteFrames_cgete")
+animation = &"idle Vamp"
+autoplay = "idle Vamp"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1283099891]
+
+[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=351317161]
+offset_left = 68.0
+offset_top = 61.0
+offset_right = 768.0
+offset_bottom = 161.0
+theme = SubResource("Theme_ytjd8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
+autowrap_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=804664432]
+offset_left = 84.0
+offset_top = 74.0
+offset_right = 751.0
+offset_bottom = 150.0
+theme_override_font_sizes/font_size = 15
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=356194070]
+
+[node name="LabelInteração" type="Label" parent="Area2D" unique_id=623400268]
+offset_left = -24.0
+offset_top = -34.0
+offset_right = 37.0
+label_settings = SubResource("LabelSettings_faxwa")
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=49316292]
+position = Vector2(-5.5, 26.5)
+shape = SubResource("RectangleShape2D_xxcha")
+debug_color = Color(0.96602, 0, 0.483122, 0.42)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
