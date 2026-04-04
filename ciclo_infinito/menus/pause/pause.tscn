@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bw0i1wy6c26yp"]
+
+[ext_resource type="Script" uid="uid://b62184fnaafn3" path="res://menus/pause/pause.gd" id="1_00tvw"]
+
+[node name="Control" type="Control" unique_id=204471871]
+process_mode = 2
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_00tvw")
+metadata/_custom_type_script = "uid://b62184fnaafn3"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=71243184]
+visible = false
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.411765, 0.411765, 0.411765, 0.501961)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1933064722]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -335.0
+offset_top = -194.5
+offset_right = 335.0
+offset_bottom = 194.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=502260245]
+layout_mode = 2
+
+[node name="MenuPrincipal" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1841004715]
+layout_mode = 2
+
+[node name="resumebutton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=673512400]
+layout_mode = 2
+text = "Resume"
+
+[node name="optionsbutton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=2109752151]
+layout_mode = 2
+text = "Opções"
+
+[node name="quitbutton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=780739351]
+layout_mode = 2
+text = "Voltar ao menu iniciar"
+
+[node name="MenuOpcoes" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1200399122]
+layout_direction = 1
+layout_mode = 2
+size_flags_vertical = 6
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MenuOpcoes" unique_id=1517607842]
+layout_direction = 1
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer" unique_id=1516009164]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Volume geral"
+
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/Label" unique_id=1638864458]
+layout_mode = 0
+offset_left = 116.0
+offset_top = 6.0
+offset_right = 406.0
+offset_bottom = 22.0
+
+[node name="FullScreenButton" type="Button" parent="MarginContainer/VBoxContainer/MenuOpcoes" unique_id=62465894]
+layout_mode = 2
+text = "Tela cheia"
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/MenuOpcoes" unique_id=1945522866]
+layout_mode = 2
+text = "Voltar"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/resumebutton" to="." method="_on_resumebutton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton" to="." method="_on_optionsbutton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/quitbutton" to="." method="_on_quitbutton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOpcoes/BackButton" to="." method="_on_backbutton_pressed"]

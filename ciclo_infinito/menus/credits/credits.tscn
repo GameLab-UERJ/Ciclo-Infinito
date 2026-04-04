@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://c8f43sr71atgk"]
+
+[ext_resource type="Script" uid="uid://be8jarypcwqr7" path="res://menus/credits/credits.gd" id="1_2bq7n"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_2bq7n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bq7n"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="ScrollContainer" type="ScrollContainer" unique_id=1460894246]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -288.0
+offset_right = 288.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2bq7n")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+script = ExtResource("1_2bq7n")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1433189652]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer" unique_id=1144156391]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_2bq7n")
+theme_override_fonts/bold_font = ExtResource("2_2bq7n")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "Um jogo desenvolvido por: Fractal Team
+
+Coordenador:
+Arthur Morais
+
+Desenvolvedor de Gameplay:
+Arthur Morais
+Rebeca Dias
+Uriam Napolitano
+
+Designer:
+Marcos Rodrigues
+
+UI designer:
+Víctor Ralha 
+
+
+🏛️ Sobre o Jogo
+
+Inspirado na intensidade e na estética de Hades, 
+este jogo transporta o jogador para uma jornada única 
+pelos corredores e andares do icônico Prédio João Lyra Filho, da UERJ.
+
+Aqui, o inferno não é mitológico — ele é acadêmico.
+Cada andar representa uma matéria do ciclo básico de Engenharia, 
+e cada uma delas é um boss com sua própria personalidade, 
+desafios e mecânicas implacáveis.
+
+Do terror das provas de Cálculo ao caos controlado da Física, 
+o jogador precisa dominar suas habilidades e estratégias para sobreviver
+ a cada disciplina e alcançar a tão sonhada formação.
+
+Entre batalhas, o ambiente revela pequenas homenagens e referências à vida universitária: 
+corredores familiares, salas de aula lendárias e aquele eterno
+ café frio que sustenta os engenheiros em formação.
+
+🔥 Uma homenagem épica à UERJ, aos estudantes de Engenharia
+ e a todos que enfrentam seus próprios “bosses” acadêmicos dia após dia."
+fit_content = true
+horizontal_alignment = 1
