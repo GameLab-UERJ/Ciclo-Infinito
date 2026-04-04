@@ -17,7 +17,9 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="Ciclo_Infinito"
 run/main_scene="uid://bvapan1pwj3pn"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-boot_splash/image="uid://cp1sh8hqy8ani"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/image="uid://cm5btkw7utoq5"
+boot_splash/minimum_display_time=50
 
 [audio]
 
