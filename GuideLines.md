@@ -44,13 +44,23 @@ A descrição deve ser usada sempre que o resumo não deixe claro o que o commit
 
 ### Boas práticas
 
+**TODO**
+
+### Nomenclatura da branch
+
+**TODO**
+
+## Pull Requests
+
+### Boas práticas
+
 Nós juntaremos os trabalhos feitos por cada um por meio de Pull Requests (PRs). Para seguirmos um padrão de PR, um template foi disponibilizado abaixo.
 
 Lembre-se de manter sua branch atualizada com a master branch.
 
-### Nomenclatura da branch
+### Nomenclatura do Pull Request
 
-
+**TODO**
 
 ### PR Template
 
