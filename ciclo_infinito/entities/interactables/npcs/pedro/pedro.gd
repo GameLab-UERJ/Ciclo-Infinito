@@ -5,6 +5,8 @@ extends StaticBody2D
 @onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
 @onready var label_interação: Label = $Area2D/LabelInteração
 @onready var mapa = get_parent()
+@onready var pular_dialogo = $Area2D/CanvasLayer/PularDialogo
+
 
 signal dialogo_concluido
 signal falou_com_pedro
@@ -14,6 +16,9 @@ var falando = false
 var pode_avancar = false
 var fala_index = 0
 var falas_atuais = []
+var escrevendo = false
+var texto_completo = ''
+var skip_animacao = false
 
 
 var falas = {
@@ -36,13 +41,19 @@ func _ready() -> void:
 	caixa_de_dialogo.visible = false
 	texto_dialogo.visible = false
 	label_interação.visible = false
+	pular_dialogo.visible = false
+	
+	
 	
 	
 func _process(_delta) -> void:
 	if player_in_area and not falando and Input.is_action_just_pressed("interact"):
 		iniciar_dialogo()
-	elif falando and pode_avancar and Input.is_action_just_pressed("interact"):
-		proxima_fala()
+	elif falando  and Input.is_action_just_pressed("interact"):
+		if escrevendo:
+			skip_animacao = true
+		elif pode_avancar:
+			proxima_fala()
 		
 		
 func iniciar_dialogo():
@@ -81,11 +92,24 @@ func proxima_fala():
 		
 		
 func mostrar_texto_com_efeito(texto: String):
+	texto_completo = texto
+	escrevendo = true
+	skip_animacao = false
+	pode_avancar  = false
+	texto_dialogo.text = ""
+	pular_dialogo.text = "Pressione 'E' para pular"
+	pular_dialogo.visible = true
+	
 	await get_tree().create_timer(0.1).timeout
 	for letra in texto:
+		if skip_animacao:
+			texto_dialogo.text = texto
+			break
 		texto_dialogo.text += letra
 		await get_tree().create_timer(0.02).timeout
+	escrevendo = false
 	pode_avancar = true
+	pular_dialogo.visible = false
 	
 	
 func encerrar_dialogo():
