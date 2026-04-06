@@ -70,7 +70,8 @@ size = Vector2(25, 43)
 
 [node name="Jose" type="StaticBody2D" unique_id=1772634627]
 position = Vector2(0.9, 0)
-collision_layer = 3
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_iebxx")
 metadata/_custom_type_script = "uid://3sojsttqv77"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]

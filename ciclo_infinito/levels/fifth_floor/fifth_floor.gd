@@ -24,30 +24,44 @@ func _ready():
 	configurar_label()
 	_atualizar_texto_missao()
 	conectar_sinais()
+	
+	
 func configurar_label():
 	mission_label.autowrap_mode=TextServer.AUTOWRAP_WORD
 	mission_label.add_theme_font_size_override("font_size", 24)
+	
+	
 func _process(_delta):
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused:
 			_resume_game()
 		else:
 			_pause_game()
+			
+			
 func _pause_game():
 	get_tree().paused = true
 	pause_menu.show()
+	
+	
 func _resume_game():
 	get_tree().paused = false
 	pause_menu.hide()
+	
+	
 func _atualizar_texto_missao():
 	if mission_label and indice_missao_atual < missoes.size():
 		mission_label.text = missoes[indice_missao_atual]
 	else:
 		mission_label.text = "Todas as missões concluídas!"
 		get_tree().call_deferred("change_scene_to_packed",victory_screen)
+		
+		
 func proxima_missao():
 	indice_missao_atual += 1
 	_atualizar_texto_missao()
+	
+	
 func conectar_sinais():
 	var npc = $NPC
 	if npc:
@@ -56,9 +70,13 @@ func conectar_sinais():
 	if enemies:
 		for enemy in enemies.get_children():
 			enemy.inimigo_derrotado.connect(_on_inimigo_derrotado)
+			
+			
 func _on_falou_com_pedro():
 	print("Pedro falou — avançando missão.")
 	proxima_missao()
+	
+	
 func _on_inimigo_derrotado():
 	inimigos_derrotados += 1
 	if inimigos_derrotados >= inimigos_totais:
