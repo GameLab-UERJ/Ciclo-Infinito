@@ -109,7 +109,7 @@ offset_top = 138.0
 offset_right = 767.0
 offset_bottom = 161.0
 
-[node name="LabelInteração" type="Label" parent="Area2D" unique_id=623400268]
+[node name="LabelInteracao" type="Label" parent="Area2D" unique_id=623400268]
 offset_left = -24.0
 offset_top = -34.0
 offset_right = 37.0

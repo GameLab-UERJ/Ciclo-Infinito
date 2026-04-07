@@ -334,6 +334,7 @@ tile_set = SubResource("TileSet_d1abf")
 [node name="NPC2" parent="." unique_id=2101407489 instance=ExtResource("6_dw1uh")]
 position = Vector2(737.857, 90)
 scale = Vector2(0.5, 0.5)
+move_speed = null
 
 [node name="Label" type="Label" parent="NPC2" unique_id=999073816]
 offset_left = 2.85718
