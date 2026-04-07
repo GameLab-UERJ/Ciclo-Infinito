@@ -34,7 +34,7 @@ var falas = {
 	],
 	"depois_de_matar": [
 		"Nada mal.",
-		"Venha, que vou te explicar mais sobre o que está acontecendo."
+		"Venha, vou te explicar mais sobre o que está acontecendo."
 	]}
 	
 func _ready() -> void:
