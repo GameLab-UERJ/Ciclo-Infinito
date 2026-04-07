@@ -92,6 +92,7 @@ func _physics_process(_delta: float) -> void:
 		else:
 			target_position = pos_a
 
+#lógica de aproximaçao
 func _parar_npc() -> void:
 	velocity = Vector2.ZERO
 	if sprite != null:
