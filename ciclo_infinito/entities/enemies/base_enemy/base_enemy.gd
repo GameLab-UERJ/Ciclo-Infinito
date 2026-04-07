@@ -4,6 +4,10 @@ extends CharacterBody2D
 
 signal defeated ##Contador para a tela de vitória
 
+#Para não grudar
+@export_category("Attributes")
+@export var is_floating: bool = true
+
 
 @export_category("objects")
 @export var sprite: Sprite2D = null
