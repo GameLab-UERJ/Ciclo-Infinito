@@ -56,6 +56,8 @@ func proxima_fala():
 func mostrar_texto_com_efeito(texto: String):
 	await get_tree().create_timer(0.1).timeout
 	for letra in texto:
+		if not falando:
+			return
 		texto_dialogo.text += letra
 		await get_tree().create_timer(0.02).timeout
 	pode_avancar = true

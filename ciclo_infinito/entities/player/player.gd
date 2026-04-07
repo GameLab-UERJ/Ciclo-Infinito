@@ -14,6 +14,9 @@ var vida_textures = [
 ]
 
 
+@export_category("Attributes")
+@export var is_floating: bool = true
+
 @onready var anim  = $animacoes  
 @onready var dash_timer = $dash_timer
 @onready var dash_cooldown = $dash_cooldown
