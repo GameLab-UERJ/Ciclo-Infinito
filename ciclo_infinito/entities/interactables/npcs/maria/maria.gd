@@ -12,6 +12,11 @@ extends CharacterBody2D
 @onready var ponto_patrulha_a: Marker2D = $PontoPatrulhaA
 @onready var ponto_patrulha_b: Marker2D = $PontoPatrulhaB
 
+@export_category("Attributes")
+@export var is_floating: bool = true
+
+
+
 var player_in_area = false
 var falando = false
 var pode_avancar = false
@@ -22,6 +27,7 @@ var falas = ["Oi! Eu sou a Maria! Você é um calouro de engenharia?"
 
 # --- Variáveis de Patrulha ---
 @export var move_speed: float = 50.0
+@export var distancia_segura: float = 55.0
 
 var pos_a: Vector2
 var pos_b: Vector2
@@ -51,24 +57,27 @@ func _physics_process(_delta: float) -> void:
 		iniciar_dialogo()
 	elif falando and pode_avancar and Input.is_action_just_pressed("interact"):
 		proxima_fala()
-
-	# --- Lógica de Movimento ---
-	if falando or not is_moving:
-		# <<<< ADICIONEI ANIMAÇÃO DE IDLE AQUI >>>>
-		if sprite != null:
-			sprite.play("idle") # Troque "idle" pelo nome da sua animação de parado
-		velocity = Vector2.ZERO
-		move_and_slide()
+	
+	#Lógica de parar para conversar
+	var player = get_tree().get_first_node_in_group("player")
+	var muito_perto: bool = false
+	
+	if player:
+		var dist = global_position.distance_to(player.global_position)
+		if dist < distancia_segura:
+			muito_perto = true
+			
+	if falando or muito_perto or not is_moving:
+		_parar_npc()
 		return
-
+	
 	# Lógica de Patrulha
 	var direction = (target_position - global_position).normalized()
 	velocity = direction * move_speed
 	
 	if sprite != null:
 		# <<<< ADICIONEI ANIMAÇÃO DE WALK AQUI >>>>
-		#sprite.play("walk") # Troque "walk" pelo nome da sua animação de andar
-		
+		sprite.play("walk") # Troque "walk" pelo nome da sua animação de andar
 		if velocity.x > 0.1: 
 			sprite.flip_h = false 
 		elif velocity.x < -0.1:
@@ -82,6 +91,11 @@ func _physics_process(_delta: float) -> void:
 		else:
 			target_position = pos_a
 
+func _parar_npc() -> void:
+	velocity = Vector2.ZERO
+	if sprite != null:
+		sprite.play("idle")
+	move_and_slide()
 
 # --- Funções de Diálogo (sem mudanças) ---
 
