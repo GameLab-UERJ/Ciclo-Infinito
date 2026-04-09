@@ -1085,17 +1085,18 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5vqd"]
-size = Vector2(33, 24)
+size = Vector2(26, 20)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5yr5"]
 radius = 276.11
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m1c6a"]
-radius = 63.21
+radius = 39.051247
 
 [node name="GolemBlue" type="CharacterBody2D" unique_id=875007688]
 collision_layer = 4
 collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_5uxnx")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
@@ -1109,9 +1110,8 @@ libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=1515401558]
 show_behind_parent = true
-position = Vector2(-1, 6)
+position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_i5vqd")
-debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
 [node name="detectionarea" type="Area2D" parent="." unique_id=150714349]
 collision_mask = 3
