@@ -1434,8 +1434,8 @@ corner_radius_bottom_left = 8
 
 [node name="player" type="CharacterBody2D" unique_id=1305817267 groups=["player"]]
 scale = Vector2(1.1, 1.1)
-collision_layer = 3
-collision_mask = 21
+collision_layer = 2
+collision_mask = 29
 script = ExtResource("1_wq0jh")
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
@@ -1452,14 +1452,16 @@ one_shot = true
 one_shot = true
 
 [node name="attack_area" type="Area2D" parent="." unique_id=203285202 groups=["player"]]
-collision_layer = 8
-collision_mask = 4
+visible = false
+collision_layer = 0
+collision_mask = 8
 
 [node name="attack_colison" type="CollisionShape2D" parent="attack_area" unique_id=598295500]
 shape = SubResource("RectangleShape2D_jrjdb")
 one_way_collision_margin = 0.0
 
 [node name="player_colision" type="CollisionShape2D" parent="." unique_id=1626315010]
+visible = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_4ja17")
 
