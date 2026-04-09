@@ -180,6 +180,7 @@ draw_center = false
 size = Vector2(34, 72.75)
 
 [node name="SpuudNPC" type="CharacterBody2D" unique_id=1354297474]
+motion_mode = 1
 script = ExtResource("1_tu2hi")
 metadata/_custom_type_script = "uid://crikhcj4uvp0e"
 

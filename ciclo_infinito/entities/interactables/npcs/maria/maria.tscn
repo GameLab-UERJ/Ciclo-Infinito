@@ -140,6 +140,7 @@ size = Vector2(25, 43)
 [node name="Maria" type="CharacterBody2D" unique_id=555259493]
 position = Vector2(0.9, 0)
 collision_layer = 3
+motion_mode = 1
 script = ExtResource("1_khbs0")
 metadata/_custom_type_script = "uid://cxsud87xx3vbj"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
