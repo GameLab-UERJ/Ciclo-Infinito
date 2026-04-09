@@ -25,10 +25,6 @@ boot_splash/minimum_display_time=50
 
 buses/default_bus_layout=""
 
-[autoload]
-
-DebugMenu="*uid://t8sgvvw21eir"
-
 [display]
 
 window/size/viewport_width=960
