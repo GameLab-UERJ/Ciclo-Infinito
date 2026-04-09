@@ -142,7 +142,7 @@ func die() -> void:
 
 # ======== Movimento / Animação ========
 func _stop() -> void:
-	if velocity.length() < 5.0:
+	if velocity.length() < 5.0: #correçao do grude
 		velocity = Vector2.ZERO
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, accel)

@@ -1436,6 +1436,7 @@ corner_radius_bottom_left = 8
 scale = Vector2(1.1, 1.1)
 collision_layer = 3
 collision_mask = 21
+motion_mode = 1
 script = ExtResource("1_wq0jh")
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
