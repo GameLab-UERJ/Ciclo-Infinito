@@ -1094,7 +1094,7 @@ radius = 276.11
 radius = 39.051247
 
 [node name="GolemBlue" type="CharacterBody2D" unique_id=875007688]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_5uxnx")
@@ -1109,17 +1109,20 @@ vframes = 4
 libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=1515401558]
+visible = false
 show_behind_parent = true
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_i5vqd")
 
 [node name="detectionarea" type="Area2D" parent="." unique_id=150714349]
+visible = false
 collision_mask = 3
 
 [node name="Detectionarea" type="CollisionShape2D" parent="detectionarea" unique_id=1861528670]
 shape = SubResource("CircleShape2D_m5yr5")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=577404922]
+visible = false
 collision_layer = 16
 collision_mask = 2
 

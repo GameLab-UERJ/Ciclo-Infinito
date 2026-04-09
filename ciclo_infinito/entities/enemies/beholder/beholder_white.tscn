@@ -1094,7 +1094,7 @@ radius = 276.11
 radius = 63.21
 
 [node name="BeholderWhite" type="CharacterBody2D" unique_id=1792496737]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_hh56e")
@@ -1109,18 +1109,21 @@ vframes = 4
 libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=1497250192]
+visible = false
 show_behind_parent = true
 position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_i5vqd")
 debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
 [node name="detectionarea" type="Area2D" parent="." unique_id=46205392]
+visible = false
 collision_mask = 3
 
 [node name="Detectionarea" type="CollisionShape2D" parent="detectionarea" unique_id=1387545]
 shape = SubResource("CircleShape2D_m5yr5")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1429695213]
+visible = false
 collision_layer = 16
 collision_mask = 2
 

@@ -180,11 +180,18 @@ draw_center = false
 size = Vector2(34, 72.75)
 
 [node name="SpuudNPC" type="CharacterBody2D" unique_id=1354297474]
+<<<<<<< HEAD
 motion_mode = 1
+=======
+collision_layer = 4
+collision_mask = 3
+>>>>>>> 3a2ff21b7eee675da84bfdc03147918f03055c82
 script = ExtResource("1_tu2hi")
 metadata/_custom_type_script = "uid://crikhcj4uvp0e"
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1835664185]
+collision_layer = 0
+collision_mask = 2
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1982530203]
 position = Vector2(17, 3)
