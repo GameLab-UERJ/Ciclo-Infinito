@@ -59,13 +59,10 @@ func obter_dialogo_atual():
 	match mapa.indice_missao_atual:
 		2:
 			return falas["primeira_conversa"]
-			print(mapa.indice_missao_atual)
 		3:
 			return falas["antes_de_matar"]
-			print(mapa.indice_missao_atual)
 		4:
 			return falas["depois_de_matar"]
-			print(mapa.indice_missao_atual)
 	
 	
 	
