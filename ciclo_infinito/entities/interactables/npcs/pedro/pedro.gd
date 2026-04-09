@@ -6,6 +6,10 @@ extends StaticBody2D
 # ========================
 # SIGNALS
 # ========================
+@onready var caixa_de_dialogo: Label = $Area2D/CanvasLayer/CaixaDeDialogo
+@onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
+@onready var label_interação: Label = $Area2D/LabelInteração
+@onready var mapa = get_parent()
 
 signal dialogo_concluido
 signal falou_com_pedro
@@ -56,6 +60,22 @@ var falas: Dictionary = {
 # LIFECYCLE
 # ========================
 
+var falas = {
+	"primeira_conversa": [
+		"Olá, meu chapa. Você infelizmente acabou de entrar em um purgatório da UERJ.",
+		"No quinto andar, moram os golems monstros que guardam os segredos mais sombrios da engenharia.",
+		"Entre todos os monstros do quinto andar, há um ser místico temido por todos: o Olho da Pressão.",
+		"Elimine os inimigos e fale comigo novamente."
+	],
+	"antes_de_matar": [
+		"Você ainda não derrotou os monstros.",
+		"Elimine os inimigos e fale comigo novamente."
+	],
+	"depois_de_matar": [
+		"Nada mal.",
+		"Venha, que vou te explicar mais sobre o que está acontecendo."
+	]}
+	
 func _ready() -> void:
 	dialogo = Dialogo.new()
 	add_child(dialogo)

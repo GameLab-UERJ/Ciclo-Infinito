@@ -1146,7 +1146,7 @@ radius = 63.21
 
 [node name="GolemBrown" type="CharacterBody2D" unique_id=1589772853]
 scale = Vector2(1.3, 1.3)
-collision_layer = 4
+collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_u6quf")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
@@ -1160,24 +1160,25 @@ vframes = 4
 libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=2046266785]
+visible = false
 show_behind_parent = true
 position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_i5vqd")
 debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
 [node name="detectionarea" type="Area2D" parent="." unique_id=2142074318]
+visible = false
 collision_mask = 3
 
 [node name="Detectionarea" type="CollisionShape2D" parent="detectionarea" unique_id=644843539]
-visible = false
 shape = SubResource("CircleShape2D_m5yr5")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=615768062]
+visible = false
 collision_layer = 16
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=512161656]
-visible = false
 shape = SubResource("CircleShape2D_m1c6a")
 debug_color = Color(0.95932, 0.105688, 0.437158, 0.42)
 
