@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://3qoae7f6uh8o"]
 
 [ext_resource type="Script" uid="uid://dbg05n786rg21" path="res://entities/player/player.gd" id="1_wq0jh"]
+[ext_resource type="Material" uid="uid://bk3kiethktv7y" path="res://resources/shaders/whiten.tres" id="2_24ehl"]
 [ext_resource type="Texture2D" uid="uid://cw6rmtpf160hr" path="res://assets/art/player/ATTACK 1/attack1_down.png" id="2_gt4e4"]
 [ext_resource type="Texture2D" uid="uid://baw5eohono6a1" path="res://assets/art/player/ATTACK 1/attack1_left.png" id="3_24ehl"]
 [ext_resource type="Texture2D" uid="uid://d4nq18t3e7kix" path="res://assets/art/player/ATTACK 1/attack1_right.png" id="4_bwdx1"]
@@ -28,6 +29,7 @@
 [ext_resource type="Texture2D" uid="uid://c82joy0gpepr5" path="res://assets/art/menus/hud/3_hearts.png" id="26_arp52"]
 [ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="27_jjk8f"]
 [ext_resource type="AudioStream" uid="uid://bccw64i2jy4xe" path="res://assets/sfx/rpg-sword-attack-combo-17-388929.mp3" id="28_cnswy"]
+[ext_resource type="AudioStream" uid="uid://3ydqk3abb8kq" path="res://assets/sfx/Hit4.wav" id="30_24ehl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_govaw"]
 atlas = ExtResource("2_gt4e4")
@@ -1441,6 +1443,7 @@ script = ExtResource("1_wq0jh")
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
 [node name="animacoes" type="AnimatedSprite2D" parent="." unique_id=226188145]
+material = ExtResource("2_24ehl")
 sprite_frames = SubResource("SpriteFrames_to47r")
 animation = &"idle_up"
 speed_scale = 1.5
@@ -1495,5 +1498,8 @@ mix_target = 1
 [node name="dash_sfx" type="AudioStreamPlayer" parent="." unique_id=315505597]
 stream = ExtResource("28_cnswy")
 volume_db = -34.668
+
+[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=1941439101]
+stream = ExtResource("30_24ehl")
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

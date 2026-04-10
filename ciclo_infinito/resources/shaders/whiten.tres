@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bk3kiethktv7y"]
+
+[ext_resource type="Shader" uid="uid://xq0amp6mj1aa" path="res://resources/shaders/whiten.gdshader" id="1_l2wpm"]
+
+[resource]
+shader = ExtResource("1_l2wpm")
+shader_parameter/whiten = false
