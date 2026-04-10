@@ -1096,6 +1096,7 @@ radius = 63.21
 [node name="BeholderOrange" type="CharacterBody2D" unique_id=960144527]
 collision_layer = 8
 collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_xgoio")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
