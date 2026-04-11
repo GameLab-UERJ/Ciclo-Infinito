@@ -4,6 +4,8 @@ extends CharacterBody2D
 
 signal defeated ##Contador para a tela de vitória
 
+@export_category("Attributes")
+@export var is_floating: bool = true
 
 @export_category("objects")
 @export var sprite: Sprite2D = null
@@ -140,8 +142,12 @@ func die() -> void:
 
 # ======== Movimento / Animação ========
 func _stop() -> void:
-	velocity = velocity.lerp(Vector2.ZERO, accel)
-	move_and_slide()
+	if velocity.length() < 5.0: #correçao do grude
+		velocity = Vector2.ZERO
+	else:
+		velocity = velocity.lerp(Vector2.ZERO, accel)
+	if velocity != Vector2.ZERO:
+		move_and_slide()
 	_update_animation_idle()
 
 

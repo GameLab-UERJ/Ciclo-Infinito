@@ -1416,7 +1416,7 @@ animations = [{
 size = Vector2(100, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ja17"]
-size = Vector2(21.5, 34.25)
+size = Vector2(21.5, 34.488636)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhcba"]
 bg_color = Color(0.29219, 0.29219, 0.29219, 1)
@@ -1436,6 +1436,7 @@ corner_radius_bottom_left = 8
 scale = Vector2(1.1, 1.1)
 collision_layer = 2
 collision_mask = 29
+motion_mode = 1
 script = ExtResource("1_wq0jh")
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
@@ -1464,6 +1465,7 @@ one_way_collision_margin = 0.0
 visible = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_4ja17")
+debug_color = Color(0.9817937, 0, 0.37205806, 0.41960785)
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=165336263]
 unique_name_in_owner = true
