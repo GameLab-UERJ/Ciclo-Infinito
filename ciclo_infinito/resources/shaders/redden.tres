@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://caca1g8p4dgrq"]
+
+[ext_resource type="Shader" uid="uid://b4ecm70ug50ju" path="res://resources/shaders/redden.gdshader" id="1_d1moo"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_d1moo")
+shader_parameter/redden = false

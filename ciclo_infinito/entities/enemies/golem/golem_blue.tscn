@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://dr0s7gb32d5vh"]
 
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_5uxnx"]
+[ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_gnbg4"]
 [ext_resource type="Texture2D" uid="uid://d36oybg1drgsf" path="res://assets/art/enemies/golem/golem_blue/Attack/Golem3_Attack_full.png" id="2_hdt1t"]
 [ext_resource type="Texture2D" uid="uid://5quxkg8t3k3c" path="res://assets/art/enemies/golem/golem_blue/Death/Golem3_Death_full.png" id="3_gnbg4"]
 [ext_resource type="Texture2D" uid="uid://cv23km6qh6qdy" path="res://assets/art/enemies/golem/golem_blue/Idle/Golem3_Idle_full.png" id="4_u0ahf"]
 [ext_resource type="Texture2D" uid="uid://criuj5hluaw4s" path="res://assets/art/enemies/golem/golem_blue/Walk/Golem3_Walk_full.png" id="5_jt4v6"]
 [ext_resource type="Texture2D" uid="uid://b5ipk3flgmyfx" path="res://assets/art/enemies/golem/golem_brown/Walk/Golem1_Walk_full.png" id="6_hexj7"]
 [ext_resource type="AudioStream" uid="uid://cxoixrxq44xp5" path="res://assets/sfx/earth-magic-6-378601.mp3" id="7_qqe8x"]
+[ext_resource type="AudioStream" uid="uid://bd2ijt8nn2qtr" path="res://assets/sfx/Hit3.wav" id="8_hdt1t"]
 
 [sub_resource type="Animation" id="Animation_8ihwp"]
 resource_name = "attack_down"
@@ -1101,8 +1103,9 @@ script = ExtResource("1_5uxnx")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1019330262]
-texture = ExtResource("2_hdt1t")
-hframes = 9
+material = ExtResource("2_gnbg4")
+texture = ExtResource("4_u0ahf")
+hframes = 4
 vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1564457134]
@@ -1136,6 +1139,9 @@ wait_time = 1.5
 [node name="attack_sfx" type="AudioStreamPlayer" parent="." unique_id=1084138517]
 stream = ExtResource("7_qqe8x")
 volume_db = -12.518
+
+[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=819476962]
+stream = ExtResource("8_hdt1t")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]
