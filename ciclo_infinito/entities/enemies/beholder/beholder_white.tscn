@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://c80omegwkn2ei"]
 
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_hh56e"]
+[ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_jabvo"]
 [ext_resource type="Texture2D" uid="uid://bikfhjtyea6h3" path="res://assets/art/enemies/beholder/beholder_white/Attack/Beholder1_Attack_full.png" id="2_yuadt"]
 [ext_resource type="Texture2D" uid="uid://xpi1pihjgyf1" path="res://assets/art/enemies/beholder/beholder_white/Death/Beholder1_Death_full.png" id="3_jabvo"]
 [ext_resource type="Texture2D" uid="uid://b8dw5p2thki2v" path="res://assets/art/enemies/beholder/beholder_white/Hurt/Beholder1_Hurt_full.png" id="4_fmtvx"]
 [ext_resource type="Texture2D" uid="uid://5332gn6x5o4g" path="res://assets/art/enemies/beholder/beholder_white/Idle/Beholder1_Idle_full.png" id="5_8mewe"]
 [ext_resource type="Texture2D" uid="uid://cmmg50spf3d3e" path="res://assets/art/enemies/beholder/beholder_white/Walk/Beholder1_Walk_full.png" id="6_w3758"]
 [ext_resource type="AudioStream" uid="uid://cx441vlb2nbup" path="res://assets/sfx/laser-351683.mp3" id="7_2nxdg"]
+[ext_resource type="AudioStream" uid="uid://bd2ijt8nn2qtr" path="res://assets/sfx/Hit3.wav" id="8_yuadt"]
 
 [sub_resource type="Animation" id="Animation_8ihwp"]
 resource_name = "attack_down"
@@ -1101,6 +1103,7 @@ script = ExtResource("1_hh56e")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1295580082]
+material = ExtResource("2_jabvo")
 texture = ExtResource("2_yuadt")
 hframes = 12
 vframes = 4
@@ -1137,6 +1140,9 @@ wait_time = 1.5
 [node name="attack_sfx" type="AudioStreamPlayer" parent="." unique_id=1780262662]
 stream = ExtResource("7_2nxdg")
 volume_db = -6.438
+
+[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=621279465]
+stream = ExtResource("8_yuadt")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]
