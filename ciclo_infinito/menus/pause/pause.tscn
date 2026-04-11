@@ -60,13 +60,11 @@ layout_mode = 2
 text = "Voltar ao menu iniciar"
 
 [node name="MenuOpcoes" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1200399122]
-layout_direction = 1
 layout_mode = 2
 size_flags_vertical = 6
 alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/MenuOpcoes" unique_id=1517607842]
-layout_direction = 1
 layout_mode = 2
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer" unique_id=1516009164]
@@ -74,12 +72,9 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "Volume geral"
 
-[node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/Label" unique_id=1638864458]
-layout_mode = 0
-offset_left = 116.0
-offset_top = 6.0
-offset_right = 406.0
-offset_bottom = 22.0
+[node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer" unique_id=1638864458]
+custom_minimum_size = Vector2(300, 9)
+layout_mode = 2
 
 [node name="FullScreenButton" type="Button" parent="MarginContainer/VBoxContainer/MenuOpcoes" unique_id=62465894]
 layout_mode = 2
@@ -92,4 +87,5 @@ text = "Voltar"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/resumebutton" to="." method="_on_resumebutton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton" to="." method="_on_optionsbutton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/quitbutton" to="." method="_on_quitbutton_pressed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/VolumeSlider" to="." method="_on_volume_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOpcoes/BackButton" to="." method="_on_backbutton_pressed"]
