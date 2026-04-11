@@ -10,6 +10,7 @@ signal defeated ##Contador para a tela de vitória
 @export_category("objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null
+@onready var damage_recieved_sfx: AudioStreamPlayer = null
 
 @export_category("Movement")
 @export var move_speed: float = 100.0
@@ -22,6 +23,10 @@ signal defeated ##Contador para a tela de vitória
 
 @export_category("Health")
 @export var max_health: float = 50.0
+
+
+# --- NOVO: Constante de duração de efeito de dano recebido ---
+const DAMAGE_TAKEN_EFFECT_DURATION: float = 0.3
 
 
 var can_attack: bool = true	
@@ -44,6 +49,8 @@ func _ready() -> void:
 		sprite = $texture
 	if anim == null and has_node("AnimationPlayer"):
 		anim = $AnimationPlayer
+	if damage_recieved_sfx == null and has_node("DamageRecievedSFX"):
+		damage_recieved_sfx = $DamageRecievedSFX
 
 	attack_area = _resolve_area2d("AttackArea")
 	if attack_area == null:
@@ -130,6 +137,9 @@ func take_damage(damage: float, hit_direction: Vector2) -> void:
 	var knockback_force: float = 300.0
 	velocity = hit_direction * knockback_force
 
+	# --- NOVO: Aplica efeito de dano recebido ---
+	applies_damage_received_effect()
+
 	if current_health <= 0:
 		die()
 
@@ -173,6 +183,16 @@ func _play_anim(animation_name: String) -> void:
 		return
 	if anim.has_animation(animation_name) and anim.current_animation != animation_name:
 		anim.play(animation_name)
+
+
+# --- NOVA FUNÇÃO: Aplica efeito visual e sonoro ao receber dano ---
+func applies_damage_received_effect() -> void:
+	damage_recieved_sfx.play()
+	
+	if sprite.material != null:
+		sprite.material.set_shader_parameter("redden", true)
+		await get_tree().create_timer(DAMAGE_TAKEN_EFFECT_DURATION).timeout
+		sprite.material.set_shader_parameter("redden", false)
 
 
 # ======== Util ========
