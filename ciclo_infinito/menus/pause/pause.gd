@@ -2,7 +2,7 @@ class_name PauseScreen
 extends Control
 
 var main_menu = load("uid://downt2rxxaqaf")
-
+var master_idx: int
 
 @onready var resume_button = $MarginContainer/VBoxContainer/MenuPrincipal/resumebutton
 @onready var options_button = $MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton
@@ -10,17 +10,20 @@ var main_menu = load("uid://downt2rxxaqaf")
 
 @onready var menu_principal = $MarginContainer/VBoxContainer/MenuPrincipal
 @onready var menu_opcoes = $MarginContainer/VBoxContainer/MenuOpcoes
-@onready var volume_slider = $MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/Label/VolumeSlider
+@onready var volume_slider = $MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/VolumeSlider
 @onready var fullscreen_button = $MarginContainer/VBoxContainer/MenuOpcoes/FullScreenButton
 @onready var back_button = $MarginContainer/VBoxContainer/MenuOpcoes/BackButton
+@onready var volume_label = $MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/Label
 
-func _ready():
+func _ready():	
+	master_idx = AudioServer.get_bus_index("Master")
+	
 	menu_principal.show()
 	menu_opcoes.hide()
-	volume_slider.min_value = -80.0
-	volume_slider.max_value = 0.0
-	volume_slider.step = 0.5
-	volume_slider.value = AudioServer.get_bus_volume_db(0)
+	volume_slider.min_value = 0.0
+	volume_slider.max_value = 100.0
+	volume_slider.step = 1.0
+	_update_volume_slider()
 
 func _on_resumebutton_pressed():
 	get_tree().paused = false
@@ -36,9 +39,22 @@ func _on_fullscreenbutton_pressed():
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-func _on_volume_changed(value: float):
-	AudioServer.set_bus_volume_db(0, value)
+func _on_volume_changed(value: float)-> void:
+	var linear = value / 100.0
+	var db = linear_to_db(linear)
+	_update_volume_label(value)
+
+	AudioServer.set_bus_volume_db(master_idx, db)
 func _on_backbutton_pressed() -> void:
 	menu_opcoes.hide()
 	menu_principal.show()
 	pass
+	
+func _update_volume_slider()-> void:
+	var current_db = AudioServer.get_bus_volume_db(master_idx)
+	var amp = db_to_linear(current_db)
+	volume_slider.value = amp * 100.0
+	
+func _update_volume_label(value: float) -> void:
+	var percent = int(value)
+	volume_label.text = "Volume: %d%%" % clamp(percent, 0, 100)
