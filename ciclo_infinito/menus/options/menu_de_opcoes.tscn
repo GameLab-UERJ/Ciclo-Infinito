@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://cid6bl0ejesbj" path="res://menus/options/menu_de_opcoes.gd" id="1_68aqc"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_c01ij"]
 [ext_resource type="Texture2D" uid="uid://n6opr2ssjnv5" path="res://assets/art/menus/main_menu/university_front_view.png" id="2_ecyp8"]
-[ext_resource type="AudioStream" uid="uid://c8ag6husw1v2" path="res://assets/music/Metal Hellsinger — The Hellsinger (Main Theme) - Piece Of Lembas (youtube).mp3" id="4_chf0p"]
 
-[node name="Menu de opcoes" type="Control"]
+[node name="Menu de opcoes" type="Control" unique_id=1635085087]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_68aqc")
 
-[node name="fundo_uerj" type="TextureRect" parent="."]
+[node name="fundo_uerj" type="TextureRect" parent="." unique_id=1798620034]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.275
@@ -28,7 +27,7 @@ offset_bottom = -163.0
 texture = ExtResource("2_ecyp8")
 expand_mode = 1
 
-[node name="ColorRect" type="ColorRect" parent="fundo_uerj"]
+[node name="ColorRect" type="ColorRect" parent="fundo_uerj" unique_id=40511221]
 layout_mode = 0
 offset_left = -2.0
 offset_top = -3.0
@@ -36,7 +35,7 @@ offset_right = 959.0
 offset_bottom = 542.0
 color = Color(0.41, 0.41, 0.41, 0.501961)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=976085161]
 layout_mode = 1
 offset_left = 298.0
 offset_top = 82.0
@@ -45,18 +44,19 @@ offset_bottom = 114.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="HBoxContainerGeral" type="HBoxContainer" parent="MarginContainer"]
+[node name="HBoxContainerGeral" type="HBoxContainer" parent="MarginContainer" unique_id=837716093]
 layout_mode = 2
 size_flags_horizontal = 0
 
-[node name="Volume" type="Label" parent="MarginContainer/HBoxContainerGeral"]
+[node name="Volume" type="Label" parent="MarginContainer/HBoxContainerGeral" unique_id=1167785659]
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("2_c01ij")
 theme_override_font_sizes/font_size = 32
 text = "Volume geral"
 
-[node name="volume_slider" type="HSlider" parent="MarginContainer/HBoxContainerGeral"]
+[node name="volume_slider" type="HSlider" parent="MarginContainer/HBoxContainerGeral" unique_id=1965270248]
 custom_minimum_size = Vector2(200, 9)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -65,9 +65,8 @@ min_value = -80.0
 max_value = 1.0
 step = 0.1
 page = 1.0
-rounded = true
 
-[node name="MarginContainer2" type="MarginContainer" parent="."]
+[node name="MarginContainer2" type="MarginContainer" parent="." unique_id=2012334559]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -84,10 +83,10 @@ scale = Vector2(1, 0.980493)
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer2" unique_id=932608283]
 layout_mode = 2
 
-[node name="Alternar tela cheia" type="Button" parent="MarginContainer2/VBoxContainer"]
+[node name="Alternar tela cheia" type="Button" parent="MarginContainer2/VBoxContainer" unique_id=2082608185]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 4
@@ -96,16 +95,11 @@ theme_override_fonts/font = ExtResource("2_c01ij")
 theme_override_font_sizes/font_size = 32
 text = "Tela cheia"
 
-[node name="voltar_button" type="Button" parent="MarginContainer2/VBoxContainer"]
+[node name="voltar_button" type="Button" parent="MarginContainer2/VBoxContainer" unique_id=144444470]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.768627, 0.721569, 0.615686, 1)
 theme_override_fonts/font = ExtResource("2_c01ij")
 theme_override_font_sizes/font_size = 32
 text = "Voltar"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("4_chf0p")
-autoplay = true
-attenuation = 0.784584
 
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/voltar_button" to="." method="_on_voltar_button_pressed"]

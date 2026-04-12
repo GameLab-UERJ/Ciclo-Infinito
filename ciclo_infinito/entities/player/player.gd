@@ -14,12 +14,17 @@ var vida_textures = [
 ]
 
 
+@export_category("Attributes")
+@export var is_floating: bool = true
+
 @onready var anim  = $animacoes  
 @onready var dash_timer = $dash_timer
 @onready var dash_cooldown = $dash_cooldown
 @export var dash_duracao  = 0.2
 @onready var area_attack = $attack_area
 @onready var dash_sfx = $dash_sfx
+@onready var player_colision: CollisionShape2D = $player_colision
+@onready var damage_recieved_sfx: AudioStreamPlayer = $DamageRecievedSFX
 
 
 var last_facing: String = "down"
@@ -75,6 +80,13 @@ var combo_buffered := false
 @export var hitbox_offset_up:    Vector2 = Vector2(0, -18)
 @export var hitbox_offset_down:  Vector2 = Vector2(0, 18)
 
+# --- NOVO: Constante de duração de invencibilidade ---
+const INVINCIBILITY_DURATION: float = 0.3
+
+# --- NOVO: Variável de condição de invencibilidade ---
+var is_invincible = false
+
+
 func _ready():
 	# --- novinho em folha: inicializa a vida do jogador ---
 	current_health = max_health
@@ -111,7 +123,13 @@ func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	# Efeito de knockback
 	var knockback_force: float = 350.0
 	velocity = hit_direction * knockback_force
-
+	
+	# --- NOVO: Aplica efeito de dano recebido ---
+	applies_damage_received_effect()
+	
+	# --- NOVO: Deixa o player imortal por um determinado tempo ---
+	start_invincibility(INVINCIBILITY_DURATION)
+	
 	if current_health <= 0.0:
 		die()
 
@@ -128,6 +146,19 @@ func die() -> void:
 	var death_scene = preload("uid://b7qoxm33b5qxt").instantiate()#death_screen.tscn
 	get_tree().root.add_child(death_scene)
 	death_scene.set_layer(100)
+
+
+# --- NOVO: Deixa o player imortal por um determinado tempo ---
+func start_invincibility(invincibility_duration: float) -> void:
+	is_invincible = true
+	
+	player_colision.set_deferred("disabled", true)
+	
+	await get_tree().create_timer(invincibility_duration).timeout
+	
+	player_colision.set_deferred("disabled", false)
+	
+	is_invincible = false
 
 
 func _physics_process(delta: float):
@@ -348,6 +379,15 @@ func update_animation() -> void:
 		if current_state == State.ATTACK:
 			anim.stop(); anim.frame = 0
 		anim.play(anim_name)
+
+
+# --- NOVA FUNÇÃO: Aplica efeito visual e sonoro ao receber dano ---
+func applies_damage_received_effect() -> void:
+	damage_recieved_sfx.play()
+	anim.material.set_shader_parameter("whiten", true)
+	await get_tree().create_timer(INVINCIBILITY_DURATION).timeout
+	anim.material.set_shader_parameter("whiten", false)
+
 
 func get_direction_string(v: Vector2) -> String:
 	if abs(v.x) > abs(v.y):

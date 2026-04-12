@@ -9,9 +9,6 @@ extends CharacterBody2D
 
 var player_in_area: bool = false
 var falando: bool = false
-
-var dialogo: Dialogo
-
 var falas: Array[String] = [
 	"Você já segue a página do SPUUD?",
 	"Lá você consegue achar a gatinha que tanto procura rsrs",
@@ -19,11 +16,13 @@ var falas: Array[String] = [
 ]
 
 @export var move_speed: float = 50.0
+@export var distancia_segura: float = 55.0
 
 var pos_a: Vector2
 var pos_b: Vector2
 var target_position: Vector2
 var is_moving: bool = false
+var dialogo : Dialogo
 
 
 # ========================
@@ -94,7 +93,6 @@ func _physics_process(_delta: float) -> void:
 # ========================
 # DIALOGO
 # ========================
-
 func iniciar_dialogo() -> void:
 	falando = true
 	label_interacao.visible = false
