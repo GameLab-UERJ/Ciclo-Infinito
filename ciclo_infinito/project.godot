@@ -25,6 +25,10 @@ boot_splash/minimum_display_time=50
 
 buses/default_bus_layout=""
 
+[autoload]
+
+MusicManager="*uid://bq8i8qcygm3gb"
+
 [display]
 
 window/size/viewport_width=960
