@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cid6bl0ejesbj" path="res://menus/options/menu_de_opcoes.gd" id="1_68aqc"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_c01ij"]
 [ext_resource type="Texture2D" uid="uid://n6opr2ssjnv5" path="res://assets/art/menus/main_menu/university_front_view.png" id="2_ecyp8"]
-[ext_resource type="AudioStream" uid="uid://c8ag6husw1v2" path="res://assets/music/Metal Hellsinger — The Hellsinger (Main Theme) - Piece Of Lembas (youtube).mp3" id="4_chf0p"]
 
 [node name="Menu de opcoes" type="Control" unique_id=1635085087]
 layout_mode = 3
@@ -102,10 +101,5 @@ theme_override_colors/font_color = Color(0.768627, 0.721569, 0.615686, 1)
 theme_override_fonts/font = ExtResource("2_c01ij")
 theme_override_font_sizes/font_size = 32
 text = "Voltar"
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=522186001]
-stream = ExtResource("4_chf0p")
-autoplay = true
-attenuation = 0.784584
 
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/voltar_button" to="." method="_on_voltar_button_pressed"]

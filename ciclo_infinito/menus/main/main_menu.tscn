@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://biduen4m26mw5" path="res://menus/main/main_menu.gd" id="2_rvc10"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="3_cqjrg"]
 [ext_resource type="Texture2D" uid="uid://cutt1kh3xr6q" path="res://assets/art/menus/main_menu/discord_logo.png" id="4_e2xy7"]
-[ext_resource type="AudioStream" uid="uid://d34npikhkd0oe" path="res://assets/music/MÚSICA MENU.mp3" id="5_tf3dk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tf3dk"]
 bg_color = Color(0.466667, 0.00784314, 0.917647, 1)
@@ -106,11 +105,6 @@ offset_bottom = 1051.0
 texture_normal = ExtResource("4_e2xy7")
 ignore_texture_size = true
 stretch_mode = 0
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=332710858]
-stream = ExtResource("5_tf3dk")
-autoplay = true
-attenuation = 0.784584
 
 [connection signal="pressed" from="VBoxContainer/Jogar_Button" to="." method="_on_jogar_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Opções_Button" to="." method="_on_opções_button_pressed"]
