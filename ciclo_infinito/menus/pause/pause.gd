@@ -32,6 +32,7 @@ func _on_optionsbutton_pressed():
 	menu_principal.hide()
 	menu_opcoes.show()
 func _on_quitbutton_pressed():
+	get_tree().paused = false
 	get_tree().change_scene_to_packed(main_menu)
 func _on_fullscreenbutton_pressed():
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
