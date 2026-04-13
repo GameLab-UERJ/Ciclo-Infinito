@@ -1,7 +1,11 @@
 extends Node2D
 
+@export var target_scene: PackedScene
+
 @onready var pause_menu = $player/pause
 @onready var mission_label = $CanvasLayer/TextureRect/Label
+@onready var fade_in_component: FadeComponent = $player/FadeInComponent
+@onready var fade_out_component: FadeComponent = $player/FadeOutComponent
 
 var missoes = [
 	"Fale com José próximo aos elevadores no Hall do Queijo",
@@ -20,6 +24,7 @@ func _ready():
 	var npc3 = get_node_or_null("npc3")
 	if npc3:
 		npc3.falou_com_jose.connect(_on_falou_com_jose)
+	fade_in_component.fade()
 
 
 func configurar_label():
@@ -49,5 +54,20 @@ func proxima_missao():
 	if indice_missao_atual < missoes.size() - 1:
 		indice_missao_atual += 1
 		atualizar_missao()
+
+
+func mudar_de_cena():
+	if target_scene == null:
+		print("ERRO: A cena de destino (Target Scene) não foi definida no inspetor!")
+		return
+	var terrain_manager = get_tree().get_current_scene()
+	terrain_manager.atualizar_missao("Missão: \nFale com o Pedro.")
+	fade_out_component.fade()
+
+
 func _on_falou_com_jose():
 	proxima_missao()
+
+
+func _on_fade_out_component_fade_finished() -> void:
+	get_tree().change_scene_to_packed(target_scene)

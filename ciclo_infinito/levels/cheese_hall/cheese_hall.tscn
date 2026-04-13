@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="8_7nto0"]
 [ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose/jose.tscn" id="10_p3xb5"]
 [ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria/maria.tscn" id="11_td228"]
+[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/fade_component.gd" id="13_pfwt5"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="13_v1y88"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_v1y88"]
 [ext_resource type="AudioStream" uid="uid://cq14taynk4t07" path="res://assets/music/Hades - House of Hades - Supergiant Games (youtube).mp3" id="15_7nto0"]
@@ -293,10 +294,11 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bvks6")
 sources/1 = SubResource("TileSetAtlasSource_qy7ad")
 
-[node name="TerrainManager2" type="Node2D" unique_id=481706482]
+[node name="CheeseHall" type="Node2D" unique_id=481706482]
 position = Vector2(-11, -21)
 scale = Vector2(1.4, 1.4)
 script = ExtResource("1_dw1uh")
+target_scene = ExtResource("4_td228")
 metadata/_edit_horizontal_guides_ = [724.0, 5.0, -40.0]
 metadata/_edit_vertical_guides_ = [69.0, 1194.0, 1072.0]
 
@@ -336,7 +338,6 @@ tile_set = SubResource("TileSet_61582")
 
 [node name="ElevadorInterativo" parent="." unique_id=595449376 instance=ExtResource("3_p3xb5")]
 position = Vector2(536.429, -133.571)
-target_scene = ExtResource("4_td228")
 
 [node name="ParedeRampa" type="TileMapLayer" parent="." unique_id=1021102607]
 position = Vector2(27, -15)
@@ -396,6 +397,24 @@ offset_right = 469.87
 offset_bottom = 277.532
 scale = Vector2(0.521822, 0.503862)
 
+[node name="FadeInComponent" type="ColorRect" parent="player" unique_id=305366240]
+offset_left = -138.96089
+offset_top = -258.4418
+offset_right = -98.96089
+offset_bottom = -218.4418
+script = ExtResource("13_pfwt5")
+is_fade_out = false
+fade_time = 0.5
+metadata/_custom_type_script = "uid://br6wsqfyc7ush"
+
+[node name="FadeOutComponent" type="ColorRect" parent="player" unique_id=1665556648]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("13_pfwt5")
+fade_time = 0.5
+offset = Vector2(-500, -250)
+metadata/_custom_type_script = "uid://br6wsqfyc7ush"
+
 [node name="ParedeUerj" type="TileMapLayer" parent="." unique_id=1524752549]
 tile_map_data = PackedByteArray("AAAFABAAAAABAAQAAAALABAAAQABAAEAAAARABAAAAABAAQAAAAXABAAAQABAAEAAAAdABAAAAABAAQAAAAjABAAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_n24co")
@@ -451,3 +470,5 @@ scale = Vector2(2.62175, 1.76895)
 stream = ExtResource("15_7nto0")
 volume_db = -4.952
 autoplay = true
+
+[connection signal="fade_finished" from="player/FadeOutComponent" to="." method="_on_fade_out_component_fade_finished"]
