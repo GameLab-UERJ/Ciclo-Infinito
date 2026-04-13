@@ -23,6 +23,7 @@ func _ready() -> void:
 		size = preferred_size
 	position += offset
 	color = fade_color
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	if is_fade_out:
 		color.a = 0
 	else:
