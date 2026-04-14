@@ -3,6 +3,8 @@ extends Control
 
 var main_menu = load("uid://downt2rxxaqaf")
 var master_idx: int
+var cena_controles = preload("res://menus/controls/menu_controles.tscn")
+
 
 @onready var resume_button = $MarginContainer/VBoxContainer/MenuPrincipal/resumebutton
 @onready var options_button = $MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton
@@ -58,3 +60,13 @@ func _update_volume_slider()-> void:
 func _update_volume_label(value: float) -> void:
 	var percent = int(value)
 	volume_label.text = "Volume: %d%%" % clamp(percent, 0, 100)
+
+
+
+
+func _on_controles_pressed() -> void:
+	print("SINAL RECEBIDO COM SUCESSO!") # Se isso aparecer, o problema acaba aqui.
+	var instancia = cena_controles.instantiate()
+	add_child(instancia)
+	$MarginContainer.hide()
+	pass # Replace with function body.

@@ -55,6 +55,11 @@ text = "Resume"
 layout_mode = 2
 text = "Opções"
 
+[node name="Controles" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=456575190]
+layout_mode = 2
+text = "Controles
+"
+
 [node name="quitbutton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=780739351]
 layout_mode = 2
 text = "Voltar ao menu iniciar"
@@ -87,6 +92,7 @@ text = "Voltar"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/resumebutton" to="." method="_on_resumebutton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton" to="." method="_on_optionsbutton_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/Controles" to="." method="_on_controles_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/quitbutton" to="." method="_on_quitbutton_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/VolumeSlider" to="." method="_on_volume_changed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOpcoes/BackButton" to="." method="_on_backbutton_pressed"]
