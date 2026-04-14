@@ -62,10 +62,7 @@ func _update_volume_label(value: float) -> void:
 	volume_label.text = "Volume: %d%%" % clamp(percent, 0, 100)
 
 
-
-
 func _on_controles_pressed() -> void:
-	print("SINAL RECEBIDO COM SUCESSO!") # Se isso aparecer, o problema acaba aqui.
 	var instancia = cena_controles.instantiate()
 	add_child(instancia)
 	$MarginContainer.hide()
