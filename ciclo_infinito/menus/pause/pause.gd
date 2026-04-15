@@ -58,3 +58,11 @@ func _update_volume_slider()-> void:
 func _update_volume_label(value: float) -> void:
 	var percent = int(value)
 	volume_label.text = "Volume: %d%%" % clamp(percent, 0, 100)
+
+
+func _on_full_screen_button_pressed() -> void:
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	pass # Replace with function body.
