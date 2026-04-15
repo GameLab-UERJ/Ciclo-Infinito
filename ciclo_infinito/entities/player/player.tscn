@@ -1105,7 +1105,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4nkfr")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_down",
 "speed": 5.0
 }, {
@@ -1131,7 +1131,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_er4b4")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_left",
 "speed": 5.0
 }, {
@@ -1157,7 +1157,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bgtuk")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_right",
 "speed": 5.0
 }, {
@@ -1183,7 +1183,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n7h2d")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_up",
 "speed": 5.0
 }, {
@@ -1445,7 +1445,7 @@ metadata/_custom_type_script = "uid://dbg05n786rg21"
 [node name="animacoes" type="AnimatedSprite2D" parent="." unique_id=226188145]
 material = ExtResource("2_24ehl")
 sprite_frames = SubResource("SpriteFrames_to47r")
-animation = &"idle_up"
+animation = &"death_up"
 speed_scale = 1.5
 
 [node name="dash_timer" type="Timer" parent="." unique_id=481345477]
