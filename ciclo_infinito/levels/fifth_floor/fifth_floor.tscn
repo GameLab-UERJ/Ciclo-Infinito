@@ -47,15 +47,15 @@ text = "Pedro"
 position = Vector2(574, -278)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -273.0
-offset_top = -154.0
-offset_right = 817.0
-offset_bottom = 460.0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -163.3766
+offset_top = -75.19482
+offset_right = 476.6234
+offset_bottom = 284.80518
+grow_horizontal = 1
+grow_vertical = 1
 scale = Vector2(0.5, 0.5)
 
 [node name="enemies" type="Label" parent="player" unique_id=574180986]
