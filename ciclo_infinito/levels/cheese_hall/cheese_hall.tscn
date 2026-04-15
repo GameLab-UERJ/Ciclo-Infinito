@@ -391,10 +391,15 @@ tile_set = SubResource("TileSet_vft3r")
 position = Vector2(152.857, 284.286)
 
 [node name="pause" parent="player" unique_id=2143532255 instance=ExtResource("13_v1y88")]
-offset_left = -170.13
-offset_top = -82.4678
-offset_right = 469.87
-offset_bottom = 277.532
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -164.28557
+offset_top = -86.3639
+offset_right = 475.71442
+offset_bottom = 273.6361
+grow_horizontal = 1
+grow_vertical = 1
 scale = Vector2(0.521822, 0.503862)
 
 [node name="FadeInComponent" type="ColorRect" parent="player" unique_id=305366240]

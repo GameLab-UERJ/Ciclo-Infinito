@@ -29,3 +29,8 @@ func _on_opções_button_pressed() -> void:
 
 func _on_discordbutton_pressed()->void:
 	OS.shell_open("https://discord.com/channels/1409169018534891644/1412147166658429038")
+
+
+func _on_controles_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://menus/controls/menu_controles.tscn")
+	pass # Replace with function body.
