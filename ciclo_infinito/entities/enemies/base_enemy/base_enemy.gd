@@ -233,7 +233,5 @@ func _on_attack_cooldown_timeout() -> void:
 func _on_anim_animation_finished(animation_name: StringName) -> void:
 	var n := String(animation_name)
 	if n.begins_with("attack_"):
-		# Primeiro aplica o dano (se o alvo ainda estiver na área), depois destrava
-		apply_attack_damage()
 		_is_attacking = false
 		_play_anim("idle_%s" % _last_facing)
