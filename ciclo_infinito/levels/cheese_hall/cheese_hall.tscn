@@ -295,7 +295,6 @@ sources/1 = SubResource("TileSetAtlasSource_qy7ad")
 
 [node name="TerrainManager2" type="Node2D" unique_id=481706482]
 position = Vector2(-11, -21)
-scale = Vector2(1.4, 1.4)
 script = ExtResource("1_dw1uh")
 metadata/_edit_horizontal_guides_ = [724.0, 5.0, -40.0]
 metadata/_edit_vertical_guides_ = [69.0, 1194.0, 1072.0]
