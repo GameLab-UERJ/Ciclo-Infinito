@@ -141,7 +141,7 @@ position = Vector2(631, 775)
 position = Vector2(505, 461)
 
 [node name="golem8" parent="Enemies" unique_id=539874560 instance=ExtResource("7_ancri")]
-position = Vector2(135, 277)
+position = Vector2(150, 270)
 
 [node name="golem9" parent="Enemies" unique_id=1773328042 instance=ExtResource("7_ancri")]
 position = Vector2(276, 527)
@@ -162,7 +162,7 @@ position = Vector2(362, 420)
 position = Vector2(204, 407)
 
 [node name="golem_azul7" parent="Enemies" unique_id=140674353 instance=ExtResource("3_v3xqr")]
-position = Vector2(730, 344)
+position = Vector2(729, 346)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1512366738]
 stream = ExtResource("15_r8vnr")
