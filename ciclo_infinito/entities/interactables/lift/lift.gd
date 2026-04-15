@@ -1,11 +1,15 @@
 class_name Lift
 extends Area2D
 
-@export var target_scene: PackedScene
+
 var talk_jose = false
+var player_in_area = false
+
+
 @onready var label_interação: Label = $LabelInteração
 @onready var npc = get_node("../NPC3")
-var player_in_area = false
+@onready var cheese_hall: Node2D = $".."
+
 
 func _falar_jose() ->void:
 	talk_jose=true
@@ -17,15 +21,7 @@ func _ready() -> void:
 
 func _process(_delta) -> void:
 	if player_in_area and Input.is_action_just_pressed("interact"):
-		mudar_de_cena()
-
-func mudar_de_cena():
-	if target_scene == null:
-		print("ERRO: A cena de destino (Target Scene) não foi definida no inspetor!")
-		return
-	var terrain_manager = get_tree().get_current_scene()
-	terrain_manager.atualizar_missao("Missão: \nFale com o Pedro.")
-	get_tree().change_scene_to_packed(target_scene)
+		cheese_hall.mudar_de_cena()
 
 func _on_body_entered(body: Node2D) -> void:
 	print("---ALGO ENTROU NO ELEVADOR!---")

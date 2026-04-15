@@ -1,0 +1,153 @@
+[gd_scene format=3 uid="uid://jgxnlfi33ok0"]
+
+[ext_resource type="Script" uid="uid://bubtax7ha8ijd" path="res://menus/controls/menu_controles.gd" id="1_hnxwp"]
+[ext_resource type="Texture2D" uid="uid://n6opr2ssjnv5" path="res://assets/art/menus/main_menu/university_front_view.png" id="2_opgxd"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="3_oqebd"]
+
+[node name="MenuControles" type="Control" unique_id=388669314]
+process_mode = 3
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hnxwp")
+metadata/_edit_vertical_guides_ = [133.0, 617.0]
+metadata/_edit_horizontal_guides_ = [405.0, 326.0, 244.0, 156.0, 67.0]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1170788630]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -288.0
+offset_top = -242.0
+offset_right = 288.0
+offset_bottom = 242.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_opgxd")
+expand_mode = 1
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect" unique_id=1374080318]
+layout_mode = 0
+offset_right = 1536.0
+offset_bottom = 1024.0
+color = Color(0.4117647, 0.4117647, 0.4117647, 0.5019608)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/ColorRect" unique_id=898731452]
+layout_mode = 0
+offset_left = 735.0
+offset_top = 300.0
+offset_right = 904.0
+offset_bottom = 575.0
+
+[node name="A" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=1405046451]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "A"
+
+[node name="D" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=1649616519]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "D"
+
+[node name="W" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=192741996]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "W"
+
+[node name="S" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=627413529]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "S"
+
+[node name="Space" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=1527023623]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Space"
+
+[node name="Left_Mouse" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=6067225]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Left Mouse"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TextureRect/ColorRect" unique_id=1451424201]
+layout_mode = 0
+offset_left = 332.0
+offset_top = 300.0
+offset_right = 501.0
+offset_bottom = 536.0
+
+[node name="Move_left" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=1449700252]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Move Left"
+
+[node name="Move_Right" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=2022711848]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Move Right"
+
+[node name="Move_Up" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=148752357]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Move Up"
+
+[node name="Move_Down" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=1397644265]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Move Down"
+
+[node name="Dash" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=1188692537]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Dash"
+
+[node name="Attack" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=894154808]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Attack"
+
+[node name="Voltar" type="Button" parent="." unique_id=2049924230]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 326.0
+offset_right = 168.0
+offset_bottom = 381.0
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_oqebd")
+theme_override_font_sizes/font_size = 36
+text = "Voltar"
+
+[connection signal="pressed" from="Voltar" to="." method="_on_voltar_pressed"]

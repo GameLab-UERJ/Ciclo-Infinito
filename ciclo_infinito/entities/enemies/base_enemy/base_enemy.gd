@@ -7,7 +7,7 @@ signal defeated ##Contador para a tela de vitória
 @export_category("Attributes")
 @export var is_floating: bool = true
 
-@export_category("objects")
+@export_category("Objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null
 @onready var damage_recieved_sfx: AudioStreamPlayer = null
@@ -233,7 +233,5 @@ func _on_attack_cooldown_timeout() -> void:
 func _on_anim_animation_finished(animation_name: StringName) -> void:
 	var n := String(animation_name)
 	if n.begins_with("attack_"):
-		# Primeiro aplica o dano (se o alvo ainda estiver na área), depois destrava
-		apply_attack_damage()
 		_is_attacking = false
 		_play_anim("idle_%s" % _last_facing)

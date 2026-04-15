@@ -83,6 +83,18 @@ theme_override_font_sizes/font_size = 46
 theme_override_styles/hover = SubResource("StyleBoxFlat_85i58")
 text = "Créditos"
 
+[node name="Controles_Button" type="Button" parent="VBoxContainer" unique_id=168128271]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_cqjrg")
+theme_override_font_sizes/font_size = 46
+text = "Controles
+"
+
 [node name="Sair_Button" type="Button" parent="VBoxContainer" unique_id=747055780]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -109,5 +121,6 @@ stretch_mode = 0
 [connection signal="pressed" from="VBoxContainer/Jogar_Button" to="." method="_on_jogar_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Opções_Button" to="." method="_on_opções_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Creditos_button" to="." method="_on_creditos_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controles_Button" to="." method="_on_controles_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Sair_Button" to="." method="_on_sair_button_pressed"]
 [connection signal="pressed" from="discordbutton" to="." method="_on_discordbutton_pressed"]

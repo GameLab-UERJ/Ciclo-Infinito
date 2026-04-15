@@ -15,6 +15,7 @@
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="13_ni4lu"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_71gwp"]
 [ext_resource type="AudioStream" uid="uid://ce378hasf2vjm" path="res://assets/music/Hades - God of the Dead - Supergiant Games (youtube).mp3" id="15_r8vnr"]
+[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/fade_component.gd" id="16_ekmel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
@@ -47,15 +48,15 @@ text = "Pedro"
 position = Vector2(574, -278)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -273.0
-offset_top = -154.0
-offset_right = 817.0
-offset_bottom = 460.0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -163.3766
+offset_top = -75.19482
+offset_right = 476.6234
+offset_bottom = 284.80518
+grow_horizontal = 1
+grow_vertical = 1
 scale = Vector2(0.5, 0.5)
 
 [node name="enemies" type="Label" parent="player" unique_id=574180986]
@@ -90,6 +91,15 @@ offset_bottom = 104.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.74863, 0.959864)
+
+[node name="FadeComponent" type="ColorRect" parent="player" unique_id=1717650633]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("16_ekmel")
+is_fade_out = false
+fade_time = 0.5
+offset = Vector2(-500, -250)
+metadata/_custom_type_script = "uid://br6wsqfyc7ush"
 
 [node name="Enemies" type="Node" parent="." unique_id=1015743081 node_paths=PackedStringArray("label_contador")]
 script = ExtResource("2_tprnl")
@@ -141,7 +151,7 @@ position = Vector2(631, 775)
 position = Vector2(505, 461)
 
 [node name="golem8" parent="Enemies" unique_id=539874560 instance=ExtResource("7_ancri")]
-position = Vector2(135, 277)
+position = Vector2(150, 270)
 
 [node name="golem9" parent="Enemies" unique_id=1773328042 instance=ExtResource("7_ancri")]
 position = Vector2(276, 527)
@@ -162,7 +172,7 @@ position = Vector2(362, 420)
 position = Vector2(204, 407)
 
 [node name="golem_azul7" parent="Enemies" unique_id=140674353 instance=ExtResource("3_v3xqr")]
-position = Vector2(730, 344)
+position = Vector2(729, 346)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1512366738]
 stream = ExtResource("15_r8vnr")

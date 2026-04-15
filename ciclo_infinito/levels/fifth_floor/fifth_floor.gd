@@ -5,6 +5,7 @@ var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
 
 @onready var pause_menu = $player/pause
 @onready var mission_label = $player/TextureRect/Label
+@onready var fade_component: FadeComponent = $player/FadeComponent
 
 var missoes = [
 	"Fale com José próximo aos elevadores no Hall do Queijo",
@@ -19,6 +20,7 @@ var inimigos_totais = 0
 var inimigos_derrotados = 0
 
 func _ready():
+	fade_component.fade()
 	pause_menu.hide()
 	inimigos_totais = $player/enemies.get_child_count() if $player/enemies else 0
 	configurar_label()
