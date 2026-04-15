@@ -3,10 +3,10 @@
 [ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="1_tydhf"]
 [ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="2_erwq8"]
 
-[node name="Node2D" type="Node2D"]
+[node name="Node2D" type="Node2D" unique_id=701104975]
 
-[node name="golem" parent="." instance=ExtResource("1_tydhf")]
+[node name="golem" parent="." unique_id=984158001 instance=ExtResource("1_tydhf")]
 position = Vector2(19, 19)
 
-[node name="player" parent="." instance=ExtResource("2_erwq8")]
+[node name="player" parent="." unique_id=1555171060 instance=ExtResource("2_erwq8")]
 position = Vector2(129, 120)

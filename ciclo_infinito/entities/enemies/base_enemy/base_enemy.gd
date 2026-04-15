@@ -7,7 +7,7 @@ signal defeated ##Contador para a tela de vitória
 @export_category("Attributes")
 @export var is_floating: bool = true
 
-@export_category("objects")
+@export_category("Objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null
 @onready var damage_recieved_sfx: AudioStreamPlayer = null

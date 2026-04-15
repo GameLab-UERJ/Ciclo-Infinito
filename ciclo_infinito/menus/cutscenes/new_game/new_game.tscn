@@ -2,8 +2,9 @@
 
 [ext_resource type="VideoStream" uid="uid://v74o4bua43da" path="res://assets/video/intro-ciclo-infinito.ogv" id="1_drs7p"]
 [ext_resource type="Script" uid="uid://du102pklt6jw1" path="res://menus/cutscenes/new_game/new_game.gd" id="2_1lj4p"]
+[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/fade_component.gd" id="3_7dy73"]
 
-[node name="Cutscene" type="VideoStreamPlayer"]
+[node name="Cutscene" type="VideoStreamPlayer" unique_id=2071533687]
 layout_direction = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -18,5 +19,12 @@ scale = Vector2(0.5, 0.5)
 stream = ExtResource("1_drs7p")
 autoplay = true
 script = ExtResource("2_1lj4p")
+
+[node name="FadeComponent" type="ColorRect" parent="." unique_id=1137094072]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_7dy73")
+metadata/_custom_type_script = "uid://br6wsqfyc7ush"
 
 [connection signal="finished" from="." to="." method="_on_finished"]
