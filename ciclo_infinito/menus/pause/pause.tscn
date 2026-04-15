@@ -89,4 +89,5 @@ text = "Voltar"
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton" to="." method="_on_optionsbutton_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/quitbutton" to="." method="_on_quitbutton_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/VolumeSlider" to="." method="_on_volume_changed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOpcoes/FullScreenButton" to="." method="_on_full_screen_button_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOpcoes/BackButton" to="." method="_on_backbutton_pressed"]
