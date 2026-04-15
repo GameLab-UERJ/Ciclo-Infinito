@@ -38,3 +38,11 @@ func _on_voltar_button_pressed() -> void:
 	get_tree().change_scene_to_packed(main_menu)
 	
 	pass
+
+
+func _on_alternar_tela_cheia_pressed() -> void:
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	pass # Replace with function body.

@@ -102,4 +102,5 @@ theme_override_fonts/font = ExtResource("2_c01ij")
 theme_override_font_sizes/font_size = 32
 text = "Voltar"
 
+[connection signal="pressed" from="MarginContainer2/VBoxContainer/Alternar tela cheia" to="." method="_on_alternar_tela_cheia_pressed"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/voltar_button" to="." method="_on_voltar_button_pressed"]

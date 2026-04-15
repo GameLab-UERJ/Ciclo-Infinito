@@ -66,4 +66,10 @@ func _on_controles_pressed() -> void:
 	var instancia = cena_controles.instantiate()
 	add_child(instancia)
 	$MarginContainer.hide()
-	pass # Replace with function body.
+
+
+func _on_full_screen_button_pressed() -> void:
+	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	else:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
