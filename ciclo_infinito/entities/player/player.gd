@@ -152,11 +152,11 @@ func die() -> void:
 func start_invincibility(invincibility_duration: float) -> void:
 	is_invincible = true
 	
-	player_colision.set_deferred("disabled", true)
+	set_deferred("collision_mask",collision_mask^0x8)
 	
 	await get_tree().create_timer(invincibility_duration).timeout
 	
-	player_colision.set_deferred("disabled", false)
+	set_deferred("collision_mask",collision_mask^0x8)
 	
 	is_invincible = false
 
