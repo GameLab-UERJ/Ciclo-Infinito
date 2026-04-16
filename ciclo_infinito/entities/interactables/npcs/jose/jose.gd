@@ -5,6 +5,8 @@ extends StaticBody2D
 @onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
 @onready var label_interação: Label = $Area2D/LabelInteração
 
+signal dialog_started
+signal dialog_finished
 signal falou_com_jose
 var player_in_area = false
 var falando = false
@@ -34,6 +36,8 @@ func _process(_delta) -> void:
 
 
 func iniciar_dialogo():
+	print("NPC: emitindo dialog_started")
+	emit_signal("dialog_started")
 	falando = true
 	label_interação.visible = false
 	caixa_de_dialogo.visible = true
@@ -62,13 +66,15 @@ func mostrar_texto_com_efeito(texto: String):
 
 
 func encerrar_dialogo():
+	print("NPC: emitindo dialog_finished")
 	falando = false
 	pode_avancar = false
 	caixa_de_dialogo.visible = false
 	texto_dialogo.visible = false
 	emit_signal("falou_com_jose")
+	emit_signal("dialog_finished")
 	var terrain_manager = get_tree().get_current_scene()
-	terrain_manager.atualizar_missao("Missão: \nEntre no elevador \ne suba até o 5° andar.")
+	terrain_manager.atualizar_missao("Missão: \\nEntre no elevador \\ne suba até o 5° andar.")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "player":

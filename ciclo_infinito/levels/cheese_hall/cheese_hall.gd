@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var target_scene: PackedScene
-
+@onready var mission_hud = $CanvasLayer
 @onready var pause_menu = $player/pause
 @onready var mission_label = $CanvasLayer/TextureRect/Label
 @onready var fade_in_component: FadeComponent = $player/FadeInComponent
@@ -21,11 +21,32 @@ func _ready():
 	pause_menu.hide()
 	configurar_label()
 	atualizar_missao()
-	var npc3 = get_node_or_null("npc3")
+
+	var npc3 = get_node_or_null("NPC3")
+	print("npc3 encontrado? ", npc3)
+
 	if npc3:
+		print("Conectando sinais do NPC3...")
 		npc3.falou_com_jose.connect(_on_falou_com_jose)
+		npc3.dialog_started.connect(_on_jose_dialog_started)
+		npc3.dialog_finished.connect(_on_jose_dialog_finished)
+		print("Sinais conectados com sucesso.")
+	else:
+		print("ERRO: NPC3 não foi encontrado na cena.")
+
 	fade_in_component.fade()
 
+func hide_mission_hud() -> void:
+	mission_hud.hide()
+
+func show_mission_hud() -> void:
+	mission_hud.show()
+
+func _on_jose_dialog_started() -> void:
+	hide_mission_hud()
+
+func _on_jose_dialog_finished() -> void:
+	show_mission_hud()
 
 func configurar_label():
 	mission_label.autowrap_mode=TextServer.AUTOWRAP_WORD
