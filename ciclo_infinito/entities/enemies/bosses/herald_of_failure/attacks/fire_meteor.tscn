@@ -1,0 +1,307 @@
+[gd_scene format=3 uid="uid://dyjwfrwsly7lx"]
+
+[ext_resource type="Script" uid="uid://bj2hktpvkc0py" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.gd" id="1_fbmj5"]
+[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_6tc2q"]
+[ext_resource type="Texture2D" uid="uid://xwf36kyx1b0m" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/1.png" id="3_dsv3r"]
+[ext_resource type="Texture2D" uid="uid://cltv41rkamgrp" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/2.png" id="4_kip3t"]
+[ext_resource type="Texture2D" uid="uid://xoh5t8xg1muo" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/3.png" id="5_7vibg"]
+[ext_resource type="Texture2D" uid="uid://bfoyge4fvq755" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/4.png" id="6_od3f2"]
+[ext_resource type="Texture2D" uid="uid://dy8g6e55ackge" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/5.png" id="7_7y1it"]
+[ext_resource type="Texture2D" uid="uid://xadtmenxvfug" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/6.png" id="8_r6ian"]
+[ext_resource type="Texture2D" uid="uid://bksyp415v1hrf" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/7.png" id="9_ukhdu"]
+[ext_resource type="Texture2D" uid="uid://bfqxmnxbwi84o" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/8.png" id="10_2e3o3"]
+[ext_resource type="Texture2D" uid="uid://dsssmo8bsaeu2" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/9.png" id="11_xc44h"]
+[ext_resource type="Texture2D" uid="uid://duai8xtaoptyf" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/10.png" id="12_0qo7y"]
+[ext_resource type="Texture2D" uid="uid://dc7e3x32djvab" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/11.png" id="13_b0gwp"]
+[ext_resource type="Texture2D" uid="uid://cbihp8a6ka4a0" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/12.png" id="14_wfwmn"]
+[ext_resource type="Texture2D" uid="uid://5rx276ex2t4v" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/13.png" id="15_vqhmt"]
+[ext_resource type="Texture2D" uid="uid://bpcelspp2fwh3" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/14.png" id="16_j86f2"]
+[ext_resource type="Texture2D" uid="uid://pqko3isj2y4u" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/15.png" id="17_fmetu"]
+[ext_resource type="Texture2D" uid="uid://c2ss0pvgcrcep" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/16.png" id="18_cqinj"]
+[ext_resource type="Texture2D" uid="uid://cp445upgg2qol" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/17.png" id="19_14ks7"]
+[ext_resource type="Texture2D" uid="uid://coj8m1jwe3isf" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/18.png" id="20_y7pbn"]
+[ext_resource type="Texture2D" uid="uid://bcs4qco1a1eaq" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/19.png" id="21_rx6vr"]
+[ext_resource type="Texture2D" uid="uid://bts43uya7bcs4" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/20.png" id="22_lqckb"]
+[ext_resource type="Texture2D" uid="uid://i7ros8fsmwm1" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/21.png" id="23_dam52"]
+[ext_resource type="Texture2D" uid="uid://coij62plis5kj" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/22.png" id="24_d1dvi"]
+[ext_resource type="Texture2D" uid="uid://dmgtqukgncqx4" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/23.png" id="25_eoe2h"]
+[ext_resource type="Texture2D" uid="uid://bbhxdft5w67kr" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/24.png" id="26_g47a4"]
+[ext_resource type="Texture2D" uid="uid://b4plylxc4c6fy" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/25.png" id="27_x360p"]
+[ext_resource type="Texture2D" uid="uid://bqikid423qvbp" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/26.png" id="28_cykfq"]
+[ext_resource type="Texture2D" uid="uid://boj3con5nn7xm" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/27.png" id="29_uv38v"]
+[ext_resource type="Texture2D" uid="uid://d8nmu7ejq23v" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/28.png" id="30_ato6b"]
+[ext_resource type="Texture2D" uid="uid://c2l1p0ga0cflc" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/29.png" id="31_qgjer"]
+[ext_resource type="Texture2D" uid="uid://bebxh06mcggtf" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/30.png" id="32_yasgu"]
+[ext_resource type="Texture2D" uid="uid://bqd7a13l3yg8u" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/31.png" id="33_p2p1h"]
+[ext_resource type="Texture2D" uid="uid://dtuwplovba6fl" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/32.png" id="34_rwgsm"]
+[ext_resource type="Texture2D" uid="uid://chqlv53tvxftu" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/33.png" id="35_0v8sl"]
+[ext_resource type="Texture2D" uid="uid://cr10lj6y4llu" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/34.png" id="36_ycid8"]
+[ext_resource type="Texture2D" uid="uid://cs5g1qfa2ridr" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/35.png" id="37_jvdcl"]
+[ext_resource type="Texture2D" uid="uid://vojj0kfj7q45" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/36.png" id="38_jlldo"]
+[ext_resource type="Texture2D" uid="uid://ciu31f4srttwb" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/37.png" id="39_0vusw"]
+[ext_resource type="Texture2D" uid="uid://c0e11o8r5njc7" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/38.png" id="40_jobve"]
+[ext_resource type="Texture2D" uid="uid://ddtanemniaca" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/39.png" id="41_k3vrd"]
+[ext_resource type="Texture2D" uid="uid://dewsa3d4of1g8" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/40.png" id="42_c170a"]
+[ext_resource type="Texture2D" uid="uid://crc8nrbqc84bt" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/41.png" id="43_34wx0"]
+[ext_resource type="Texture2D" uid="uid://caxfaeks57xh1" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/42.png" id="44_pm3ul"]
+[ext_resource type="Texture2D" uid="uid://4jc0aebwnrgx" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/43.png" id="45_la5bf"]
+[ext_resource type="Texture2D" uid="uid://bugyb6bjrvvkm" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/44.png" id="46_yj0aa"]
+[ext_resource type="Texture2D" uid="uid://ca08w7gworeuf" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/45.png" id="47_ietdt"]
+[ext_resource type="Texture2D" uid="uid://c5xniykhuaknr" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/46.png" id="48_6pgfs"]
+[ext_resource type="Texture2D" uid="uid://c8ukbtauk7jqt" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/47.png" id="49_brcep"]
+[ext_resource type="Texture2D" uid="uid://wah1e7thn3h6" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/48.png" id="50_mfdut"]
+[ext_resource type="Texture2D" uid="uid://bbr07aya77att" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/49.png" id="51_6dnwo"]
+[ext_resource type="Texture2D" uid="uid://v3fj6mar1awt" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/50.png" id="52_086ni"]
+[ext_resource type="Texture2D" uid="uid://27g7gh5ch0m7" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/51.png" id="53_eh50u"]
+[ext_resource type="Texture2D" uid="uid://de1ol626lngyj" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/52.png" id="54_10k7l"]
+[ext_resource type="Texture2D" uid="uid://p6qyy4qtrptf" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/53.png" id="55_nflui"]
+[ext_resource type="Texture2D" uid="uid://cbdc8ui6iycod" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/54.png" id="56_uwdx2"]
+[ext_resource type="Texture2D" uid="uid://8xlcc62c40q2" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/55.png" id="57_bfgkm"]
+[ext_resource type="Texture2D" uid="uid://cc7nn76cyou6" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/56.png" id="58_sj3je"]
+[ext_resource type="Texture2D" uid="uid://vwkupq6ou0aj" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/57.png" id="59_8exkf"]
+[ext_resource type="Texture2D" uid="uid://dtjxeochmifij" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/58.png" id="60_2jebr"]
+[ext_resource type="Texture2D" uid="uid://qfdcxh65i62w" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/59.png" id="61_kon4m"]
+[ext_resource type="Texture2D" uid="uid://d3i0soxy6vrtg" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/60.png" id="62_cuop1"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_l1c2m"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dsv3r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_kip3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_7vibg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_od3f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7y1it")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_r6ian")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ukhdu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_2e3o3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_xc44h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_0qo7y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_b0gwp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_wfwmn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_vqhmt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_j86f2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_fmetu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_cqinj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_14ks7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_y7pbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_rx6vr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_lqckb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_dam52")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_d1dvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_eoe2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_g47a4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_x360p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_cykfq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_uv38v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_ato6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_qgjer")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_yasgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_p2p1h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_rwgsm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_0v8sl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_ycid8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_jvdcl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_jlldo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_0vusw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_jobve")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_k3vrd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_c170a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_34wx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_pm3ul")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_la5bf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_yj0aa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_ietdt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_6pgfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_brcep")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_mfdut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_6dnwo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_086ni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_eh50u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_10k7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_nflui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_uwdx2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_bfgkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_sj3je")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_8exkf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_2jebr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_kon4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_cuop1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
+[sub_resource type="Animation" id="Animation_fbmj5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireBallSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -100)]
+}
+
+[sub_resource type="Animation" id="Animation_6tc2q"]
+resource_name = "drop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FireBallSprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dsv3r"]
+_data = {
+&"RESET": SubResource("Animation_fbmj5"),
+&"drop": SubResource("Animation_6tc2q")
+}
+
+[node name="FireMeteor" type="Node2D" unique_id=1857492451]
+position = Vector2(100, 100)
+scale = Vector2(5, 5)
+script = ExtResource("1_fbmj5")
+
+[node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1189333717]
+texture = ExtResource("2_6tc2q")
+offset = Vector2(-0.5, -10)
+
+[node name="FireBallSprite" type="AnimatedSprite2D" parent="." unique_id=2142317343]
+texture_filter = 1
+position = Vector2(0, -100)
+rotation = 1.5707964
+sprite_frames = SubResource("SpriteFrames_l1c2m")
+frame_progress = 0.4563154
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1077549025]
+libraries/ = SubResource("AnimationLibrary_dsv3r")
