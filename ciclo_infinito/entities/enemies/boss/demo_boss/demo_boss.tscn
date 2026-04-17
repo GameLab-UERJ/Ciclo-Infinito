@@ -17,8 +17,10 @@ size = Vector2(62, 62)
 [sub_resource type="CircleShape2D" id="CircleShape2D_miuj7"]
 radius = 164.0762
 
-[node name="DemoBoss" type="CharacterBody2D" unique_id=1767870527]
+[node name="DemoBoss" type="CharacterBody2D" unique_id=1767870527 node_paths=PackedStringArray("state_machine", "movement_component")]
 script = ExtResource("1_ysgi2")
+state_machine = NodePath("StateMachine")
+movement_component = NodePath("MovementComponent")
 metadata/_custom_type_script = "uid://cyangyrj0j445"
 
 [node name="MovementComponent" type="Node2D" parent="." unique_id=1585138494]
