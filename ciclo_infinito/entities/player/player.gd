@@ -384,6 +384,7 @@ func update_animation() -> void:
 # --- NOVA FUNÇÃO: Aplica efeito visual e sonoro ao receber dano ---
 func applies_damage_received_effect() -> void:
 	damage_recieved_sfx.play()
+	
 	anim.material.set_shader_parameter("whiten", true)
 	await get_tree().create_timer(INVINCIBILITY_DURATION).timeout
 	anim.material.set_shader_parameter("whiten", false)
