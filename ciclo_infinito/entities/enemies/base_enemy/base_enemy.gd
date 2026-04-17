@@ -251,3 +251,5 @@ func _on_anim_animation_finished(animation_name: StringName) -> void:
 	if n.begins_with("attack_"):
 		_is_attacking = false
 		_play_anim("idle_%s" % _last_facing)
+	if n.begins_with("death_"):
+		collision_layer = 0
