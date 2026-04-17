@@ -28,6 +28,8 @@ buses/default_bus_layout=""
 [autoload]
 
 MusicManager="*uid://bq8i8qcygm3gb"
+GameManager="*uid://csdi8cspltr7t"
+DialogueCore="*uid://dvq2tbqy28pou"
 
 [display]
 

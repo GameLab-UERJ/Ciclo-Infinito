@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://coxq6soiugmkd"]
+
+[ext_resource type="Script" uid="uid://8ikwm35kjmdc" path="res://systems/dialogue_system/dialogue_visuals.gd" id="1_g67xy"]
+[ext_resource type="Theme" uid="uid://blca8k82j60n8" path="res://systems/dialogue_system/dialogue_theme.tres" id="2_4nj5k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g67xy"]
+bg_color = Color(0.3897091, 0.69405806, 0, 1)
+
+[node name="DialogueVisuals" type="CanvasLayer" unique_id=1877245703]
+script = ExtResource("1_g67xy")
+characters_per_second = 15.0
+
+[node name="Panel" type="Panel" parent="." unique_id=1898299638]
+offset_top = 23.0
+offset_right = 960.0
+offset_bottom = 142.0
+theme = ExtResource("2_4nj5k")
+theme_override_styles/panel = SubResource("StyleBoxFlat_g67xy")
+
+[node name="DialogueLabel" type="Label" parent="Panel" unique_id=1000979097]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 119.0
+theme = ExtResource("2_4nj5k")
+visible_characters = 0
+visible_ratio = 0.0
