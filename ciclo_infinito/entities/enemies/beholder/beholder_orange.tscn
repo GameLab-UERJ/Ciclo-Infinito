@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://deyn0aff4vkxb"]
 
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_xgoio"]
+[ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_7axup"]
 [ext_resource type="Texture2D" uid="uid://bybr7omrihpw1" path="res://assets/art/enemies/beholder/beholder_brown/Attack/Beholder2_Attack_full.png" id="2_yqgpa"]
 [ext_resource type="Texture2D" uid="uid://djtpyjtxvh75n" path="res://assets/art/enemies/beholder/beholder_brown/Death/Beholder2_Death_full.png" id="3_7axup"]
 [ext_resource type="Texture2D" uid="uid://bgn3gj8ixtee0" path="res://assets/art/enemies/beholder/beholder_brown/Hurt/Beholder2_Hurt_full.png" id="4_u7vxu"]
 [ext_resource type="Texture2D" uid="uid://ddjxbpme3sv4a" path="res://assets/art/enemies/beholder/beholder_brown/Idle/Beholder2_Idle_full.png" id="5_f8hu2"]
 [ext_resource type="Texture2D" uid="uid://daxnl8u6qljd7" path="res://assets/art/enemies/beholder/beholder_brown/Walk/Beholder2_Walk_full.png" id="6_lupc4"]
 [ext_resource type="AudioStream" uid="uid://cx441vlb2nbup" path="res://assets/sfx/laser-351683.mp3" id="7_2loqd"]
+[ext_resource type="AudioStream" uid="uid://bd2ijt8nn2qtr" path="res://assets/sfx/Hit3.wav" id="8_yqgpa"]
 
 [sub_resource type="Animation" id="Animation_8ihwp"]
 resource_name = "attack_down"
@@ -59,6 +61,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_attack_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_2mppa"]
@@ -113,6 +129,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_attack_damage"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_5krk2"]
 resource_name = "attack_right"
@@ -166,6 +196,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_attack_damage"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_et38h"]
 resource_name = "attack_up"
@@ -218,6 +262,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_attack_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_yshjb"]
@@ -1094,12 +1152,14 @@ radius = 276.11
 radius = 63.21
 
 [node name="BeholderOrange" type="CharacterBody2D" unique_id=960144527]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_xgoio")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1001324020]
+material = ExtResource("2_7axup")
 texture = ExtResource("2_yqgpa")
 hframes = 12
 vframes = 4
@@ -1108,18 +1168,21 @@ vframes = 4
 libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=111429110]
+visible = false
 show_behind_parent = true
 position = Vector2(-1, 6)
 shape = SubResource("RectangleShape2D_i5vqd")
 debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
 [node name="detectionarea" type="Area2D" parent="." unique_id=507822470]
+visible = false
 collision_mask = 3
 
 [node name="Detectionarea" type="CollisionShape2D" parent="detectionarea" unique_id=171745319]
 shape = SubResource("CircleShape2D_m5yr5")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=524015347]
+visible = false
 collision_layer = 16
 collision_mask = 2
 
@@ -1133,6 +1196,9 @@ wait_time = 1.5
 [node name="attack_sfx" type="AudioStreamPlayer" parent="." unique_id=766749998]
 stream = ExtResource("7_2loqd")
 volume_db = -6.308
+
+[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=670377616]
+stream = ExtResource("8_yqgpa")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]

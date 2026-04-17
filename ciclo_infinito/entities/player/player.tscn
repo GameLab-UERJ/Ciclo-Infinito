@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://3qoae7f6uh8o"]
 
 [ext_resource type="Script" uid="uid://dbg05n786rg21" path="res://entities/player/player.gd" id="1_wq0jh"]
+[ext_resource type="Material" uid="uid://bk3kiethktv7y" path="res://resources/shaders/whiten.tres" id="2_24ehl"]
+[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://cw6rmtpf160hr" path="res://assets/art/player/ATTACK 1/attack1_down.png" id="2_gt4e4"]
 [ext_resource type="Texture2D" uid="uid://baw5eohono6a1" path="res://assets/art/player/ATTACK 1/attack1_left.png" id="3_24ehl"]
 [ext_resource type="Texture2D" uid="uid://d4nq18t3e7kix" path="res://assets/art/player/ATTACK 1/attack1_right.png" id="4_bwdx1"]
@@ -28,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://c82joy0gpepr5" path="res://assets/art/menus/hud/3_hearts.png" id="26_arp52"]
 [ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="27_jjk8f"]
 [ext_resource type="AudioStream" uid="uid://bccw64i2jy4xe" path="res://assets/sfx/rpg-sword-attack-combo-17-388929.mp3" id="28_cnswy"]
+[ext_resource type="AudioStream" uid="uid://3ydqk3abb8kq" path="res://assets/sfx/Hit4.wav" id="30_24ehl"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_govaw"]
 atlas = ExtResource("2_gt4e4")
@@ -946,7 +949,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack2_right",
-"speed": 9.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1103,7 +1106,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4nkfr")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_down",
 "speed": 5.0
 }, {
@@ -1129,7 +1132,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_er4b4")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_left",
 "speed": 5.0
 }, {
@@ -1155,7 +1158,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bgtuk")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_right",
 "speed": 5.0
 }, {
@@ -1181,7 +1184,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n7h2d")
 }],
-"loop": true,
+"loop": false,
 "name": &"death_up",
 "speed": 5.0
 }, {
@@ -1416,7 +1419,7 @@ animations = [{
 size = Vector2(100, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ja17"]
-size = Vector2(21.5, 34.25)
+size = Vector2(21.5, 34.488636)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhcba"]
 bg_color = Color(0.29219, 0.29219, 0.29219, 1)
@@ -1434,14 +1437,22 @@ corner_radius_bottom_left = 8
 
 [node name="player" type="CharacterBody2D" unique_id=1305817267 groups=["player"]]
 scale = Vector2(1.1, 1.1)
-collision_layer = 3
-collision_mask = 21
+collision_layer = 2
+collision_mask = 29
+motion_mode = 1
 script = ExtResource("1_wq0jh")
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1059278900]
+position = Vector2(-0.909091, 6.363637)
+scale = Vector2(1.2007576, 1.0823863)
+texture = ExtResource("2_bwdx1")
+
 [node name="animacoes" type="AnimatedSprite2D" parent="." unique_id=226188145]
+material = ExtResource("2_24ehl")
 sprite_frames = SubResource("SpriteFrames_to47r")
-animation = &"idle_up"
+animation = &"attack1_down"
+frame_progress = 0.8874806
 speed_scale = 1.5
 
 [node name="dash_timer" type="Timer" parent="." unique_id=481345477]
@@ -1452,16 +1463,19 @@ one_shot = true
 one_shot = true
 
 [node name="attack_area" type="Area2D" parent="." unique_id=203285202 groups=["player"]]
-collision_layer = 8
-collision_mask = 4
+visible = false
+collision_layer = 0
+collision_mask = 8
 
 [node name="attack_colison" type="CollisionShape2D" parent="attack_area" unique_id=598295500]
 shape = SubResource("RectangleShape2D_jrjdb")
 one_way_collision_margin = 0.0
 
 [node name="player_colision" type="CollisionShape2D" parent="." unique_id=1626315010]
+visible = false
 position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_4ja17")
+debug_color = Color(0.9817937, 0, 0.37205806, 0.41960785)
 
 [node name="ProgressBar" type="ProgressBar" parent="." unique_id=165336263]
 unique_name_in_owner = true
@@ -1491,5 +1505,8 @@ mix_target = 1
 [node name="dash_sfx" type="AudioStreamPlayer" parent="." unique_id=315505597]
 stream = ExtResource("28_cnswy")
 volume_db = -34.668
+
+[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=1941439101]
+stream = ExtResource("30_24ehl")
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

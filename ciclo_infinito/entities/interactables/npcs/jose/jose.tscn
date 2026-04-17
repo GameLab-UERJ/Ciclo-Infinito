@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://3sojsttqv77" path="res://entities/interactables/npcs/jose/jose.gd" id="1_iebxx"]
 [ext_resource type="Texture2D" uid="uid://b80tuigosseak" path="res://assets/art/npcs/jose/jose_idle.png" id="2_bv1l4"]
+[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_hfcox"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
 size = Vector2(77, 49)
@@ -70,15 +71,24 @@ size = Vector2(25, 43)
 
 [node name="Jose" type="StaticBody2D" unique_id=1772634627]
 position = Vector2(0.9, 0)
-collision_layer = 3
+collision_layer = 4
+collision_mask = 2
 script = ExtResource("1_iebxx")
 metadata/_custom_type_script = "uid://3sojsttqv77"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1580327972]
+position = Vector2(-2.8999996, 48)
+scale = Vector2(2.4375, 1.546875)
+texture = ExtResource("2_hfcox")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=1898002823]
+collision_layer = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2061759812]
+visible = false
 position = Vector2(-4.5, 24.5)
 shape = SubResource("RectangleShape2D_gu3sj")
 
@@ -120,6 +130,7 @@ label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1709931667]
+visible = false
 position = Vector2(-5.5, 22.5)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)

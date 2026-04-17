@@ -3,7 +3,7 @@
 [ext_resource type="VideoStream" uid="uid://cw48j0rumidr3" path="res://assets/video/INTRO-LOGOS V2.ogv" id="1_dlfbb"]
 [ext_resource type="Script" uid="uid://c6uhkws1p4823" path="res://menus/cutscenes/logos/logos_screen.gd" id="2_yv8ol"]
 
-[node name="Intro" type="VideoStreamPlayer"]
+[node name="Intro" type="VideoStreamPlayer" unique_id=376532560]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -15,6 +15,7 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.505, 0.505)
 stream = ExtResource("1_dlfbb")
+volume_db = -80.0
 autoplay = true
 script = ExtResource("2_yv8ol")
 

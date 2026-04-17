@@ -1,7 +1,37 @@
 [gd_scene format=3 uid="uid://c8528aoh54ot1"]
 
 [ext_resource type="Script" uid="uid://cxsud87xx3vbj" path="res://entities/interactables/npcs/maria/maria.gd" id="1_khbs0"]
+[ext_resource type="Texture2D" uid="uid://dlo38mh7ugqax" path="res://assets/art/npcs/maria/maria_idle.png" id="2_6kxhb"]
 [ext_resource type="Texture2D" uid="uid://2y8phasy63w" path="res://assets/art/npcs/maria/maira_walk.png" id="2_coxnl"]
+[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_y5mj7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y5mj7"]
+atlas = ExtResource("2_6kxhb")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6p6a1"]
+atlas = ExtResource("2_6kxhb")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bubju"]
+atlas = ExtResource("2_6kxhb")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntm0r"]
+atlas = ExtResource("2_6kxhb")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5d3y"]
+atlas = ExtResource("2_6kxhb")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qys0q"]
+atlas = ExtResource("2_6kxhb")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjwbe"]
+atlas = ExtResource("2_6kxhb")
+region = Rect2(768, 0, 128, 128)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kjdye"]
 atlas = ExtResource("2_coxnl")
@@ -39,6 +69,32 @@ region = Rect2(1408, 0, 128, 128)
 animations = [{
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_y5mj7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6p6a1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bubju")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntm0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5d3y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qys0q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjwbe")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kjdye")
 }, {
 "duration": 1.0,
@@ -63,7 +119,7 @@ animations = [{
 "texture": SubResource("AtlasTexture_177lu")
 }],
 "loop": true,
-"name": &"idle",
+"name": &"walk",
 "speed": 6.0
 }]
 
@@ -84,21 +140,30 @@ size = Vector2(25, 43)
 
 [node name="Maria" type="CharacterBody2D" unique_id=555259493]
 position = Vector2(0.9, 0)
-collision_layer = 3
+collision_layer = 4
+collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_khbs0")
 metadata/_custom_type_script = "uid://cxsud87xx3vbj"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1882064076]
+position = Vector2(-0.8999996, 47)
+scale = Vector2(2.5625, 1.609375)
+texture = ExtResource("2_y5mj7")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=622443044]
+collision_layer = 0
+collision_mask = 2
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=2029837772]
 sprite_frames = SubResource("SpriteFrames_cgete")
 animation = &"idle"
-autoplay = "idle"
-frame_progress = 0.904303
+autoplay = "walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2032086527]
+visible = false
 position = Vector2(-4.5, 24.5)
 shape = SubResource("RectangleShape2D_gu3sj")
 
@@ -133,6 +198,7 @@ label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=230494016]
+visible = false
 position = Vector2(-5.5, 22.5)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)

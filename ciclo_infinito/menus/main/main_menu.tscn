@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://biduen4m26mw5" path="res://menus/main/main_menu.gd" id="2_rvc10"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="3_cqjrg"]
 [ext_resource type="Texture2D" uid="uid://cutt1kh3xr6q" path="res://assets/art/menus/main_menu/discord_logo.png" id="4_e2xy7"]
-[ext_resource type="AudioStream" uid="uid://d34npikhkd0oe" path="res://assets/music/MÚSICA MENU.mp3" id="5_tf3dk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tf3dk"]
 bg_color = Color(0.466667, 0.00784314, 0.917647, 1)
@@ -84,6 +83,18 @@ theme_override_font_sizes/font_size = 46
 theme_override_styles/hover = SubResource("StyleBoxFlat_85i58")
 text = "Créditos"
 
+[node name="Controles_Button" type="Button" parent="VBoxContainer" unique_id=168128271]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_cqjrg")
+theme_override_font_sizes/font_size = 46
+text = "Controles
+"
+
 [node name="Sair_Button" type="Button" parent="VBoxContainer" unique_id=747055780]
 layout_mode = 2
 size_flags_horizontal = 0
@@ -107,13 +118,9 @@ texture_normal = ExtResource("4_e2xy7")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=332710858]
-stream = ExtResource("5_tf3dk")
-autoplay = true
-attenuation = 0.784584
-
 [connection signal="pressed" from="VBoxContainer/Jogar_Button" to="." method="_on_jogar_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Opções_Button" to="." method="_on_opções_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Creditos_button" to="." method="_on_creditos_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Controles_Button" to="." method="_on_controles_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Sair_Button" to="." method="_on_sair_button_pressed"]
 [connection signal="pressed" from="discordbutton" to="." method="_on_discordbutton_pressed"]

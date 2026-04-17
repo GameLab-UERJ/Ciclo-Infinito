@@ -2,12 +2,14 @@
 
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_fnxjb"]
 [ext_resource type="Texture2D" uid="uid://c34vgjn8fpxwi" path="res://assets/art/enemies/golem/golem_white/Attack/Golem2_Attack_full.png" id="2_1pue7"]
+[ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_nohhn"]
 [ext_resource type="Texture2D" uid="uid://do7vd7ehdyipb" path="res://assets/art/enemies/golem/golem_white/Death/Golem2_Death_full.png" id="3_nohhn"]
 [ext_resource type="Texture2D" uid="uid://bbad7irnh0x8" path="res://assets/art/enemies/golem/golem_white/Hurt/Golem2_Hurt_full.png" id="4_qs847"]
 [ext_resource type="Texture2D" uid="uid://drxmy004xp0o" path="res://assets/art/enemies/golem/golem_white/Idle/Golem2_Idle_full.png" id="5_vp6vn"]
 [ext_resource type="Texture2D" uid="uid://j8kpip2lkcxy" path="res://assets/art/enemies/golem/golem_white/Walk/Golem2_Walk_full.png" id="6_myw28"]
 [ext_resource type="Texture2D" uid="uid://b5ipk3flgmyfx" path="res://assets/art/enemies/golem/golem_brown/Walk/Golem1_Walk_full.png" id="7_x6vst"]
 [ext_resource type="AudioStream" uid="uid://cxoixrxq44xp5" path="res://assets/sfx/earth-magic-6-378601.mp3" id="8_lix03"]
+[ext_resource type="AudioStream" uid="uid://bd2ijt8nn2qtr" path="res://assets/sfx/Hit3.wav" id="9_1pue7"]
 
 [sub_resource type="Animation" id="Animation_8ihwp"]
 resource_name = "attack_down"
@@ -60,6 +62,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [ExtResource("2_1pue7")]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_attack_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_2mppa"]
@@ -114,6 +130,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [ExtResource("2_1pue7"), ExtResource("2_1pue7")]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_attack_damage"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_5krk2"]
 resource_name = "attack_right"
@@ -167,6 +197,20 @@ tracks/3/keys = {
 "update": 0,
 "values": [ExtResource("2_1pue7")]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_attack_damage"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_et38h"]
 resource_name = "attack_up"
@@ -219,6 +263,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [ExtResource("2_1pue7")]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"apply_attack_damage"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_yshjb"]
@@ -1086,21 +1144,23 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i5vqd"]
-size = Vector2(33, 24)
+size = Vector2(20, 12)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5yr5"]
 radius = 276.11
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m1c6a"]
-radius = 63.21
+radius = 39.012817
 
 [node name="GolemWhite" type="CharacterBody2D" unique_id=349012999]
-collision_layer = 4
+collision_layer = 8
 collision_mask = 3
+motion_mode = 1
 script = ExtResource("1_fnxjb")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1272685203]
+material = ExtResource("2_nohhn")
 texture = ExtResource("2_1pue7")
 hframes = 9
 vframes = 4
@@ -1109,18 +1169,27 @@ vframes = 4
 libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=900871294]
+visible = false
 show_behind_parent = true
-position = Vector2(-1, 6)
+position = Vector2(0, 7)
+shape = SubResource("RectangleShape2D_i5vqd")
+debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
+
+[node name="Colisiondano2" type="CollisionShape2D" parent="." unique_id=508228306]
+show_behind_parent = true
+position = Vector2(-0.5, 7)
 shape = SubResource("RectangleShape2D_i5vqd")
 debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
 [node name="detectionarea" type="Area2D" parent="." unique_id=2105815564]
+visible = false
 collision_mask = 3
 
 [node name="Detectionarea" type="CollisionShape2D" parent="detectionarea" unique_id=1477158817]
 shape = SubResource("CircleShape2D_m5yr5")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=1471319950]
+visible = false
 collision_layer = 16
 collision_mask = 2
 
@@ -1134,6 +1203,9 @@ wait_time = 1.5
 [node name="attack_sfx" type="AudioStreamPlayer" parent="." unique_id=1046028221]
 stream = ExtResource("8_lix03")
 volume_db = -11.857
+
+[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=1985334455]
+stream = ExtResource("9_1pue7")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]

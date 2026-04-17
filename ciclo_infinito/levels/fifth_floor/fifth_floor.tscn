@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://djrevjgpeak50" path="res://entities/enemies/golem/golem_white.tscn" id="4_wyqw4"]
 [ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="5_vl0w6"]
 [ext_resource type="PackedScene" uid="uid://deyn0aff4vkxb" path="res://entities/enemies/beholder/beholder_orange.tscn" id="6_3nscd"]
+[ext_resource type="Shader" uid="uid://b4ecm70ug50ju" path="res://resources/shaders/redden.gdshader" id="6_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://c80omegwkn2ei" path="res://entities/enemies/beholder/beholder_white.tscn" id="7_ancri"]
 [ext_resource type="PackedScene" uid="uid://bbf6oefdi3vmk" path="res://levels/fifth_floor/fifth_floor_map.tscn" id="8_wow6u"]
 [ext_resource type="Script" uid="uid://bu55xg23achvn" path="res://levels/fifth_floor/barrier.gd" id="9_d2dnc"]
@@ -15,12 +16,97 @@
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="13_ni4lu"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_71gwp"]
 [ext_resource type="AudioStream" uid="uid://ce378hasf2vjm" path="res://assets/music/Hades - God of the Dead - Supergiant Games (youtube).mp3" id="15_r8vnr"]
+[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/fade_component.gd" id="16_ekmel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yw1aw"]
+resource_local_to_scene = true
+shader = ExtResource("6_yw1aw")
+shader_parameter/redden = false
+
 [node name="QuintoAndar" type="Node2D" unique_id=1838089692]
 script = ExtResource("1_u87vb")
+
+[node name="TerrainManager" parent="." unique_id=468786021 instance=ExtResource("8_wow6u")]
+position = Vector2(-1, 45)
+
+[node name="barreira" type="StaticBody2D" parent="TerrainManager" unique_id=130409252]
+script = ExtResource("9_d2dnc")
+
+[node name="colisaobarreira" type="CollisionShape2D" parent="TerrainManager/barreira" unique_id=356658534]
+position = Vector2(405.536, -55.5357)
+shape = SubResource("RectangleShape2D_ysv2v")
+
+[node name="NPC" parent="." unique_id=531889216 instance=ExtResource("10_x1c7k")]
+position = Vector2(510.9, -118)
+scale = Vector2(0.6, 0.6)
+
+[node name="Label" type="Label" parent="NPC" unique_id=312686080]
+offset_left = -26.5
+offset_top = -33.3333
+offset_right = 19.5
+offset_bottom = -10.3333
+text = "Pedro"
+
+[node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
+material = SubResource("ShaderMaterial_yw1aw")
+position = Vector2(574, -278)
+
+[node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -163.3766
+offset_top = -75.19482
+offset_right = 476.6234
+offset_bottom = 284.80518
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.5, 0.5)
+
+[node name="enemies" type="Label" parent="player" unique_id=574180986]
+offset_left = -264.545
+offset_top = -125.455
+offset_right = -133.545
+offset_bottom = -102.455
+theme_override_colors/font_shadow_color = Color(0.662745, 0.027451, 0.933333, 1)
+theme_override_fonts/font = ExtResource("13_ni4lu")
+text = "Inimigos mortos:"
+
+[node name="TextureRect" type="TextureRect" parent="player" unique_id=1804543002]
+offset_left = 120.909
+offset_top = -153.636
+offset_right = 654.909
+offset_bottom = 131.364
+scale = Vector2(0.284224, 0.275615)
+texture = ExtResource("14_71gwp")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="player/TextureRect" unique_id=723667528]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.0
+offset_top = -46.5
+offset_right = 32.0
+offset_bottom = 104.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.74863, 0.959864)
+
+[node name="FadeComponent" type="ColorRect" parent="player" unique_id=1717650633]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("16_ekmel")
+is_fade_out = false
+fade_time = 0.5
+offset = Vector2(-500, -250)
+metadata/_custom_type_script = "uid://br6wsqfyc7ush"
 
 [node name="Enemies" type="Node" parent="." unique_id=1015743081 node_paths=PackedStringArray("label_contador")]
 script = ExtResource("2_tprnl")
@@ -72,7 +158,7 @@ position = Vector2(631, 775)
 position = Vector2(505, 461)
 
 [node name="golem8" parent="Enemies" unique_id=539874560 instance=ExtResource("7_ancri")]
-position = Vector2(135, 277)
+position = Vector2(150, 270)
 
 [node name="golem9" parent="Enemies" unique_id=1773328042 instance=ExtResource("7_ancri")]
 position = Vector2(276, 527)
@@ -91,78 +177,6 @@ position = Vector2(362, 420)
 
 [node name="golem12" parent="Enemies" unique_id=1251686522 instance=ExtResource("5_vl0w6")]
 position = Vector2(204, 407)
-
-[node name="golem_azul7" parent="Enemies" unique_id=140674353 instance=ExtResource("3_v3xqr")]
-position = Vector2(730, 344)
-
-[node name="TerrainManager" parent="." unique_id=468786021 instance=ExtResource("8_wow6u")]
-position = Vector2(-1, 45)
-
-[node name="barreira" type="StaticBody2D" parent="TerrainManager" unique_id=130409252]
-script = ExtResource("9_d2dnc")
-
-[node name="colisaobarreira" type="CollisionShape2D" parent="TerrainManager/barreira" unique_id=356658534]
-position = Vector2(405.536, -55.5357)
-shape = SubResource("RectangleShape2D_ysv2v")
-
-[node name="NPC" parent="." unique_id=531889216 instance=ExtResource("10_x1c7k")]
-position = Vector2(510.9, -118)
-scale = Vector2(0.6, 0.6)
-
-[node name="Label" type="Label" parent="NPC" unique_id=312686080]
-offset_left = -26.5
-offset_top = -33.3333
-offset_right = 19.5
-offset_bottom = -10.3333
-text = "Pedro"
-
-[node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
-position = Vector2(574, -278)
-
-[node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -273.0
-offset_top = -154.0
-offset_right = 817.0
-offset_bottom = 460.0
-scale = Vector2(0.5, 0.5)
-
-[node name="enemies" type="Label" parent="player" unique_id=574180986]
-offset_left = -264.545
-offset_top = -125.455
-offset_right = -133.545
-offset_bottom = -102.455
-theme_override_colors/font_shadow_color = Color(0.662745, 0.027451, 0.933333, 1)
-theme_override_fonts/font = ExtResource("13_ni4lu")
-text = "Inimigos mortos:"
-
-[node name="TextureRect" type="TextureRect" parent="player" unique_id=1804543002]
-offset_left = 120.909
-offset_top = -153.636
-offset_right = 654.909
-offset_bottom = 131.364
-scale = Vector2(0.284224, 0.275615)
-texture = ExtResource("14_71gwp")
-expand_mode = 1
-
-[node name="Label" type="Label" parent="player/TextureRect" unique_id=723667528]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -213.0
-offset_top = -46.5
-offset_right = 32.0
-offset_bottom = 104.5
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(1.74863, 0.959864)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1512366738]
 stream = ExtResource("15_r8vnr")
