@@ -117,6 +117,8 @@ func attack() -> void:
 	_play_anim(atk_name)
 	attack_sfx.play()
 	print("Golem ataca!")
+	
+	# apply_attack_damage() está no AnimationPlayer
 
 
 func apply_attack_damage() -> void:

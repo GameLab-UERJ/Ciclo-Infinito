@@ -1445,7 +1445,7 @@ metadata/_custom_type_script = "uid://dbg05n786rg21"
 [node name="animacoes" type="AnimatedSprite2D" parent="." unique_id=226188145]
 material = ExtResource("2_24ehl")
 sprite_frames = SubResource("SpriteFrames_to47r")
-animation = &"death_up"
+animation = &"idle_up"
 speed_scale = 1.5
 
 [node name="dash_timer" type="Timer" parent="." unique_id=481345477]

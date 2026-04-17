@@ -1163,7 +1163,6 @@ material = ExtResource("2_7axup")
 texture = ExtResource("2_yqgpa")
 hframes = 12
 vframes = 4
-frame = 12
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=178829396]
 libraries/ = SubResource("AnimationLibrary_0g2he")
