@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbg05n786rg21" path="res://entities/player/player.gd" id="1_wq0jh"]
 [ext_resource type="Material" uid="uid://bk3kiethktv7y" path="res://resources/shaders/whiten.tres" id="2_24ehl"]
+[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://cw6rmtpf160hr" path="res://assets/art/player/ATTACK 1/attack1_down.png" id="2_gt4e4"]
 [ext_resource type="Texture2D" uid="uid://baw5eohono6a1" path="res://assets/art/player/ATTACK 1/attack1_left.png" id="3_24ehl"]
 [ext_resource type="Texture2D" uid="uid://d4nq18t3e7kix" path="res://assets/art/player/ATTACK 1/attack1_right.png" id="4_bwdx1"]
@@ -948,7 +949,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"attack2_right",
-"speed": 9.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -1442,10 +1443,16 @@ motion_mode = 1
 script = ExtResource("1_wq0jh")
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1059278900]
+position = Vector2(-0.909091, 6.363637)
+scale = Vector2(1.2007576, 1.0823863)
+texture = ExtResource("2_bwdx1")
+
 [node name="animacoes" type="AnimatedSprite2D" parent="." unique_id=226188145]
 material = ExtResource("2_24ehl")
 sprite_frames = SubResource("SpriteFrames_to47r")
-animation = &"idle_up"
+animation = &"attack1_down"
+frame_progress = 0.8874806
 speed_scale = 1.5
 
 [node name="dash_timer" type="Timer" parent="." unique_id=481345477]
