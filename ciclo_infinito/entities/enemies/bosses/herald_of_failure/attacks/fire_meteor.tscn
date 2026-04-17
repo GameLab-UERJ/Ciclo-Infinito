@@ -301,6 +301,7 @@ texture_filter = 1
 position = Vector2(0, -100)
 rotation = 1.5707964
 sprite_frames = SubResource("SpriteFrames_l1c2m")
+autoplay = "default"
 frame_progress = 0.4563154
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1077549025]
