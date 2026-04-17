@@ -2,9 +2,8 @@
 class_name State 
 extends Node
 
-@export var tt: Callable
 
-var _transitions: Array[StateTransition] = []
+var _transitions: Array[Transition] = []
 
 @abstract
 func _on_enter() -> void
@@ -16,17 +15,7 @@ func _on_exit() -> void
 func _update(delta: float) -> void
 
 func _ready() -> void:
-	var children: Array[Node] = get_children()
-	if children.size() == 0:
-		push_warning("State '%s' não tem transições válidas como filhos." % name)
-		return
-	for child in children:
-		if child is StateTransition:
-			_transitions.append(child)
-		else:
-			push_warning("Filho '%s' de State '%s' não é uma StateTransition." % [child.name, name])
-	if _transitions.size() == 0:
-		push_warning("State '%s' não tem transições válidas como filhos." % name)
+	_setup_transitions()
 		
 func enter() -> void:
 	_on_enter()
@@ -40,4 +29,14 @@ func process(delta: float) -> State:
 			return transition.target_state
 	_update(delta)
 	return
-	
+
+
+@abstract func _setup_transitions() -> void
+
+class Transition:
+	var target_state: State
+	var condition: Callable
+
+	func _init(_target_state: State, _condition: Callable) -> void:
+		self.target_state = _target_state
+		self.condition = _condition
