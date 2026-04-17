@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://daxs4d78svouo"]
 
-[ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_vxnce"]
+[ext_resource type="Script" uid="uid://cyangyrj0j445" path="res://entities/enemies/bosses/boss.gd" id="1_7w10v"]
 [ext_resource type="Texture2D" uid="uid://meh1k2jwq368" path="res://assets/art/enemies/herald/necromancer_spritesheet_128x128.png" id="2_5i653"]
+[ext_resource type="Script" uid="uid://cp1ll72gcduh3" path="res://systems/movement_component.gd" id="2_o101c"]
 [ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="3_2k7es"]
+[ext_resource type="Script" uid="uid://xnqq5wccpjre" path="res://systems/state_machine/state_machine.gd" id="5_7w10v"]
+[ext_resource type="Script" uid="uid://vjq672irf8cm" path="res://entities/enemies/bosses/demo_boss/states/patrol.gd" id="6_jv5ku"]
+[ext_resource type="Script" uid="uid://b8aymb02e0pal" path="res://entities/enemies/bosses/demo_boss/states/attack.gd" id="7_dbdd4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mypcf"]
 atlas = ExtResource("2_5i653")
@@ -563,10 +567,14 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkhbt"]
 height = 38.0
 
-[node name="HeraldOfFailure" type="CharacterBody2D" unique_id=2065867592]
+[node name="HeraldOfFailure" type="CharacterBody2D" unique_id=1540324731]
 collision_layer = 8
-script = ExtResource("1_vxnce")
-metadata/_custom_type_script = "uid://cwb32k80tgxq7"
+script = ExtResource("1_7w10v")
+metadata/_custom_type_script = "uid://cyangyrj0j445"
+
+[node name="MovementComponent" type="Node2D" parent="." unique_id=266014240]
+script = ExtResource("2_o101c")
+metadata/_custom_type_script = "uid://cp1ll72gcduh3"
 
 [node name="Sprites" type="AnimatedSprite2D" parent="." unique_id=1413652259]
 sprite_frames = SubResource("SpriteFrames_kcj3j")
@@ -581,3 +589,18 @@ texture = ExtResource("3_2k7es")
 [node name="ColisaoFisica" type="CollisionShape2D" parent="." unique_id=1166700932]
 position = Vector2(-1, 35)
 shape = SubResource("CapsuleShape2D_hkhbt")
+
+[node name="StateMachine" type="Node" parent="." unique_id=1377708847 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("5_7w10v")
+initial_state = NodePath("Patrol")
+metadata/_custom_type_script = "uid://xnqq5wccpjre"
+
+[node name="Patrol" type="Node" parent="StateMachine" unique_id=1722367442 node_paths=PackedStringArray("patrol_around", "attack_state")]
+script = ExtResource("6_jv5ku")
+patrol_around = NodePath("../..")
+attack_state = NodePath("../Attack")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=701294027]
+script = ExtResource("7_dbdd4")
+
+[node name="AttackTornado" type="Node" parent="StateMachine" unique_id=2045612349]

@@ -13,7 +13,7 @@ func _on_enter() -> void:
 func _on_exit() -> void:
 	pass
 	
-func _update(delta: float) -> void:
+func _update(_delta: float) -> void:
 	pass
 	
 	

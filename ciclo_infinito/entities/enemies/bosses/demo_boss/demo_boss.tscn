@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://bot0ejj7vu1ks"]
 
-[ext_resource type="Script" uid="uid://cyangyrj0j445" path="res://entities/enemies/boss/boss.gd" id="1_ysgi2"]
+[ext_resource type="Script" uid="uid://cyangyrj0j445" path="res://entities/enemies/bosses/boss.gd" id="1_ysgi2"]
 [ext_resource type="Script" uid="uid://cp1ll72gcduh3" path="res://systems/movement_component.gd" id="2_ccea8"]
 [ext_resource type="Script" uid="uid://xnqq5wccpjre" path="res://systems/state_machine/state_machine.gd" id="2_euge1"]
-[ext_resource type="Script" uid="uid://vjq672irf8cm" path="res://entities/enemies/boss/demo_boss/states/patrol.gd" id="3_miuj7"]
-[ext_resource type="Script" uid="uid://b8aymb02e0pal" path="res://entities/enemies/boss/demo_boss/states/attack.gd" id="4_f1qas"]
+[ext_resource type="Script" uid="uid://vjq672irf8cm" path="res://entities/enemies/bosses/demo_boss/states/patrol.gd" id="3_miuj7"]
+[ext_resource type="Script" uid="uid://b8aymb02e0pal" path="res://entities/enemies/bosses/demo_boss/states/attack.gd" id="4_f1qas"]
 
 [sub_resource type="Gradient" id="Gradient_ysgi2"]
 

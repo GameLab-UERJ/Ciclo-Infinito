@@ -21,7 +21,7 @@ func _on_enter() -> void:
 func _on_exit() -> void:
 	pass
 	
-func _update(delta: float) -> void:
+func _update(_delta: float) -> void:
 	_define_patrol_point()
 	var direction = (_patrol_point - movement_component.global_position).normalized()
 	movement_component.velocity = direction * movement_component.speed
