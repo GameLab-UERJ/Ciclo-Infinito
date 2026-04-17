@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://daxs4d78svouo"]
 
-[ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_vxnce"]
 [ext_resource type="Texture2D" uid="uid://meh1k2jwq368" path="res://assets/art/enemies/herald/necromancer_spritesheet_128x128.png" id="2_5i653"]
 [ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="3_2k7es"]
+[ext_resource type="PackedScene" uid="uid://dyjwfrwsly7lx" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.tscn" id="4_5i653"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mypcf"]
 atlas = ExtResource("2_5i653")
@@ -563,15 +563,13 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkhbt"]
 height = 38.0
 
-[node name="HeraldOfFailure" type="CharacterBody2D" unique_id=2065867592]
+[node name="HeraldOfFailure" type="CharacterBody2D" unique_id=999366454]
 collision_layer = 8
-script = ExtResource("1_vxnce")
-metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="Sprites" type="AnimatedSprite2D" parent="." unique_id=1413652259]
 sprite_frames = SubResource("SpriteFrames_kcj3j")
-animation = &"talk"
-frame_progress = 0.12203695
+animation = &"idle"
+autoplay = "idle"
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=2076377722]
 position = Vector2(-1.9999995, 45.000004)
@@ -581,3 +579,12 @@ texture = ExtResource("3_2k7es")
 [node name="ColisaoFisica" type="CollisionShape2D" parent="." unique_id=1166700932]
 position = Vector2(-1, 35)
 shape = SubResource("CapsuleShape2D_hkhbt")
+
+[node name="FireMeteor" parent="." unique_id=1857492451 instance=ExtResource("4_5i653")]
+position = Vector2(149, 73)
+
+[node name="FireMeteor2" parent="." unique_id=960213747 instance=ExtResource("4_5i653")]
+position = Vector2(51, 115)
+
+[node name="FireMeteor3" parent="." unique_id=45410998 instance=ExtResource("4_5i653")]
+position = Vector2(207, 113)

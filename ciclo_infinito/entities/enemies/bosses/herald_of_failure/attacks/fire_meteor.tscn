@@ -500,6 +500,9 @@ collision_mask = 2
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_dsv3r")
 
-[connection signal="animation_finished" from="FireBallSprite" to="." method="_on_fire_ball_sprite_animation_finished"]
+[node name="EndLifetimeTimer" type="Timer" parent="." unique_id=814060201]
+one_shot = true
+
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
+[connection signal="timeout" from="EndLifetimeTimer" to="." method="_on_end_lifetime_timer_timeout"]
