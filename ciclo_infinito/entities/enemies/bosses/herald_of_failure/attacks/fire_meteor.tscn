@@ -469,8 +469,6 @@ radius = 6.0
 height = 16.800003
 
 [node name="FireMeteor" type="Node2D" unique_id=1857492451]
-position = Vector2(500, 500)
-scale = Vector2(5, 5)
 script = ExtResource("1_fbmj5")
 initial_y_position = -200.0
 total_drop_time = 2.0
