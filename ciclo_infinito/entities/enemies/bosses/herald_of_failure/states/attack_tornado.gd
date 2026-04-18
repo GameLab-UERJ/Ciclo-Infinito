@@ -38,3 +38,4 @@ func _spawn_tornado() -> void:
 	var spawn_position := tornado_spawn_point.global_position + direction_to_player * spawn_distance
 	tornado_instance.global_position = spawn_position
 	add_child(tornado_instance)
+	_attack_done = true
