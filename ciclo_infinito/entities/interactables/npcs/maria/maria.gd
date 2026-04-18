@@ -101,8 +101,8 @@ func iniciar_dialogo() -> void:
 
 func encerrar_dialogo() -> void:
 	falando = false
-	caixa_de_dialogo.visible = false
-	texto_dialogo.visible = false
+	
+	dialogo.encerrar()
 
 
 # ========================
