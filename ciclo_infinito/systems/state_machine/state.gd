@@ -25,7 +25,9 @@ func exit() -> void:
 	
 func process(delta: float) -> State:
 	for transition in _transitions:
-		if transition.can_transition():
+		var can_transition = transition.can_transition.call()
+		assert(typeof(can_transition) == TYPE_BOOL, "A função can_transition deve retornar um valor booleano.")
+		if can_transition:
 			return transition.target_state
 	_update(delta)
 	return
@@ -35,8 +37,8 @@ func process(delta: float) -> State:
 
 class Transition:
 	var target_state: State
-	var condition: Callable
+	var can_transition: Callable
 
-	func _init(_target_state: State, _condition: Callable) -> void:
+	func _init(_target_state: State, _can_transition: Callable) -> void:
 		self.target_state = _target_state
-		self.condition = _condition
+		self.can_transition = _can_transition

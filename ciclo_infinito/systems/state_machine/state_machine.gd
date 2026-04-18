@@ -1,9 +1,14 @@
 class_name StateMachine
 extends Node
 
+signal state_changed(new_state: String)
+
 @export var initial_state: State
 
-var _current_state: State
+var _current_state: State:
+	set(value):
+		_current_state = value
+		state_changed.emit(_current_state.name)
 
 func _ready() -> void:
 	if initial_state == null:

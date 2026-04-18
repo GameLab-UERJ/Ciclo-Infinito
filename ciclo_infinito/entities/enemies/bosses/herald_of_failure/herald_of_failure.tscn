@@ -1,13 +1,17 @@
 [gd_scene format=3 uid="uid://daxs4d78svouo"]
 
-[ext_resource type="Script" uid="uid://cyangyrj0j445" path="res://entities/enemies/bosses/boss.gd" id="1_7w10v"]
+[ext_resource type="Script" uid="uid://qddkcm8pfj8a" path="res://entities/enemies/bosses/herald_of_failure/herald_of_failure.gd" id="1_p0yqv"]
 [ext_resource type="Texture2D" uid="uid://meh1k2jwq368" path="res://assets/art/enemies/herald/necromancer_spritesheet_128x128.png" id="2_5i653"]
 [ext_resource type="Script" uid="uid://cp1ll72gcduh3" path="res://systems/movement_component.gd" id="2_o101c"]
-[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="3_2k7es"]
+[ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="3_2k7es"]
 [ext_resource type="PackedScene" uid="uid://dyjwfrwsly7lx" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.tscn" id="4_5i653"]
 [ext_resource type="Script" uid="uid://xnqq5wccpjre" path="res://systems/state_machine/state_machine.gd" id="5_7w10v"]
-[ext_resource type="Script" uid="uid://vjq672irf8cm" path="res://entities/enemies/bosses/demo_boss/states/patrol.gd" id="6_jv5ku"]
-[ext_resource type="Script" uid="uid://b8aymb02e0pal" path="res://entities/enemies/bosses/demo_boss/states/attack.gd" id="7_dbdd4"]
+[ext_resource type="Script" uid="uid://vjq672irf8cm" path="res://entities/enemies/bosses/herald_of_failure/states/patrol.gd" id="6_jv5ku"]
+[ext_resource type="Script" uid="uid://b8aymb02e0pal" path="res://entities/enemies/bosses/herald_of_failure/states/attack.gd" id="7_dbdd4"]
+[ext_resource type="Script" uid="uid://lwlb1dkyxj6c" path="res://entities/enemies/bosses/herald_of_failure/states/attack_tornado.gd" id="8_jv5ku"]
+[ext_resource type="Script" uid="uid://dr1iuukccl6lq" path="res://entities/enemies/bosses/herald_of_failure/states/attack_recovery.gd" id="9_dbdd4"]
+[ext_resource type="PackedScene" uid="uid://dhuerub8rrvhw" path="res://entities/enemies/bosses/herald_of_failure/attacks/tornado.tscn" id="9_p0yqv"]
+[ext_resource type="Script" uid="uid://5sr5mhc88j5a" path="res://entities/enemies/bosses/herald_of_failure/states/attack_meteor.gd" id="10_id1to"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mypcf"]
 atlas = ExtResource("2_5i653")
@@ -568,9 +572,16 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkhbt"]
 height = 38.0
 
-[node name="HeraldOfFailure" type="CharacterBody2D" unique_id=1540324731]
+[sub_resource type="CircleShape2D" id="CircleShape2D_dbdd4"]
+radius = 209.1937
+
+[node name="HeraldOfFailure" type="CharacterBody2D" unique_id=1540324731 node_paths=PackedStringArray("sprite", "state_machine", "movement_component")]
 collision_layer = 8
-script = ExtResource("1_7w10v")
+collision_mask = 15
+script = ExtResource("1_p0yqv")
+sprite = NodePath("Sprites")
+state_machine = NodePath("StateMachine")
+movement_component = NodePath("MovementComponent")
 metadata/_custom_type_script = "uid://cyangyrj0j445"
 
 [node name="MovementComponent" type="Node2D" parent="." unique_id=266014240]
@@ -581,6 +592,7 @@ metadata/_custom_type_script = "uid://cp1ll72gcduh3"
 sprite_frames = SubResource("SpriteFrames_kcj3j")
 animation = &"idle"
 autoplay = "idle"
+frame_progress = 0.9541661
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=2076377722]
 position = Vector2(-1.9999995, 45.000004)
@@ -588,6 +600,7 @@ scale = Vector2(1.6041666, 1.265625)
 texture = ExtResource("3_2k7es")
 
 [node name="ColisaoFisica" type="CollisionShape2D" parent="." unique_id=1166700932]
+visible = false
 position = Vector2(-1, 35)
 shape = SubResource("CapsuleShape2D_hkhbt")
 
@@ -596,15 +609,30 @@ script = ExtResource("5_7w10v")
 initial_state = NodePath("Patrol")
 metadata/_custom_type_script = "uid://xnqq5wccpjre"
 
-[node name="Patrol" type="Node" parent="StateMachine" unique_id=1722367442 node_paths=PackedStringArray("patrol_around", "attack_state")]
+[node name="Patrol" type="Node" parent="StateMachine" unique_id=1722367442 node_paths=PackedStringArray("movement_component", "detection_area", "attack_state")]
 script = ExtResource("6_jv5ku")
-patrol_around = NodePath("../..")
+movement_component = NodePath("../../MovementComponent")
+detection_area = NodePath("../../DetectionArea")
 attack_state = NodePath("../Attack")
 
-[node name="Attack" type="Node" parent="StateMachine" unique_id=701294027]
+[node name="Attack" type="Node" parent="StateMachine" unique_id=701294027 node_paths=PackedStringArray("tornado_attack_state", "fireball_attack_state")]
 script = ExtResource("7_dbdd4")
+tornado_attack_state = NodePath("../AttackTornado")
+fireball_attack_state = NodePath("../AttackMeteor")
 
-[node name="AttackTornado" type="Node" parent="StateMachine" unique_id=2045612349]
+[node name="AttackTornado" type="Node" parent="StateMachine" unique_id=2045612349 node_paths=PackedStringArray("tornado_spawn_point", "attack_recovery")]
+script = ExtResource("8_jv5ku")
+tornado_scene = ExtResource("9_p0yqv")
+tornado_spawn_point = NodePath("../..")
+attack_recovery = NodePath("../AttackRecovery")
+
+[node name="AttackRecovery" type="Node" parent="StateMachine" unique_id=436655453 node_paths=PackedStringArray("patrol_state")]
+script = ExtResource("9_dbdd4")
+patrol_state = NodePath("../Patrol")
+
+[node name="AttackMeteor" type="Node" parent="StateMachine" unique_id=782279963 node_paths=PackedStringArray("attack_recovery")]
+script = ExtResource("10_id1to")
+attack_recovery = NodePath("../AttackRecovery")
 
 [node name="FireMeteor" parent="." unique_id=1857492451 instance=ExtResource("4_5i653")]
 position = Vector2(149, 73)
@@ -614,3 +642,11 @@ position = Vector2(51, 115)
 
 [node name="FireMeteor3" parent="." unique_id=45410998 instance=ExtResource("4_5i653")]
 position = Vector2(207, 113)
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=212705785]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=401306208]
+shape = SubResource("CircleShape2D_dbdd4")

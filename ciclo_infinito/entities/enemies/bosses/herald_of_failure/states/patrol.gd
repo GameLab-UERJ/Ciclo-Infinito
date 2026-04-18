@@ -19,7 +19,7 @@ func _on_enter() -> void:
 	pass
 	
 func _on_exit() -> void:
-	pass
+	movement_component.velocity = Vector2.ZERO
 	
 func _update(_delta: float) -> void:
 	_define_patrol_point()
