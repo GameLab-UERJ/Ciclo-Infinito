@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://cpp5xuulq02bh"]
+
+[ext_resource type="PackedScene" uid="uid://d1k4qbshbruq" path="res://systems/ui/boss_hud/boss_hud.tscn" id="1"]
+[ext_resource type="Script" uid="uid://s42vwkgjbckb" path="res://systems/ui/boss_hud/test_scene/test_scene_bosshud.gd" id="1_7ckht"]
+
+[node name="TestScene" type="Node2D" unique_id=2058146161]
+script = ExtResource("1_7ckht")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1620784266]
+
+[node name="BossHUD" parent="CanvasLayer" unique_id=868629836 instance=ExtResource("1")]
