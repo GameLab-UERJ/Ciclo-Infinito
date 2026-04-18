@@ -70,6 +70,23 @@ func _process(_delta: float) -> void:
 	if falando and not dialogo.ativo:
 		encerrar_dialogo()
 
+func _physics_process(_delta: float) -> void:
+
+	# PARA SE ESTIVER FALANDO
+	if falando or not is_moving:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
+	# MOVIMENTO
+	var direction: Vector2 = (target_position - global_position).normalized()
+	velocity = direction * move_speed
+
+	move_and_slide()
+
+	# TROCA DE PONTO
+	if global_position.distance_to(target_position) < 10.0:
+		target_position = pos_b if target_position == pos_a else pos_a
 
 # ========================
 # DIALOGO
