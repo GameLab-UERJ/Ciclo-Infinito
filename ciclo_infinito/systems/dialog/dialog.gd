@@ -56,14 +56,21 @@ func input_interact() -> void:
 	elif pode_avancar:
 		_proxima_fala()
 
-
+func encerrar() -> void:
+	ativo = false
+	pode_avancar = false
+	
+	caixa.visible = false
+	texto.visible = false
+	skip_label.visible = false
+	
 # ========================
 # PRIVATE METHODS
 # ========================
 
 func _proxima_fala() -> void:
 	if indice_atual >= falas.size():
-		_encerrar()
+		encerrar()
 		return
 	
 	var fala: String = falas[indice_atual]
@@ -94,13 +101,4 @@ func _escrever(conteudo: String) -> void:
 	
 	escrevendo = false
 	pode_avancar = true
-	skip_label.visible = false
-
-
-func _encerrar() -> void:
-	ativo = false
-	pode_avancar = false
-	
-	caixa.visible = false
-	texto.visible = false
 	skip_label.visible = false
