@@ -3,6 +3,9 @@ extends Node
 
 ## Módulo responsável por controlar a exibição de diálogos com efeito de digitação.
 
+signal dialogo_iniciado
+signal dialogo_encerrado
+
 # ========================
 # VARIABLES
 # ========================
@@ -39,6 +42,8 @@ func iniciar(_falas: Array[String], _caixa: Control, _texto: Label, _skip_label:
 	
 	ativo = true
 	
+	emit_signal("dialogo_iniciado")
+	
 	caixa.visible = true
 	texto.visible = true
 	
@@ -63,6 +68,8 @@ func encerrar() -> void:
 	caixa.visible = false
 	texto.visible = false
 	skip_label.visible = false
+	
+	emit_signal("dialogo_encerrado")
 	
 # ========================
 # PRIVATE METHODS
@@ -101,4 +108,6 @@ func _escrever(conteudo: String) -> void:
 	
 	escrevendo = false
 	pode_avancar = true
-	skip_label.visible = false
+	
+	skip_label.text = "Pressione 'E' para continuar"
+	skip_label.visible = true
