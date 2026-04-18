@@ -35,6 +35,9 @@ var is_moving: bool = false
 @onready var label_interacao: Label = $Area2D/LabelInteracao
 @onready var pular_dialogo: Label = $Area2D/CanvasLayer/PularDialogo
 
+@onready var ponto_patrulha_a: Marker2D = $PontoPatrulhaA
+@onready var ponto_patrulha_b: Marker2D = $PontoPatrulhaB
+
 # ========================
 # LIFECYCLE
 # ========================
