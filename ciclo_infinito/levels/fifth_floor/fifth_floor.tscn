@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://djrevjgpeak50" path="res://entities/enemies/golem/golem_white.tscn" id="4_wyqw4"]
 [ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="5_vl0w6"]
 [ext_resource type="PackedScene" uid="uid://deyn0aff4vkxb" path="res://entities/enemies/beholder/beholder_orange.tscn" id="6_3nscd"]
+[ext_resource type="Shader" uid="uid://b4ecm70ug50ju" path="res://resources/shaders/redden.gdshader" id="6_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://c80omegwkn2ei" path="res://entities/enemies/beholder/beholder_white.tscn" id="7_ancri"]
 [ext_resource type="PackedScene" uid="uid://bbf6oefdi3vmk" path="res://levels/fifth_floor/fifth_floor_map.tscn" id="8_wow6u"]
 [ext_resource type="Script" uid="uid://bu55xg23achvn" path="res://levels/fifth_floor/barrier.gd" id="9_d2dnc"]
@@ -19,6 +20,11 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yw1aw"]
+resource_local_to_scene = true
+shader = ExtResource("6_yw1aw")
+shader_parameter/redden = false
 
 [node name="QuintoAndar" type="Node2D" unique_id=1838089692]
 script = ExtResource("1_u87vb")
@@ -45,6 +51,7 @@ offset_bottom = -10.3333
 text = "Pedro"
 
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
+material = SubResource("ShaderMaterial_yw1aw")
 position = Vector2(574, -278)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
@@ -170,9 +177,6 @@ position = Vector2(362, 420)
 
 [node name="golem12" parent="Enemies" unique_id=1251686522 instance=ExtResource("5_vl0w6")]
 position = Vector2(204, 407)
-
-[node name="golem_azul7" parent="Enemies" unique_id=140674353 instance=ExtResource("3_v3xqr")]
-position = Vector2(729, 346)
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1512366738]
 stream = ExtResource("15_r8vnr")

@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bu424e6ida6ma" path="res://entities/interactables/npcs/pedro/pedro.gd" id="1_5sp64"]
 [ext_resource type="Texture2D" uid="uid://b31qbydqhwrwt" path="res://assets/art/npcs/pedro/pedro_idle.png" id="2_74uy2"]
+[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_f6j54"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
 size = Vector2(77, 49)
@@ -70,11 +71,17 @@ metadata/_custom_type_script = "uid://bu424e6ida6ma"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
+[node name="Shadow" type="Sprite2D" parent="." unique_id=1560247652]
+position = Vector2(-4.8999996, 50.000008)
+scale = Vector2(2.125, 1.421875)
+texture = ExtResource("2_f6j54")
+
 [node name="Area2D" type="Area2D" parent="." unique_id=2022606982]
 collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1867660891]
+visible = false
 position = Vector2(-4.5, 24.5)
 shape = SubResource("RectangleShape2D_gu3sj")
 
@@ -120,6 +127,7 @@ label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=49316292]
+visible = false
 position = Vector2(-5.5, 26.5)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)

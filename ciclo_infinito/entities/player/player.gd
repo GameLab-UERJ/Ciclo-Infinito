@@ -39,7 +39,7 @@ var is_dashing := false
 var can_dash := true
 var dash_dir: Vector2 = Vector2.ZERO
 
-enum State {IDLE, RUN, ATTACK, DASH, DIALOG}
+enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG}
 var current_state: int = State.IDLE
 var next_direction: Vector2 = Vector2(0,1)
 
@@ -108,7 +108,7 @@ func _ready():
 	
 	# --- NOVO: Função para receber dano ---
 func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
-	if current_state == State.DASH:
+	if current_state == State.DASH or current_state == State.DEATH or is_invincible:
 		return
 
 	current_health -= damage_amount
@@ -141,7 +141,12 @@ func update_health_bar():
 	
 # --- NOVO: Função de morte ---
 func die() -> void:
-	print("O jogador foi derrotado!")
+	current_state = State.DEATH
+	
+	update_animation()
+	
+	await get_tree().create_timer(2.0).timeout
+	
 	var death_scene = preload("uid://b7qoxm33b5qxt").instantiate()#death_screen.tscn
 	get_tree().root.add_child(death_scene)
 	death_scene.set_layer(100)
@@ -173,6 +178,8 @@ func _physics_process(delta: float):
 		State.DIALOG:
 			_dialog_state()
 			
+		State.DEATH:
+			return
 	move_and_slide()
 	_update_attack_area_anchor()
 	update_animation()
@@ -385,6 +392,8 @@ func update_animation() -> void:
 			anim_name = ( "attack2_" if combo_step == 2 else "attack1_" ) + attack_facing
 		State.DASH:
 			anim_name = "dash_" + direction_str
+		State.DEATH:
+			anim_name = "death_" + direction_str
 	if anim.animation != anim_name:
 		if current_state == State.ATTACK:
 			anim.stop(); anim.frame = 0
@@ -394,6 +403,7 @@ func update_animation() -> void:
 # --- NOVA FUNÇÃO: Aplica efeito visual e sonoro ao receber dano ---
 func applies_damage_received_effect() -> void:
 	damage_recieved_sfx.play()
+	
 	anim.material.set_shader_parameter("whiten", true)
 	await get_tree().create_timer(INVINCIBILITY_DURATION).timeout
 	anim.material.set_shader_parameter("whiten", false)
