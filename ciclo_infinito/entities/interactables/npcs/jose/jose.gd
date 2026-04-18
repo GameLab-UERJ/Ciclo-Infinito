@@ -74,14 +74,13 @@ func iniciar_dialogo() -> void:
 
 func encerrar_dialogo() -> void:
 	falando = false
-
+	
+	dialogo.encerrar()
+	
 	# evita emitir múltiplas vezes
 	if not ja_falou:
 		ja_falou = true
 		emit_signal("falou_com_jose")
-
-	caixa_de_dialogo.visible = false
-	texto_dialogo.visible = false
 
 
 # ========================
