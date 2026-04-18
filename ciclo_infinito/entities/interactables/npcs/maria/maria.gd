@@ -49,6 +49,14 @@ func _ready() -> void:
 	caixa_de_dialogo.visible = false
 	texto_dialogo.visible = false
 	label_interacao.visible = false
+	
+	if ponto_patrulha_a and ponto_patrulha_b:
+		pos_a = ponto_patrulha_a.global_position
+		pos_b = ponto_patrulha_b.global_position
+		target_position = pos_a
+		is_moving = true
+	else:
+		is_moving = false
 
 
 func _process(_delta: float) -> void:
