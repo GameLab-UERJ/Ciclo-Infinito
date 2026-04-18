@@ -32,7 +32,7 @@ func _setup_transitions() -> void:
 
 	
 func _spawn_tornado() -> void:
-	var tornado_instance = tornado_scene.instantiate()
+	var tornado_instance := tornado_scene.instantiate()
 	var player_position := GameManager.player.global_position
 	var direction_to_player := (player_position - tornado_spawn_point.global_position).normalized()
 	var spawn_position := tornado_spawn_point.global_position + direction_to_player * spawn_distance
