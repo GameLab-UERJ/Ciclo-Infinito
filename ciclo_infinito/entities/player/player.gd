@@ -39,7 +39,7 @@ var is_dashing := false
 var can_dash := true
 var dash_dir: Vector2 = Vector2.ZERO
 
-enum State {IDLE, RUN, ATTACK, DASH}
+enum State {IDLE, RUN, ATTACK, DASH, DIALOG}
 var current_state: int = State.IDLE
 var next_direction: Vector2 = Vector2(0,1)
 
@@ -85,7 +85,6 @@ const INVINCIBILITY_DURATION: float = 0.3
 
 # --- NOVO: Variável de condição de invencibilidade ---
 var is_invincible = false
-
 
 func _ready():
 	# --- novinho em folha: inicializa a vida do jogador ---
@@ -171,6 +170,9 @@ func _physics_process(delta: float):
 			_attack_state()
 		State.DASH:
 			_dash_state()
+		State.DIALOG:
+			_dialog_state()
+			
 	move_and_slide()
 	_update_attack_area_anchor()
 	update_animation()
@@ -250,6 +252,9 @@ func _on_dash_timer_timeout() -> void:
 
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
+
+func _dialog_state():
+	velocity = Vector2.ZERO
 
 # --- NOVA FUNÇÃO: Aplica dano ao CharacterBody atingido ---
 func _on_area_attack_body_entered(body: Node2D) -> void:
@@ -362,6 +367,11 @@ func _update_attack_area_anchor() -> void:
 	var facing: String = get_direction_string(input_dir) if input_dir != Vector2.ZERO else last_facing
 	_apply_attack_hitbox_for_facing(facing)
 
+func _on_dialogo_iniciado():
+	current_state = State.DIALOG
+
+func _on_dialogo_encerrado():
+	current_state = State.IDLE
 
 func update_animation() -> void:
 	var anim_name := ""
