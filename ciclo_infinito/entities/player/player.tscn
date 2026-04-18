@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dbg05n786rg21" path="res://entities/player/player.gd" id="1_wq0jh"]
 [ext_resource type="Material" uid="uid://bk3kiethktv7y" path="res://resources/shaders/whiten.tres" id="2_24ehl"]
-[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_bwdx1"]
+[ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://cw6rmtpf160hr" path="res://assets/art/player/ATTACK 1/attack1_down.png" id="2_gt4e4"]
 [ext_resource type="Texture2D" uid="uid://baw5eohono6a1" path="res://assets/art/player/ATTACK 1/attack1_left.png" id="3_24ehl"]
 [ext_resource type="Texture2D" uid="uid://d4nq18t3e7kix" path="res://assets/art/player/ATTACK 1/attack1_right.png" id="4_bwdx1"]
@@ -31,6 +31,7 @@
 [ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="27_jjk8f"]
 [ext_resource type="AudioStream" uid="uid://bccw64i2jy4xe" path="res://assets/sfx/rpg-sword-attack-combo-17-388929.mp3" id="28_cnswy"]
 [ext_resource type="AudioStream" uid="uid://3ydqk3abb8kq" path="res://assets/sfx/Hit4.wav" id="30_24ehl"]
+[ext_resource type="AudioStream" uid="uid://jfblkkelsdqc" path="res://assets/sfx/14_human_death_spin.wav" id="32_vewsg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_govaw"]
 atlas = ExtResource("2_gt4e4")
@@ -1508,5 +1509,8 @@ volume_db = -34.668
 
 [node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=1941439101]
 stream = ExtResource("30_24ehl")
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=559540639]
+stream = ExtResource("32_vewsg")
 
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

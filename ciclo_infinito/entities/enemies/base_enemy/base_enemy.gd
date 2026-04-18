@@ -41,6 +41,8 @@ var alive: bool = true
 
 @onready var attack_sfx: AudioStreamPlayer = $attack_sfx
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
+@onready var death_sfx: AudioStreamPlayer = $DeathSFX
+
 
 func _ready() -> void:
 	current_health = max_health
@@ -116,7 +118,6 @@ func attack() -> void:
 			a.loop_mode = Animation.LOOP_NONE
 	_play_anim(atk_name)
 	attack_sfx.play()
-	print("Golem ataca!")
 	
 	# apply_attack_damage() está no AnimationPlayer
 
@@ -158,7 +159,11 @@ func die() -> void:
 	alive = false
 	
 	_play_anim("death_%s" %_dir_string_from_vector(velocity))
+	death_sfx.play()
+	
 	await get_tree().create_timer(1.0).timeout
+	
+	death_sfx.stop()
 	
 	sprite.material = null
 	var tween = create_tween()
