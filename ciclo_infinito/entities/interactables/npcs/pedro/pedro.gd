@@ -121,8 +121,7 @@ func obter_dialogo_atual() -> Array[String]:
 func encerrar_dialogo() -> void:
 	falando = false
 	
-	caixa_de_dialogo.visible = false
-	texto_dialogo.visible = false
+	dialogo.encerrar()
 	
 	emit_signal("dialogo_concluido")
 	emit_signal("falou_com_pedro")
