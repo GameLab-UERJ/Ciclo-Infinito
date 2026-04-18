@@ -18,6 +18,13 @@ var falas: Array[String] = [
 	"Toma cuidado por aí."
 ]
 
+# ---- PATRULHA ----
+@export var move_speed: float = 50.0
+
+var pos_a: Vector2
+var pos_b: Vector2
+var target_position: Vector2
+var is_moving: bool = false
 
 # ========================
 # ONREADY
