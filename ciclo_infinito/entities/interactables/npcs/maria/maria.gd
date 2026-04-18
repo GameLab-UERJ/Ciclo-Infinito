@@ -45,7 +45,13 @@ var is_moving: bool = false
 func _ready() -> void:
 	dialogo = Dialogo.new()
 	add_child(dialogo)
+	
+	var player = get_tree().get_first_node_in_group("player")
 
+	if player:
+		dialogo.dialogo_iniciado.connect(player._on_dialogo_iniciado)
+		dialogo.dialogo_encerrado.connect(player._on_dialogo_encerrado)
+	
 	caixa_de_dialogo.visible = false
 	texto_dialogo.visible = false
 	label_interacao.visible = false
