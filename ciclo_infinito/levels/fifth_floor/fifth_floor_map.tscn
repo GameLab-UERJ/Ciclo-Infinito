@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://dqnc2yjvbltmw" path="res://assets/art/tilesets/windows.png" id="7_xu6sh"]
 [ext_resource type="Texture2D" uid="uid://dslkbgs4suie3" path="res://assets/art/tilesets/trash_right.png" id="8_ha6xo"]
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="9_7vs5p"]
-[ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="11_47mow"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7vs5p"]
 texture = ExtResource("1_ha6xo")
@@ -429,6 +428,3 @@ tile_set = SubResource("TileSet_s0ifh")
 position = Vector2(-106, -24)
 tile_map_data = PackedByteArray("AABQAP//AAAZACcAAABwAP//AAAZACcAAAA=")
 tile_set = SubResource("TileSet_7vs5p")
-
-[node name="player" parent="." unique_id=1305817267 instance=ExtResource("11_47mow")]
-position = Vector2(411.42853, 27.85714)
