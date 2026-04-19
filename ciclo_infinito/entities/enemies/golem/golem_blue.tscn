@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://b5ipk3flgmyfx" path="res://assets/art/enemies/golem/golem_brown/Walk/Golem1_Walk_full.png" id="6_hexj7"]
 [ext_resource type="AudioStream" uid="uid://cxoixrxq44xp5" path="res://assets/sfx/earth-magic-6-378601.mp3" id="7_qqe8x"]
 [ext_resource type="AudioStream" uid="uid://bd2ijt8nn2qtr" path="res://assets/sfx/Hit3.wav" id="8_hdt1t"]
+[ext_resource type="AudioStream" uid="uid://ekxnyhyvqth0" path="res://assets/sfx/Giant_Grunt.wav" id="10_u0ahf"]
 
 [sub_resource type="Animation" id="Animation_gnbg4"]
 length = 0.001
@@ -1164,8 +1165,8 @@ metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1019330262]
 material = ExtResource("2_gnbg4")
-texture = ExtResource("3_gnbg4")
-hframes = 8
+texture = ExtResource("2_hdt1t")
+hframes = 9
 vframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1564457134]
@@ -1202,6 +1203,9 @@ volume_db = -12.518
 
 [node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=819476962]
 stream = ExtResource("8_hdt1t")
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=752457235]
+stream = ExtResource("10_u0ahf")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]

@@ -1,8 +1,53 @@
 class_name Player
 extends CharacterBody2D
 
-@onready var vida_cheia = $Camera2D/VidaCheia
 
+enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG}
+
+
+@export var max_health: float = 120.0
+@export var attack1_damage: float = 15.0 ## Dano do primeiro golpe
+@export var attack2_damage: float = 15.0 ## Dano do segundo golpe
+@export var move_speed: float = 240.00
+@export var invinciblity_duration : float  = 0.3
+@export_group("Attack")
+@export var attack_cooldown := 0.15
+@export var combo_window := 0.20
+@export_subgroup("Attack 1")
+@export var hit1_active_time := 0.12
+@export var attack1_lock_time := 0.22
+@export_subgroup("Attack 2")
+@export var hit2_active_time := 0.14
+@export var attack2_lock_time := 0.28
+@export_group("Dash")
+@export var dash_speed: float = move_speed * 1.5
+@export var dash_duracao  = 0.2
+@export_group("Hitboxes")
+@export_subgroup("Hitbox sizes")
+@export var hitbox_size_right: Vector2 = Vector2(50, 25)
+@export var hitbox_size_left:  Vector2 = Vector2(50, 25)
+@export var hitbox_size_up:    Vector2 = Vector2(50, 40)
+@export var hitbox_size_down:  Vector2 = Vector2(50, 40)
+@export_subgroup("Hitbox offsets")
+@export var hitbox_offset_right: Vector2 = Vector2(18, 0)
+@export var hitbox_offset_left:  Vector2 = Vector2(-18, 0)
+@export var hitbox_offset_up:    Vector2 = Vector2(0, -18)
+@export var hitbox_offset_down:  Vector2 = Vector2(0, 18)
+
+
+var last_facing: String = "down"
+var attack_facing: String = "down"
+var is_dashing := false
+var can_dash := true
+var dash_dir: Vector2 = Vector2.ZERO
+var current_state: int = State.IDLE
+var next_direction: Vector2 = Vector2(0,1)
+var can_attack := true
+var combo_step := 0
+var combo_window_open := false
+var combo_buffered := false
+var current_health: float
+var is_invincible = false
 var vida_textures = [
 	preload("uid://d04wn5x7fupjs"),#vida -1
 	preload("uid://dus84fjy3186o"),#vida -2
@@ -14,77 +59,16 @@ var vida_textures = [
 ]
 
 
-@export_category("Attributes")
-@export var is_floating: bool = true
-
+@onready var vida_cheia = $Camera2D/VidaCheia
 @onready var anim  = $animacoes  
 @onready var dash_timer = $dash_timer
 @onready var dash_cooldown = $dash_cooldown
-@export var dash_duracao  = 0.2
 @onready var area_attack = $attack_area
 @onready var dash_sfx = $dash_sfx
 @onready var player_colision: CollisionShape2D = $player_colision
 @onready var damage_recieved_sfx: AudioStreamPlayer = $DamageRecievedSFX
-
-
-var last_facing: String = "down"
-var attack_facing: String = "down"
-
-@export var move_speed: float = 240.00
-@export var acceleration: float = 0.20
-@export var friction: float = 0.20
-
-@export var dash_speed: float = move_speed * 1.5
-var is_dashing := false
-var can_dash := true
-var dash_dir: Vector2 = Vector2.ZERO
-
-enum State {IDLE, RUN, ATTACK, DASH, DEATH}
-var current_state: int = State.IDLE
-var next_direction: Vector2 = Vector2(0,1)
-
-
-@export var attack1_lock_time := 0.22
-@export var attack2_lock_time := 0.28
-@export var hit1_active_time := 0.12
-@export var hit2_active_time := 0.14
-@export var combo_window := 0.20
-@export var attack_cooldown := 0.15
+@onready var death_sfx: AudioStreamPlayer = $DeathSFX
 @onready var attack_sfxplay: AudioStreamPlayer = $attack_sfxplay
-
-# --- NOVO: Variáveis de Dano ---
-@export var attack1_damage: float = 10.0 # Dano do primeiro golpe
-@export var attack2_damage: float = 15.0 # Dano do segundo golpe
-# -----------------------------
-
-# --- NOVO: Variáveis de Vida do Jogador ---
-@export var max_health: float = 120.0
-var current_health: float
-# ----------------------------------------
-
-
-var can_attack := true
-var combo_step := 0
-var combo_window_open := false
-var combo_buffered := false
-
-
-@export var hitbox_size_right: Vector2 = Vector2(50, 25)
-@export var hitbox_size_left:  Vector2 = Vector2(50, 25)
-@export var hitbox_size_up:    Vector2 = Vector2(50, 40)
-@export var hitbox_size_down:  Vector2 = Vector2(50, 40)
-
-
-@export var hitbox_offset_right: Vector2 = Vector2(18, 0)
-@export var hitbox_offset_left:  Vector2 = Vector2(-18, 0)
-@export var hitbox_offset_up:    Vector2 = Vector2(0, -18)
-@export var hitbox_offset_down:  Vector2 = Vector2(0, 18)
-
-# --- NOVO: Constante de duração de invencibilidade ---
-const INVINCIBILITY_DURATION: float = 0.3
-
-# --- NOVO: Variável de condição de invencibilidade ---
-var is_invincible = false
 
 
 func _ready():
@@ -129,7 +113,7 @@ func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	applies_damage_received_effect()
 	
 	# --- NOVO: Deixa o player imortal por um determinado tempo ---
-	start_invincibility(INVINCIBILITY_DURATION)
+	start_invincibility(invinciblity_duration)
 	
 	if current_health <= 0.0:
 		die()
@@ -146,6 +130,7 @@ func die() -> void:
 	current_state = State.DEATH
 	
 	update_animation()
+	death_sfx.play(0.3)
 	
 	await get_tree().create_timer(2.0).timeout
 	
@@ -155,12 +140,12 @@ func die() -> void:
 
 
 # --- NOVO: Deixa o player imortal por um determinado tempo ---
-func start_invincibility(invincibility_duration: float) -> void:
+func start_invincibility(duration: float) -> void:
 	is_invincible = true
 	
 	set_deferred("collision_mask",collision_mask^0x8)
 	
-	await get_tree().create_timer(invincibility_duration).timeout
+	await get_tree().create_timer(duration).timeout
 	
 	set_deferred("collision_mask",collision_mask^0x8)
 	
@@ -177,6 +162,9 @@ func _physics_process(delta: float):
 			_attack_state()
 		State.DASH:
 			_dash_state()
+		State.DIALOG:
+			_dialog_state()
+			
 		State.DEATH:
 			return
 	move_and_slide()
@@ -246,6 +234,11 @@ func _dash_state():
 	else:
 		velocity = dash_dir * dash_speed
 
+
+func _dialog_state():
+	velocity = Vector2.ZERO
+
+
 func _on_dash_timer_timeout() -> void:
 	$player_colision.disabled = false
 	velocity = Vector2.ZERO
@@ -256,8 +249,10 @@ func _on_dash_timer_timeout() -> void:
 	if dash_cooldown and dash_cooldown.is_stopped():
 		dash_cooldown.start()
 
+
 func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
+
 
 # --- NOVA FUNÇÃO: Aplica dano ao CharacterBody atingido ---
 func _on_area_attack_body_entered(body: Node2D) -> void:
@@ -299,6 +294,7 @@ func _start_attack1() -> void: # Inicia a animação do ataque 1 e ajusta as var
 	_open_combo_window()
 	_end_attack1_after_lock()
 
+
 func _open_combo_window() -> void: # Espera a janela de combo e, se houve um ataque, inicia o ataque 2
 	combo_window_open = true
 	await get_tree().create_timer(combo_window).timeout
@@ -306,10 +302,12 @@ func _open_combo_window() -> void: # Espera a janela de combo e, se houve um ata
 	if combo_step == 1 and combo_buffered:
 		_start_attack2()
 
+
 func _end_attack1_after_lock() -> void: # Se após a janela de combo não houver ataque, finaliza o estado de ataque
 	await get_tree().create_timer(attack1_lock_time).timeout
 	if combo_step == 1:
 		_finish_attack_sequence()
+
 
 func _start_attack2() -> void: # Mesma lógica do ataque 1
 	combo_step = 2
@@ -325,6 +323,7 @@ func _start_attack2() -> void: # Mesma lógica do ataque 1
 	await get_tree().create_timer(attack2_lock_time).timeout
 	_finish_attack_sequence()
 
+
 func _finish_attack_sequence() -> void: # Restaura variáveis de controle e devolve para outro estado
 	combo_step = 0
 	if get_input_direction() != Vector2.ZERO:
@@ -333,6 +332,7 @@ func _finish_attack_sequence() -> void: # Restaura variáveis de controle e devo
 		current_state = State.IDLE
 	await get_tree().create_timer(attack_cooldown).timeout
 	can_attack = true
+
 
 func _enable_attack_hitbox_for(dur: float) -> void: # Ativa a colisão de ataque durante o tempo do golpe
 	var col: CollisionShape2D = area_attack.get_node("attack_colison")
@@ -360,6 +360,7 @@ func _apply_attack_hitbox_for_facing(facing: String) -> void: # Ajusta a hitbox 
 			rect.size = hitbox_size_down
 			col.position = hitbox_offset_down
 
+
 # Mantém a hitbox “apontando” para onde o personagem está olhando
 func _update_attack_area_anchor() -> void:
 	if current_state == State.ATTACK:
@@ -371,11 +372,19 @@ func _update_attack_area_anchor() -> void:
 	_apply_attack_hitbox_for_facing(facing)
 
 
+func _on_dialogo_iniciado():
+	current_state = State.DIALOG
+
+
+func _on_dialogo_encerrado():
+	current_state = State.IDLE
+
+
 func update_animation() -> void:
 	var anim_name := ""
 	var direction_str: String = attack_facing if current_state == State.ATTACK else get_direction_string(next_direction)
 	match current_state:
-		State.IDLE:
+		State.IDLE,State.DIALOG:
 			anim_name = "idle_" + direction_str
 		State.RUN:
 			anim_name = "run_" + direction_str
@@ -396,7 +405,7 @@ func applies_damage_received_effect() -> void:
 	damage_recieved_sfx.play()
 	
 	anim.material.set_shader_parameter("whiten", true)
-	await get_tree().create_timer(INVINCIBILITY_DURATION).timeout
+	await get_tree().create_timer(invinciblity_duration).timeout
 	anim.material.set_shader_parameter("whiten", false)
 
 
