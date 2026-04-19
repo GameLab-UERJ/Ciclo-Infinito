@@ -336,9 +336,6 @@ position = Vector2(36, -55)
 tile_map_data = PackedByteArray("AAAGABAAAgAQABMAAAAGAAMAAgAQAAcAAAAGAAkAAgAQAAoAAAAGAAsAAgAQAAoAAAA=")
 tile_set = SubResource("TileSet_61582")
 
-[node name="ElevadorInterativo" parent="." unique_id=595449376 instance=ExtResource("3_p3xb5")]
-position = Vector2(536.429, -133.571)
-
 [node name="ParedeRampa" type="TileMapLayer" parent="." unique_id=1021102607]
 position = Vector2(27, -15)
 tile_map_data = PackedByteArray("AAAgAAoAAAAQABAAAAA=")
@@ -445,6 +442,10 @@ offset_top = -31.4289
 offset_right = 22.1426
 offset_bottom = -8.42888
 text = "Maria"
+
+[node name="ElevadorInterativo" parent="." unique_id=595449376 instance=ExtResource("3_p3xb5")]
+position = Vector2(536.42896, -133.57098)
+scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1878532527]
 
