@@ -28,7 +28,7 @@ func _on_opções_button_pressed() -> void:
 
 
 func _on_discordbutton_pressed()->void:
-	OS.shell_open("https://discord.com/channels/1409169018534891644/1412147166658429038")
+	OS.shell_open("https://discord.gg/Ra9fKn3qHN")
 
 
 func _on_controles_button_pressed() -> void:
