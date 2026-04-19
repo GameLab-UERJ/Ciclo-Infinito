@@ -1,6 +1,6 @@
 extends ScrollContainer
 
-@export_range(1,10000,0.1) var credits_time : float = 28.0
+@export_range(1,10000,0.1) var credits_time : float = 25.0
 @export_range(0,10000,0.1) var margin_increment : float = 0
 
 var main_menu : PackedScene = load("uid://downt2rxxaqaf")
