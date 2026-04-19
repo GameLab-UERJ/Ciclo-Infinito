@@ -1,92 +1,111 @@
 class_name Jose
 extends StaticBody2D
 
-@onready var caixa_de_dialogo: Label = $Area2D/CanvasLayer/CaixaDeDialogo
-@onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
-@onready var label_interação: Label = $Area2D/LabelInteração
+## NPC José com diálogo simples
+
+# ========================
+# SIGNALS
+# ========================
 
 signal dialog_started
 signal dialog_finished
 signal falou_com_jose
-var player_in_area = false
-var falando = false
-var pode_avancar = false
-var fala_index = 0
 
-var falas = ["Ora, seja bem-vindo à UERJ! Então você é o novo calouro de Engenharia, não é?
-", 
-"Pois prepare-se, o quinto andar será praticamente sua segunda casa durante esse ciclo",
-"É lá que tudo acontece — aulas, projetos, noites viradas e muita cafeína!",
-"Ah, e se encontrar o Pedro, o veterano, fale com ele.
-Ele vai te orientar sobre os primeiros passos e talvez até te dar umas boas dicas de sobrevivência por aqui" 
+
+# ========================
+# VARIABLES
+# ========================
+
+var player_in_area: bool = false
+var falando: bool = false
+var ja_falou: bool = false
+
+var dialogo: Dialogo
+
+var falas: Array[String] = [
+	"E aí!",
+	"Já falou com a Maria?",
+	"Boa sorte na jornada!"
 ]
 
+
+# ========================
+# ONREADY
+# ========================
+
+@onready var caixa_de_dialogo: Label = $Area2D/CanvasLayer/CaixaDeDialogo
+@onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
+@onready var label_interacao: Label = $Area2D/LabelInteracao
+@onready var pular_dialogo: Label = $Area2D/CanvasLayer/PularDialogo
+
+# ========================
+# LIFECYCLE
+# ========================
+
 func _ready() -> void:
+	dialogo = Dialogo.new()
+	add_child(dialogo)
+	
+	var player = get_tree().get_first_node_in_group("player")
+
+	if player:
+		dialogo.dialogo_iniciado.connect(player._on_dialogo_iniciado)
+		dialogo.dialogo_encerrado.connect(player._on_dialogo_encerrado)
+	
 	caixa_de_dialogo.visible = false
 	texto_dialogo.visible = false
-	label_interação.visible = false
+	label_interacao.visible = false
 
 
-func _process(_delta) -> void:
+func _process(_delta: float) -> void:
+
 	if player_in_area and not falando and Input.is_action_just_pressed("interact"):
 		iniciar_dialogo()
-		
-	elif falando and pode_avancar and Input.is_action_just_pressed("interact"):
-		proxima_fala()
 
+	elif falando and Input.is_action_just_pressed("interact"):
+		dialogo.input_interact()
 
-func iniciar_dialogo():
-	print("NPC: emitindo dialog_started")
-	emit_signal("dialog_started")
-	falando = true
-	label_interação.visible = false
-	caixa_de_dialogo.visible = true
-	texto_dialogo.visible = true
-	fala_index = 0
-	proxima_fala()
-
-
-func proxima_fala():
-	if fala_index < falas.size():
-		pode_avancar = false
-		texto_dialogo.text = ""
-		var texto = falas[fala_index]
-		fala_index += 1
-		mostrar_texto_com_efeito(texto)
-	else:
+	if falando and not dialogo.ativo:
 		encerrar_dialogo()
 
 
-func mostrar_texto_com_efeito(texto: String):
-	await get_tree().create_timer(0.1).timeout
-	for letra in texto:
-		texto_dialogo.text += letra
-		await get_tree().create_timer(0.02).timeout
-	pode_avancar = true
+# ========================
+# DIALOGO
+# ========================
+
+func iniciar_dialogo() -> void:
+	falando = true
+	label_interacao.visible = false
+
+	dialogo.iniciar(falas, caixa_de_dialogo, texto_dialogo, pular_dialogo)
 
 
-func encerrar_dialogo():
-	print("NPC: emitindo dialog_finished")
+func encerrar_dialogo() -> void:
 	falando = false
-	pode_avancar = false
-	caixa_de_dialogo.visible = false
-	texto_dialogo.visible = false
-	emit_signal("falou_com_jose")
-	emit_signal("dialog_finished")
-	var terrain_manager = get_tree().get_current_scene()
-	terrain_manager.atualizar_missao("Entre no elevador \ne suba até o 5° andar.")
+	
+	dialogo.encerrar()
+	
+	# evita emitir múltiplas vezes
+	if not ja_falou:
+		ja_falou = true
+		emit_signal("falou_com_jose")
+
+
+# ========================
+# AREA
+# ========================
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "player":
+	if body.is_in_group("player"):
 		player_in_area = true
-		label_interação.text = "Pressione 'E' para interagir"
-		label_interação.visible = true
+		label_interacao.text = "Pressione 'E'"
+		label_interacao.visible = true
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.name == "player":
+	if body.is_in_group("player"):
 		player_in_area = false
-		label_interação.visible = false
+		label_interacao.visible = false
+
 		if falando:
 			encerrar_dialogo()
-		
