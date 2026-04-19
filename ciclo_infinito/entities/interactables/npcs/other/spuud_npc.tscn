@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://12i1ywgpw05p"]
 
 [ext_resource type="Script" uid="uid://crikhcj4uvp0e" path="res://entities/interactables/npcs/other/spuud_npc.gd" id="1_tu2hi"]
+[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_2b3ct"]
 [ext_resource type="Texture2D" uid="uid://05mguym0tfks" path="res://assets/art/npcs/other/spuud_idle.png" id="2_ghj3v"]
 [ext_resource type="Texture2D" uid="uid://cw5k3pfja14yo" path="res://assets/art/npcs/other/spuud_walk.png" id="2_r72a0"]
 
@@ -180,13 +181,16 @@ draw_center = false
 size = Vector2(34, 72.75)
 
 [node name="SpuudNPC" type="CharacterBody2D" unique_id=1354297474]
-
-motion_mode = 1
 collision_layer = 4
 collision_mask = 3
-
+motion_mode = 1
 script = ExtResource("1_tu2hi")
 metadata/_custom_type_script = "uid://crikhcj4uvp0e"
+
+[node name="Shadow" type="Sprite2D" parent="." unique_id=614643943]
+position = Vector2(16.000002, 51.000004)
+scale = Vector2(2.0625, 1.421875)
+texture = ExtResource("2_2b3ct")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1835664185]
 collision_layer = 0
@@ -201,6 +205,7 @@ frame = 2
 frame_progress = 0.0035015477
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2127824784]
+visible = false
 position = Vector2(24.5, 30)
 shape = SubResource("RectangleShape2D_decul")
 
@@ -233,6 +238,7 @@ offset_bottom = -9.0
 label_settings = SubResource("LabelSettings_o4hm0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6731502]
+visible = false
 position = Vector2(17, 31.375)
 shape = SubResource("RectangleShape2D_dfyt3")
 debug_color = Color(0.505315, 0.0268385, 0.069401, 0.42)

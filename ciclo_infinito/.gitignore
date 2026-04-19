@@ -3,5 +3,7 @@
 *.tmp
 /android/
 
+.idea
+
 
 *.import

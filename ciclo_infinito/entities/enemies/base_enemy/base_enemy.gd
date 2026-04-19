@@ -36,6 +36,7 @@ var _last_facing: String = "down"
 var _is_attacking: bool = false
 var attack_area: Area2D
 var detect_area: Area2D
+var alive: bool = true
 
 
 @onready var attack_sfx: AudioStreamPlayer = $attack_sfx
@@ -76,6 +77,9 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if !alive:
+		return
+	
 	if player_ref == null or not is_instance_valid(player_ref):
 		_stop()
 		return
@@ -113,6 +117,8 @@ func attack() -> void:
 	_play_anim(atk_name)
 	attack_sfx.play()
 	print("Golem ataca!")
+	
+	# apply_attack_damage() está no AnimationPlayer
 
 
 func apply_attack_damage() -> void:
@@ -131,6 +137,9 @@ func apply_attack_damage() -> void:
 
 # ======== Vida / Morte ========
 func take_damage(damage: float, hit_direction: Vector2) -> void:
+	if !alive:
+		return
+	
 	current_health -= damage
 	print("Inimigo recebeu dano de ", damage, ". Vida restante: ", current_health)
 
@@ -145,9 +154,16 @@ func take_damage(damage: float, hit_direction: Vector2) -> void:
 
 
 func die() -> void:
-	print("Inimigo foi derrotado!")
 	defeated.emit()
-	queue_free()
+	alive = false
+	
+	_play_anim("death_%s" %_dir_string_from_vector(velocity))
+	await get_tree().create_timer(1.0).timeout
+	
+	sprite.material = null
+	var tween = create_tween()
+	tween.tween_property(self, "modulate:a", 0.0, 5.0)
+	tween.tween_callback(queue_free)
 
 
 # ======== Movimento / Animação ========
@@ -189,7 +205,7 @@ func _play_anim(animation_name: String) -> void:
 func applies_damage_received_effect() -> void:
 	damage_recieved_sfx.play()
 	
-	if sprite.material != null:
+	if sprite.material != null and current_health > 0:
 		sprite.material.set_shader_parameter("redden", true)
 		await get_tree().create_timer(DAMAGE_TAKEN_EFFECT_DURATION).timeout
 		sprite.material.set_shader_parameter("redden", false)
@@ -235,3 +251,5 @@ func _on_anim_animation_finished(animation_name: StringName) -> void:
 	if n.begins_with("attack_"):
 		_is_attacking = false
 		_play_anim("idle_%s" % _last_facing)
+	if n.begins_with("death_"):
+		collision_layer = 0
