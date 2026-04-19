@@ -147,7 +147,7 @@ func die() -> void:
 	
 	update_animation()
 	death_sfx.play(0.3)
-
+	
 	await get_tree().create_timer(2.0).timeout
 	
 	var death_scene = preload("uid://b7qoxm33b5qxt").instantiate()#death_screen.tscn

@@ -45,6 +45,7 @@ var alive: bool = true
 
 
 func _ready() -> void:
+	death_sfx.volume_db = -25.0
 	current_health = max_health
 	attack_cooldown_timer.wait_time = attack_cooldown
 
