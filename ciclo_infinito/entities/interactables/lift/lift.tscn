@@ -6,6 +6,7 @@
 size = Vector2(52, 52)
 
 [sub_resource type="LabelSettings" id="LabelSettings_v4j7h"]
+font_size = 8
 
 [node name="ElevadorInterativo" type="Area2D" unique_id=1971279796]
 collision_layer = 16
@@ -19,6 +20,7 @@ shape = SubResource("RectangleShape2D_ceqy0")
 debug_color = Color(0.476749, 0, 0.100846, 0.42)
 
 [node name="LabelInteração" type="Label" parent="." unique_id=714468324]
+texture_filter = 1
 offset_top = -14.0
 offset_right = 87.0
 offset_bottom = 17.0
