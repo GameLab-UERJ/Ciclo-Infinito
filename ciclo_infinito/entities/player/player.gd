@@ -25,6 +25,7 @@ var vida_textures = [
 @onready var dash_sfx = $dash_sfx
 @onready var player_colision: CollisionShape2D = $player_colision
 @onready var damage_recieved_sfx: AudioStreamPlayer = $DamageRecievedSFX
+@onready var death_sfx: AudioStreamPlayer = $DeathSFX
 
 
 var last_facing: String = "down"
@@ -144,6 +145,7 @@ func die() -> void:
 	current_state = State.DEATH
 	
 	update_animation()
+	death_sfx.play(0.3)
 	
 	await get_tree().create_timer(2.0).timeout
 	
