@@ -1,20 +1,42 @@
 class_name NPC
 extends StaticBody2D
 
-@onready var caixa_de_dialogo: Label = $Area2D/CanvasLayer/CaixaDeDialogo
-@onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
-@onready var label_interação: Label = $Area2D/LabelInteração
-@onready var mapa = get_parent()
+## NPC responsável por interação com o jogador e controle de diálogo baseado na missão.
+
+# ========================
+# SIGNALS
+# ========================
 
 signal dialogo_concluido
 signal falou_com_pedro
 
-var player_in_area = false
-var falando = false
-var pode_avancar = false
-var fala_index = 0
-var falas_atuais = []
 
+# ========================
+# VARIABLES
+# ========================
+
+var player_in_area: bool = false
+var falando: bool = false
+
+var falas_atuais: Array[String] = []
+
+var dialogo: Dialogo
+
+
+# ========================
+# ONREADY
+# ========================
+
+@onready var caixa_de_dialogo: Label = $Area2D/CanvasLayer/CaixaDeDialogo
+@onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
+@onready var label_interacao: Label = $Area2D/LabelInteracao
+@onready var mapa: Node = get_parent()
+@onready var pular_dialogo: Label = $Area2D/CanvasLayer/PularDialogo
+
+
+# ========================
+# LIFECYCLE
+# ========================
 
 var falas = {
 	"primeira_conversa": [
@@ -33,77 +55,100 @@ var falas = {
 	]}
 	
 func _ready() -> void:
+	dialogo = Dialogo.new()
+	add_child(dialogo)
+	
+	var player = get_tree().get_first_node_in_group("player")
+
+	if player:
+		dialogo.dialogo_iniciado.connect(player._on_dialogo_iniciado)
+		dialogo.dialogo_encerrado.connect(player._on_dialogo_encerrado)
+	
+	
 	caixa_de_dialogo.visible = false
 	texto_dialogo.visible = false
-	label_interação.visible = false
-	
-	
-func _process(_delta) -> void:
+	label_interacao.visible = false
+	pular_dialogo.visible = false
+
+
+func _process(_delta: float) -> void:
 	if player_in_area and not falando and Input.is_action_just_pressed("interact"):
 		iniciar_dialogo()
-	elif falando and pode_avancar and Input.is_action_just_pressed("interact"):
-		proxima_fala()
-		
-		
-func iniciar_dialogo():
+	
+	elif falando and Input.is_action_just_pressed("interact"):
+		dialogo.input_interact()
+	
+	# Detecta fim do diálogo
+	if falando and not dialogo.ativo:
+		encerrar_dialogo()
+
+
+# ========================
+# DIALOGO
+# ========================
+
+## Inicia o diálogo com base no estado atual da missão.
+func iniciar_dialogo() -> void:
 	falando = true
-	label_interação.visible = false
-	caixa_de_dialogo.visible = true
-	texto_dialogo.visible = true
-	fala_index = 0
+	label_interacao.visible = false
+	
 	falas_atuais = obter_dialogo_atual()
-	proxima_fala()
 	
-	
-func obter_dialogo_atual():
+	dialogo.iniciar(
+		falas_atuais,
+		caixa_de_dialogo,
+		texto_dialogo,
+		pular_dialogo
+	)
+
+
+## Retorna o conjunto de falas baseado na missão atual.
+func obter_dialogo_atual() -> Array[String]:
+	var resultado: Array[String] = []
+
+	var falas_brutas: Array = []
+
 	match mapa.indice_missao_atual:
 		2:
-			return falas["primeira_conversa"]
+			falas_brutas = falas["primeira_conversa"]
 		3:
-			return falas["antes_de_matar"]
+			falas_brutas = falas["antes_de_matar"]
 		4:
-			return falas["depois_de_matar"]
-	
-	
-	
-func proxima_fala():
-	if fala_index < falas_atuais.size():
-		pode_avancar = false
-		texto_dialogo.text = ""
-		var texto = falas_atuais[fala_index]
-		fala_index += 1
-		mostrar_texto_com_efeito(texto)
-	else:
-		encerrar_dialogo()
-		
-		
-func mostrar_texto_com_efeito(texto: String):
-	await get_tree().create_timer(0.1).timeout
-	for letra in texto:
-		texto_dialogo.text += letra
-		await get_tree().create_timer(0.02).timeout
-	pode_avancar = true
-	
-	
-func encerrar_dialogo():
+			falas_brutas = falas["depois_de_matar"]
+		_:
+			falas_brutas = []
+
+	for fala in falas_brutas:
+		resultado.append(fala)
+
+	return resultado
+
+
+## Encerra o diálogo e emite sinais necessários.
+func encerrar_dialogo() -> void:
 	falando = false
-	pode_avancar = false
-	caixa_de_dialogo.visible = false
-	texto_dialogo.visible = false
+	
+	dialogo.encerrar()
+	
 	emit_signal("dialogo_concluido")
-	emit_signal("falou_com_pedro")  # Emite sinal para avançar missão
-	
-	
+	emit_signal("falou_com_pedro")
+
+
+# ========================
+# AREA
+# ========================
+
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "player":
 		player_in_area = true
-		label_interação.text = "Pressione 'E' para interagir"
-		label_interação.visible = true
-		
-		
+		label_interacao.text = "Pressione 'E' para interagir"
+		label_interacao.visible = true
+
+
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "player":
 		player_in_area = false
-		label_interação.visible = false
+		label_interacao.visible = false
+		
 		if falando:
 			encerrar_dialogo()
