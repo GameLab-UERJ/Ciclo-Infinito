@@ -210,6 +210,7 @@ position = Vector2(24.5, 30)
 shape = SubResource("RectangleShape2D_decul")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1304327940]
+layer = 2
 
 [node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=1905287445]
 offset_left = 68.0

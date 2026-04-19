@@ -91,6 +91,7 @@ animation = &"idle Vamp"
 autoplay = "idle Vamp"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1283099891]
+layer = 2
 
 [node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=351317161]
 offset_left = 68.0

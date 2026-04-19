@@ -100,6 +100,7 @@ frame_progress = 0.378858
 flip_h = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1984156275]
+layer = 2
 
 [node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=980316351]
 offset_left = 68.0
