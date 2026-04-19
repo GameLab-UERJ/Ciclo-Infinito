@@ -74,6 +74,7 @@ var vida_textures = [
 func _ready():
 	# --- novinho em folha: inicializa a vida do jogador ---
 	current_health = max_health
+	GameManager.player = self
 	update_health_bar()
 	# -----------------------------------------
 	

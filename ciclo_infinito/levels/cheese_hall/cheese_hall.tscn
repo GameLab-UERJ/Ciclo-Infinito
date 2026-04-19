@@ -13,10 +13,11 @@
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="8_7nto0"]
 [ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose/jose.tscn" id="10_p3xb5"]
 [ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria/maria.tscn" id="11_td228"]
-[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/fade_component.gd" id="13_pfwt5"]
+[ext_resource type="Script" path="res://systems/fade_component.gd" id="13_pfwt5"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="13_v1y88"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_v1y88"]
 [ext_resource type="AudioStream" uid="uid://cq14taynk4t07" path="res://assets/music/Hades - House of Hades - Supergiant Games (youtube).mp3" id="15_7nto0"]
+[ext_resource type="PackedScene" uid="uid://daxs4d78svouo" path="res://entities/enemies/bosses/herald_of_failure/herald_of_failure.tscn" id="18_daq30"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_inj64"]
 texture = ExtResource("1_h2ksd")
@@ -407,7 +408,6 @@ offset_bottom = -218.4418
 script = ExtResource("13_pfwt5")
 is_fade_out = false
 fade_time = 0.5
-metadata/_custom_type_script = "uid://br6wsqfyc7ush"
 
 [node name="FadeOutComponent" type="ColorRect" parent="player" unique_id=1665556648]
 offset_right = 40.0
@@ -415,7 +415,6 @@ offset_bottom = 40.0
 script = ExtResource("13_pfwt5")
 fade_time = 0.5
 offset = Vector2(-500, -250)
-metadata/_custom_type_script = "uid://br6wsqfyc7ush"
 
 [node name="ParedeUerj" type="TileMapLayer" parent="." unique_id=1524752549]
 tile_map_data = PackedByteArray("AAAFABAAAAABAAQAAAALABAAAQABAAEAAAARABAAAAABAAQAAAAXABAAAQABAAEAAAAdABAAAAABAAQAAAAjABAAAQABAAEAAAA=")
@@ -477,4 +476,16 @@ stream = ExtResource("15_7nto0")
 volume_db = -4.952
 autoplay = true
 
+[node name="HeraldOfFailure" parent="." unique_id=1540324731 instance=ExtResource("18_daq30")]
+position = Vector2(825, 282.85715)
+
+[node name="Patrol" parent="HeraldOfFailure/StateMachine" parent_id_path=PackedInt32Array(1540324731, 1377708847) index="0" unique_id=1722367442 node_paths=PackedStringArray("patrol_around")]
+patrol_around = NodePath("../../../patrol_point")
+
+[node name="patrol_point" type="Node2D" parent="." unique_id=247842289]
+position = Vector2(807.14276, 227.14284)
+scale = Vector2(0.99999994, 0.99999994)
+
 [connection signal="fade_finished" from="player/FadeOutComponent" to="." method="_on_fade_out_component_fade_finished"]
+
+[editable path="HeraldOfFailure"]

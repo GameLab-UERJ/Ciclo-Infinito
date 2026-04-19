@@ -16,12 +16,12 @@
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="13_ni4lu"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_71gwp"]
 [ext_resource type="AudioStream" uid="uid://ce378hasf2vjm" path="res://assets/music/Hades - God of the Dead - Supergiant Games (youtube).mp3" id="15_r8vnr"]
-[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/fade_component.gd" id="16_ekmel"]
+[ext_resource type="Script" path="res://systems/fade_component.gd" id="16_ekmel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yw1aw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jo4v1"]
 resource_local_to_scene = true
 shader = ExtResource("6_yw1aw")
 shader_parameter/redden = false
@@ -51,7 +51,7 @@ offset_bottom = -10.3333
 text = "Pedro"
 
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
-material = SubResource("ShaderMaterial_yw1aw")
+material = SubResource("ShaderMaterial_jo4v1")
 position = Vector2(574, -278)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
@@ -106,7 +106,6 @@ script = ExtResource("16_ekmel")
 is_fade_out = false
 fade_time = 0.5
 offset = Vector2(-500, -250)
-metadata/_custom_type_script = "uid://br6wsqfyc7ush"
 
 [node name="Enemies" type="Node" parent="." unique_id=1015743081 node_paths=PackedStringArray("label_contador")]
 script = ExtResource("2_tprnl")
