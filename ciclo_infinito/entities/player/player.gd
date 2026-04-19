@@ -2,11 +2,52 @@ class_name Player
 extends CharacterBody2D
 
 
-@export_category("Attributes")
-@export var is_floating: bool = true
+enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG}
+
+
+@export var max_health: float = 120.0
+@export var attack1_damage: float = 15.0 ## Dano do primeiro golpe
+@export var attack2_damage: float = 15.0 ## Dano do segundo golpe
+@export var move_speed: float = 240.00
+@export var invinciblity_duration : float  = 0.3
+@export_group("Attack")
+@export var attack_cooldown := 0.15
+@export var combo_window := 0.20
+@export_subgroup("Attack 1")
+@export var hit1_active_time := 0.12
+@export var attack1_lock_time := 0.22
+@export_subgroup("Attack 2")
+@export var hit2_active_time := 0.14
+@export var attack2_lock_time := 0.28
+@export_group("Dash")
+@export var dash_speed: float = move_speed * 1.5
 @export var dash_duracao  = 0.2
+@export_group("Hitboxes")
+@export_subgroup("Hitbox sizes")
+@export var hitbox_size_right: Vector2 = Vector2(50, 25)
+@export var hitbox_size_left:  Vector2 = Vector2(50, 25)
+@export var hitbox_size_up:    Vector2 = Vector2(50, 40)
+@export var hitbox_size_down:  Vector2 = Vector2(50, 40)
+@export_subgroup("Hitbox offsets")
+@export var hitbox_offset_right: Vector2 = Vector2(18, 0)
+@export var hitbox_offset_left:  Vector2 = Vector2(-18, 0)
+@export var hitbox_offset_up:    Vector2 = Vector2(0, -18)
+@export var hitbox_offset_down:  Vector2 = Vector2(0, 18)
 
 
+var last_facing: String = "down"
+var attack_facing: String = "down"
+var is_dashing := false
+var can_dash := true
+var dash_dir: Vector2 = Vector2.ZERO
+var current_state: int = State.IDLE
+var next_direction: Vector2 = Vector2(0,1)
+var can_attack := true
+var combo_step := 0
+var combo_window_open := false
+var combo_buffered := false
+var current_health: float
+var is_invincible = false
 var vida_textures = [
 	preload("uid://d04wn5x7fupjs"),#vida -1
 	preload("uid://dus84fjy3186o"),#vida -2
@@ -27,66 +68,8 @@ var vida_textures = [
 @onready var player_colision: CollisionShape2D = $player_colision
 @onready var damage_recieved_sfx: AudioStreamPlayer = $DamageRecievedSFX
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
-
-
-var last_facing: String = "down"
-var attack_facing: String = "down"
-
-@export var move_speed: float = 240.00
-@export var acceleration: float = 0.20
-@export var friction: float = 0.20
-
-@export var dash_speed: float = move_speed * 1.5
-var is_dashing := false
-var can_dash := true
-var dash_dir: Vector2 = Vector2.ZERO
-
-enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG}
-var current_state: int = State.IDLE
-var next_direction: Vector2 = Vector2(0,1)
-
-
-@export var attack1_lock_time := 0.22
-@export var attack2_lock_time := 0.28
-@export var hit1_active_time := 0.12
-@export var hit2_active_time := 0.14
-@export var combo_window := 0.20
-@export var attack_cooldown := 0.15
 @onready var attack_sfxplay: AudioStreamPlayer = $attack_sfxplay
 
-# --- NOVO: Variáveis de Dano ---
-@export var attack1_damage: float = 10.0 # Dano do primeiro golpe
-@export var attack2_damage: float = 15.0 # Dano do segundo golpe
-# -----------------------------
-
-# --- NOVO: Variáveis de Vida do Jogador ---
-@export var max_health: float = 120.0
-var current_health: float
-# ----------------------------------------
-
-
-var can_attack := true
-var combo_step := 0
-var combo_window_open := false
-var combo_buffered := false
-
-
-@export var hitbox_size_right: Vector2 = Vector2(50, 25)
-@export var hitbox_size_left:  Vector2 = Vector2(50, 25)
-@export var hitbox_size_up:    Vector2 = Vector2(50, 40)
-@export var hitbox_size_down:  Vector2 = Vector2(50, 40)
-
-
-@export var hitbox_offset_right: Vector2 = Vector2(18, 0)
-@export var hitbox_offset_left:  Vector2 = Vector2(-18, 0)
-@export var hitbox_offset_up:    Vector2 = Vector2(0, -18)
-@export var hitbox_offset_down:  Vector2 = Vector2(0, 18)
-
-# --- NOVO: Constante de duração de invencibilidade ---
-const INVINCIBILITY_DURATION: float = 0.3
-
-# --- NOVO: Variável de condição de invencibilidade ---
-var is_invincible = false
 
 func _ready():
 	# --- novinho em folha: inicializa a vida do jogador ---
@@ -129,7 +112,7 @@ func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	applies_damage_received_effect()
 	
 	# --- NOVO: Deixa o player imortal por um determinado tempo ---
-	start_invincibility(INVINCIBILITY_DURATION)
+	start_invincibility(invinciblity_duration)
 	
 	if current_health <= 0.0:
 		die()
@@ -156,12 +139,12 @@ func die() -> void:
 
 
 # --- NOVO: Deixa o player imortal por um determinado tempo ---
-func start_invincibility(invincibility_duration: float) -> void:
+func start_invincibility(duration: float) -> void:
 	is_invincible = true
 	
 	set_deferred("collision_mask",collision_mask^0x8)
 	
-	await get_tree().create_timer(invincibility_duration).timeout
+	await get_tree().create_timer(duration).timeout
 	
 	set_deferred("collision_mask",collision_mask^0x8)
 	
@@ -421,7 +404,7 @@ func applies_damage_received_effect() -> void:
 	damage_recieved_sfx.play()
 	
 	anim.material.set_shader_parameter("whiten", true)
-	await get_tree().create_timer(INVINCIBILITY_DURATION).timeout
+	await get_tree().create_timer(invinciblity_duration).timeout
 	anim.material.set_shader_parameter("whiten", false)
 
 
