@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://dqnc2yjvbltmw" path="res://assets/art/tilesets/windows.png" id="7_xu6sh"]
 [ext_resource type="Texture2D" uid="uid://dslkbgs4suie3" path="res://assets/art/tilesets/trash_right.png" id="8_ha6xo"]
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="9_7vs5p"]
+[ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="11_47mow"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_7vs5p"]
 texture = ExtResource("1_ha6xo")
@@ -144,6 +145,7 @@ margins = Vector2i(9, 0)
 texture_region_size = Vector2i(32, 32)
 10:9/size_in_atlas = Vector2i(3, 4)
 10:9/0 = 0
+10:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35.072456, -54.94684, 43.705666, -55.1267, 43.998497, 9.736153, -35.377174, 9.587509)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_477sd"]
 texture = ExtResource("5_gxafy")
@@ -151,7 +153,7 @@ margins = Vector2i(0, 34)
 texture_region_size = Vector2i(32, 32)
 0:0/size_in_atlas = Vector2i(4, 4)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-50.8027, -33.8684, 25.9658, -33.304, 26.5303, 35.5619, -50.8027, 34.9974)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-52.666237, -54.11456, 27.386444, -54.11456, 27.411903, 13.249084, -52.285652, 13.249084)
 
 [sub_resource type="TileSet" id="TileSet_1f0id"]
 physics_layer_0/collision_layer = 1
@@ -197,7 +199,7 @@ margins = Vector2i(23, 0)
 texture_region_size = Vector2i(32, 32)
 8:2/size_in_atlas = Vector2i(7, 5)
 8:2/0 = 0
-8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-107.063, 11.8959, 97.2668, 9.09689, 98.6663, 49.683, 39.4199, 49.683, -44.0849, 49.2165, -71.1424, 48.75, -107.063, 48.2835)
+8:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-106.02438, 9.060265, 97.92796, 8.674725, 97.51019, 48.0862, -105.63884, 48.38567)
 
 [sub_resource type="TileSet" id="TileSet_qmj8v"]
 tile_size = Vector2i(32, 32)
@@ -210,7 +212,6 @@ margins = Vector2i(57, 5)
 texture_region_size = Vector2i(32, 32)
 22:13/size_in_atlas = Vector2i(2, 1)
 22:13/0 = 0
-22:13/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
 [sub_resource type="TileSet" id="TileSet_i67hi"]
 tile_size = Vector2i(32, 32)
@@ -236,7 +237,7 @@ margins = Vector2i(50, 1)
 texture_region_size = Vector2i(32, 32)
 39:12/size_in_atlas = Vector2i(2, 3)
 39:12/0 = 0
-39:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-31.5444, -16.5688, 7.48782, -16, 16, 16, -32.1817, 18.162)
+39:12/0/physics_layer_0/polygon_0/points = PackedVector2Array(-27.27179, -16.952738, 7.0098877, -16, 7.9657745, 19.117847, -20.02388, 22.726494, -27.0261, 22.849342)
 
 [sub_resource type="TileSet" id="TileSet_p5omj"]
 tile_size = Vector2i(32, 32)
@@ -286,7 +287,7 @@ texture = ExtResource("8_ha6xo")
 margins = Vector2i(0, 11)
 0:0/size_in_atlas = Vector2i(1, 2)
 0:0/0 = 0
-0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-5.118229, -10.823797, -3.2092743, -11.003235, -2.7508087, -11.748245, -1.891182, -12.837107, -0.97424316, -13.12365, -0.85962677, -15.014831, 0.9169388, -14.900214, 1.2034798, -16, 6.93433, -16, 6.991638, -11.003235, 6.074703, -11.17516, 5.8454704, -10.143607, 4.8712234, -9.971682, 4.9858437, -8.596277, 5.043148, 13.754044, 3.8969803, 13.868662, 3.8596497, 16, -3.839672, 16, -3.839672, 13.4101925, -4.9504204, 13.424864)
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4.782608, -10.026696, -1.2585831, -12.627764, -0.5034332, -14.725399, 6.8802414, -16, 4.782608, -8.600304, 4.782608, 13.802441, 4.070818, 13.993437, 3.8751068, 14.932857, -3.7968206, 14.971999, -3.9533901, 14.032579, -4.8145247, 13.993437)
 
 [sub_resource type="TileSet" id="TileSet_tmma7"]
 tile_size = Vector2i(32, 32)
@@ -428,3 +429,6 @@ tile_set = SubResource("TileSet_s0ifh")
 position = Vector2(-106, -24)
 tile_map_data = PackedByteArray("AABQAP//AAAZACcAAABwAP//AAAZACcAAAA=")
 tile_set = SubResource("TileSet_7vs5p")
+
+[node name="player" parent="." unique_id=1305817267 instance=ExtResource("11_47mow")]
+position = Vector2(411.42853, 27.85714)
