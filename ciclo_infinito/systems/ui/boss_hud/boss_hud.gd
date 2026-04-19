@@ -1,7 +1,7 @@
 class_name BossHUD
 extends Control
 
-## HUD de boss com barra dupla e feedback de dano (delay + tremor).
+## HUD de boss com barra dupla, delay de dano, tremor e animações.
 
 # ========================
 # SIGNALS
@@ -25,17 +25,25 @@ signal hud_escondida
 ## Barra atrasada (dano).
 @export var damage_bar: ProgressBar
 
-@export_category("Configuração de Dano")
+# ========================
+# CONFIGURAÇÃO DE DANO
+# ========================
+
+@export_category("Dano")
 
 ## Velocidade da barra atrasada.
 @export_range(0.1, 20.0, 0.1)
 var damage_speed: float = 5.0
 
-## Delay antes da barra atrasada começar a descer.
+## Delay antes da barra atrasada descer.
 @export_range(0.0, 2.0, 0.05)
 var damage_delay: float = 0.4
 
-@export_category("Feedback Visual")
+# ========================
+# FEEDBACK VISUAL
+# ========================
+
+@export_category("Feedback")
 
 ## Intensidade do tremor.
 @export_range(0.0, 20.0, 0.5)
@@ -61,6 +69,7 @@ var shake_timer: float = 0.0
 # ONREADY
 # ========================
 
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var original_position: Vector2 = position
 
 # ========================
@@ -68,6 +77,7 @@ var shake_timer: float = 0.0
 # ========================
 
 func _ready() -> void:
+	modulate.a = 0.0
 	hide()
 
 func _process(delta: float) -> void:
@@ -91,11 +101,12 @@ func show_hud(boss_name: String, max_hp: float) -> void:
 	damage_bar.value = max_hp
 	
 	show()
+	animation_player.play("fade_in")
+	
 	emit_signal("hud_mostrada")
 
 func hide_hud() -> void:
-	hide()
-	emit_signal("hud_escondida")
+	animation_player.play("fade_out")
 
 func update_health(new_health: float) -> void:
 	new_health = clamp(new_health, 0, max_health)
@@ -141,3 +152,12 @@ func _update_shake(delta: float) -> void:
 	if shake_timer <= 0:
 		shaking = false
 		position = original_position
+
+# ========================
+# SIGNAL CALLBACKS
+# ========================
+
+func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "fade_out":
+		hide()
+		emit_signal("hud_escondida")
