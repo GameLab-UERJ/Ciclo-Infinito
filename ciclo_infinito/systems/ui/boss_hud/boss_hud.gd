@@ -108,6 +108,10 @@ func show_hud(boss_name: String, max_hp: float) -> void:
 func hide_hud() -> void:
 	animation_player.play("fade_out")
 
+
+func damage_health(damage_amount: float) -> void:
+	update_health(health_bar.value-damage_amount)
+
 func update_health(new_health: float) -> void:
 	new_health = clamp(new_health, 0, max_health)
 	

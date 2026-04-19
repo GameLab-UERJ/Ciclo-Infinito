@@ -7,4 +7,4 @@ func _ready() -> void:
 
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
-		boss_hud.update_health(boss_hud.health_bar.value - 10)
+		boss_hud.damage_health(10)
