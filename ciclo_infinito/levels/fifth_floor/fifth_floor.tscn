@@ -16,7 +16,6 @@
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="13_ni4lu"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_71gwp"]
 [ext_resource type="AudioStream" uid="uid://ce378hasf2vjm" path="res://assets/music/Hades - God of the Dead - Supergiant Games (youtube).mp3" id="15_r8vnr"]
-[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/fade_component.gd" id="16_ekmel"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
@@ -98,15 +97,6 @@ offset_bottom = 104.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.74863, 0.959864)
-
-[node name="FadeComponent" type="ColorRect" parent="player" unique_id=1717650633]
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("16_ekmel")
-is_fade_out = false
-fade_time = 0.5
-offset = Vector2(-500, -250)
-metadata/_custom_type_script = "uid://br6wsqfyc7ush"
 
 [node name="Enemies" type="Node" parent="." unique_id=1015743081 node_paths=PackedStringArray("label_contador")]
 script = ExtResource("2_tprnl")

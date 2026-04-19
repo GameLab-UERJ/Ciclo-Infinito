@@ -7,6 +7,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 func _on_button_pressed() -> void:
+	
 	var tween = create_tween()
 	tween.tween_property(color_rect, "modulate:a", 0.0, 0.5)
 	await tween.finished

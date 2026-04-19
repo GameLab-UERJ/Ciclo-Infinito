@@ -89,6 +89,7 @@ var is_invincible = false
 
 func _ready():
 	# --- novinho em folha: inicializa a vida do jogador ---
+	
 	current_health = max_health
 	update_health_bar()
 	# -----------------------------------------
@@ -142,6 +143,7 @@ func update_health_bar():
 	
 # --- NOVO: Função de morte ---
 func die() -> void:
+	SceneTransition.fade_out()
 	current_state = State.DEATH
 	
 	update_animation()
