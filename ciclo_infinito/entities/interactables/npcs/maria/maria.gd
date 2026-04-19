@@ -15,6 +15,8 @@ extends CharacterBody2D
 @export_category("Attributes")
 @export var is_floating: bool = true
 
+signal dialog_started
+signal dialog_finished
 
 
 var player_in_area = false
@@ -36,6 +38,7 @@ var is_moving: bool = false
 
 
 func _ready() -> void:
+	
 	caixa_de_dialogo.visible = false
 	texto_dialogo.visible = false
 	label_interação.visible = false
@@ -100,6 +103,7 @@ func _parar_npc() -> void:
 # --- Funções de Diálogo (sem mudanças) ---
 
 func iniciar_dialogo():
+	emit_signal("dialog_started")
 	falando = true 
 	label_interação.visible = false
 	caixa_de_dialogo.visible = true
@@ -125,6 +129,7 @@ func mostrar_texto_com_efeito(texto: String):
 	pode_avancar = true
 
 func encerrar_dialogo():
+	emit_signal("dialog_finished")
 	falando = false 
 	pode_avancar = false
 	caixa_de_dialogo.visible = false

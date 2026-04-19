@@ -22,17 +22,39 @@ func _ready():
 	configurar_label()
 	atualizar_missao()
 
-	var npc3 = get_node_or_null("NPC3")
-	print("npc3 encontrado? ", npc3)
+	var jose = get_node_or_null("NPC3")
+	print("npc3 encontrado? ", jose)
+	
+	var maria = get_node_or_null("NPC4")
+	print("npc3 encontrado? ", maria)
+	
+	var julia = get_node_or_null("NPC2")
+	print("npc3 encontrado? ", julia)
 
-	if npc3:
+	if jose:
 		print("Conectando sinais do NPC3...")
-		npc3.falou_com_jose.connect(_on_falou_com_jose)
-		npc3.dialog_started.connect(_on_jose_dialog_started)
-		npc3.dialog_finished.connect(_on_jose_dialog_finished)
+		jose.falou_com_jose.connect(_on_falou_com_jose)
+		jose.dialog_started.connect(_on_npc_dialog_started)
+		jose.dialog_finished.connect(_on_npc_dialog_finished)
 		print("Sinais conectados com sucesso.")
 	else:
 		print("ERRO: NPC3 não foi encontrado na cena.")
+	
+	if maria:
+		print("Conectando sinais da Maria...")
+		maria.dialog_started.connect(_on_npc_dialog_started)
+		maria.dialog_finished.connect(_on_npc_dialog_finished)
+		print("Sinais da Maria conectados com sucesso.")
+	else:
+		print("ERRO: Maria não foi encontrada na cena.")
+
+	if julia:
+		print("Conectando sinais da Julia...")
+		julia.dialog_started.connect(_on_npc_dialog_started)
+		julia.dialog_finished.connect(_on_npc_dialog_finished)
+		print("Sinais da Julia conectados com sucesso.")
+	else:
+		print("ERRO: Julia não foi encontrada na cena.")
 
 	fade_in_component.fade()
 
@@ -42,10 +64,10 @@ func hide_mission_hud() -> void:
 func show_mission_hud() -> void:
 	mission_hud.show()
 
-func _on_jose_dialog_started() -> void:
+func _on_npc_dialog_started() -> void:
 	hide_mission_hud()
 
-func _on_jose_dialog_finished() -> void:
+func _on_npc_dialog_finished() -> void:
 	show_mission_hud()
 
 func configurar_label():

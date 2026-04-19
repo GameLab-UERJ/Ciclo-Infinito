@@ -74,7 +74,7 @@ func encerrar_dialogo():
 	emit_signal("falou_com_jose")
 	emit_signal("dialog_finished")
 	var terrain_manager = get_tree().get_current_scene()
-	terrain_manager.atualizar_missao("Missão: \\nEntre no elevador \\ne suba até o 5° andar.")
+	terrain_manager.atualizar_missao("Entre no elevador \ne suba até o 5° andar.")
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "player":
