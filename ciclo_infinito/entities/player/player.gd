@@ -12,7 +12,7 @@ enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG}
 @export var invinciblity_duration : float  = 0.3
 @export_group("Attack")
 @export var attack_cooldown := 0.15
-@export var combo_window := 0.20
+@export var combo_window := 0.21
 @export_subgroup("Attack 1")
 @export var hit1_active_time := 0.12
 @export var attack1_lock_time := 0.22
