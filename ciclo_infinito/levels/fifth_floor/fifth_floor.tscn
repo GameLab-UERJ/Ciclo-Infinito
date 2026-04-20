@@ -20,7 +20,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_yw1aw"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekmel"]
 resource_local_to_scene = true
 shader = ExtResource("6_yw1aw")
 shader_parameter/redden = false
@@ -50,7 +50,7 @@ offset_bottom = -10.3333
 text = "Pedro"
 
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
-material = SubResource("ShaderMaterial_yw1aw")
+material = SubResource("ShaderMaterial_ekmel")
 position = Vector2(573, -235)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]

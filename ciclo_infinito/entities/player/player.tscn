@@ -1516,4 +1516,13 @@ stream = ExtResource("32_vewsg")
 volume_db = -10.0
 pitch_scale = 1.96
 
+[node name="StateLabel" type="Label" parent="." unique_id=79007232]
+offset_left = -19.090908
+offset_top = -35.454548
+offset_right = 20.909092
+offset_bottom = -12.454548
+theme_override_font_sizes/font_size = 6
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
