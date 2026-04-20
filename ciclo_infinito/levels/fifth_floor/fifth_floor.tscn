@@ -52,7 +52,7 @@ text = "Pedro"
 
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
 material = SubResource("ShaderMaterial_yw1aw")
-position = Vector2(574, -278)
+position = Vector2(573, -235)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
 anchors_preset = 0

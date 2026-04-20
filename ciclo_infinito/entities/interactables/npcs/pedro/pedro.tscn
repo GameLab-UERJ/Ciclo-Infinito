@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bu424e6ida6ma" path="res://entities/interactables/npcs/pedro/pedro.gd" id="1_5sp64"]
 [ext_resource type="Texture2D" uid="uid://b31qbydqhwrwt" path="res://assets/art/npcs/pedro/pedro_idle.png" id="2_74uy2"]
-[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_f6j54"]
+[ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_f6j54"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
 size = Vector2(77, 49)
