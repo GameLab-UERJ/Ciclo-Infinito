@@ -34,7 +34,7 @@ var is_moving: bool = false
 @onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
 @onready var label_interacao: Label = $Area2D/LabelInteracao
 @onready var pular_dialogo: Label = $Area2D/CanvasLayer/PularDialogo
-
+@onready var sprite: AnimatedSprite2D = $Area2D/Sprite
 @onready var ponto_patrulha_a: Marker2D = $PontoPatrulhaA
 @onready var ponto_patrulha_b: Marker2D = $PontoPatrulhaB
 
@@ -87,7 +87,10 @@ func _physics_process(_delta: float) -> void:
 	# MOVIMENTO
 	var direction: Vector2 = (target_position - global_position).normalized()
 	velocity = direction * move_speed
-
+	
+	if sprite:
+		sprite.flip_h = velocity.x < 0
+		
 	move_and_slide()
 
 	# TROCA DE PONTO
