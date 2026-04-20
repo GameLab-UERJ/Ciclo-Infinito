@@ -130,6 +130,7 @@ func update_health_bar():
 func die() -> void:
 	is_dead = true
 	current_state = State.DEATH
+	collision_layer = 0
 	
 	update_animation()
 	death_sfx.play(0.3)
