@@ -91,6 +91,7 @@ animation = &"idle Vamp"
 autoplay = "idle Vamp"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1283099891]
+layer = 2
 
 [node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=351317161]
 offset_left = 68.0
@@ -113,7 +114,13 @@ autowrap_mode = 2
 
 [node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=356194070]
 
-[node name="LabelInteração" type="Label" parent="Area2D" unique_id=623400268]
+[node name="PularDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=104532168]
+offset_left = 516.0
+offset_top = 138.0
+offset_right = 767.0
+offset_bottom = 161.0
+
+[node name="LabelInteracao" type="Label" parent="Area2D" unique_id=623400268]
 offset_left = -24.0
 offset_top = -34.0
 offset_right = 37.0
