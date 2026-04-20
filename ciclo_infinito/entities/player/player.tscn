@@ -1517,6 +1517,7 @@ volume_db = -10.0
 pitch_scale = 1.96
 
 [node name="StateLabel" type="Label" parent="." unique_id=79007232]
+visible = false
 offset_left = -19.090908
 offset_top = -35.454548
 offset_right = 20.909092
