@@ -1,9 +1,10 @@
 extends CanvasLayer
 
-@onready var color_rect := $ColorRect
-@onready var animation_player := $AnimationPlayer
+var is_transitioning: bool = false
 
-var is_transitioning := false
+@onready var color_rect: ColorRect = $ColorRect
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 
 func fade_out() -> void:
 	if is_transitioning:
@@ -16,6 +17,7 @@ func fade_out() -> void:
 	
 	is_transitioning = false
 
+
 func fade_in() -> void:
 	if is_transitioning:
 		return
@@ -26,6 +28,7 @@ func fade_in() -> void:
 	await animation_player.animation_finished
 	
 	is_transitioning = false
+
 
 func fade_to_scene(scene: PackedScene) -> void:
 	await fade_out()

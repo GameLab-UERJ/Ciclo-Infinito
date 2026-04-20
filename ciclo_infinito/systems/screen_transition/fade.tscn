@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cgava0i4cge2c"]
 
-[ext_resource type="Script" uid="uid://dt863b0nx73jq" path="res://menus/cutscenes/screen_transition/fade.gd" id="1_fr0gt"]
+[ext_resource type="Script" uid="uid://dt863b0nx73jq" path="res://systems/screen_transition/fade.gd" id="1_fr0gt"]
 
 [sub_resource type="Animation" id="Animation_otxkg"]
 length = 0.001
