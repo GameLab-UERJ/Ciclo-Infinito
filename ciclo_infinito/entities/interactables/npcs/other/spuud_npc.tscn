@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://12i1ywgpw05p"]
 
 [ext_resource type="Script" uid="uid://crikhcj4uvp0e" path="res://entities/interactables/npcs/other/spuud_npc.gd" id="1_tu2hi"]
-[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_2b3ct"]
+[ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_2b3ct"]
 [ext_resource type="Texture2D" uid="uid://05mguym0tfks" path="res://assets/art/npcs/other/spuud_idle.png" id="2_ghj3v"]
 [ext_resource type="Texture2D" uid="uid://cw5k3pfja14yo" path="res://assets/art/npcs/other/spuud_walk.png" id="2_r72a0"]
 

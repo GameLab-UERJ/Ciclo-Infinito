@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://cxsud87xx3vbj" path="res://entities/interactables/npcs/maria/maria.gd" id="1_khbs0"]
 [ext_resource type="Texture2D" uid="uid://dlo38mh7ugqax" path="res://assets/art/npcs/maria/maria_idle.png" id="2_6kxhb"]
 [ext_resource type="Texture2D" uid="uid://2y8phasy63w" path="res://assets/art/npcs/maria/maira_walk.png" id="2_coxnl"]
-[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_y5mj7"]
+[ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_y5mj7"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5mj7"]
 atlas = ExtResource("2_6kxhb")
