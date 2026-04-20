@@ -4,8 +4,6 @@ extends CharacterBody2D
 
 signal defeated ##Contador para a tela de vitória
 
-@export_category("Attributes")
-@export var is_floating: bool = true
 
 @export_category("Objects")
 @export var sprite: Sprite2D = null
@@ -160,6 +158,7 @@ func die() -> void:
 	alive = false
 	
 	_play_anim("death_%s" %_dir_string_from_vector(velocity))
+	collision_layer = 0
 	death_sfx.play()
 	
 	await get_tree().create_timer(1.0).timeout
@@ -257,5 +256,3 @@ func _on_anim_animation_finished(animation_name: StringName) -> void:
 	if n.begins_with("attack_"):
 		_is_attacking = false
 		_play_anim("idle_%s" % _last_facing)
-	if n.begins_with("death_"):
-		collision_layer = 0
