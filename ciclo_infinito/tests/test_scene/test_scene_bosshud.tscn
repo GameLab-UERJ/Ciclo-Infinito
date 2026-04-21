@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cpp5xuulq02bh"]
+
+[ext_resource type="PackedScene" uid="uid://bqlqrn7rxiafo" path="res://systems/ui/boss_hud/boss_hud.tscn" id="1_thte3"]
+
+[sub_resource type="GDScript" id="GDScript_tdfdo"]
+script/source = "extends Node2D
+
+@onready var boss_hud: BossHUD = $BossHUD
+
+func _ready() -> void:
+	boss_hud.show_hud(\"Arauto da Reprovação\", 100)
+
+func _input(event):
+	if event.is_action_pressed(\"ui_accept\"):
+		boss_hud.update_health(boss_hud.health_bar.value - 10)
+"
+
+[node name="TestScene" type="Node2D" unique_id=2058146161]
+script = SubResource("GDScript_tdfdo")
+
+[node name="BossHUD" parent="." unique_id=1353981896 instance=ExtResource("1_thte3")]

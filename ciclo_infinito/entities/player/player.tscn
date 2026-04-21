@@ -1466,7 +1466,7 @@ one_shot = true
 [node name="attack_area" type="Area2D" parent="." unique_id=203285202 groups=["player"]]
 visible = false
 collision_layer = 0
-collision_mask = 8
+collision_mask = 40
 
 [node name="attack_colison" type="CollisionShape2D" parent="attack_area" unique_id=598295500]
 shape = SubResource("RectangleShape2D_jrjdb")

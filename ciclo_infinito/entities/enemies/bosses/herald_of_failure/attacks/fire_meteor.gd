@@ -3,6 +3,7 @@ extends Node2D
 
 
 signal deal_damage_to_player
+signal finished
 
 
 @export var initial_y_position : float = -100
@@ -28,18 +29,22 @@ func _ready() -> void:
 
 #Only for testing. To be removed
 func _process(_delta: float) -> void:
-	if Input.is_action_just_released("ui_accept"):
-		drop()
+	#if Input.is_action_just_released("ui_accept"):
+	#	drop()
+	pass
 
 func reset() -> void:
+	visible = false
 	impact_sprite.scale = Vector2.ZERO
 	shadow_sprite.scale = Vector2.ZERO
 	fire_ball_sprite.play("drop")
 	fire_ball_sprite.position.y = initial_y_position
 	end_lifetime_timer.stop()
+	_player_damageable = false
 
 func drop() -> void:
 	reset()
+	visible = true
 	var drop_tween : Tween = create_tween()
 	drop_tween.tween_property(fire_ball_sprite,"position",Vector2(fire_ball_sprite.position.x,_final_y_position),total_drop_time)
 	drop_tween.parallel().tween_property(shadow_sprite,"scale",Vector2.ONE,total_drop_time)
@@ -73,3 +78,4 @@ func _on_damage_area_body_exited(body: Node2D) -> void:
 
 func _on_end_lifetime_timer_timeout() -> void:
 	reset()
+	finished.emit()
