@@ -1,5 +1,5 @@
 class_name BossHUD
-extends Control
+extends CanvasLayer
 
 ## HUD de boss com barra dupla, delay de dano, tremor e animações.
 
@@ -69,15 +69,16 @@ var shake_timer: float = 0.0
 # ONREADY
 # ========================
 
-@onready var animation_player: AnimationPlayer = $AnimationPlayer
-@onready var original_position: Vector2 = position
+@onready var control_hud: Control = $ControlHUD
+@onready var animation_player: AnimationPlayer = $ControlHUD/AnimationPlayer
+@onready var original_position: Vector2 = control_hud.position
 
 # ========================
 # LIFECYCLE
 # ========================
 
 func _ready() -> void:
-	modulate.a = 0.0
+	control_hud.modulate.a = 0.0
 	hide()
 
 func _process(delta: float) -> void:
@@ -105,8 +106,14 @@ func show_hud(boss_name: String, max_hp: float) -> void:
 	
 	emit_signal("hud_mostrada")
 
+
 func hide_hud() -> void:
 	animation_player.play("fade_out")
+
+
+func change_health_by(amount : float) -> void:
+	update_health(health_bar.value - amount)
+
 
 func update_health(new_health: float) -> void:
 	new_health = clamp(new_health, 0, max_health)
@@ -139,19 +146,18 @@ func _update_bars(delta: float) -> void:
 func _update_shake(delta: float) -> void:
 	if not shaking:
 		return
-	
 	shake_timer -= delta
 	
-	var offset := Vector2(
+	var shake_offset : Vector2 = Vector2(
 		randf_range(-shake_intensity, shake_intensity),
 		randf_range(-shake_intensity, shake_intensity)
 	)
 	
-	position = original_position + offset
+	control_hud.position = original_position + shake_offset
 	
 	if shake_timer <= 0:
 		shaking = false
-		position = original_position
+		control_hud.position = original_position
 
 # ========================
 # SIGNAL CALLBACKS

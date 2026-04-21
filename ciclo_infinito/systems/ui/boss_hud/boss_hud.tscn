@@ -1,6 +1,7 @@
-[gd_scene format=3 uid="uid://d1k4qbshbruq"]
+[gd_scene format=3 uid="uid://bqlqrn7rxiafo"]
 
 [ext_resource type="Script" uid="uid://bh6gog7ktut7y" path="res://systems/ui/boss_hud/boss_hud.gd" id="1"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_tf5lf"]
 
 [sub_resource type="Animation" id="Animation_c4w46"]
 length = 0.001
@@ -107,7 +108,13 @@ border_color = Color(0, 0, 0, 1)
 ProgressBar/styles/background = SubResource("StyleBoxEmpty_5pa7s")
 ProgressBar/styles/fill = SubResource("StyleBoxFlat_htk4h")
 
-[node name="BossHUD" type="Control" unique_id=756291450 node_paths=PackedStringArray("boss_name_label", "health_bar", "damage_bar")]
+[node name="BossHUD" type="CanvasLayer" unique_id=1353981896 node_paths=PackedStringArray("boss_name_label", "health_bar", "damage_bar")]
+script = ExtResource("1")
+boss_name_label = NodePath("ControlHUD/CenterContainer/VBoxContainer/BossName")
+health_bar = NodePath("ControlHUD/CenterContainer/VBoxContainer/Bars/HealthBar")
+damage_bar = NodePath("ControlHUD/CenterContainer/VBoxContainer/Bars/DamageBar")
+
+[node name="ControlHUD" type="Control" parent="." unique_id=756291450]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -121,15 +128,11 @@ offset_bottom = -40.000244
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1")
-boss_name_label = NodePath("CenterContainer/VBoxContainer/BossName")
-health_bar = NodePath("CenterContainer/VBoxContainer/Bars/HealthBar")
-damage_bar = NodePath("CenterContainer/VBoxContainer/Bars/DamageBar")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=289084847]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ControlHUD" unique_id=289084847]
 libraries/ = SubResource("AnimationLibrary_5pa7s")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1471058240]
+[node name="CenterContainer" type="CenterContainer" parent="ControlHUD" unique_id=1471058240]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -138,20 +141,22 @@ offset_bottom = -9.918213e-05
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1409310866]
+[node name="VBoxContainer" type="VBoxContainer" parent="ControlHUD/CenterContainer" unique_id=1409310866]
 layout_mode = 2
 alignment = 1
 
-[node name="BossName" type="Label" parent="CenterContainer/VBoxContainer" unique_id=2075570692]
+[node name="BossName" type="Label" parent="ControlHUD/CenterContainer/VBoxContainer" unique_id=2075570692]
 layout_mode = 2
-text = "Arauto da Reprovação"
+theme_override_fonts/font = ExtResource("2_tf5lf")
+theme_override_font_sizes/font_size = 20
+text = "boss name"
 horizontal_alignment = 1
 
-[node name="Bars" type="Control" parent="CenterContainer/VBoxContainer" unique_id=669503253]
+[node name="Bars" type="Control" parent="ControlHUD/CenterContainer/VBoxContainer" unique_id=669503253]
 custom_minimum_size = Vector2(600, 15)
 layout_mode = 2
 
-[node name="DamageBar" type="ProgressBar" parent="CenterContainer/VBoxContainer/Bars" unique_id=1108867380]
+[node name="DamageBar" type="ProgressBar" parent="ControlHUD/CenterContainer/VBoxContainer/Bars" unique_id=1108867380]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -162,7 +167,7 @@ theme = SubResource("Theme_uacqn")
 value = 100.0
 show_percentage = false
 
-[node name="HealthBar" type="ProgressBar" parent="CenterContainer/VBoxContainer/Bars" unique_id=258160591]
+[node name="HealthBar" type="ProgressBar" parent="ControlHUD/CenterContainer/VBoxContainer/Bars" unique_id=258160591]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15

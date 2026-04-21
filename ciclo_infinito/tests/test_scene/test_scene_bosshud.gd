@@ -1,8 +1,9 @@
 extends Node2D
 
-@onready var boss_hud: BossHUD = $CanvasLayer/BossHUD
+@onready var boss_hud: BossHUD = $BossHUD/BossHUD
 
 func _ready() -> void:
+
 	boss_hud.show_hud("Arauto da Reprovação", 100)
 
 func _input(event):

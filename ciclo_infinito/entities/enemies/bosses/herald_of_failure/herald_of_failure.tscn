@@ -1,8 +1,11 @@
 [gd_scene format=3 uid="uid://daxs4d78svouo"]
 
+[ext_resource type="Script" uid="uid://b8nobu7qym2s3" path="res://entities/enemies/bosses/herald_of_failure/herald_of_failure.gd" id="1_5i653"]
 [ext_resource type="Texture2D" uid="uid://meh1k2jwq368" path="res://assets/art/enemies/herald/necromancer_spritesheet_128x128.png" id="2_5i653"]
-[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="3_2k7es"]
+[ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_mypcf"]
+[ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="3_2k7es"]
 [ext_resource type="PackedScene" uid="uid://dyjwfrwsly7lx" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.tscn" id="4_5i653"]
+[ext_resource type="PackedScene" uid="uid://bqlqrn7rxiafo" path="res://systems/ui/boss_hud/boss_hud.tscn" id="5_2k7es"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mypcf"]
 atlas = ExtResource("2_5i653")
@@ -354,9 +357,9 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vgm2b")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_1",
-"speed": 6.0
+"speed": 11.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -433,7 +436,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0t4rt")
 }],
-"loop": true,
+"loop": false,
 "name": &"death",
 "speed": 6.0
 }, {
@@ -561,30 +564,50 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkhbt"]
-height = 38.0
+height = 22.0
 
 [node name="HeraldOfFailure" type="CharacterBody2D" unique_id=999366454]
-collision_layer = 8
+collision_layer = 32
+script = ExtResource("1_5i653")
 
 [node name="Sprites" type="AnimatedSprite2D" parent="." unique_id=1413652259]
+material = ExtResource("2_mypcf")
+position = Vector2(1, -48)
 sprite_frames = SubResource("SpriteFrames_kcj3j")
-animation = &"idle"
+animation = &"attack_1"
 autoplay = "idle"
+frame = 16
+frame_progress = 1.0
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=2076377722]
-position = Vector2(-1.9999995, 45.000004)
+position = Vector2(-1, -12)
 scale = Vector2(1.6041666, 1.265625)
 texture = ExtResource("3_2k7es")
 
 [node name="ColisaoFisica" type="CollisionShape2D" parent="." unique_id=1166700932]
-position = Vector2(-1, 35)
+position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_hkhbt")
 
 [node name="FireMeteor" parent="." unique_id=1857492451 instance=ExtResource("4_5i653")]
 position = Vector2(149, 73)
+scale = Vector2(4, 4)
+total_drop_time = 1.5
 
 [node name="FireMeteor2" parent="." unique_id=960213747 instance=ExtResource("4_5i653")]
 position = Vector2(51, 115)
+scale = Vector2(4, 4)
+total_drop_time = 1.5
 
 [node name="FireMeteor3" parent="." unique_id=45410998 instance=ExtResource("4_5i653")]
 position = Vector2(207, 113)
+scale = Vector2(4, 4)
+total_drop_time = 1.5
+
+[node name="BossHUD" parent="." unique_id=1353981896 instance=ExtResource("5_2k7es")]
+visible = false
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1042097656]
+
+[connection signal="animation_finished" from="Sprites" to="." method="_on_sprites_animation_finished"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_entered_visible_on_screen"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_exited_visible_on_screen"]
