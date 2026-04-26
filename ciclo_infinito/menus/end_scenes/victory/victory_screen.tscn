@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b4knutnoii2mc" path="res://menus/end_scenes/victory/victory_screen.gd" id="1_ftuty"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_iu1fh"]
+[ext_resource type="AudioStream" uid="uid://baahyl5ijlsmf" path="res://assets/sfx/Victory.mp3" id="3_3edvs"]
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1248596979]
 script = ExtResource("1_ftuty")
@@ -12,7 +13,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 0.207843)
+color = Color(0, 0, 0, 0.56078434)
 
 [node name="Label" type="Label" parent="." unique_id=1193381187]
 anchors_preset = 8
@@ -63,6 +64,10 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_iu1fh")
 theme_override_font_sizes/font_size = 25
 text = "Voltar ao menu iniciar"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1641084495]
+stream = ExtResource("3_3edvs")
+autoplay = true
 
 [connection signal="pressed" from="jogar_novamente_button" to="." method="_on_jogar_novamente_button_pressed"]
 [connection signal="pressed" from="menu_iniciar_button" to="." method="_on_menu_iniciar_button_pressed"]

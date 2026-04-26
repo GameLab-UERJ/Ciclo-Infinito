@@ -35,6 +35,7 @@ enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG}
 @export var hitbox_offset_down:  Vector2 = Vector2(0, 18)
 
 
+var is_dead : bool = false
 var last_facing: String = "down"
 var attack_facing: String = "down"
 var is_dashing := false
@@ -58,7 +59,7 @@ var vida_textures = [
 	preload("uid://c71y8r3arh7qc")#vida cheia
 ]
 
-
+@onready var state_label: Label = $StateLabel
 @onready var vida_cheia = $Camera2D/VidaCheia
 @onready var anim  = $animacoes  
 @onready var dash_timer = $dash_timer
@@ -73,6 +74,7 @@ var vida_textures = [
 
 func _ready():
 	# --- novinho em folha: inicializa a vida do jogador ---
+	
 	current_health = max_health
 	update_health_bar()
 	# -----------------------------------------
@@ -126,12 +128,15 @@ func update_health_bar():
 	
 # --- NOVO: Função de morte ---
 func die() -> void:
+	is_dead = true
 	current_state = State.DEATH
+	collision_layer = 0
 	
 	update_animation()
 	death_sfx.play(0.3)
 	
 	await get_tree().create_timer(2.0).timeout
+	await SceneTransition.fade_out()
 	
 	var death_scene = preload("uid://b7qoxm33b5qxt").instantiate()#death_screen.tscn
 	get_tree().root.add_child(death_scene)
@@ -152,6 +157,10 @@ func start_invincibility(duration: float) -> void:
 
 
 func _physics_process(delta: float):
+	if is_dead:
+		return
+		
+	state_label.text = State.find_key(current_state)
 	match current_state:
 		State.IDLE:
 			_idle_state()
@@ -163,9 +172,6 @@ func _physics_process(delta: float):
 			_dash_state()
 		State.DIALOG:
 			_dialog_state()
-			
-		State.DEATH:
-			return
 	move_and_slide()
 	_update_attack_area_anchor()
 	update_animation()
