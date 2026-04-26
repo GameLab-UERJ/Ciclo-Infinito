@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://cm8qee0mnotdo"]
+
+[ext_resource type="PackedScene" uid="uid://daxs4d78svouo" path="res://entities/enemies/bosses/herald_of_failure/herald_of_failure.tscn" id="1_kwh7m"]
+[ext_resource type="PackedScene" uid="uid://bbf6oefdi3vmk" path="res://levels/fifth_floor/fifth_floor_map.tscn" id="2_mamqe"]
+[ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="4_eetdf"]
+
+[node name="TestHerald" type="Node2D" unique_id=1552855407]
+y_sort_enabled = true
+position = Vector2(3, 578)
+
+[node name="TerrainManager" parent="." unique_id=451303052 instance=ExtResource("2_mamqe")]
+z_index = -1
+position = Vector2(-337, 495)
+scale = Vector2(2, 2)
+
+[node name="TopLeftLimit" type="Marker2D" parent="." unique_id=1124155219]
+position = Vector2(331, 88)
+
+[node name="BottomRightLimit" type="Marker2D" parent="." unique_id=2004018500]
+position = Vector2(619, 505)
+
+[node name="HeraldOfFailure" parent="." unique_id=999366454 node_paths=PackedStringArray("player", "top_left_corner", "bottom_right_corner") instance=ExtResource("1_kwh7m")]
+position = Vector2(473, 89)
+scale = Vector2(2, 2)
+player = NodePath("../player")
+max_health = 100.0
+chance_of_attacking_after_moving = 0.9
+top_left_corner = NodePath("../TopLeftLimit")
+bottom_right_corner = NodePath("../BottomRightLimit")
+
+[node name="player" parent="." unique_id=1305817267 instance=ExtResource("4_eetdf")]
+position = Vector2(478, 418)

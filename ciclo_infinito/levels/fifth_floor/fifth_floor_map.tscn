@@ -143,7 +143,6 @@ margins = Vector2i(9, 0)
 texture_region_size = Vector2i(32, 32)
 10:9/size_in_atlas = Vector2i(3, 4)
 10:9/0 = 0
-10:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-35.072456, -54.94684, 43.705666, -55.1267, 43.998497, 9.736153, -35.377174, 9.587509)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_477sd"]
 texture = ExtResource("5_gxafy")
