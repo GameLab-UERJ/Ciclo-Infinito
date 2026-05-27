@@ -5,7 +5,6 @@ var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
 
 @onready var pause_menu = $player/pause
 @onready var mission_label = $player/TextureRect/Label
-@onready var fade_component: FadeComponent = $player/FadeComponent
 
 var missoes = [
 	"Fale com José próximo aos elevadores no Hall do Queijo",
@@ -20,7 +19,7 @@ var inimigos_totais = 0
 var inimigos_derrotados = 0
 
 func _ready():
-	fade_component.fade()
+	SceneTransition.fade_in()
 	pause_menu.hide()
 	inimigos_totais = $player/enemies.get_child_count() if $player/enemies else 0
 	configurar_label()
@@ -56,8 +55,11 @@ func _atualizar_texto_missao():
 		mission_label.text = missoes[indice_missao_atual]
 	else:
 		mission_label.text = "Todas as missões concluídas!"
-		get_tree().call_deferred("change_scene_to_packed",victory_screen)
-		
+		SceneTransition.fade_out()
+		var victory_scene = preload("res://menus/end_scenes/victory/victory_screen.tscn").instantiate()
+		await get_tree().create_timer(1.5).timeout
+		get_tree().root.add_child(victory_scene)
+		victory_scene.set_layer(100)
 		
 func proxima_missao():
 	indice_missao_atual += 1

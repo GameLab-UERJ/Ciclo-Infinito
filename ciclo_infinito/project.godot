@@ -28,6 +28,7 @@ buses/default_bus_layout=""
 [autoload]
 
 MusicManager="*uid://bq8i8qcygm3gb"
+SceneTransition="*uid://cgava0i4cge2c"
 
 [display]
 
