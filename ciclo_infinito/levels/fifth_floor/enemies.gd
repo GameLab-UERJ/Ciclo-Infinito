@@ -42,14 +42,13 @@ func _on_inimigo_derrotado() -> void:
 		get_parent().proxima_missao()
 	
 	_atualizar_label()
-	
-
 
 
 func _atualizar_label() -> void:
 	if label_contador != null:
 		label_contador.text = "Inimigos mortos: %s / %s" % [inimigos_mortos, total_inimigos]
-		
+
+
 func vitoria() -> void:
 	print("🎉 Vitória! Todos os inimigos foram derrotados!")
 	get_tree().change_scene_to_file("res://scene/vitoria.tscn")

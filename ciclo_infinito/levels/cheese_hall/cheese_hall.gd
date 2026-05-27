@@ -1,11 +1,15 @@
 extends Node2D
+class_name Cheesehall
 
 @export var target_scene: PackedScene
 
+
 @onready var pause_menu = $player/pause
-@onready var mission_label = $CanvasLayer/TextureRect/Label
+@onready var mission_label = $Hud/TextureRect/Label
 @onready var fade_in_component: FadeComponent = $player/FadeInComponent
 @onready var fade_out_component: FadeComponent = $player/FadeOutComponent
+@onready var jose: CheeseNpc = $Jose
+
 
 var missoes = [
 	"Fale com José próximo aos elevadores no Hall do Queijo",
@@ -21,9 +25,7 @@ func _ready():
 	pause_menu.hide()
 	configurar_label()
 	atualizar_missao()
-	var npc3 = get_node_or_null("npc3")
-	if npc3:
-		npc3.falou_com_jose.connect(_on_falou_com_jose)
+	jose.was_talked_to.connect(_on_falou_com_jose)
 	fade_in_component.fade()
 
 
@@ -65,7 +67,9 @@ func mudar_de_cena():
 	fade_out_component.fade()
 
 
-func _on_falou_com_jose():
+func _on_falou_com_jose(npc : CheeseNpc):
+	if npc.name != "Jose":
+		return
 	proxima_missao()
 
 

@@ -173,9 +173,6 @@ func _physics_process(delta: float):
 		State.DIALOG:
 			_dialog_state()
 	move_and_slide()
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		print("Collided with: ", collision.get_collider().name)
 	_update_attack_area_anchor()
 	update_animation()
 	#last_facing = get_direction_string(get_input_direction())

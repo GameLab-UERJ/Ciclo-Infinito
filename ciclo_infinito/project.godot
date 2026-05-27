@@ -29,6 +29,8 @@ buses/default_bus_layout=""
 
 MusicManager="*uid://bq8i8qcygm3gb"
 SceneTransition="*uid://cgava0i4cge2c"
+DialogueManager="*uid://c3rodes2l3gxb"
+GameState="*uid://c4e2kw5jjtgi0"
 
 [display]
 
@@ -41,13 +43,14 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/imjp94.yafsm/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/imjp94.yafsm/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://addons/": "gray",
 "res://assets/": "purple",
+"res://dialog/": "teal",
 "res://entities/": "red",
 "res://levels/": "orange",
 "res://menus/": "green",
@@ -109,6 +112,10 @@ debug_menu={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 ]
 }
+
+[internationalization]
+
+locale/translations_pot_files=PackedStringArray("res://dialog/maria.dialogue", "res://dialog/example.dialogue", "res://dialog/julia.dialogue", "res://dialog/jose.dialogue", "res://dialog/pedro.dialogue")
 
 [layer_names]
 

@@ -4,7 +4,7 @@
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="1_p0nv0"]
 [ext_resource type="AudioStream" uid="uid://ep2wx0abksun" path="res://assets/sfx/losing-sound-effect.mp3" id="3_6nidt"]
 
-[node name="CanvasLayer" type="CanvasLayer" unique_id=1878799597]
+[node name="DeathScreen" type="CanvasLayer" unique_id=1878799597]
 script = ExtResource("1_fiw2g")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1561101762]
