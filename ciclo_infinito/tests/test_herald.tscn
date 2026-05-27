@@ -20,11 +20,11 @@ position = Vector2(331, 88)
 position = Vector2(619, 505)
 
 [node name="HeraldOfFailure" parent="." unique_id=999366454 node_paths=PackedStringArray("player", "top_left_corner", "bottom_right_corner") instance=ExtResource("1_kwh7m")]
-position = Vector2(473, 89)
+position = Vector2(469.41373, 134.72507)
 scale = Vector2(2, 2)
 player = NodePath("../player")
-max_health = 100.0
-chance_of_attacking_after_moving = 0.9
+max_health = 800.0
+chance_of_attacking_after_moving = 0.8
 top_left_corner = NodePath("../TopLeftLimit")
 bottom_right_corner = NodePath("../BottomRightLimit")
 
