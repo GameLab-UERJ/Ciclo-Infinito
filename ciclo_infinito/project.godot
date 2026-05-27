@@ -39,6 +39,23 @@ window/size/window_height_override=720
 window/subwindows/embed_subwindows=false
 window/stretch/mode="canvas_items"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/imjp94.yafsm/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://assets/": "purple",
+"res://entities/": "red",
+"res://levels/": "orange",
+"res://menus/": "green",
+"res://resources/": "yellow",
+"res://systems/": "blue",
+"res://tests/": "pink"
+}
+
 [input]
 
 ui_cancel={
