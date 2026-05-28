@@ -38,7 +38,7 @@ gdscript/warnings/int_as_enum_without_cast=0
 
 [dialogue_manager]
 
-runtime/balloon_path="res://dialogue/balloon.tscn"
+runtime/balloon_path="res://dialogue/baloons/balloon.tscn"
 
 [display]
 
