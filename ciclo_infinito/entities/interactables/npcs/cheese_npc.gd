@@ -2,6 +2,9 @@ class_name CheeseNpc
 extends CharacterBody2D
 
 
+const BALLOON = preload("uid://ccgakgfk7wvp8")
+
+
 signal was_talked_to(npc : CheeseNpc)
 
 
@@ -78,7 +81,9 @@ func _physics_process(_delta: float) -> void:
 
 func inicia_dialogo() -> void:
 	falando = true
-	DialogueManager.show_example_dialogue_balloon(dialogo,"start")
+	var dialogue : DialogueBallon = BALLOON.instantiate()
+	get_tree().current_scene.add_child(dialogue)
+	dialogue.start(dialogo,"start")
 	if player:
 		player._on_dialogo_iniciado()
 

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_2b3ct"]
 [ext_resource type="Texture2D" uid="uid://05mguym0tfks" path="res://assets/art/npcs/other/spuud_idle.png" id="2_ghj3v"]
 [ext_resource type="Texture2D" uid="uid://cw5k3pfja14yo" path="res://assets/art/npcs/other/spuud_walk.png" id="2_r72a0"]
-[ext_resource type="Resource" uid="uid://os4wg6oi2kp3" path="res://dialog/julia.dialogue" id="2_wx7qv"]
+[ext_resource type="Resource" uid="uid://os4wg6oi2kp3" path="res://dialogue/julia.dialogue" id="2_wx7qv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2b3ct"]
 atlas = ExtResource("2_ghj3v")
