@@ -11,12 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://12i1ywgpw05p" path="res://entities/interactables/npcs/julia.tscn" id="6_dw1uh"]
 [ext_resource type="Texture2D" uid="uid://dslkbgs4suie3" path="res://assets/art/tilesets/trash_right.png" id="7_v1y88"]
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="8_7nto0"]
-[ext_resource type="Resource" uid="uid://7lcd48ifqwik" path="res://dialogue/maria.dialogue" id="8_daq30"]
+[ext_resource type="Resource" uid="uid://bknr3kx6tuqqa" path="res://dialogue/maria.dialogue" id="8_daq30"]
+[ext_resource type="Resource" uid="uid://coj6yk4yalr01" path="res://dialogue/julia.dialogue" id="8_nli6l"]
 [ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose.tscn" id="10_p3xb5"]
 [ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria.tscn" id="11_td228"]
 [ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/screen_transition/fade_component.gd" id="13_pfwt5"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="13_v1y88"]
-[ext_resource type="Resource" uid="uid://735hp7k64lwt" path="res://dialogue/jose.dialogue" id="14_dgs87"]
+[ext_resource type="Resource" uid="uid://dile7qs30igoc" path="res://dialogue/jose.dialogue" id="14_dgs87"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_v1y88"]
 [ext_resource type="AudioStream" uid="uid://cq14taynk4t07" path="res://assets/music/Hades - House of Hades - Supergiant Games (youtube).mp3" id="15_7nto0"]
 
@@ -360,6 +361,7 @@ tile_set = SubResource("TileSet_d1abf")
 [node name="Julia" parent="." unique_id=2101407489 instance=ExtResource("6_dw1uh")]
 position = Vector2(737.857, 90)
 scale = Vector2(0.5, 0.5)
+dialogo = ExtResource("8_nli6l")
 
 [node name="Label" type="Label" parent="Julia" unique_id=999073816]
 offset_left = 2.85718
