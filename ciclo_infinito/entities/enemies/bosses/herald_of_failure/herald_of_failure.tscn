@@ -1,11 +1,18 @@
 [gd_scene format=3 uid="uid://daxs4d78svouo"]
 
-[ext_resource type="Script" uid="uid://b8nobu7qym2s3" path="res://entities/enemies/bosses/herald_of_failure/herald_of_failure.gd" id="1_5i653"]
+[ext_resource type="Script" uid="uid://buu3cajoep4cf" path="res://entities/enemies/bosses/herald_of_failure/herald_of_failure.gd" id="1_nxqky"]
 [ext_resource type="Texture2D" uid="uid://meh1k2jwq368" path="res://assets/art/enemies/herald/necromancer_spritesheet_128x128.png" id="2_5i653"]
 [ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_mypcf"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="3_2k7es"]
-[ext_resource type="PackedScene" uid="uid://dyjwfrwsly7lx" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.tscn" id="4_5i653"]
 [ext_resource type="PackedScene" uid="uid://bqlqrn7rxiafo" path="res://systems/ui/boss_hud/boss_hud.tscn" id="5_2k7es"]
+[ext_resource type="Script" uid="uid://brs84g6d73rk4" path="res://entities/enemies/bosses/herald_of_failure/state_machine_manager.gd" id="6_mypcf"]
+[ext_resource type="Script" uid="uid://clkakichfm1ov" path="res://addons/imjp94.yafsm/src/StateMachinePlayer.gd" id="7_o101c"]
+[ext_resource type="Script" uid="uid://cste5lmincdqs" path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" id="8_jv5ku"]
+[ext_resource type="Script" uid="uid://bhlii08bbnbld" path="res://addons/imjp94.yafsm/src/states/State.gd" id="9_dbdd4"]
+[ext_resource type="Script" uid="uid://c35ot44rxnqul" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="10_nxqky"]
+[ext_resource type="Script" uid="uid://c5ktp2mskwgwq" path="res://addons/imjp94.yafsm/src/conditions/FloatCondition.gd" id="11_a620h"]
+[ext_resource type="Script" uid="uid://blovpmqtjwas8" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="12_cfaxy"]
+[ext_resource type="Script" uid="uid://c8v7jql0ajoyk" path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" id="13_jm2gi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mypcf"]
 atlas = ExtResource("2_5i653")
@@ -401,7 +408,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cakh6")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_2",
 "speed": 6.0
 }, {
@@ -566,18 +573,219 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hkhbt"]
 height = 22.0
 
+[sub_resource type="Resource" id="Resource_hpyrj"]
+script = ExtResource("9_dbdd4")
+name = "Attacking"
+metadata/graph_offset = Vector2(937.5, -77.5)
+
+[sub_resource type="Resource" id="Resource_xu8id"]
+script = ExtResource("9_dbdd4")
+name = "Dead"
+metadata/graph_offset = Vector2(1100.9999, 282.5)
+
+[sub_resource type="Resource" id="Resource_id1to"]
+script = ExtResource("9_dbdd4")
+name = "Entry"
+metadata/graph_offset = Vector2(781, 62.5)
+
+[sub_resource type="Resource" id="Resource_a620h"]
+script = ExtResource("9_dbdd4")
+name = "Idle"
+metadata/graph_offset = Vector2(941, 362.5)
+
+[sub_resource type="Resource" id="Resource_b7pe6"]
+script = ExtResource("9_dbdd4")
+name = "Running"
+metadata/graph_offset = Vector2(1260, 362.5)
+
+[sub_resource type="Resource" id="Resource_jm2gi"]
+script = ExtResource("9_dbdd4")
+name = "TryAttacking"
+metadata/graph_offset = Vector2(1247.5, -77.5)
+
+[sub_resource type="Resource" id="Resource_nxqky"]
+script = ExtResource("9_dbdd4")
+name = "WaitingPlayer"
+metadata/graph_offset = Vector2(763.5, 162.5)
+
+[sub_resource type="Resource" id="Resource_x3ccs"]
+script = ExtResource("12_cfaxy")
+name = "attack_ended"
+
+[sub_resource type="Resource" id="Resource_b63gq"]
+script = ExtResource("10_nxqky")
+from = "Attacking"
+to = "Idle"
+conditions = {
+"attack_ended": SubResource("Resource_x3ccs")
+}
+
+[sub_resource type="Resource" id="Resource_vgm2b"]
+script = ExtResource("13_jm2gi")
+value = true
+name = "died"
+
+[sub_resource type="Resource" id="Resource_jfjlx"]
+script = ExtResource("10_nxqky")
+from = "Attacking"
+to = "Dead"
+conditions = {
+"died": SubResource("Resource_vgm2b")
+}
+
+[sub_resource type="Resource" id="Resource_wgc8c"]
+script = ExtResource("10_nxqky")
+from = "Entry"
+to = "WaitingPlayer"
+
+[sub_resource type="Resource" id="Resource_sf8xq"]
+script = ExtResource("13_jm2gi")
+value = true
+name = "died"
+
+[sub_resource type="Resource" id="Resource_sqo1j"]
+script = ExtResource("10_nxqky")
+from = "Idle"
+to = "Dead"
+conditions = {
+"died": SubResource("Resource_sf8xq")
+}
+
+[sub_resource type="Resource" id="Resource_kxlp3"]
+script = ExtResource("12_cfaxy")
+name = "wait_time_passed"
+
+[sub_resource type="Resource" id="Resource_o5ols"]
+script = ExtResource("10_nxqky")
+from = "Idle"
+to = "Running"
+conditions = {
+"wait_time_passed": SubResource("Resource_kxlp3")
+}
+
+[sub_resource type="Resource" id="Resource_v81n1"]
+script = ExtResource("13_jm2gi")
+name = "player_is_close"
+
+[sub_resource type="Resource" id="Resource_bxrny"]
+script = ExtResource("10_nxqky")
+from = "Idle"
+to = "WaitingPlayer"
+conditions = {
+"player_is_close": SubResource("Resource_v81n1")
+}
+
+[sub_resource type="Resource" id="Resource_7yy3v"]
+script = ExtResource("11_a620h")
+value = 10.0
+comparation = 3
+name = "distance_to_next_position"
+
+[sub_resource type="Resource" id="Resource_1m3cm"]
+script = ExtResource("10_nxqky")
+from = "Running"
+to = "TryAttacking"
+conditions = {
+"distance_to_next_position": SubResource("Resource_7yy3v")
+}
+
+[sub_resource type="Resource" id="Resource_dv3t6"]
+script = ExtResource("13_jm2gi")
+value = true
+name = "died"
+
+[sub_resource type="Resource" id="Resource_0dwhe"]
+script = ExtResource("10_nxqky")
+from = "Running"
+to = "Dead"
+conditions = {
+"died": SubResource("Resource_dv3t6")
+}
+
+[sub_resource type="Resource" id="Resource_ln1tb"]
+script = ExtResource("12_cfaxy")
+name = "chose_to_attack"
+
+[sub_resource type="Resource" id="Resource_cakh6"]
+script = ExtResource("10_nxqky")
+from = "TryAttacking"
+to = "Attacking"
+conditions = {
+"chose_to_attack": SubResource("Resource_ln1tb")
+}
+
+[sub_resource type="Resource" id="Resource_cyiyv"]
+script = ExtResource("12_cfaxy")
+name = "chose_not_to_attack"
+
+[sub_resource type="Resource" id="Resource_1qxk5"]
+script = ExtResource("10_nxqky")
+from = "TryAttacking"
+to = "Idle"
+conditions = {
+"chose_not_to_attack": SubResource("Resource_cyiyv")
+}
+
+[sub_resource type="Resource" id="Resource_cfaxy"]
+script = ExtResource("13_jm2gi")
+value = true
+name = "player_is_close"
+
+[sub_resource type="Resource" id="Resource_8c22q"]
+script = ExtResource("10_nxqky")
+from = "WaitingPlayer"
+to = "Idle"
+conditions = {
+"player_is_close": SubResource("Resource_cfaxy")
+}
+
+[sub_resource type="Resource" id="Resource_sj6hh"]
+script = ExtResource("8_jv5ku")
+states = {
+"Attacking": SubResource("Resource_hpyrj"),
+"Dead": SubResource("Resource_xu8id"),
+"Entry": SubResource("Resource_id1to"),
+"Idle": SubResource("Resource_a620h"),
+"Running": SubResource("Resource_b7pe6"),
+"TryAttacking": SubResource("Resource_jm2gi"),
+"WaitingPlayer": SubResource("Resource_nxqky")
+}
+transitions = {
+"Attacking": {
+"Dead": SubResource("Resource_jfjlx"),
+"Idle": SubResource("Resource_b63gq")
+},
+"Entry": {
+"WaitingPlayer": SubResource("Resource_wgc8c")
+},
+"Idle": {
+"Dead": SubResource("Resource_sqo1j"),
+"Running": SubResource("Resource_o5ols"),
+"WaitingPlayer": SubResource("Resource_bxrny")
+},
+"Running": {
+"Dead": SubResource("Resource_0dwhe"),
+"TryAttacking": SubResource("Resource_1m3cm")
+},
+"TryAttacking": {
+"Attacking": SubResource("Resource_cakh6"),
+"Idle": SubResource("Resource_1qxk5")
+},
+"WaitingPlayer": {
+"Idle": SubResource("Resource_8c22q")
+}
+}
+
 [node name="HeraldOfFailure" type="CharacterBody2D" unique_id=999366454]
 collision_layer = 32
-script = ExtResource("1_5i653")
+script = ExtResource("1_nxqky")
 
 [node name="Sprites" type="AnimatedSprite2D" parent="." unique_id=1413652259]
 material = ExtResource("2_mypcf")
 position = Vector2(1, -48)
 sprite_frames = SubResource("SpriteFrames_kcj3j")
-animation = &"attack_1"
+animation = &"attack_2"
 autoplay = "idle"
-frame = 16
-frame_progress = 1.0
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=2076377722]
 position = Vector2(-1, -12)
@@ -588,26 +796,40 @@ texture = ExtResource("3_2k7es")
 position = Vector2(0, -10)
 shape = SubResource("CapsuleShape2D_hkhbt")
 
-[node name="FireMeteor" parent="." unique_id=1857492451 instance=ExtResource("4_5i653")]
-position = Vector2(149, 73)
-scale = Vector2(4, 4)
-total_drop_time = 1.5
-
-[node name="FireMeteor2" parent="." unique_id=960213747 instance=ExtResource("4_5i653")]
-position = Vector2(51, 115)
-scale = Vector2(4, 4)
-total_drop_time = 1.5
-
-[node name="FireMeteor3" parent="." unique_id=45410998 instance=ExtResource("4_5i653")]
-position = Vector2(207, 113)
-scale = Vector2(4, 4)
-total_drop_time = 1.5
-
 [node name="BossHUD" parent="." unique_id=1353981896 instance=ExtResource("5_2k7es")]
 visible = false
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1042097656]
 
+[node name="StateMachineManager" type="Node" parent="." unique_id=230462722 node_paths=PackedStringArray("debug_label")]
+script = ExtResource("6_mypcf")
+debug_label = NodePath("../StateLabel")
+
+[node name="StateMachinePlayer" type="Node" parent="StateMachineManager" unique_id=735810245]
+script = ExtResource("7_o101c")
+state_machine = SubResource("Resource_sj6hh")
+metadata/_custom_type_script = "uid://clkakichfm1ov"
+
+[node name="Timer" type="Timer" parent="StateMachineManager" unique_id=223320791]
+one_shot = true
+
+[node name="StateLabel" type="Label" parent="." unique_id=847433241]
+visible = false
+offset_left = -23.0
+offset_top = -72.0
+offset_right = 24.0
+offset_bottom = -49.0
+theme_override_font_sizes/font_size = 12
+text = "STATE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MeteorTimer" type="Timer" parent="." unique_id=507673803]
+wait_time = 0.3
+one_shot = true
+
 [connection signal="animation_finished" from="Sprites" to="." method="_on_sprites_animation_finished"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_entered_visible_on_screen"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_exited_visible_on_screen"]
+[connection signal="transited" from="StateMachineManager/StateMachinePlayer" to="StateMachineManager" method="_on_state_machine_player_transited"]
+[connection signal="updated" from="StateMachineManager/StateMachinePlayer" to="StateMachineManager" method="_on_state_machine_player_updated"]

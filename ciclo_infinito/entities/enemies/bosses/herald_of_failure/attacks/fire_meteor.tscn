@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dyjwfrwsly7lx"]
 
 [ext_resource type="Script" uid="uid://bj2hktpvkc0py" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.gd" id="1_fbmj5"]
-[ext_resource type="Texture2D" uid="uid://d1dsjluuc0egu" path="res://assets/art/shadow.png" id="2_6tc2q"]
+[ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_6tc2q"]
 [ext_resource type="Texture2D" uid="uid://xwf36kyx1b0m" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/1.png" id="3_dsv3r"]
-[ext_resource type="Texture2D" uid="uid://c3lhf10upakt0" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/disappear_spritesheet.png" id="3_kip3t"]
+[ext_resource type="Texture2D" uid="uid://bftb8q1dc7yn" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/disappear_spritesheet.png" id="3_kip3t"]
 [ext_resource type="Texture2D" uid="uid://cltv41rkamgrp" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/2.png" id="4_kip3t"]
 [ext_resource type="Texture2D" uid="uid://xoh5t8xg1muo" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/3.png" id="5_7vibg"]
 [ext_resource type="Texture2D" uid="uid://bfoyge4fvq755" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/4.png" id="6_od3f2"]
@@ -471,21 +471,23 @@ height = 16.800003
 [node name="FireMeteor" type="Node2D" unique_id=1857492451]
 script = ExtResource("1_fbmj5")
 initial_y_position = -200.0
-total_drop_time = 2.0
+total_drop_time = 0.5
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1189333717]
+scale = Vector2(3, 3)
 texture = ExtResource("2_6tc2q")
 offset = Vector2(-0.5, -10)
 
 [node name="ImpactSprite" type="Sprite2D" parent="." unique_id=1557395758]
 position = Vector2(-0.39999607, -0.2999999)
-scale = Vector2(1.1111118, 0.81052625)
+scale = Vector2(3, 2.19)
 texture = ExtResource("63_6tc2q")
 
 [node name="FireBallSprite" type="AnimatedSprite2D" parent="." unique_id=2142317343]
 texture_filter = 1
 position = Vector2(0, -100)
 rotation = 1.5707964
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_l1c2m")
 animation = &"disappear"
 autoplay = "drop"
@@ -498,6 +500,7 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=432333931]
 rotation = 1.5707964
+scale = Vector2(3, 3)
 shape = SubResource("CapsuleShape2D_dsv3r")
 
 [node name="EndLifetimeTimer" type="Timer" parent="." unique_id=814060201]

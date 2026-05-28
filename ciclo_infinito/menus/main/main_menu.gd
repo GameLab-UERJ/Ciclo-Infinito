@@ -6,6 +6,11 @@ var creditos : PackedScene = preload("uid://c8f43sr71atgk")
 var menu_de_opcoes : PackedScene = preload("uid://del2he55eywxt")
 
 
+func _ready() -> void:
+	if not MusicManager.is_playing():
+		MusicManager.play_music(preload("uid://c8ag6husw1v2"),12)
+
+
 func _on_jogar_button_pressed() -> void:
 	MusicManager.stop_music()
 	get_tree().change_scene_to_packed(cutscene)

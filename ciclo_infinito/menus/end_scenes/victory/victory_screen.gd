@@ -2,7 +2,7 @@ extends CanvasLayer
 
 @onready var color_rect: ColorRect = $ColorRect
 
-var main_menu = preload("uid://downt2rxxaqaf")
+var main_menu = load("uid://downt2rxxaqaf")
 
 func _on_jogar_novamente_button_pressed() -> void:
 	get_tree().reload_current_scene()

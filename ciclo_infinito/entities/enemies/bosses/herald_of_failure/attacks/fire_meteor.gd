@@ -77,5 +77,5 @@ func _on_damage_area_body_exited(body: Node2D) -> void:
 
 
 func _on_end_lifetime_timer_timeout() -> void:
-	reset()
+	queue_free()
 	finished.emit()

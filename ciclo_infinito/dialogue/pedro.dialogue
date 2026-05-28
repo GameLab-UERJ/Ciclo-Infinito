@@ -1,0 +1,13 @@
+~ start
+if GameState.fifth_floor_state == GameState.FifthFloorState.FIRST_TALK:
+	Pedro: Olá, meu chapa. Você infelizmente acabou de entrar em um purgatório da UERJ.
+	Pedro: No quinto andar, moram os golems monstros que guardam os segredos mais sombrios da engenharia.
+	Pedro: Entre todos os monstros do quinto andar, há um ser místico temido por todos: o Olho da Pressão.
+	Pedro: Elimine os inimigos e fale comigo novamente.
+elif GameState.fifth_floor_state == GameState.FifthFloorState.BEFORE_KILLING:
+	Pedro: Você ainda não derrotou os monstros.
+	Pedro: Elimine os inimigos e fale comigo novamente.
+else:
+	Pedro: Nada mal.
+	Pedro: Venha, que vou te explicar mais sobre o que está acontecendo.
+=> END

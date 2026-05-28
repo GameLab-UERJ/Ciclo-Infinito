@@ -1,13 +1,15 @@
 extends StaticBody2D
+
+
+var liberado : bool = false
+
+
 @onready var colisao: CollisionShape2D = $colisaobarreira
-var liberar = false
 
 
-func _ready() -> void:
-	colisao.disabled = false 
-	
-
-
-func _on_npc_dialogo_concluido() -> void:
-	liberar = true
-	colisao.set_deferred("disabled",true)
+func _physics_process(_delta: float) -> void:
+	if liberado:
+		queue_free()
+	if GameState.fifth_floor_state > GameState.FifthFloorState.FIRST_TALK:
+		liberado = true
+		colisao.set_deferred("disabled",true)

@@ -8,13 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://dsq7xdomtnv5c" path="res://assets/art/tilesets/portal.png" id="4_650mc"]
 [ext_resource type="PackedScene" uid="uid://c1t0cprxobugr" path="res://levels/fifth_floor/fifth_floor.tscn" id="4_td228"]
 [ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="5_inj64"]
-[ext_resource type="PackedScene" uid="uid://12i1ywgpw05p" path="res://entities/interactables/npcs/other/spuud_npc.tscn" id="6_dw1uh"]
+[ext_resource type="PackedScene" uid="uid://12i1ywgpw05p" path="res://entities/interactables/npcs/julia.tscn" id="6_dw1uh"]
 [ext_resource type="Texture2D" uid="uid://dslkbgs4suie3" path="res://assets/art/tilesets/trash_right.png" id="7_v1y88"]
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="8_7nto0"]
-[ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose/jose.tscn" id="10_p3xb5"]
-[ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria/maria.tscn" id="11_td228"]
-[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/fade_component.gd" id="13_pfwt5"]
+[ext_resource type="Resource" uid="uid://7lcd48ifqwik" path="res://dialogue/maria.dialogue" id="8_daq30"]
+[ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose.tscn" id="10_p3xb5"]
+[ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria.tscn" id="11_td228"]
+[ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/screen_transition/fade_component.gd" id="13_pfwt5"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="13_v1y88"]
+[ext_resource type="Resource" uid="uid://735hp7k64lwt" path="res://dialogue/jose.dialogue" id="14_dgs87"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_v1y88"]
 [ext_resource type="AudioStream" uid="uid://cq14taynk4t07" path="res://assets/music/Hades - House of Hades - Supergiant Games (youtube).mp3" id="15_7nto0"]
 
@@ -355,11 +357,11 @@ tile_set = SubResource("TileSet_mr3py")
 tile_map_data = PackedByteArray("AAASAAgAAAARAAMAAAA=")
 tile_set = SubResource("TileSet_d1abf")
 
-[node name="NPC2" parent="." unique_id=2101407489 instance=ExtResource("6_dw1uh")]
+[node name="Julia" parent="." unique_id=2101407489 instance=ExtResource("6_dw1uh")]
 position = Vector2(737.857, 90)
 scale = Vector2(0.5, 0.5)
 
-[node name="Label" type="Label" parent="NPC2" unique_id=999073816]
+[node name="Label" type="Label" parent="Julia" unique_id=999073816]
 offset_left = 2.85718
 offset_top = -30.0
 offset_right = 42.8572
@@ -421,22 +423,24 @@ metadata/_custom_type_script = "uid://br6wsqfyc7ush"
 tile_map_data = PackedByteArray("AAAFABAAAAABAAQAAAALABAAAQABAAEAAAARABAAAAABAAQAAAAXABAAAQABAAEAAAAdABAAAAABAAQAAAAjABAAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_n24co")
 
-[node name="NPC3" parent="." unique_id=999656628 instance=ExtResource("10_p3xb5")]
+[node name="Jose" parent="." unique_id=999656628 instance=ExtResource("10_p3xb5")]
 position = Vector2(687.857, -120.714)
 scale = Vector2(0.5, 0.5)
+dialogo = ExtResource("14_dgs87")
 
-[node name="Label" type="Label" parent="NPC3" unique_id=1491900223]
+[node name="Label" type="Label" parent="Jose" unique_id=1491900223]
 offset_left = -15.7139
 offset_top = -31.4292
 offset_right = 24.2861
 offset_bottom = -8.42916
 text = "José"
 
-[node name="NPC4" parent="." unique_id=1630954226 instance=ExtResource("11_td228")]
+[node name="Maria" parent="." unique_id=1630954226 instance=ExtResource("11_td228")]
 position = Vector2(432.143, 237.143)
 scale = Vector2(0.5, 0.5)
+dialogo = ExtResource("8_daq30")
 
-[node name="Label" type="Label" parent="NPC4" unique_id=2083795153]
+[node name="Label" type="Label" parent="Maria" unique_id=2083795153]
 offset_left = -22.8574
 offset_top = -31.4289
 offset_right = 22.1426
@@ -447,9 +451,9 @@ text = "Maria"
 position = Vector2(536.42896, -133.57098)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1878532527]
+[node name="Hud" type="CanvasLayer" parent="." unique_id=1878532527]
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer" unique_id=290005524]
+[node name="TextureRect" type="TextureRect" parent="Hud" unique_id=290005524]
 offset_left = 682.0
 offset_top = 3.0
 offset_right = 1657.0
@@ -457,7 +461,7 @@ offset_bottom = 546.0
 scale = Vector2(0.284224, 0.275615)
 texture = ExtResource("14_v1y88")
 
-[node name="Label" type="Label" parent="CanvasLayer/TextureRect" unique_id=1062840317]
+[node name="Label" type="Label" parent="Hud/TextureRect" unique_id=1062840317]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

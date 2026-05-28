@@ -5,12 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://dr0s7gb32d5vh" path="res://entities/enemies/golem/golem_blue.tscn" id="3_v3xqr"]
 [ext_resource type="PackedScene" uid="uid://djrevjgpeak50" path="res://entities/enemies/golem/golem_white.tscn" id="4_wyqw4"]
 [ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="5_vl0w6"]
+[ext_resource type="Resource" uid="uid://dumym8tg7uleq" path="res://dialogue/pedro.dialogue" id="5_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://deyn0aff4vkxb" path="res://entities/enemies/beholder/beholder_orange.tscn" id="6_3nscd"]
 [ext_resource type="Shader" uid="uid://b4ecm70ug50ju" path="res://resources/shaders/redden.gdshader" id="6_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://c80omegwkn2ei" path="res://entities/enemies/beholder/beholder_white.tscn" id="7_ancri"]
 [ext_resource type="PackedScene" uid="uid://bbf6oefdi3vmk" path="res://levels/fifth_floor/fifth_floor_map.tscn" id="8_wow6u"]
 [ext_resource type="Script" uid="uid://bu55xg23achvn" path="res://levels/fifth_floor/barrier.gd" id="9_d2dnc"]
-[ext_resource type="PackedScene" uid="uid://sf0ngt0mifqa" path="res://entities/interactables/npcs/pedro/pedro.tscn" id="10_x1c7k"]
+[ext_resource type="PackedScene" uid="uid://sf0ngt0mifqa" path="res://entities/interactables/npcs/pedro.tscn" id="10_x1c7k"]
 [ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="11_friax"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="12_2g3x2"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="13_ni4lu"]
@@ -20,7 +21,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekmel"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yw1aw"]
 resource_local_to_scene = true
 shader = ExtResource("6_yw1aw")
 shader_parameter/redden = false
@@ -31,18 +32,19 @@ script = ExtResource("1_u87vb")
 [node name="TerrainManager" parent="." unique_id=468786021 instance=ExtResource("8_wow6u")]
 position = Vector2(-1, 45)
 
-[node name="barreira" type="StaticBody2D" parent="TerrainManager" unique_id=130409252]
+[node name="Barreira" type="StaticBody2D" parent="TerrainManager" unique_id=130409252]
 script = ExtResource("9_d2dnc")
 
-[node name="colisaobarreira" type="CollisionShape2D" parent="TerrainManager/barreira" unique_id=356658534]
+[node name="colisaobarreira" type="CollisionShape2D" parent="TerrainManager/Barreira" unique_id=356658534]
 position = Vector2(405.536, -55.5357)
 shape = SubResource("RectangleShape2D_ysv2v")
 
-[node name="NPC" parent="." unique_id=531889216 instance=ExtResource("10_x1c7k")]
+[node name="Pedro" parent="." unique_id=531889216 instance=ExtResource("10_x1c7k")]
 position = Vector2(510.9, -118)
 scale = Vector2(0.6, 0.6)
+dialogo = ExtResource("5_yw1aw")
 
-[node name="Label" type="Label" parent="NPC" unique_id=312686080]
+[node name="Label" type="Label" parent="Pedro" unique_id=312686080]
 offset_left = -26.5
 offset_top = -33.3333
 offset_right = 19.5
@@ -50,7 +52,7 @@ offset_bottom = -10.3333
 text = "Pedro"
 
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
-material = SubResource("ShaderMaterial_ekmel")
+material = SubResource("ShaderMaterial_yw1aw")
 position = Vector2(573, -235)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
@@ -172,5 +174,3 @@ position = Vector2(204, 407)
 stream = ExtResource("15_r8vnr")
 volume_db = -19.299
 autoplay = true
-
-[connection signal="dialogo_concluido" from="NPC" to="TerrainManager/barreira" method="_on_npc_dialogo_concluido"]
