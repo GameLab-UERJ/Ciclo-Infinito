@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dr0s7gb32d5vh" path="res://entities/enemies/golem/golem_blue.tscn" id="3_v3xqr"]
 [ext_resource type="PackedScene" uid="uid://djrevjgpeak50" path="res://entities/enemies/golem/golem_white.tscn" id="4_wyqw4"]
 [ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="5_vl0w6"]
-[ext_resource type="Resource" uid="uid://dumym8tg7uleq" path="res://dialog/pedro.dialogue" id="5_yw1aw"]
+[ext_resource type="Resource" uid="uid://dumym8tg7uleq" path="res://dialogue/pedro.dialogue" id="5_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://deyn0aff4vkxb" path="res://entities/enemies/beholder/beholder_orange.tscn" id="6_3nscd"]
 [ext_resource type="Shader" uid="uid://b4ecm70ug50ju" path="res://resources/shaders/redden.gdshader" id="6_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://c80omegwkn2ei" path="res://entities/enemies/beholder/beholder_white.tscn" id="7_ancri"]
@@ -21,7 +21,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ysv2v"]
 size = Vector2(154.643, 5.35712)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ekmel"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yw1aw"]
 resource_local_to_scene = true
 shader = ExtResource("6_yw1aw")
 shader_parameter/redden = false
@@ -52,7 +52,7 @@ offset_bottom = -10.3333
 text = "Pedro"
 
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
-material = SubResource("ShaderMaterial_ekmel")
+material = SubResource("ShaderMaterial_yw1aw")
 position = Vector2(573, -235)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]

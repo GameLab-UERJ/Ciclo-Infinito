@@ -32,6 +32,14 @@ SceneTransition="*uid://cgava0i4cge2c"
 DialogueManager="*uid://c3rodes2l3gxb"
 GameState="*uid://c4e2kw5jjtgi0"
 
+[debug]
+
+gdscript/warnings/int_as_enum_without_cast=0
+
+[dialogue_manager]
+
+runtime/balloon_path="res://dialogue/balloon.tscn"
+
 [display]
 
 window/size/viewport_width=960
@@ -50,7 +58,7 @@ enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://add
 folder_colors={
 "res://addons/": "gray",
 "res://assets/": "purple",
-"res://dialog/": "teal",
+"res://dialogue/": "teal",
 "res://entities/": "red",
 "res://levels/": "orange",
 "res://menus/": "green",
@@ -115,7 +123,7 @@ debug_menu={
 
 [internationalization]
 
-locale/translations_pot_files=PackedStringArray("res://dialog/maria.dialogue", "res://dialog/example.dialogue", "res://dialog/julia.dialogue", "res://dialog/jose.dialogue", "res://dialog/pedro.dialogue")
+locale/translations_pot_files=PackedStringArray("res://dialogue/example.dialogue", "res://dialogue/jose.dialogue", "res://dialogue/julia.dialogue", "res://dialogue/maria.dialogue", "res://dialogue/pedro.dialogue")
 
 [layer_names]
 
