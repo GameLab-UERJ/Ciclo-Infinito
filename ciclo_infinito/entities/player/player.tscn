@@ -1491,6 +1491,7 @@ value = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=452761772]
 zoom = Vector2(1.6, 1.6)
+limit_enabled = false
 
 [node name="VidaCheia" type="Sprite2D" parent="Camera2D" unique_id=148788504]
 position = Vector2(-201.352, -135.455)
