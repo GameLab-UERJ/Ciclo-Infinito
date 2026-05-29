@@ -6,6 +6,9 @@ const DAMAGE_TAKEN_EFFECT_DURATION: float = 0.15
 const FIRE_METEOR = preload("uid://dyjwfrwsly7lx")
 
 
+signal died
+
+
 @export var speed = 100.0
 @export var player : Player
 @export var max_health: float = 1600.0
@@ -72,10 +75,6 @@ func die() -> void:
 	is_dead = true
 
 
-func set_flip_h() -> void:
-	sprites.flip_h = false
-
-
 func get_valid_next_position(minimum_distance : float = 50) -> void:
 	var candidate_next_position : Vector2
 	for i in 20:
@@ -110,7 +109,7 @@ func _on_sprites_animation_finished() -> void:
 	if sprites.animation == "death":
 		shadow.visible = false
 		_on_exited_visible_on_screen()
-		print("VICTORY")
+		died.emit()
 		queue_free()
 
 func spawn_meteor_at_player(amount : float = 1, time_to_drop : float = 0.3, offset : Vector2 = Vector2.ZERO) -> void:

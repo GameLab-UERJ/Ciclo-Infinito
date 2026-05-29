@@ -54,7 +54,6 @@ func _on_state_machine_player_transited(_from: Variant, to: Variant) -> void:
 			happened("attack_ended")
 		"Running":
 			boss.get_valid_next_position()
-			boss.current_direction = boss.global_position.direction_to(boss.next_position)
 		"TryAttacking":
 			if randf() <= boss.chance_of_attacking_after_moving:
 				happened("chose_to_attack")
@@ -64,5 +63,11 @@ func _on_state_machine_player_transited(_from: Variant, to: Variant) -> void:
 			boss.die()
 
 
-func _on_state_machine_player_updated(_state: Variant, _delta: Variant) -> void:
-	pass
+func _on_state_machine_player_updated(state: Variant, _delta: Variant) -> void:
+	
+	match state:
+		"Running":
+			if boss.get_slide_collision_count() > 0:
+				state_machine_player.set_trigger("hit_wall")
+			boss.current_direction = boss.global_position.direction_to(boss.next_position)
+			boss.sprites.flip_h = boss.current_direction.x < 0

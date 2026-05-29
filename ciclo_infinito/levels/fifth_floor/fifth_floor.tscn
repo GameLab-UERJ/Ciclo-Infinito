@@ -18,6 +18,9 @@
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_71gwp"]
 [ext_resource type="AudioStream" uid="uid://ce378hasf2vjm" path="res://assets/music/Hades - God of the Dead - Supergiant Games (youtube).mp3" id="15_r8vnr"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw1aw"]
+size = Vector2(24, 27)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yw1aw"]
 resource_local_to_scene = true
 shader = ExtResource("6_yw1aw")
@@ -47,6 +50,17 @@ opener_method_name = "libera_barreira"
 position = Vector2(76, -1)
 scale = Vector2(2, 2)
 opener_node = NodePath("..")
+opener_method_name = "libera_barreira_boss"
+
+[node name="CutsceneArea" type="Area2D" parent="." unique_id=176385997]
+position = Vector2(76, -1)
+scale = Vector2(2, 2)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneArea" unique_id=2138562383]
+position = Vector2(0.5, 8)
+shape = SubResource("RectangleShape2D_yw1aw")
+debug_color = Color(0.8475721, 0.00095953466, 0.90705407, 0.41960785)
 
 [node name="Pedro" parent="." unique_id=531889216 instance=ExtResource("10_x1c7k")]
 position = Vector2(510.9, -118)
@@ -184,5 +198,8 @@ stream = ExtResource("15_r8vnr")
 volume_db = -19.299
 autoplay = true
 
-[connection signal="finished_opening" from="Barreira" to="." method="_on_barreira_finished_opening"]
+[connection signal="finished_opening" from="Barreira" to="." method="_on_any_barreira_finished_opening"]
 [connection signal="started_opening" from="Barreira" to="." method="_on_barreira_started_opening"]
+[connection signal="finished_opening" from="BarreiraBoss" to="." method="_on_any_barreira_finished_opening"]
+[connection signal="started_opening" from="BarreiraBoss" to="." method="_on_barreira_boss_started_opening"]
+[connection signal="body_entered" from="CutsceneArea" to="." method="_on_cutscene_area_body_entered"]

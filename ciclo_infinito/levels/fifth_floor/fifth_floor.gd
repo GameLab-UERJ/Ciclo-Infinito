@@ -10,13 +10,14 @@ var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
 @onready var pedro: CheeseNpc = $Pedro
 @onready var player: Player = $player
 @onready var barreira: Barrier = $Barreira
+@onready var barreira_boss: Barrier = $BarreiraBoss
 
 
 var missoes = [
 	"Fale com o Pedro no 5° andar",
 	"Mate os monstros que aparecerem",
 	"Fale com pedro",
-	"Missões Concluídas"
+	"Entre na sala do Arauto da Reprovação"
 ]
 
 var inimigos_totais = 0
@@ -34,6 +35,15 @@ func _ready():
 func configurar_label():
 	mission_label.autowrap_mode=TextServer.AUTOWRAP_WORD
 	mission_label.add_theme_font_size_override("font_size", 24)
+
+
+func conectar_sinais():
+	if pedro:
+		pedro.was_talked_to.connect(_on_falou_com_pedro)
+	var enemies = $player/enemies
+	if enemies:
+		for enemy in enemies.get_children():
+			enemy.inimigo_derrotado.connect(_on_inimigo_derrotado)
 	
 	
 func _process(_delta):
@@ -72,17 +82,13 @@ func proxima_missao():
 	_atualizar_texto_missao()
 
 
-func conectar_sinais():
-	if pedro:
-		pedro.was_talked_to.connect(_on_falou_com_pedro)
-	var enemies = $player/enemies
-	if enemies:
-		for enemy in enemies.get_children():
-			enemy.inimigo_derrotado.connect(_on_inimigo_derrotado)
-
-
 func libera_barreira() -> bool:
 	return GameState.fifth_floor_state > GameState.FifthFloorState.FIRST_TALK
+
+
+func libera_barreira_boss() -> bool:
+	return GameState.fifth_floor_state == GameState.FifthFloorState.GO_BOSS
+
 
 func _on_falou_com_pedro(npc : CheeseNpc):
 	if npc.name != "Pedro":
@@ -104,8 +110,26 @@ func _on_inimigo_derrotado():
 
 
 func _on_barreira_started_opening() -> void:
-	player.pan_camera_to(barreira)
+	await player.pan_camera_to(barreira)
 
 
-func _on_barreira_finished_opening() -> void:
-	player.pan_camera_back()
+func _on_any_barreira_finished_opening() -> void:
+	await player.pan_camera_back()
+
+
+func _on_barreira_boss_started_opening() -> void:
+	await player.pan_camera_to(barreira_boss)
+
+
+func _on_cutscene_area_body_entered(body: Node2D) -> void:
+	if not body is Player:
+		return
+	player.current_state = player.State.CUTSCENE
+	await create_tween().tween_property(player.anim,"scale",Vector2.ZERO,1).finished
+	
+	mission_label.text = "Todas as missões concluídas!"
+	SceneTransition.fade_out()
+	var boss_scene = load("uid://laif38pcjfq7").instantiate()
+	await get_tree().create_timer(1.5).timeout
+	get_tree().change_scene_to_node(boss_scene)
+	
