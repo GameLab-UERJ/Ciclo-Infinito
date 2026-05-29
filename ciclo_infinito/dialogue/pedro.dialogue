@@ -7,7 +7,38 @@ if GameState.fifth_floor_state == GameState.FifthFloorState.FIRST_TALK:
 elif GameState.fifth_floor_state == GameState.FifthFloorState.BEFORE_KILLING:
 	Pedro: Você ainda não derrotou os monstros.
 	Pedro: Elimine os inimigos e fale comigo novamente.
-else:
+elif GameState.fifth_floor_state == GameState.FifthFloorState.AFTER_KILLING:
 	Pedro: Nada mal.
-	Pedro: Venha, que vou te explicar mais sobre o que está acontecendo.
+	Pedro: Vou te explicar mais sobre o que está acontecendo.
+	Pedro: Este andar é regido pelo Arauto da Reprovação. Ele reina absoluto e incontestado. 
+	Pedro: Todos os monstros voltam a aparecer por culpa dele.
+	Pedro: Ninguém foi capaz de derrotá-lo até hoje....
+	Pedro: Você seria capaz de vencê-lo?[wait=1]
+	- Com certeza! 
+		Pedro: Caramba! [wait=0.5] Parece que temos um herói por aqui!
+		Pedro: Vou liberar a sala do Arauto para você.
+	- Não, mas acredito que deva tentar mesmo assim... 
+		Pedro: Sua resposta demonstra humildade e senso de dever. 
+		Pedro: A coragem está na capacidade de lutar contra seus medos.
+		Pedro: Eu confio que você será capaz de vencer esse desafio.
+	Pedro: Que Turing olhe por ti.
+	set GameState.fifth_floor_state = GameState.FifthFloorState.GO_BOSS
+=> END
+
+~ libera_boss
+	Pedro: Que Turing olhe por ti.
+	set GameState.fifth_floor_state = GameState.FifthFloorState.GO_BOSS
+=> END
+
+~ libera_boss_certo
+	Pedro: Caramba! [wait=0.5] Parece que temos um herói por aqui!
+	Pedro: Vou liberar a sala do Arauto para você.
+	=> libera_boss
+=> END
+
+~ libera_boss_incerto
+	Pedro: Sua resposta demonstra humildade e senso de dever. 
+	Pedro: A coragem está na capacidade de lutar contra seus medos.
+	Pedro: Eu confio que você será capaz de vencer esse desafio.
+	=> libera_boss
 => END

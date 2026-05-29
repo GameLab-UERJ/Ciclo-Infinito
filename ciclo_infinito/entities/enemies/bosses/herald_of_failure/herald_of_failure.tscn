@@ -608,18 +608,6 @@ script = ExtResource("9_dbdd4")
 name = "WaitingPlayer"
 metadata/graph_offset = Vector2(763.5, 162.5)
 
-[sub_resource type="Resource" id="Resource_x3ccs"]
-script = ExtResource("12_cfaxy")
-name = "attack_ended"
-
-[sub_resource type="Resource" id="Resource_b63gq"]
-script = ExtResource("10_nxqky")
-from = "Attacking"
-to = "Idle"
-conditions = {
-"attack_ended": SubResource("Resource_x3ccs")
-}
-
 [sub_resource type="Resource" id="Resource_vgm2b"]
 script = ExtResource("13_jm2gi")
 value = true
@@ -631,6 +619,18 @@ from = "Attacking"
 to = "Dead"
 conditions = {
 "died": SubResource("Resource_vgm2b")
+}
+
+[sub_resource type="Resource" id="Resource_x3ccs"]
+script = ExtResource("12_cfaxy")
+name = "attack_ended"
+
+[sub_resource type="Resource" id="Resource_b63gq"]
+script = ExtResource("10_nxqky")
+from = "Attacking"
+to = "Idle"
+conditions = {
+"attack_ended": SubResource("Resource_x3ccs")
 }
 
 [sub_resource type="Resource" id="Resource_wgc8c"]
@@ -675,6 +675,19 @@ conditions = {
 "player_is_close": SubResource("Resource_v81n1")
 }
 
+[sub_resource type="Resource" id="Resource_dv3t6"]
+script = ExtResource("13_jm2gi")
+value = true
+name = "died"
+
+[sub_resource type="Resource" id="Resource_0dwhe"]
+script = ExtResource("10_nxqky")
+from = "Running"
+to = "Dead"
+conditions = {
+"died": SubResource("Resource_dv3t6")
+}
+
 [sub_resource type="Resource" id="Resource_7yy3v"]
 script = ExtResource("11_a620h")
 value = 10.0
@@ -689,17 +702,16 @@ conditions = {
 "distance_to_next_position": SubResource("Resource_7yy3v")
 }
 
-[sub_resource type="Resource" id="Resource_dv3t6"]
-script = ExtResource("13_jm2gi")
-value = true
-name = "died"
+[sub_resource type="Resource" id="Resource_413ty"]
+script = ExtResource("12_cfaxy")
+name = "hit_wall"
 
-[sub_resource type="Resource" id="Resource_0dwhe"]
+[sub_resource type="Resource" id="Resource_4k1tx"]
 script = ExtResource("10_nxqky")
 from = "Running"
-to = "Dead"
+to = "Idle"
 conditions = {
-"died": SubResource("Resource_dv3t6")
+"hit_wall": SubResource("Resource_413ty")
 }
 
 [sub_resource type="Resource" id="Resource_ln1tb"]
@@ -765,6 +777,7 @@ transitions = {
 },
 "Running": {
 "Dead": SubResource("Resource_0dwhe"),
+"Idle": SubResource("Resource_4k1tx"),
 "TryAttacking": SubResource("Resource_1m3cm")
 },
 "TryAttacking": {

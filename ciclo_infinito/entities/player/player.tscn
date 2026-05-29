@@ -1420,7 +1420,7 @@ animations = [{
 size = Vector2(100, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ja17"]
-size = Vector2(21.5, 34.488636)
+size = Vector2(10.90909, 8.244316)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhcba"]
 bg_color = Color(0.29219, 0.29219, 0.29219, 1)
@@ -1474,7 +1474,7 @@ shape = SubResource("RectangleShape2D_jrjdb")
 one_way_collision_margin = 0.0
 
 [node name="player_colision" type="CollisionShape2D" parent="." unique_id=1626315010]
-position = Vector2(0, -15.36364)
+position = Vector2(-1.6255811e-07, -2.2414787)
 shape = SubResource("RectangleShape2D_4ja17")
 debug_color = Color(0.9817937, 0, 0.37205806, 0.41960785)
 

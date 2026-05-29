@@ -2,7 +2,7 @@ class_name Player
 extends CharacterBody2D
 
 
-enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG}
+enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG, CUTSCENE}
 
 
 @export var max_health: float = 120.0
@@ -61,7 +61,7 @@ var vida_textures = [
 
 @onready var state_label: Label = $StateLabel
 @onready var vida_cheia = $Camera2D/VidaCheia
-@onready var anim  = $animacoes  
+@onready var anim : AnimatedSprite2D  = $animacoes  
 @onready var dash_timer = $dash_timer
 @onready var dash_cooldown = $dash_cooldown
 @onready var area_attack = $attack_area
@@ -392,7 +392,7 @@ func update_animation() -> void:
 	match current_state:
 		State.IDLE,State.DIALOG:
 			anim_name = "idle_" + direction_str
-		State.RUN:
+		State.RUN,State.CUTSCENE:
 			anim_name = "run_" + direction_str
 		State.ATTACK:
 			anim_name = ( "attack2_" if combo_step == 2 else "attack1_" ) + attack_facing
