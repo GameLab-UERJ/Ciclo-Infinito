@@ -1,12 +1,16 @@
 class_name FifthFloor
 extends Node2D
 
+
 var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
+
 
 @onready var pause_menu = $player/pause
 @onready var mission_label = $player/TextureRect/Label
 @onready var pedro: CheeseNpc = $Pedro
-@onready var barreira: StaticBody2D = $TerrainManager/Barreira
+@onready var player: Player = $player
+@onready var barreira: Barrier = $Barreira
+
 
 var missoes = [
 	"Fale com o Pedro no 5° andar",
@@ -25,8 +29,8 @@ func _ready():
 	configurar_label()
 	_atualizar_texto_missao()
 	conectar_sinais()
-	
-	
+
+
 func configurar_label():
 	mission_label.autowrap_mode=TextServer.AUTOWRAP_WORD
 	mission_label.add_theme_font_size_override("font_size", 24)
@@ -66,8 +70,8 @@ func _atualizar_texto_missao():
 func proxima_missao():
 	GameState.fifth_floor_state += 1
 	_atualizar_texto_missao()
-	
-	
+
+
 func conectar_sinais():
 	if pedro:
 		pedro.was_talked_to.connect(_on_falou_com_pedro)
@@ -76,6 +80,9 @@ func conectar_sinais():
 		for enemy in enemies.get_children():
 			enemy.inimigo_derrotado.connect(_on_inimigo_derrotado)
 
+
+func libera_barreira() -> bool:
+	return GameState.fifth_floor_state > GameState.FifthFloorState.FIRST_TALK
 
 func _on_falou_com_pedro(npc : CheeseNpc):
 	if npc.name != "Pedro":
@@ -94,3 +101,11 @@ func _on_inimigo_derrotado():
 		print("vasco")
 		print("Todos os inimigos derrotados — avançando missão.")
 		proxima_missao()
+
+
+func _on_barreira_started_opening() -> void:
+	player.pan_camera_to(barreira)
+
+
+func _on_barreira_finished_opening() -> void:
+	player.pan_camera_back()

@@ -35,9 +35,7 @@ var is_moving: bool = false
 @onready var player : Player = get_tree().get_first_node_in_group("player")
 
 
-# ========================
-# LIFECYCLE
-# ========================
+#region Built-in
 
 func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(encerra_dialogo)
@@ -73,11 +71,10 @@ func _physics_process(_delta: float) -> void:
 	
 	if global_position.distance_to(target_position) < 10.0:
 		target_position = pos_b if target_position == pos_a else pos_a
+#endregion
 
 
-# ========================
-# DIALOGO
-# ========================
+#region Diálogo
 
 func inicia_dialogo() -> void:
 	falando = true
@@ -94,10 +91,10 @@ func encerra_dialogo(_dialogue : DialogueResource) -> void:
 		player._on_dialogo_encerrado()
 		player_has_talked_with = true
 		was_talked_to.emit(self)
+#endregion
 
-# ========================
-# AREA
-# ========================
+
+#region Area
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "player":
@@ -110,3 +107,4 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "player":
 		player_in_area = false
 		label_interacao.visible = false
+#endregion

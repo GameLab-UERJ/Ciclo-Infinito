@@ -70,6 +70,7 @@ var vida_textures = [
 @onready var damage_recieved_sfx: AudioStreamPlayer = $DamageRecievedSFX
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
 @onready var attack_sfxplay: AudioStreamPlayer = $attack_sfxplay
+@onready var camera: Camera2D = $Camera2D
 
 
 func _ready():
@@ -101,7 +102,7 @@ func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	current_health -= damage_amount
 	current_health = clamp(current_health, 0.0, max_health)
 
-	print("Player recebeu dano de ", damage_amount, ". Vida restante: ", current_health)
+	#print("Player recebeu dano de ", damage_amount, ". Vida restante: ", current_health)
 
 	# Atualiza barra de vida
 	update_health_bar()
@@ -419,3 +420,13 @@ func get_direction_string(v: Vector2) -> String:
 		return "right"  if v.x > 0.0 else "left"
 	else:
 		return "down"  if v.y > 0.0 else "up"
+
+
+func pan_camera_to(node : Node2D) -> void:
+	current_state = State.DIALOG
+	await create_tween().tween_property(camera,"global_position",node.global_position,1).finished
+
+
+func pan_camera_back() -> void:
+	await pan_camera_to(self)
+	current_state = State.IDLE
