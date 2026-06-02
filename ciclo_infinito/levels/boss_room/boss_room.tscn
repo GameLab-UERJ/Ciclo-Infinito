@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bltky00w7yru1" path="res://assets/art/tilesets/Itens_da_sala_do_boss/caveira_e_ossos.png" id="8_od868"]
 [ext_resource type="Texture2D" uid="uid://c1opt1xefobbk" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pisotalvezpng.png" id="9_3sdgd"]
 [ext_resource type="Texture2D" uid="uid://c17cm1cr0rxqo" path="res://assets/art/tilesets/Itens_da_sala_do_boss/Pilarmuro.png" id="10_f4nee"]
+[ext_resource type="PackedScene" uid="uid://dyjwfrwsly7lx" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.tscn" id="11_nhjq1"]
 [ext_resource type="Texture2D" uid="uid://bta6ohxvy2jdk" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar1.png" id="11_weo27"]
 [ext_resource type="Texture2D" uid="uid://bbhbdqv0ch5hn" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar2.png" id="12_ktetc"]
 [ext_resource type="Script" uid="uid://dhwy74dwvwl1k" path="res://levels/boss_room/transparent_area.gd" id="13_3mmng"]
@@ -28,6 +29,9 @@ size = Vector2(119.994934, 73.45471)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3mmng"]
 size = Vector2(119.994934, 156.72736)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nhjq1"]
+size = Vector2(24, 27)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rlcd1"]
 texture = ExtResource("3_ps1ce")
@@ -3448,6 +3452,17 @@ shape = SubResource("RectangleShape2D_3mmng")
 position = Vector2(172.99493, 70.45471)
 shape = SubResource("RectangleShape2D_3mmng")
 
+[node name="EndCutsceneArea" type="Area2D" parent="." unique_id=37269724]
+z_index = 3
+position = Vector2(155.09473, -298.84595)
+scale = Vector2(2, 2)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndCutsceneArea" unique_id=147223297]
+position = Vector2(0.5, 8)
+shape = SubResource("RectangleShape2D_nhjq1")
+debug_color = Color(0.8475721, 0.00095953466, 0.90705407, 0.41960785)
+
 [node name="Piso" type="TileMapLayer" parent="." unique_id=252117632]
 z_index = -2
 texture_filter = 1
@@ -3525,6 +3540,40 @@ y_sort_enabled = true
 texture_filter = 1
 tile_map_data = PackedByteArray("AAAKAO7/AwAAAAAAAAA=")
 tile_set = SubResource("TileSet_3mmng")
+
+[node name="FireMeteor" parent="Entrada" unique_id=1857492451 instance=ExtResource("11_nhjq1")]
+z_index = 6
+position = Vector2(114.86131, -219.17102)
+
+[node name="FireMeteor2" parent="Entrada" unique_id=2067190458 instance=ExtResource("11_nhjq1")]
+z_index = 6
+position = Vector2(139.5862, -220.57054)
+
+[node name="FireMeteor3" parent="Entrada" unique_id=138135318 instance=ExtResource("11_nhjq1")]
+z_index = 6
+position = Vector2(175.04076, -218.70451)
+
+[node name="FireMeteor4" parent="Entrada" unique_id=1623729726 instance=ExtResource("11_nhjq1")]
+z_index = 6
+position = Vector2(114.86131, -219.17102)
+
+[node name="FireMeteor5" parent="Entrada" unique_id=594247916 instance=ExtResource("11_nhjq1")]
+z_index = 6
+position = Vector2(109.26323, -279.81696)
+
+[node name="FireMeteor6" parent="Entrada" unique_id=90105421 instance=ExtResource("11_nhjq1")]
+z_index = 6
+position = Vector2(202.09819, -268.6208)
+
+[node name="FireMeteor7" parent="Entrada" unique_id=533552173 instance=ExtResource("11_nhjq1")]
+z_index = 6
+position = Vector2(8.869431, -218.21893)
+
+[node name="FireMeteor8" parent="Entrada" unique_id=341670018 instance=ExtResource("11_nhjq1")]
+position = Vector2(299.96997, -212.15433)
+
+[node name="CameraSpotEndCutscene" type="Marker2D" parent="Entrada" unique_id=557880319]
+position = Vector2(155, -280)
 
 [node name="Tocha" type="AnimatedSprite2D" parent="." unique_id=1479186523]
 texture_filter = 1
@@ -3670,7 +3719,7 @@ position = Vector2(134, -102)
 scale = Vector2(3, 3)
 collision_mask = 0
 player = NodePath("../player")
-max_health = 500.0
+max_health = 20.0
 chance_of_attacking_after_moving = 0.85
 top_left_corner = NodePath("Marker2D")
 bottom_right_corner = NodePath("Marker2D2")
@@ -3690,4 +3739,5 @@ stream = ExtResource("21_ps1ce")
 autoplay = true
 
 [connection signal="body_entered" from="CutsceneArea" to="." method="_on_cutscene_area_body_entered"]
+[connection signal="body_entered" from="EndCutsceneArea" to="." method="_on_end_cutscene_area_body_entered"]
 [connection signal="died" from="HeraldOfFailure" to="." method="_on_herald_of_failure_died"]

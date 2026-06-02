@@ -148,12 +148,13 @@ func die() -> void:
 # --- NOVO: Deixa o player imortal por um determinado tempo ---
 func start_invincibility(duration: float) -> void:
 	is_invincible = true
-	
-	set_deferred("collision_mask",collision_mask^0x8)
+	if Util.is_collision_mask_layer_set(self,"Enemy"):
+		set_deferred("collision_mask",collision_mask^Util.collision_layer_values.Enemy)
 	
 	await get_tree().create_timer(duration).timeout
 	
-	set_deferred("collision_mask",collision_mask^0x8)
+	if not Util.is_collision_mask_layer_set(self,"Enemy"):
+		set_deferred("collision_mask",collision_mask^Util.collision_layer_values.Enemy)
 	
 	is_invincible = false
 
@@ -161,7 +162,7 @@ func start_invincibility(duration: float) -> void:
 func _physics_process(delta: float):
 	if is_dead:
 		return
-		
+	
 	state_label.text = State.find_key(current_state)
 	match current_state:
 		State.IDLE:
@@ -229,6 +230,7 @@ func _attack_state():
 
 func _dash_state():
 	if dash_timer.is_stopped():
+		start_invincibility(dash_duracao)
 		dash_sfx.play(0.4)
 		dash_timer.start()
 		var dash_direction: Vector2 = next_direction

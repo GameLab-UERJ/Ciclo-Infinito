@@ -14,35 +14,40 @@ signal finished
 var _final_y_position : float = -10
 var _final_impact_scale : Vector2
 var _player_damageable : bool = false
+var _has_damaged_player : bool = false
 
 
 @onready var fire_ball_sprite: AnimatedSprite2D = $FireBallSprite
 @onready var shadow_sprite: Sprite2D = $ShadowSprite
-@onready var impact_sprite: Sprite2D = $ImpactSprite
 @onready var end_lifetime_timer: Timer = $EndLifetimeTimer
+@onready var explosion: AnimatedSprite2D = $Explosion
+@onready var impact_sfx: AudioStreamPlayer2D = $ImpactSfx
 
 
 func _ready() -> void:
-	_final_impact_scale = impact_sprite.scale
 	end_lifetime_timer.wait_time = total_damage_time_after_drop
 	reset()
 
 #Only for testing. To be removed
-func _process(_delta: float) -> void:
-	#if Input.is_action_just_released("ui_accept"):
-	#	drop()
-	pass
+func _physics_process(delta: float) -> void:
+	if _has_damaged_player:
+		return
+
+	if _player_damageable and explosion.is_playing():
+		deal_damage_to_player.emit()
+		_has_damaged_player = true
 
 func reset() -> void:
 	visible = false
-	impact_sprite.scale = Vector2.ZERO
 	shadow_sprite.scale = Vector2.ZERO
 	fire_ball_sprite.play("drop")
 	fire_ball_sprite.position.y = initial_y_position
 	end_lifetime_timer.stop()
 	_player_damageable = false
 
-func drop() -> void:
+func drop(wait_time: float = 0) -> void:
+	if wait_time:
+		await get_tree().create_timer(wait_time).timeout
 	reset()
 	visible = true
 	var drop_tween : Tween = create_tween()
@@ -53,17 +58,8 @@ func drop() -> void:
 
 func _on_drop_finished() -> void:
 	fire_ball_sprite.play("disappear")
-	var temp_impact_self_modulate : Color = impact_sprite.self_modulate
-	temp_impact_self_modulate.a = 1
-	
-	create_tween().tween_property(
-		impact_sprite,
-		"scale",
-		_final_impact_scale,
-		0.2
-	)
-	if _player_damageable:
-		deal_damage_to_player.emit()
+	explosion.play("explode")
+	impact_sfx.play()
 	end_lifetime_timer.start()
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
@@ -79,3 +75,8 @@ func _on_damage_area_body_exited(body: Node2D) -> void:
 func _on_end_lifetime_timer_timeout() -> void:
 	queue_free()
 	finished.emit()
+
+
+func _on_explosion_frame_changed() -> void:
+	if explosion.frame > 6:
+		_has_damaged_player = true

@@ -1158,7 +1158,7 @@ radius = 39.051247
 
 [node name="GolemBlue" type="CharacterBody2D" unique_id=875007688]
 collision_layer = 8
-collision_mask = 3
+collision_mask = 11
 motion_mode = 1
 script = ExtResource("1_5uxnx")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
