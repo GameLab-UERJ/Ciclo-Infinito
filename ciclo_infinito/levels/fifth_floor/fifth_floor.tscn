@@ -99,7 +99,7 @@ theme_override_colors/font_shadow_color = Color(0.662745, 0.027451, 0.933333, 1)
 theme_override_fonts/font = ExtResource("13_ni4lu")
 text = "Inimigos mortos:"
 
-[node name="TextureRect" type="TextureRect" parent="player" unique_id=1804543002]
+[node name="Missions" type="TextureRect" parent="player" unique_id=1804543002]
 offset_left = 120.909
 offset_top = -153.636
 offset_right = 654.909
@@ -108,7 +108,7 @@ scale = Vector2(0.284224, 0.275615)
 texture = ExtResource("14_71gwp")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="player/TextureRect" unique_id=723667528]
+[node name="Label" type="Label" parent="player/Missions" unique_id=723667528]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

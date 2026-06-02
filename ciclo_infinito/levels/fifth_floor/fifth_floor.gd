@@ -6,12 +6,13 @@ var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
 
 
 @onready var pause_menu = $player/pause
-@onready var mission_label = $player/TextureRect/Label
+@onready var mission_label = $player/Missions/Label
 @onready var pedro: CheeseNpc = $Pedro
 @onready var player: Player = $player
 @onready var barreira: Barrier = $Barreira
 @onready var barreira_boss: Barrier = $BarreiraBoss
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
+@onready var enemies: Label = $player/enemies
 
 
 var missoes = [
@@ -31,6 +32,8 @@ func _ready():
 	configurar_label()
 	_atualizar_texto_missao()
 	conectar_sinais()
+	mission_label.get_parent().reparent(player.camera)
+	enemies.reparent(player.camera)
 
 
 func configurar_label():
