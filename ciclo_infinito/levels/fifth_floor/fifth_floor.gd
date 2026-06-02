@@ -11,6 +11,7 @@ var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
 @onready var player: Player = $player
 @onready var barreira: Barrier = $Barreira
 @onready var barreira_boss: Barrier = $BarreiraBoss
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
 
 
 var missoes = [

@@ -20,7 +20,7 @@ enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG, CUTSCENE}
 @export var hit2_active_time := 0.14
 @export var attack2_lock_time := 0.28
 @export_group("Dash")
-@export var dash_speed: float = move_speed * 1.5
+@export var dash_speed: float = move_speed * 3
 @export var dash_duracao  = 0.2
 @export_group("Hitboxes")
 @export_subgroup("Hitbox sizes")
@@ -70,6 +70,7 @@ var vida_textures = [
 @onready var damage_recieved_sfx: AudioStreamPlayer = $DamageRecievedSFX
 @onready var death_sfx: AudioStreamPlayer = $DeathSFX
 @onready var attack_sfxplay: AudioStreamPlayer = $attack_sfxplay
+@onready var footsteps_sfx: AudioStreamPlayer2D = $FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
 
 
@@ -227,8 +228,8 @@ func _attack_state():
 
 
 func _dash_state():
-	dash_sfx.play()
 	if dash_timer.is_stopped():
+		dash_sfx.play(0.4)
 		dash_timer.start()
 		var dash_direction: Vector2 = next_direction
 		var in_dir: Vector2 = get_input_direction()
@@ -236,9 +237,7 @@ func _dash_state():
 			dash_direction = in_dir
 			next_direction = in_dir
 		dash_dir = dash_direction.normalized()
-		velocity = dash_dir * dash_speed
-	else:
-		velocity = dash_dir * dash_speed
+	velocity = dash_dir * dash_speed
 
 
 func _dialog_state():
@@ -430,3 +429,13 @@ func pan_camera_to(node : Node2D) -> void:
 func pan_camera_back() -> void:
 	await pan_camera_to(self)
 	current_state = State.IDLE
+
+
+func _on_animacoes_frame_changed() -> void:
+	if not anim:
+		return
+	
+	if anim.animation.begins_with("run"):
+		match anim.frame:
+			3,7:
+				footsteps_sfx.play()

@@ -193,7 +193,7 @@ position = Vector2(362, 420)
 [node name="golem12" parent="Enemies" unique_id=1251686522 instance=ExtResource("5_vl0w6")]
 position = Vector2(204, 407)
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="." unique_id=683724658]
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=683724658]
 stream = ExtResource("15_r8vnr")
 volume_db = -19.299
 autoplay = true

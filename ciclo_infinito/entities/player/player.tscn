@@ -29,9 +29,10 @@
 [ext_resource type="Texture2D" uid="uid://lhpa3xxkqu33" path="res://assets/art/player/RUN/run_up.png" id="25_a2brg"]
 [ext_resource type="Texture2D" uid="uid://c82joy0gpepr5" path="res://assets/art/menus/hud/3_hearts.png" id="26_arp52"]
 [ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="27_jjk8f"]
-[ext_resource type="AudioStream" uid="uid://bccw64i2jy4xe" path="res://assets/sfx/rpg-sword-attack-combo-17-388929.mp3" id="28_cnswy"]
+[ext_resource type="AudioStream" uid="uid://wfe6wpmf80cv" path="res://assets/sfx/player/soundreality-whoosh-velocity-383019.mp3" id="30_2soq1"]
 [ext_resource type="AudioStream" uid="uid://3ydqk3abb8kq" path="res://assets/sfx/Hit4.wav" id="30_24ehl"]
 [ext_resource type="AudioStream" uid="uid://ekxnyhyvqth0" path="res://assets/sfx/Giant_Grunt.wav" id="32_vewsg"]
+[ext_resource type="AudioStream" uid="uid://3jvf7gkajvqv" path="res://assets/sfx/player/data_pion-st1-footstep-sfx-323053.mp3" id="33_2soq1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_govaw"]
 atlas = ExtResource("2_gt4e4")
@@ -1453,8 +1454,8 @@ texture = ExtResource("2_bwdx1")
 material = ExtResource("2_24ehl")
 position = Vector2(0, -16.363625)
 sprite_frames = SubResource("SpriteFrames_to47r")
-animation = &"attack1_down"
-frame_progress = 0.8874806
+animation = &"run_up"
+frame = 7
 speed_scale = 1.5
 
 [node name="dash_timer" type="Timer" parent="." unique_id=481345477]
@@ -1500,22 +1501,27 @@ texture = ExtResource("26_arp52")
 
 [node name="attack_sfxplay" type="AudioStreamPlayer" parent="." unique_id=1830921781]
 stream = ExtResource("27_jjk8f")
-volume_db = -19.858
+volume_db = -10.0
 pitch_scale = 1.19
 mix_target = 1
 
 [node name="dash_sfx" type="AudioStreamPlayer" parent="." unique_id=315505597]
-stream = ExtResource("28_cnswy")
-volume_db = -34.668
+stream = ExtResource("30_2soq1")
+volume_db = -8.0
 
 [node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=1941439101]
 stream = ExtResource("30_24ehl")
-volume_db = -5.0
+volume_db = 8.0
 
 [node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=559540639]
 stream = ExtResource("32_vewsg")
-volume_db = -10.0
+volume_db = -5.0
 pitch_scale = 1.96
+
+[node name="FootstepsSfx" type="AudioStreamPlayer2D" parent="." unique_id=843265607]
+scale = Vector2(0.9090909, 0.9090909)
+stream = ExtResource("33_2soq1")
+volume_db = -10.0
 
 [node name="StateLabel" type="Label" parent="." unique_id=79007232]
 visible = false
@@ -1527,4 +1533,5 @@ theme_override_font_sizes/font_size = 6
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="frame_changed" from="animacoes" to="." method="_on_animacoes_frame_changed"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
