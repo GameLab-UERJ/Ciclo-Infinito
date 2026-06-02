@@ -1491,6 +1491,7 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_qgi3f")
 value = 100.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=452761772]
+z_index = 1000
 zoom = Vector2(1.6, 1.6)
 limit_enabled = false
 

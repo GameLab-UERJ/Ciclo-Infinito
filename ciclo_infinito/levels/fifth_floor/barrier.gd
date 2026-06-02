@@ -37,6 +37,7 @@ func open() -> void:
 	started_opening.emit()
 	animated_sprite.play("open")
 	if not silenced and not rumbling_sfx.playing:
+		open_sfx.play(0.36)
 		rumbling_sfx.play()
 
 

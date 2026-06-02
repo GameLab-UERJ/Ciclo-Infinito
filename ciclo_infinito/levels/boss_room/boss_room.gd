@@ -14,6 +14,7 @@ func _ready():
 	pause_menu.hide()
 	configurar_label()
 	_atualizar_texto_missao()
+	mission_label.get_parent().reparent(player.camera)
 
 
 func configurar_label():
