@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://bta6ohxvy2jdk" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar1.png" id="11_weo27"]
 [ext_resource type="Texture2D" uid="uid://bbhbdqv0ch5hn" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar2.png" id="12_ktetc"]
 [ext_resource type="Texture2D" uid="uid://dvavbjhis12il" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar3.png" id="13_hsv8e"]
-[ext_resource type="Texture2D" uid="uid://bs0yy0m5l3mob" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar4.png" id="14_gtf2v"]
 [ext_resource type="Texture2D" uid="uid://dumg0b73ao01j" path="res://assets/art/tilesets/Itens_da_sala_do_boss/arma2.png" id="15_61hjj"]
 [ext_resource type="Texture2D" uid="uid://yl5xs7y6l16n" path="res://assets/art/tilesets/Itens_da_sala_do_boss/arma1.png" id="16_s8h4i"]
 [ext_resource type="Texture2D" uid="uid://cnp7tqsjvs70k" path="res://assets/art/tilesets/Itens_da_sala_do_boss/escudo.png" id="17_tk42g"]
@@ -3168,12 +3167,10 @@ texture_region_size = Vector2i(32, 32)
 15:14/next_alternative_id = 3
 15:14/0 = 0
 15:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(9, -96, 16, -96, 16, 96, 9, 96)
-15:14/1 = 1
 1:15/size_in_atlas = Vector2i(1, 5)
 1:15/next_alternative_id = 2
 1:15/0 = 0
 1:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(9, -80, 16, -80, 16, 80, 9, 80)
-1:15/1 = 1
 15:20/0 = 0
 15:20/0/physics_layer_0/polygon_0/points = PackedVector2Array(16, -16, 16, 16, 9, 16, 9, -16)
 15:21/0 = 0
@@ -3294,86 +3291,77 @@ physics_layer_0/collision_layer = 1
 sources/2 = SubResource("TileSetAtlasSource_40evg")
 sources/3 = SubResource("TileSetAtlasSource_ps1ce")
 
-[sub_resource type="Animation" id="Animation_lkevw"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Tocha:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
+[sub_resource type="AtlasTexture" id="AtlasTexture_40evg"]
+atlas = ExtResource("7_fupb7")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="Animation" id="Animation_7qgqk"]
-resource_name = "tocha"
-length = 0.6333333
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Tocha:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.099999994, 0.19999999, 0.3, 0.39999998, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
+[sub_resource type="AtlasTexture" id="AtlasTexture_ps1ce"]
+atlas = ExtResource("7_fupb7")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mj3qb"]
-_data = {
-&"RESET": SubResource("Animation_lkevw"),
-&"tocha": SubResource("Animation_7qgqk")
-}
+[sub_resource type="AtlasTexture" id="AtlasTexture_3mmng"]
+atlas = ExtResource("7_fupb7")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5h65r"]
-texture = ExtResource("10_f4nee")
-texture_region_size = Vector2i(32, 32)
-10:1/size_in_atlas = Vector2i(4, 5)
-10:1/0 = 0
-10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(26, 74, -14, 74, -14.265106, 39.710945, 26, 40)
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhjq1"]
+atlas = ExtResource("7_fupb7")
+region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="TileSet" id="TileSet_ft18b"]
-tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_5h65r")
+[sub_resource type="AtlasTexture" id="AtlasTexture_mtko6"]
+atlas = ExtResource("7_fupb7")
+region = Rect2(0, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fupb7"]
+atlas = ExtResource("7_fupb7")
+region = Rect2(64, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_od868"]
+atlas = ExtResource("7_fupb7")
+region = Rect2(128, 64, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3sdgd"]
+atlas = ExtResource("7_fupb7")
+region = Rect2(192, 64, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f4nee"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_40evg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ps1ce")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3mmng")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhjq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mtko6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fupb7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_od868")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3sdgd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0sjjc"]
 texture = ExtResource("10_f4nee")
 texture_region_size = Vector2i(32, 32)
-10:1/size_in_atlas = Vector2i(4, 5)
-10:1/0 = 0
-10:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(24, 42, 24, 74, -14, 74, -14, 42)
+11:1/size_in_atlas = Vector2i(2, 5)
+11:1/0 = 0
+11:1/0/texture_origin = Vector2i(5, 64)
+11:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(18, -22, 22, -10, 16, 10, -16, 10, -24, -10, -16, -22)
 
 [sub_resource type="TileSet" id="TileSet_i271w"]
 tile_size = Vector2i(32, 32)
@@ -3410,19 +3398,24 @@ texture = ExtResource("13_hsv8e")
 texture_region_size = Vector2i(32, 32)
 4:15/size_in_atlas = Vector2i(4, 5)
 4:15/0 = 0
-4:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-34, 10, 8, 10, 8, 46, -34, 46)
+4:15/0/texture_origin = Vector2i(-12, 42)
+4:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-20, -30, 18, -30, 18, -4, 12, 4, -14, 4, -20, -4)
 
 [sub_resource type="TileSet" id="TileSet_yfq71"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_i271w")
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wd4m"]
+load_path = "res://.godot/imported/pilar4.png-00b406cfb2e2fc11e3feb52573299452.ctex"
+
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vi0a6"]
-texture = ExtResource("14_gtf2v")
+texture = SubResource("CompressedTexture2D_0wd4m")
 texture_region_size = Vector2i(32, 32)
 4:6/size_in_atlas = Vector2i(4, 4)
 4:6/0 = 0
-4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 14, 4, 14, 4, 48, -32, 48)
+4:6/0/texture_origin = Vector2i(-14, 44)
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -20, 16, -20, 26, -8, 16, 8, -16, 8, -24, -8)
 
 [sub_resource type="TileSet" id="TileSet_72lgo"]
 tile_size = Vector2i(32, 32)
@@ -3435,7 +3428,7 @@ position = Vector2(-11, 2)
 script = ExtResource("1_0wd4m")
 metadata/_edit_horizontal_guides_ = [310.0, -88.0, 163.0, -195.0]
 
-[node name="Piso" type="TileMapLayer" parent="." unique_id=1788610758]
+[node name="Piso" type="TileMapLayer" parent="." unique_id=252117632]
 z_index = -2
 texture_filter = 1
 tile_map_data = PackedByteArray("AAADAA8AAAAuABEAAAAFAA8AAAAuABEAAAAFAA0AAAAuABEAAAADAA0AAAAuABEAAAADAAsAAAAuABEAAAAFAAsAAAAuABEAAAAFAAkAAAAuABEAAAADAAkAAAAuABEAAAADAAcAAAAuABEAAAAFAAcAAAAuABEAAAAHAAcAAAAuABEAAAAJAAcAAAAuABEAAAALAAcAAAAuABEAAAANAAcAAAAuABEAAAAPAAcAAAAuABEAAAARAAcAAAAuABEAAAATAAcAAAAuABEAAAAVAAcAAAAuABEAAAAXAAcAAAAuABEAAAAXAAUAAAAuABEAAAAVAAUAAAAuABEAAAATAAUAAAAuABEAAAARAAUAAAAuABEAAAAQAAUAAAAuABEAAAAPAAUAAAAuABEAAAANAAUAAAAuABEAAAALAAUAAAAuABEAAAAJAAUAAAAuABEAAAAHAAUAAAAuABEAAAAFAAUAAAAuABEAAAADAAUAAAAuABEAAAABAAUAAAAuABEAAAD//wUAAAAuABEAAAD//wMAAAAuABEAAAD//wEAAAAuABEAAAABAAEAAAAuABEAAAABAAMAAAAuABEAAAADAAMAAAAuABEAAAADAAEAAAAuABEAAAAFAAMAAAAuABEAAAAHAAMAAAAuABEAAAAJAAMAAAAuABEAAAAFAAEAAAAuABEAAAAHAAEAAAAuABEAAAAJAAEAAAAuABEAAAALAAMAAAAuABEAAAALAAEAAAAuABEAAAANAAEAAAAuABEAAAANAAMAAAAuABEAAAAPAAMAAAAuABEAAAAPAAEAAAAuABEAAAARAAEAAAAuABEAAAARAAMAAAAuABEAAAATAAMAAAAuABEAAAATAAEAAAAuABEAAAAVAAEAAAAuABEAAAAVAAMAAAAuABEAAAAXAAMAAAAuABEAAAAXAAEAAAAuABEAAAABAAcAAAAuABEAAAD//wcAAAAuABEAAAD/////AAAuABEAAAABAP//AAAuABEAAAADAP//AAAuABEAAAAFAP//AAAuABEAAAAHAP//AAAuABEAAAAJAP//AAAuABEAAAALAP//AAAuABEAAAANAP//AAAuABEAAAAPAP//AAAuABEAAAARAP//AAAuABEAAAATAP//AAAuABEAAAAVAP//AAAuABEAAAAXAP//AAAuABEAAAD///3/AAAuABEAAAABAP3/AAAuABEAAAADAP3/AAAuABEAAAAFAP3/AAAuABEAAAAHAP3/AAAuABEAAAAJAP3/AAAuABEAAAALAP3/AAAuABEAAAANAP3/AAAuABEAAAAPAP3/AAAuABEAAAARAP3/AAAuABEAAAATAP3/AAAuABEAAAAVAP3/AAAuABEAAAAXAP3/AAAuABEAAAD///v/AAAuABEAAAABAPv/AAAuABEAAAADAPv/AAAuABEAAAAFAPv/AAAuABEAAAAHAPv/AAAuABEAAAAJAPv/AAAuABEAAAALAPv/AAAuABEAAAANAPv/AAAuABEAAAAPAPv/AAAuABEAAAARAPv/AAAuABEAAAATAPv/AAAuABEAAAAVAPv/AAAuABEAAAAXAPv/AAAuABEAAAAFABEAAAAuABEAAAADABEAAAAuABEAAAADABMAAAAuABEAAAAFABMAAAAuABEAAAAFABUAAAAuABEAAAADABUAAAAuABEAAAD9//v/AAAuABEAAAD7//v/AAAuABEAAAD5//v/AAAuABEAAAD3//v/AAAuABEAAAD1//v/AAAuABEAAADz//v/AAAuABEAAADx//v/AAAuABEAAADx/wcAAAAuABEAAADz/wcAAAAuABEAAAD1/wcAAAAuABEAAAD3/wcAAAAuABEAAAD5/wcAAAAuABEAAAD7/wcAAAAuABEAAAD9/wcAAAAuABEAAAD9/wUAAAAuABEAAAD9/wMAAAAuABEAAAD9/wEAAAAuABEAAAD9////AAAuABEAAAD9//3/AAAuABEAAAD7//3/AAAuABEAAAD5//3/AAAuABEAAAD3//3/AAAuABEAAAD1//3/AAAuABEAAADz//3/AAAuABEAAADx//3/AAAuABEAAADx////AAAuABEAAADz////AAAuABEAAAD1////AAAuABEAAAD3////AAAuABEAAAD5////AAAuABEAAAD7////AAAuABEAAAD7/wEAAAAuABEAAAD5/wEAAAAuABEAAAD3/wEAAAAuABEAAAD1/wEAAAAuABEAAADz/wEAAAAuABEAAADx/wEAAAAuABEAAADx/wMAAAAuABEAAADx/wUAAAAuABEAAADz/wUAAAAuABEAAADz/wMAAAAuABEAAAD1/wMAAAAuABEAAAD1/wUAAAAuABEAAAD3/wUAAAAuABEAAAD3/wMAAAAuABEAAAD5/wMAAAAuABEAAAD5/wUAAAAuABEAAAD7/wUAAAAuABEAAAD7/wMAAAAuABEAAADx//n/AAAuABEAAADz//n/AAAuABEAAAD1//n/AAAuABEAAAD3//n/AAAuABEAAAD5//n/AAAuABEAAAD7//n/AAAuABEAAAD9//n/AAAuABEAAAD///n/AAAuABEAAAABAPn/AAAuABEAAAADAPn/AAAuABEAAAAFAPn/AAAuABEAAAAHAPn/AAAuABEAAAAJAPn/AAAuABEAAAALAPn/AAAuABEAAAANAPn/AAAuABEAAAAPAPn/AAAuABEAAAARAPn/AAAuABEAAAATAPn/AAAuABEAAAAVAPn/AAAuABEAAAAXAPn/AAAuABEAAAAXAPf/AAAuABEAAAAVAPf/AAAuABEAAAATAPf/AAAuABEAAAARAPf/AAAuABEAAAAPAPf/AAAuABEAAAANAPf/AAAuABEAAAALAPf/AAAuABEAAAAJAPf/AAAuABEAAAAHAPf/AAAuABEAAAAFAPf/AAAuABEAAAADAPf/AAAuABEAAAABAPf/AAAuABEAAAD///f/AAAuABEAAAD9//f/AAAuABEAAAD7//f/AAAuABEAAAD5//f/AAAuABEAAAD3//f/AAAuABEAAAD1//f/AAAuABEAAADz//f/AAAuABEAAADx//f/AAAuABEAAAADABcAAAAuABEAAAAFABcAAAAuABEAAAA=")
@@ -3451,6 +3444,7 @@ tile_set = SubResource("TileSet_j7ks0")
 [node name="Arma2" type="TileMapLayer" parent="." unique_id=1223129790]
 z_index = -2
 texture_filter = 1
+position = Vector2(0, 3)
 scale = Vector2(0.58532524, 0.5697963)
 tile_map_data = PackedByteArray("AAD4//3/AAAIAAwAAAAnAAcAAAAIAAwAAAAGACAAAAAIAAwAAAA=")
 tile_set = SubResource("TileSet_idmed")
@@ -3512,41 +3506,23 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAAKAO7/AwAAAAAAAAA=")
 tile_set = SubResource("TileSet_3mmng")
 
-[node name="Tocha2" type="Sprite2D" parent="." unique_id=1512997420]
+[node name="Tocha" type="AnimatedSprite2D" parent="." unique_id=1479186523]
 texture_filter = 1
-position = Vector2(265, -269)
-texture = ExtResource("7_fupb7")
-hframes = 4
-vframes = 2
+position = Vector2(53, -270)
+sprite_frames = SubResource("SpriteFrames_f4nee")
+autoplay = "default"
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tocha2" unique_id=47513279]
-libraries/ = SubResource("AnimationLibrary_mj3qb")
-autoplay = &"tocha"
-
-[node name="Tocha" type="Sprite2D" parent="." unique_id=457534480]
+[node name="Tocha2" type="AnimatedSprite2D" parent="." unique_id=23799258]
 texture_filter = 1
-position = Vector2(15, -271)
-texture = ExtResource("7_fupb7")
-hframes = 4
-vframes = 2
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Tocha" unique_id=811099588]
-root_node = NodePath("../..")
-libraries/ = SubResource("AnimationLibrary_mj3qb")
-autoplay = &"tocha"
-
-[node name="Pilarmuro2" type="TileMapLayer" parent="." unique_id=776592890]
-y_sort_enabled = true
-texture_filter = 1
-position = Vector2(-17, 159)
-tile_map_data = PackedByteArray("AAAKAPL/AAAKAAEAABA=")
-tile_set = SubResource("TileSet_ft18b")
+position = Vector2(265, -270)
+sprite_frames = SubResource("SpriteFrames_f4nee")
+autoplay = "default"
 
 [node name="Pilarmuro" type="TileMapLayer" parent="." unique_id=1895958691]
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(285, 159)
-tile_map_data = PackedByteArray("AAD1//L/AQAKAAEAAAA=")
+tile_map_data = PackedByteArray("AAD3//T/AQALAAEAAAAAAPT/AQALAAEAAAD9//T/AQALAAEAAAD8//T/AQALAAEAAAD7//T/AQALAAEAAAD6//T/AQALAAEAAAA=")
 tile_set = SubResource("TileSet_i271w")
 
 [node name="Pilar1" type="TileMapLayer" parent="." unique_id=304897064]
@@ -3573,11 +3549,11 @@ tile_set = SubResource("TileSet_yfq71")
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(317, 159)
-tile_map_data = PackedByteArray("AADv//b/AAAEAAYAAAA=")
+tile_map_data = PackedByteArray("AADv//f/AAAEAAYAAAA=")
 tile_set = SubResource("TileSet_72lgo")
 
 [node name="player" parent="." unique_id=1305817267 instance=ExtResource("18_d40j6")]
-position = Vector2(141, 670)
+position = Vector2(141, 669.00006)
 
 [node name="pause" parent="player" unique_id=204471871 instance=ExtResource("19_ps1ce")]
 anchors_preset = 0
