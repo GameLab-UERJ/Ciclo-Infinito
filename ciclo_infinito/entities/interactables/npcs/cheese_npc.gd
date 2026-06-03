@@ -25,10 +25,7 @@ var is_moving: bool = false
 # ONREADY
 # ========================
 
-@onready var caixa_de_dialogo: Label = $Area2D/CanvasLayer/CaixaDeDialogo
-@onready var texto_dialogo: Label = $Area2D/CanvasLayer/TextoDialogo
 @onready var label_interacao: Label = $Area2D/LabelInteracao
-@onready var pular_dialogo: Label = $Area2D/CanvasLayer/PularDialogo
 @onready var sprite: AnimatedSprite2D = $Area2D/Sprite
 @onready var ponto_patrulha_a: Marker2D = get_node("PontoPatrulhaA") if has_node("PontoPatrulhaA") else null
 @onready var ponto_patrulha_b: Marker2D = get_node("PontoPatrulhaB") if has_node("PontoPatrulhaB") else null
@@ -39,10 +36,6 @@ var is_moving: bool = false
 
 func _ready() -> void:
 	DialogueManager.dialogue_ended.connect(encerra_dialogo)
-	
-	caixa_de_dialogo.visible = false
-	texto_dialogo.visible = false
-	label_interacao.visible = false
 
 	if ponto_patrulha_a and ponto_patrulha_b:
 		pos_a = ponto_patrulha_a.global_position
@@ -85,7 +78,10 @@ func inicia_dialogo() -> void:
 		player._on_dialogo_iniciado()
 
 
-func encerra_dialogo(_dialogue : DialogueResource) -> void:
+func encerra_dialogo(dialogue : DialogueResource) -> void:
+	if not dialogue == dialogo:
+		return
+	
 	falando = false
 	if player:
 		player._on_dialogo_encerrado()

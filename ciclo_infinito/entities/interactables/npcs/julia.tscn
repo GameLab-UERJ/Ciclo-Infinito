@@ -168,13 +168,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_decul"]
 size = Vector2(111, 80)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_oh27l"]
-bg_color = Color(0.00392157, 0, 0, 0.545098)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_53jpq"]
-bg_color = Color(0.233925, 0.233925, 0.233925, 0.792157)
-draw_center = false
-
 [sub_resource type="LabelSettings" id="LabelSettings_o4hm0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfyt3"]
@@ -208,34 +201,6 @@ frame_progress = 0.0035015477
 visible = false
 position = Vector2(24.5, 30)
 shape = SubResource("RectangleShape2D_decul")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1304327940]
-layer = 2
-
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=1905287445]
-offset_left = 68.0
-offset_top = 61.0
-offset_right = 768.0
-offset_bottom = 161.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_oh27l")
-autowrap_mode = 2
-
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=2058126073]
-offset_left = 84.0
-offset_top = 74.0
-offset_right = 751.0
-offset_bottom = 150.0
-theme_override_styles/normal = SubResource("StyleBoxFlat_53jpq")
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=1362831660]
-
-[node name="PularDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=855121677]
-offset_left = 516.0
-offset_top = 138.0
-offset_right = 767.0
-offset_bottom = 161.0
 
 [node name="LabelInteracao" type="Label" parent="Area2D" unique_id=13117033]
 offset_left = -25.0

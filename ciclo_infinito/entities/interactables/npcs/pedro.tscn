@@ -50,11 +50,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Theme" id="Theme_ytjd8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hivs1"]
-bg_color = Color(0.187176, 0.187176, 0.187176, 0.552941)
-
 [sub_resource type="LabelSettings" id="LabelSettings_faxwa"]
 font_size = 8
 shadow_color = Color(0, 0, 0, 1)
@@ -62,11 +57,12 @@ shadow_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
 size = Vector2(25, 71)
 
-[node name="Pedro" type="CharacterBody2D" unique_id=1951016626]
+[node name="Pedro" type="CharacterBody2D" unique_id=1993631793]
 position = Vector2(0.9, 0)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_f6j54")
+metadata/_custom_type_script = "uid://crikhcj4uvp0e"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
@@ -88,36 +84,6 @@ shape = SubResource("RectangleShape2D_gu3sj")
 sprite_frames = SubResource("SpriteFrames_cgete")
 animation = &"idle Vamp"
 autoplay = "idle Vamp"
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1283099891]
-layer = 2
-
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=351317161]
-offset_left = 68.0
-offset_top = 61.0
-offset_right = 768.0
-offset_bottom = 161.0
-theme = SubResource("Theme_ytjd8")
-theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=804664432]
-offset_left = 84.0
-offset_top = 74.0
-offset_right = 751.0
-offset_bottom = 150.0
-theme_override_font_sizes/font_size = 15
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=356194070]
-
-[node name="PularDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=104532168]
-offset_left = 516.0
-offset_top = 138.0
-offset_right = 767.0
-offset_bottom = 161.0
 
 [node name="LabelInteracao" type="Label" parent="Area2D" unique_id=623400268]
 offset_left = -24.0

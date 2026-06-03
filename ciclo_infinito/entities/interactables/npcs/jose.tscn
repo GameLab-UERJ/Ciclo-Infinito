@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://crikhcj4uvp0e" path="res://entities/interactables/npcs/cheese_npc.gd" id="1_hfcox"]
 [ext_resource type="Texture2D" uid="uid://b80tuigosseak" path="res://assets/art/npcs/jose/jose_idle.png" id="2_bv1l4"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_hfcox"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="4_see4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
 size = Vector2(77, 49)
@@ -57,11 +58,6 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="Theme" id="Theme_ytjd8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hivs1"]
-bg_color = Color(0.187176, 0.187176, 0.187176, 0.552941)
-
 [sub_resource type="LabelSettings" id="LabelSettings_faxwa"]
 font_size = 8
 shadow_color = Color(0, 0, 0, 1)
@@ -69,11 +65,12 @@ shadow_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
 size = Vector2(25, 43)
 
-[node name="Jose" type="CharacterBody2D" unique_id=3184896]
+[node name="Jose" type="CharacterBody2D" unique_id=1159699131]
 position = Vector2(0.9, 0)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_hfcox")
+metadata/_custom_type_script = "uid://crikhcj4uvp0e"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
@@ -98,45 +95,16 @@ autoplay = "idle"
 frame_progress = 0.378858
 flip_h = true
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1984156275]
-layer = 2
-
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=980316351]
-offset_left = 68.0
-offset_top = 61.0
-offset_right = 768.0
-offset_bottom = 161.0
-theme = SubResource("Theme_ytjd8")
-theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=77554889]
-offset_left = 84.0
-offset_top = 74.0
-offset_right = 751.0
-offset_bottom = 150.0
-theme_override_font_sizes/font_size = 15
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=104065868]
-
-[node name="PularDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=445057466]
-offset_left = 516.0
-offset_top = 138.0
-offset_right = 767.0
-offset_bottom = 161.0
-
 [node name="LabelInteracao" type="Label" parent="Area2D" unique_id=349860372]
 offset_left = -24.0
 offset_top = -34.0
 offset_right = 37.0
+theme_override_fonts/font = ExtResource("4_see4r")
+theme_override_font_sizes/font_size = 16
 label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1709931667]
-visible = false
 position = Vector2(-5.5, 22.5)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)

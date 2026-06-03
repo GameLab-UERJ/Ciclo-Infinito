@@ -71,6 +71,8 @@ var mutation_cooldown: Timer = Timer.new()
 ## Indicator to show that player can progress dialogue.
 @onready var progress: Polygon2D = %Progress
 
+@onready var talking_sfx: AudioStreamPlayer = $TalkingSfx
+@onready var selected_sfx: AudioStreamPlayer = $SelectedSfx
 
 func _ready() -> void:
 	balloon.hide()
@@ -92,6 +94,10 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
+	if progress.visible:
+		talking_sfx.play()
+	else:
+		talking_sfx.stop()
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -212,6 +218,7 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
+	selected_sfx.play()
 	next(response.next_id)
 
 

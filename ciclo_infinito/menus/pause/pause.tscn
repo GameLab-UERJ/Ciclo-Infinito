@@ -1,6 +1,12 @@
 [gd_scene format=3 uid="uid://bw0i1wy6c26yp"]
 
 [ext_resource type="Script" uid="uid://b62184fnaafn3" path="res://menus/pause/pause.gd" id="1_00tvw"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_327xx"]
+[ext_resource type="AudioStream" uid="uid://wfe6wpmf80cv" path="res://assets/sfx/player/soundreality-whoosh-velocity-383019.mp3" id="3_f8cew"]
+[ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="4_1p5lp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_327xx"]
+bg_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
 
 [node name="Control" type="Control" unique_id=204471871]
 process_mode = 2
@@ -49,19 +55,31 @@ layout_mode = 2
 
 [node name="resumebutton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=673512400]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_327xx")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_327xx")
 text = "Resume"
 
 [node name="optionsbutton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=2109752151]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_327xx")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_327xx")
 text = "Opções"
 
 [node name="Controles" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=456575190]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_327xx")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_327xx")
 text = "Controles
 "
 
 [node name="quitbutton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=780739351]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_327xx")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_327xx")
 text = "Voltar ao menu iniciar"
 
 [node name="MenuOpcoes" type="VBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1200399122]
@@ -76,24 +94,49 @@ layout_mode = 2
 custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_327xx")
+theme_override_font_sizes/font_size = 26
 text = "Volume geral"
 
 [node name="VolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer" unique_id=1638864458]
-custom_minimum_size = Vector2(300, 9)
+custom_minimum_size = Vector2(520, 9)
 layout_mode = 2
+size_flags_vertical = 4
 
 [node name="FullScreenButton" type="Button" parent="MarginContainer/VBoxContainer/MenuOpcoes" unique_id=62465894]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_327xx")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_327xx")
 text = "Tela cheia"
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/MenuOpcoes" unique_id=1945522866]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_327xx")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_327xx")
 text = "Voltar"
 
+[node name="HoverSfx" type="AudioStreamPlayer" parent="." unique_id=1668812430]
+stream = ExtResource("3_f8cew")
+volume_db = -20.0
+pitch_scale = 2.0
+max_polyphony = 6
+
+[node name="PressedSfx" type="AudioStreamPlayer" parent="." unique_id=229459472]
+stream = ExtResource("4_1p5lp")
+volume_db = -10.0
+
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuPrincipal/resumebutton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/resumebutton" to="." method="_on_resumebutton_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton" to="." method="_on_optionsbutton_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuPrincipal/Controles" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/Controles" to="." method="_on_controles_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuPrincipal/quitbutton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/quitbutton" to="." method="_on_quitbutton_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/VolumeSlider" to="." method="_on_volume_changed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuOpcoes/FullScreenButton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOpcoes/FullScreenButton" to="." method="_on_full_screen_button_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuOpcoes/BackButton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuOpcoes/BackButton" to="." method="_on_backbutton_pressed"]

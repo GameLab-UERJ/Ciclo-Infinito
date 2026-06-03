@@ -80,33 +80,35 @@ text = "Pedro"
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
 material = SubResource("ShaderMaterial_yw1aw")
 position = Vector2(573, -235)
+scale = Vector2(1, 1)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = -163.3766
-offset_top = -75.19482
-offset_right = 476.6234
-offset_bottom = 284.80518
+offset_left = -173.63637
+offset_top = -96.36363
+offset_right = 522.7273
+offset_bottom = 312.7273
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(0.5, 0.5)
 
 [node name="enemies" type="Label" parent="player" unique_id=574180986]
-offset_left = -264.545
-offset_top = -125.455
-offset_right = -133.545
-offset_bottom = -102.455
+visible = false
+offset_left = -293.545
+offset_top = -140.455
+offset_right = -162.545
+offset_bottom = -117.455
 theme_override_colors/font_shadow_color = Color(0.662745, 0.027451, 0.933333, 1)
 theme_override_fonts/font = ExtResource("13_ni4lu")
 text = "Inimigos mortos:"
 
 [node name="Missions" type="TextureRect" parent="player" unique_id=1804543002]
-offset_left = 120.909
-offset_top = -153.636
-offset_right = 654.909
-offset_bottom = 131.364
+offset_left = 149.90894
+offset_top = -170.63599
+offset_right = 683.90894
+offset_bottom = 114.36401
 scale = Vector2(0.284224, 0.275615)
 texture = ExtResource("14_71gwp")
 expand_mode = 1

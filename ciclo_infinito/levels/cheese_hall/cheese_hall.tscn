@@ -11,13 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://12i1ywgpw05p" path="res://entities/interactables/npcs/julia.tscn" id="6_dw1uh"]
 [ext_resource type="Texture2D" uid="uid://dslkbgs4suie3" path="res://assets/art/tilesets/trash_right.png" id="7_v1y88"]
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="8_7nto0"]
-[ext_resource type="Resource" uid="uid://bknr3kx6tuqqa" path="res://dialogue/maria.dialogue" id="8_daq30"]
-[ext_resource type="Resource" uid="uid://coj6yk4yalr01" path="res://dialogue/julia.dialogue" id="8_nli6l"]
+[ext_resource type="Resource" uid="uid://7lcd48ifqwik" path="res://dialogue/maria.dialogue" id="8_daq30"]
+[ext_resource type="Resource" uid="uid://os4wg6oi2kp3" path="res://dialogue/julia.dialogue" id="8_nli6l"]
 [ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose.tscn" id="10_p3xb5"]
 [ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria.tscn" id="11_td228"]
 [ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/screen_transition/fade_component.gd" id="13_pfwt5"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="13_v1y88"]
-[ext_resource type="Resource" uid="uid://dile7qs30igoc" path="res://dialogue/jose.dialogue" id="14_dgs87"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="14_4j66v"]
+[ext_resource type="Resource" uid="uid://735hp7k64lwt" path="res://dialogue/jose.dialogue" id="14_dgs87"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_v1y88"]
 [ext_resource type="AudioStream" uid="uid://cq14taynk4t07" path="res://assets/music/Hades - House of Hades - Supergiant Games (youtube).mp3" id="15_7nto0"]
 
@@ -96,6 +97,7 @@ texture = ExtResource("1_b5055")
 texture_region_size = Vector2i(32, 32)
 2:14/size_in_atlas = Vector2i(1, 6)
 2:14/0 = 0
+2:14/0/texture_origin = Vector2i(0, -14)
 2:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 0, -79.86, 1.21, 93.17, -16, 16)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_p3xb5"]
@@ -298,12 +300,24 @@ sources/0 = SubResource("TileSetAtlasSource_bvks6")
 sources/1 = SubResource("TileSetAtlasSource_qy7ad")
 
 [node name="CheeseHall" type="Node2D" unique_id=481706482]
-position = Vector2(-11, -21)
-scale = Vector2(1.4, 1.4)
 script = ExtResource("1_dw1uh")
 target_scene = ExtResource("4_td228")
 metadata/_edit_horizontal_guides_ = [724.0, 5.0, -40.0]
 metadata/_edit_vertical_guides_ = [69.0, 1194.0, 1072.0]
+
+[node name="CameraLimits" type="Marker2D" parent="." unique_id=1430024815]
+
+[node name="Left" type="Marker2D" parent="CameraLimits" unique_id=1436504018]
+position = Vector2(78.959015, 562.1654)
+
+[node name="Right" type="Marker2D" parent="CameraLimits" unique_id=717991839]
+position = Vector2(1082.9083, 257.442)
+
+[node name="Top" type="Marker2D" parent="CameraLimits" unique_id=204851734]
+position = Vector2(639.69104, -279.39886)
+
+[node name="Bottom" type="Marker2D" parent="CameraLimits" unique_id=1464954312]
+position = Vector2(81.5793, 563.0065)
 
 [node name="FundoPreto" type="TileMapLayer" parent="." unique_id=215422276]
 tile_map_data = PackedByteArray("AAAHAAEAAgABAAEAAAA=")
@@ -327,10 +341,12 @@ tile_map_data = PackedByteArray("AAAnAP7/AAACABUAAAA=")
 tile_set = SubResource("TileSet_daq30")
 
 [node name="MuroEntrada" type="TileMapLayer" parent="." unique_id=47479383]
-tile_map_data = PackedByteArray("AAADAAQAAgACAA4AAAADAAoAAgACAA4AACADAA0AAgACAA4AACADAAEABAACAA4AAAA=")
+position = Vector2(-15, 0)
+tile_map_data = PackedByteArray("AAADAAQAAgACAA4AAAADAAoAAgACAA4AACADAA0AAgACAA4AACADAAEABAACAA4AAAADAAMAAgACAA4AAAADAAIABAACAA8AAAA=")
 tile_set = SubResource("TileSet_inj64")
 
 [node name="MuretaDoMuro" type="TileMapLayer" parent="." unique_id=1878052417]
+position = Vector2(-2, 2)
 tile_map_data = PackedByteArray("AAAIAAMAAAACAA8AAFAMAAMAAAACAA8AAFA=")
 tile_set = SubResource("TileSet_v1y88")
 
@@ -358,18 +374,6 @@ tile_set = SubResource("TileSet_mr3py")
 tile_map_data = PackedByteArray("AAASAAgAAAARAAMAAAA=")
 tile_set = SubResource("TileSet_d1abf")
 
-[node name="Julia" parent="." unique_id=2101407489 instance=ExtResource("6_dw1uh")]
-position = Vector2(737.857, 90)
-scale = Vector2(0.5, 0.5)
-dialogo = ExtResource("8_nli6l")
-
-[node name="Label" type="Label" parent="Julia" unique_id=999073816]
-offset_left = 2.85718
-offset_top = -30.0
-offset_right = 42.8572
-offset_bottom = -6.99999
-text = "Julia"
-
 [node name="LixeirasElevador" type="TileMapLayer" parent="." unique_id=1659286357]
 position = Vector2(3.5714288, -22.142859)
 tile_map_data = PackedByteArray("AAAsAAEAAwAAAAAAAAAhAAEAAgAAAAAAAAA=")
@@ -388,8 +392,13 @@ position = Vector2(6, 2)
 tile_map_data = PackedByteArray("AAALAP//AQABAAcAAAAaAP//AQABAAcAAAA=")
 tile_set = SubResource("TileSet_vft3r")
 
+[node name="ParedeUerj" type="TileMapLayer" parent="." unique_id=1524752549]
+tile_map_data = PackedByteArray("AAAFABAAAAABAAQAAAALABAAAQABAAEAAAARABAAAAABAAQAAAAXABAAAQABAAEAAAAdABAAAAABAAQAAAAjABAAAQABAAEAAAA=")
+tile_set = SubResource("TileSet_n24co")
+
 [node name="player" parent="." unique_id=415825107 instance=ExtResource("5_inj64")]
 position = Vector2(152.857, 284.286)
+scale = Vector2(1, 1)
 
 [node name="pause" parent="player" unique_id=2143532255 instance=ExtResource("13_v1y88")]
 anchors_preset = 0
@@ -402,6 +411,7 @@ offset_bottom = 273.6361
 grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(0.521822, 0.503862)
+metadata/_edit_use_anchors_ = true
 
 [node name="FadeInComponent" type="ColorRect" parent="player" unique_id=305366240]
 offset_left = -138.96089
@@ -412,6 +422,7 @@ script = ExtResource("13_pfwt5")
 is_fade_out = false
 fade_time = 0.5
 metadata/_custom_type_script = "uid://br6wsqfyc7ush"
+metadata/_edit_use_anchors_ = true
 
 [node name="FadeOutComponent" type="ColorRect" parent="player" unique_id=1665556648]
 offset_right = 40.0
@@ -420,10 +431,22 @@ script = ExtResource("13_pfwt5")
 fade_time = 0.5
 offset = Vector2(-500, -250)
 metadata/_custom_type_script = "uid://br6wsqfyc7ush"
+metadata/_edit_use_anchors_ = true
 
-[node name="ParedeUerj" type="TileMapLayer" parent="." unique_id=1524752549]
-tile_map_data = PackedByteArray("AAAFABAAAAABAAQAAAALABAAAQABAAEAAAARABAAAAABAAQAAAAXABAAAQABAAEAAAAdABAAAAABAAQAAAAjABAAAQABAAEAAAA=")
-tile_set = SubResource("TileSet_n24co")
+[node name="Julia" parent="." unique_id=2101407489 instance=ExtResource("6_dw1uh")]
+position = Vector2(737.857, 90)
+scale = Vector2(0.5, 0.5)
+dialogo = ExtResource("8_nli6l")
+
+[node name="Label" type="Label" parent="Julia" unique_id=999073816]
+offset_left = 2.85718
+offset_top = -30.0
+offset_right = 42.8572
+offset_bottom = -6.99999
+theme_override_fonts/font = ExtResource("14_4j66v")
+theme_override_font_sizes/font_size = 22
+text = "Julia"
+metadata/_edit_use_anchors_ = true
 
 [node name="Jose" parent="." unique_id=999656628 instance=ExtResource("10_p3xb5")]
 position = Vector2(687.857, -120.714)
@@ -435,6 +458,8 @@ offset_left = -15.7139
 offset_top = -31.4292
 offset_right = 24.2861
 offset_bottom = -8.42916
+theme_override_fonts/font = ExtResource("14_4j66v")
+theme_override_font_sizes/font_size = 22
 text = "José"
 
 [node name="Maria" parent="." unique_id=1630954226 instance=ExtResource("11_td228")]
@@ -447,6 +472,8 @@ offset_left = -22.8574
 offset_top = -31.4289
 offset_right = 22.1426
 offset_bottom = -8.42888
+theme_override_fonts/font = ExtResource("14_4j66v")
+theme_override_font_sizes/font_size = 22
 text = "Maria"
 
 [node name="ElevadorInterativo" parent="." unique_id=595449376 instance=ExtResource("3_p3xb5")]
@@ -484,3 +511,4 @@ volume_db = -4.952
 autoplay = true
 
 [connection signal="fade_finished" from="player/FadeOutComponent" to="." method="_on_fade_out_component_fade_finished"]
+[connection signal="was_talked_to" from="Jose" to="." method="_on_jose_was_talked_to"]

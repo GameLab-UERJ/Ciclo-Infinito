@@ -19,6 +19,8 @@ func _on_voltar_pressed() -> void:
 	var pause_menu = get_parent().get_node_or_null("MarginContainer")
 	if pause_menu:
 		pause_menu.show()
+	hide()
+	await pressed_sfx.finished
 	queue_free()
 
 

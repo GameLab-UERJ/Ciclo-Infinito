@@ -20,7 +20,7 @@ enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG, CUTSCENE}
 @export var hit2_active_time := 0.14
 @export var attack2_lock_time := 0.28
 @export_group("Dash")
-@export var dash_speed: float = move_speed * 3
+@export var dash_multiplier: float = 3
 @export var dash_duracao  = 0.2
 @export_group("Hitboxes")
 @export_subgroup("Hitbox sizes")
@@ -41,10 +41,7 @@ var attack_facing: String = "down"
 var is_dashing := false
 var can_dash := true
 var dash_dir: Vector2 = Vector2.ZERO
-var current_state: int = State.IDLE:
-	set(value):
-		print(State.find_key(current_state), " -> ", State.find_key(value))
-		current_state = value
+var current_state: int = State.IDLE
 var next_direction: Vector2 = Vector2(0,1)
 var can_attack := true
 var combo_step := 0
@@ -79,34 +76,41 @@ var vida_textures = [
 
 
 func _ready():
-	# --- novinho em folha: inicializa a vida do jogador ---
-	
 	current_health = max_health
 	update_health_bar()
-	# -----------------------------------------
-	
-	
 	dash_timer.wait_time = dash_duracao
-	dash_timer.one_shot = true
-	if not dash_timer.timeout.is_connected(_on_dash_timer_timeout):
-		dash_timer.timeout.connect(_on_dash_timer_timeout)
-	if not dash_cooldown.timeout.is_connected(_on_dash_cooldown_timeout):
-		dash_cooldown.timeout.connect(_on_dash_cooldown_timeout)
-	area_attack.get_node("attack_colison").disabled = true
-	
-	# --- NOVO: Conecta o sinal de colisão para aplicar dano ---
-	if not area_attack.body_entered.is_connected(_on_area_attack_body_entered):
-		area_attack.body_entered.connect(_on_area_attack_body_entered)
 
+
+func _physics_process(delta: float):
+	if is_dead:
+		return
 	
-	# --- NOVO: Função para receber dano ---
+	match current_state:
+		State.IDLE:
+			_idle_state()
+		State.RUN:
+			_run_state(delta)
+		State.ATTACK:
+			_attack_state()
+		State.DASH:
+			_dash_state()
+		State.DIALOG:
+			_dialog_state()
+	move_and_slide()
+	_update_attack_area_anchor()
+	update_animation()
+	
+	%ProgressBar.value = current_health
+	%ProgressBar.max_value = 100.0
+
+
 func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	if (current_state == State.DASH or 
 		current_state == State.DEATH or 
 		current_state == State.DIALOG or 
 		is_invincible):
 		return
-	print('player took damage while in state '+State.find_key(current_state))
+	
 	current_health -= damage_amount
 	current_health = clamp(current_health, 0.0, max_health)
 
@@ -122,14 +126,14 @@ func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	if current_health <= 0.0:
 		die()
 
-#Função para fazer os corações da HUD
+
 func update_health_bar():
 	var ratio=current_health/max_health
 	var filled_heart=int(round(ratio*6))
 	filled_heart=clamp(filled_heart,0,6)
 	vida_cheia.texture=vida_textures[filled_heart]
-	
-# --- NOVO: Função de morte ---
+
+
 func die() -> void:
 	is_dead = true
 	current_state = State.DEATH
@@ -146,7 +150,6 @@ func die() -> void:
 	death_scene.set_layer(100)
 
 
-# --- NOVO: Deixa o player imortal por um determinado tempo ---
 func start_invincibility(duration: float, is_dash : bool = false) -> void:
 	is_invincible = true
 	if Util.is_collision_mask_layer_set(self,"Enemy"):
@@ -164,36 +167,12 @@ func start_invincibility(duration: float, is_dash : bool = false) -> void:
 	is_invincible = false
 
 
-func _physics_process(delta: float):
-	if is_dead:
-		return
-	#state_label.text = State.find_key(current_state)
-	match current_state:
-		State.IDLE:
-			_idle_state()
-		State.RUN:
-			_run_state(delta)
-		State.ATTACK:
-			_attack_state()
-		State.DASH:
-			_dash_state()
-		State.DIALOG:
-			_dialog_state()
-	move_and_slide()
-	_update_attack_area_anchor()
-	update_animation()
-	#last_facing = get_direction_string(get_input_direction())
-	#print(last_facing)
-	
-	%ProgressBar.value = current_health
-	%ProgressBar.max_value = 100.0
-	
-
 func get_input_direction() -> Vector2:
 	return Input.get_vector("run_left","run_right","run_up","run_down")
 
 func can_start_attack() -> bool:
 	return current_state != State.DASH and current_state != State.DIALOG and can_attack
+
 
 func _idle_state() -> void:
 	velocity = Vector2.ZERO
@@ -204,6 +183,7 @@ func _idle_state() -> void:
 		current_state = State.DASH
 	elif get_input_direction() != Vector2.ZERO:
 		current_state = State.RUN
+
 
 func _run_state(_delta: float) :    
 	var input_direction: Vector2 = get_input_direction()
@@ -219,6 +199,7 @@ func _run_state(_delta: float) :
 		return
 	next_direction = input_direction
 	velocity = input_direction.normalized() * move_speed
+
 
 func _attack_state():
 	var input_direction: Vector2 = get_input_direction()
@@ -243,7 +224,7 @@ func _dash_state():
 			next_direction = in_dir
 		dash_dir = dash_direction.normalized()
 		await start_invincibility(invinciblity_duration,true)
-	velocity = dash_dir * dash_speed
+	velocity = dash_dir * move_speed * dash_multiplier
 
 
 func _dialog_state():
@@ -264,26 +245,21 @@ func _on_dash_cooldown_timeout() -> void:
 	can_dash = true
 
 
-# --- NOVA FUNÇÃO: Aplica dano ao CharacterBody atingido ---
 func _on_area_attack_body_entered(body: Node2D) -> void:
-	# Verifica se o alvo é um CharacterBody2D e tem a função 'take_damage'
-	if body is CharacterBody2D and body.has_method("take_damage"):
-		var damage_amount: float = 0.0
-
-		# Determina o dano baseado no combo atual
-		if combo_step == 1:
-			damage_amount = attack1_damage
-		elif combo_step == 2:
-			damage_amount = attack2_damage
+	if not (body is CharacterBody2D and body.has_method("take_damage")):
+		return
+	
+	var damage_amount: float
+	if combo_step == 1:
+		damage_amount = attack1_damage
+	elif combo_step == 2:
+		damage_amount = attack2_damage
+	else:
+		damage_amount = 0
 		
-		# Garante que o dano só seja aplicado quando o golpe está ATIVO
-		if damage_amount > 0.0:
-			# Calcula a direção do knockback (do atacante para o alvo)
-			var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
-			
-			# Chama a função take_damage no script do alvo (ex: inimigo)
-			body.take_damage(damage_amount, knockback_direction)
-# --------------------------------------------------------
+	if damage_amount > 0.0:
+		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
+		body.take_damage(damage_amount, knockback_direction)
 
 
 func _start_attack1() -> void: # Inicia a animação do ataque 1 e ajusta as variáveis de controle
@@ -373,12 +349,10 @@ func _apply_attack_hitbox_for_facing(facing: String) -> void: # Ajusta a hitbox 
 			col.position = hitbox_offset_down
 
 
-# Mantém a hitbox “apontando” para onde o personagem está olhando
 func _update_attack_area_anchor() -> void:
 	if current_state == State.ATTACK:
 		_apply_attack_hitbox_for_facing(attack_facing)
 		return
-	# Fora do ATTACK, ancora pela direção atual (ou última) para o retângulo ficar sempre alinhado.
 	var input_dir: Vector2 = get_input_direction()
 	var facing: String = get_direction_string(input_dir) if input_dir != Vector2.ZERO else last_facing
 	_apply_attack_hitbox_for_facing(facing)
@@ -412,7 +386,6 @@ func update_animation() -> void:
 		anim.play(anim_name)
 
 
-# --- NOVA FUNÇÃO: Aplica efeito visual e sonoro ao receber dano ---
 func applies_damage_received_effect() -> void:
 	damage_recieved_sfx.play()
 	
@@ -436,6 +409,13 @@ func pan_camera_to(node : Node2D) -> void:
 func pan_camera_back() -> void:
 	await pan_camera_to(self)
 	current_state = State.IDLE
+
+
+func set_camera_limits(left : Node2D, right : Node2D, bottom : Node2D, top : Node2D) -> void:
+	camera.limit_bottom = bottom.global_position.y
+	camera.limit_top 	= top.global_position.y
+	camera.limit_left 	= left.global_position.x
+	camera.limit_right 	= right.global_position.x
 
 
 func _on_animacoes_frame_changed() -> void:

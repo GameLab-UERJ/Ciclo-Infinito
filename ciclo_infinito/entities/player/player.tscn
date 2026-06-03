@@ -1461,7 +1461,6 @@ frame = 7
 speed_scale = 1.5
 
 [node name="dash_timer" type="Timer" parent="." unique_id=481345477]
-wait_time = 0.05
 one_shot = true
 
 [node name="dash_cooldown" type="Timer" parent="." unique_id=63024105]
@@ -1474,6 +1473,7 @@ collision_mask = 40
 [node name="attack_colison" type="CollisionShape2D" parent="attack_area" unique_id=598295500]
 position = Vector2(0, -16.363625)
 shape = SubResource("RectangleShape2D_jrjdb")
+disabled = true
 one_way_collision_margin = 0.0
 
 [node name="player_colision" type="CollisionShape2D" parent="." unique_id=1626315010]
@@ -1498,7 +1498,7 @@ zoom = Vector2(1.6, 1.6)
 limit_enabled = false
 
 [node name="VidaCheia" type="Sprite2D" parent="Camera2D" unique_id=148788504]
-position = Vector2(-201.352, -135.455)
+position = Vector2(-228.62474, -151.81866)
 scale = Vector2(0.112718, 0.113636)
 texture = ExtResource("26_arp52")
 
@@ -1538,3 +1538,5 @@ vertical_alignment = 1
 
 [connection signal="frame_changed" from="animacoes" to="." method="_on_animacoes_frame_changed"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
+[connection signal="body_entered" from="attack_area" to="." method="_on_area_attack_body_entered"]

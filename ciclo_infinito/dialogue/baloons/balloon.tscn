@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://bfn1d3joscoxf" path="res://dialogue/baloons/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="AudioStream" uid="uid://hms3wn74lbgw" path="res://assets/sfx/herald_of_failure/herald_noises.wav" id="4_aq20s"]
+[ext_resource type="AudioStream" uid="uid://7c5fg8duknch" path="res://assets/sfx/ui/creatorshome-select-003-337609.mp3" id="5_oetrw"]
+[ext_resource type="AudioStream" uid="uid://c5qrf5ciowbht" path="res://assets/sfx/ui/666herohero-rpg-text-speech-sound-131477.mp3" id="6_7nhov"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -99,7 +102,7 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="ExampleBalloon" type="CanvasLayer" unique_id=1434168376]
+[node name="DialogLayer" type="CanvasLayer" unique_id=1434168376]
 layer = 100
 script = ExtResource("1_36de5")
 
@@ -190,6 +193,16 @@ text = "Response example"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1116280512]
 unique_name_in_owner = true
+stream = ExtResource("4_aq20s")
+
+[node name="SelectedSfx" type="AudioStreamPlayer" parent="." unique_id=1723681757]
+stream = ExtResource("5_oetrw")
+volume_db = -8.0
+pitch_scale = 0.7
+
+[node name="TalkingSfx" type="AudioStreamPlayer" parent="." unique_id=1422479246]
+stream = ExtResource("6_7nhov")
+pitch_scale = 0.7
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
 [connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

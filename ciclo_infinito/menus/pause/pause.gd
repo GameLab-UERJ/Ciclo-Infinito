@@ -1,6 +1,7 @@
 class_name PauseScreen
 extends Control
 
+
 var main_menu = load("uid://downt2rxxaqaf")
 var master_idx: int
 var cena_controles = preload("res://menus/controls/menu_controles.tscn")
@@ -9,17 +10,18 @@ var cena_controles = preload("res://menus/controls/menu_controles.tscn")
 @onready var resume_button = $MarginContainer/VBoxContainer/MenuPrincipal/resumebutton
 @onready var options_button = $MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton
 @onready var quit_button = $MarginContainer/VBoxContainer/MenuPrincipal/quitbutton
-
 @onready var menu_principal = $MarginContainer/VBoxContainer/MenuPrincipal
 @onready var menu_opcoes = $MarginContainer/VBoxContainer/MenuOpcoes
 @onready var volume_slider = $MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/VolumeSlider
 @onready var fullscreen_button = $MarginContainer/VBoxContainer/MenuOpcoes/FullScreenButton
 @onready var back_button = $MarginContainer/VBoxContainer/MenuOpcoes/BackButton
 @onready var volume_label = $MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/Label
+@onready var hover_sfx: AudioStreamPlayer = $HoverSfx
+@onready var pressed_sfx: AudioStreamPlayer = $PressedSfx
 
-func _ready():	
+
+func _ready():
 	master_idx = AudioServer.get_bus_index("Master")
-	
 	menu_principal.show()
 	menu_opcoes.hide()
 	volume_slider.min_value = 0.0
@@ -27,49 +29,76 @@ func _ready():
 	volume_slider.step = 1.0
 	_update_volume_slider()
 
+
 func _on_resumebutton_pressed():
+	_on_any_button_pressed()
 	get_tree().paused = false
 	hide()
+
+
 func _on_optionsbutton_pressed():
+	_on_any_button_pressed()
 	menu_principal.hide()
 	menu_opcoes.show()
+
+
 func _on_quitbutton_pressed():
 	get_tree().paused = false
-	get_tree().change_scene_to_packed(main_menu)
+	_on_any_button_pressed()
+	EasyTransition.transition_to_scene(main_menu,1.5,EasyTransition.TransitionAnim.FADE)
+
+
 func _on_fullscreenbutton_pressed():
+	_on_any_button_pressed()
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	
+	
 func _on_volume_changed(value: float)-> void:
 	var linear = value / 100.0
 	var db = linear_to_db(linear)
 	_update_volume_label(value)
-
 	AudioServer.set_bus_volume_db(master_idx, db)
+
+
 func _on_backbutton_pressed() -> void:
+	_on_any_button_pressed()
 	menu_opcoes.hide()
 	menu_principal.show()
-	pass
-	
+
+
 func _update_volume_slider()-> void:
 	var current_db = AudioServer.get_bus_volume_db(master_idx)
 	var amp = db_to_linear(current_db)
 	volume_slider.value = amp * 100.0
-	
+
+
 func _update_volume_label(value: float) -> void:
 	var percent = int(value)
 	volume_label.text = "Volume: %d%%" % clamp(percent, 0, 100)
 
 
+func _on_any_button_pressed() -> void:
+	pressed_sfx.play(0.15)
+	await pressed_sfx.finished
+
+
 func _on_controles_pressed() -> void:
+	_on_any_button_pressed()
 	var instancia = cena_controles.instantiate()
 	add_child(instancia)
 	$MarginContainer.hide()
 
 
 func _on_full_screen_button_pressed() -> void:
+	_on_any_button_pressed()
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+
+
+func _on_button_mouse_entered() -> void:
+	hover_sfx.play(0.37)

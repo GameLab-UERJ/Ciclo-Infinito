@@ -126,11 +126,6 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
 size = Vector2(77, 49)
 
-[sub_resource type="Theme" id="Theme_ytjd8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hivs1"]
-bg_color = Color(0.187176, 0.187176, 0.187176, 0.552941)
-
 [sub_resource type="LabelSettings" id="LabelSettings_faxwa"]
 font_size = 8
 shadow_color = Color(0, 0, 0, 1)
@@ -138,12 +133,13 @@ shadow_color = Color(0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
 size = Vector2(25, 43)
 
-[node name="Maria" type="CharacterBody2D" unique_id=1331639435]
+[node name="Maria" type="CharacterBody2D" unique_id=2057248949]
 position = Vector2(0.9, 0)
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_6p6a1")
+metadata/_custom_type_script = "uid://crikhcj4uvp0e"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
@@ -165,36 +161,6 @@ autoplay = "walk"
 visible = false
 position = Vector2(-4.5, 24.5)
 shape = SubResource("RectangleShape2D_gu3sj")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1781990066]
-layer = 2
-
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=650642623]
-offset_left = 68.0
-offset_top = 61.0
-offset_right = 768.0
-offset_bottom = 161.0
-theme = SubResource("Theme_ytjd8")
-theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=819735323]
-offset_left = 84.0
-offset_top = 74.0
-offset_right = 751.0
-offset_bottom = 150.0
-theme_override_font_sizes/font_size = 15
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=862139719]
-
-[node name="PularDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=1224178449]
-offset_left = 516.0
-offset_top = 138.0
-offset_right = 767.0
-offset_bottom = 161.0
 
 [node name="LabelInteracao" type="Label" parent="Area2D" unique_id=916829660]
 offset_left = -24.0

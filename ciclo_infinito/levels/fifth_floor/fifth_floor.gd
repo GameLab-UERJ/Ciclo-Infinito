@@ -110,6 +110,7 @@ func _on_barreira_started_opening() -> void:
 
 func _on_any_barreira_finished_opening() -> void:
 	await player.pan_camera_back()
+	enemies.show()
 
 
 func _on_barreira_boss_started_opening() -> void:
