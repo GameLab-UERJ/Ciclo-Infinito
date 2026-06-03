@@ -1,4 +1,6 @@
 extends Node
+
+
 var music_player: AudioStreamPlayer = AudioStreamPlayer.new()
 
 
@@ -13,7 +15,15 @@ func play_music(stream: AudioStream, from_sec: float = 0.0) -> void:
 	music_player.play(from_sec)
 
 
-func stop_music() -> void:
+func increase_volume(amount: float = 0.0) -> void:
+	if not music_player:
+		return
+	create_tween().tween_property(music_player,"volume_db",music_player.volume_db + amount,1)
+
+
+func stop_music(fade_out_time : float = 0) -> void:
+	if fade_out_time > 0:
+		await create_tween().tween_property(music_player,"volume_db",-30,fade_out_time).finished
 	music_player.stop()
 
 

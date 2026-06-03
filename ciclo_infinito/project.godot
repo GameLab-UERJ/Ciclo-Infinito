@@ -32,6 +32,7 @@ SceneTransition="*uid://cgava0i4cge2c"
 DialogueManager="*uid://c3rodes2l3gxb"
 GameState="*uid://c4e2kw5jjtgi0"
 Util="*uid://dnepui3a3ogs7"
+EasyTransition="*uid://cq0t7o8xelk4k"
 
 [debug]
 
@@ -52,7 +53,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/imjp94.yafsm/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/easytransition/plugin.cfg", "res://addons/imjp94.yafsm/plugin.cfg")
 
 [file_customization]
 

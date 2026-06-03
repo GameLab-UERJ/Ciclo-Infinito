@@ -1,11 +1,26 @@
 extends Control
 
+
+var main_menu : PackedScene = load("uid://downt2rxxaqaf")
+
+
+@onready var hover_sfx: AudioStreamPlayer = $HoverSfx
+@onready var pressed_sfx: AudioStreamPlayer = $PressedSfx
+
+
+func _ready() -> void:
+	MusicManager.increase_volume(-10)
+
 func _on_voltar_pressed() -> void:
-	if get_parent() != get_tree().root:
-		var pause_menu = get_parent().get_node_or_null("MarginContainer")
-		if pause_menu:
-			pause_menu.show()
-		queue_free()
-	else:
-		get_tree().change_scene_to_file("res://menus/main/main_menu.tscn")
-	pass
+	pressed_sfx.play(0.15)
+	if get_parent() == get_tree().root:
+		EasyTransition.transition_to_scene(main_menu,1.5,EasyTransition.TransitionAnim.WIPE_LINEAR)
+		return
+	var pause_menu = get_parent().get_node_or_null("MarginContainer")
+	if pause_menu:
+		pause_menu.show()
+	queue_free()
+
+
+func _on_voltar_mouse_entered() -> void:
+	hover_sfx.play(0.37)

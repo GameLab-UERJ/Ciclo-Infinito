@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://biduen4m26mw5" path="res://menus/main/main_menu.gd" id="2_rvc10"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="3_cqjrg"]
 [ext_resource type="Texture2D" uid="uid://cutt1kh3xr6q" path="res://assets/art/menus/main_menu/discord_logo.png" id="4_e2xy7"]
+[ext_resource type="AudioStream" uid="uid://wfe6wpmf80cv" path="res://assets/sfx/player/soundreality-whoosh-velocity-383019.mp3" id="5_j2kye"]
+[ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="6_j2kye"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tf3dk"]
 bg_color = Color(0.466667, 0.00784314, 0.917647, 1)
@@ -13,6 +15,9 @@ bg_color = Color(0.466667, 0.00784314, 0.917647, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_85i58"]
 bg_color = Color(0.466667, 0.00784314, 0.917647, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jinmx"]
+bg_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4ih2"]
 bg_color = Color(0.466667, 0.00784314, 0.917647, 1)
@@ -92,6 +97,7 @@ theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_cqjrg")
 theme_override_font_sizes/font_size = 46
+theme_override_styles/hover = SubResource("StyleBoxFlat_jinmx")
 text = "Controles
 "
 
@@ -118,9 +124,26 @@ texture_normal = ExtResource("4_e2xy7")
 ignore_texture_size = true
 stretch_mode = 0
 
+[node name="HoverSfx" type="AudioStreamPlayer" parent="." unique_id=1762855021]
+stream = ExtResource("5_j2kye")
+volume_db = -20.0
+pitch_scale = 2.0
+max_polyphony = 6
+
+[node name="PressedSfx" type="AudioStreamPlayer" parent="." unique_id=502874668]
+stream = ExtResource("6_j2kye")
+volume_db = -10.0
+
+[connection signal="mouse_entered" from="VBoxContainer/Jogar_Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Jogar_Button" to="." method="_on_jogar_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Opções_Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Opções_Button" to="." method="_on_opções_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Creditos_button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Creditos_button" to="." method="_on_creditos_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Controles_Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Controles_Button" to="." method="_on_controles_button_pressed"]
+[connection signal="mouse_entered" from="VBoxContainer/Sair_Button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="VBoxContainer/Sair_Button" to="." method="_on_sair_button_pressed"]
+[connection signal="mouse_entered" from="discordbutton" to="." method="_on_discordbutton_mouse_entered"]
+[connection signal="mouse_exited" from="discordbutton" to="." method="_on_discordbutton_mouse_exited"]
 [connection signal="pressed" from="discordbutton" to="." method="_on_discordbutton_pressed"]
