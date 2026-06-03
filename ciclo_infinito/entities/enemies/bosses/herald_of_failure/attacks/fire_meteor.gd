@@ -13,6 +13,7 @@ signal finished
 
 var _final_y_position : float = -10
 var _final_impact_scale : Vector2
+var _final_shadow_scale : Vector2
 var _player_damageable : bool = false
 var _has_damaged_player : bool = false
 
@@ -26,6 +27,7 @@ var _has_damaged_player : bool = false
 
 func _ready() -> void:
 	end_lifetime_timer.wait_time = total_damage_time_after_drop
+	_final_shadow_scale = shadow_sprite.scale
 	reset()
 
 #Only for testing. To be removed
@@ -52,13 +54,14 @@ func drop(wait_time: float = 0) -> void:
 	visible = true
 	var drop_tween : Tween = create_tween()
 	drop_tween.tween_property(fire_ball_sprite,"position",Vector2(fire_ball_sprite.position.x,_final_y_position),total_drop_time)
-	drop_tween.parallel().tween_property(shadow_sprite,"scale",Vector2.ONE,total_drop_time)
+	drop_tween.parallel().tween_property(shadow_sprite,"scale",_final_shadow_scale,total_drop_time)
 	drop_tween.finished.connect(_on_drop_finished)
 
 
 func _on_drop_finished() -> void:
 	fire_ball_sprite.play("disappear")
 	explosion.play("explode")
+	shadow_sprite.visible = false
 	impact_sfx.play()
 	end_lifetime_timer.start()
 

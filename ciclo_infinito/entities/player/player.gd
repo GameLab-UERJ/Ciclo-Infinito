@@ -72,6 +72,7 @@ var vida_textures = [
 @onready var attack_sfxplay: AudioStreamPlayer = $attack_sfxplay
 @onready var footsteps_sfx: AudioStreamPlayer2D = $FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
+@onready var shadow: Sprite2D = $Shadow
 
 
 func _ready():
@@ -103,19 +104,13 @@ func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	current_health -= damage_amount
 	current_health = clamp(current_health, 0.0, max_health)
 
-	#print("Player recebeu dano de ", damage_amount, ". Vida restante: ", current_health)
-
-	# Atualiza barra de vida
 	update_health_bar()
 
-	# Efeito de knockback
 	var knockback_force: float = 350.0
 	velocity = hit_direction * knockback_force
-	
-	# --- NOVO: Aplica efeito de dano recebido ---
+
 	applies_damage_received_effect()
-	
-	# --- NOVO: Deixa o player imortal por um determinado tempo ---
+
 	start_invincibility(invinciblity_duration)
 	
 	if current_health <= 0.0:
@@ -149,21 +144,24 @@ func die() -> void:
 func start_invincibility(duration: float) -> void:
 	is_invincible = true
 	if Util.is_collision_mask_layer_set(self,"Enemy"):
-		set_deferred("collision_mask",collision_mask^Util.collision_layer_values.Enemy)
-	
+		set_deferred("collision_mask",collision_mask^Util.collision_layer_values["Enemy"])
+	if Util.is_collision_mask_layer_set(self,"Static Interactive"):
+		set_deferred("collision_mask",collision_mask^24)
+	state_label.set_deferred("text","%x" % (collision_mask))
 	await get_tree().create_timer(duration).timeout
 	
 	if not Util.is_collision_mask_layer_set(self,"Enemy"):
-		set_deferred("collision_mask",collision_mask^Util.collision_layer_values.Enemy)
-	
+		set_deferred("collision_mask",collision_mask^Util.collision_layer_values["Enemy"])
+	if not Util.is_collision_mask_layer_set(self,"Static Interactive"):
+		set_deferred("collision_mask",collision_mask^24)
+	state_label.set_deferred("text","%x" % (collision_mask))
 	is_invincible = false
 
 
 func _physics_process(delta: float):
 	if is_dead:
 		return
-	
-	state_label.text = State.find_key(current_state)
+	#state_label.text = State.find_key(current_state)
 	match current_state:
 		State.IDLE:
 			_idle_state()
@@ -230,7 +228,6 @@ func _attack_state():
 
 func _dash_state():
 	if dash_timer.is_stopped():
-		start_invincibility(dash_duracao)
 		dash_sfx.play(0.4)
 		dash_timer.start()
 		var dash_direction: Vector2 = next_direction
@@ -239,6 +236,7 @@ func _dash_state():
 			dash_direction = in_dir
 			next_direction = in_dir
 		dash_dir = dash_direction.normalized()
+		await start_invincibility(invinciblity_duration)
 	velocity = dash_dir * dash_speed
 
 
@@ -247,7 +245,6 @@ func _dialog_state():
 
 
 func _on_dash_timer_timeout() -> void:
-	$player_colision.disabled = false
 	velocity = Vector2.ZERO
 	if  get_input_direction() != Vector2.ZERO:
 		current_state = State.RUN

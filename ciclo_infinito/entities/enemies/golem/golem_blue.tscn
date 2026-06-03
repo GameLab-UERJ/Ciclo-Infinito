@@ -1157,8 +1157,9 @@ radius = 276.11
 radius = 39.051247
 
 [node name="GolemBlue" type="CharacterBody2D" unique_id=875007688]
+disable_mode = 1
 collision_layer = 8
-collision_mask = 11
+collision_mask = 27
 motion_mode = 1
 script = ExtResource("1_5uxnx")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
@@ -1187,7 +1188,7 @@ shape = SubResource("CircleShape2D_m5yr5")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=577404922]
 visible = false
-collision_layer = 16
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=15053823]
@@ -1197,14 +1198,13 @@ debug_color = Color(0.95932, 0.105688, 0.437158, 0.42)
 [node name="AttackCooldown" type="Timer" parent="." unique_id=1498869499]
 wait_time = 1.5
 
-[node name="attack_sfx" type="AudioStreamPlayer" parent="." unique_id=1084138517]
+[node name="attack_sfx" type="AudioStreamPlayer2D" parent="." unique_id=436381177]
 stream = ExtResource("7_qqe8x")
-volume_db = -12.518
 
-[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=819476962]
+[node name="DamageRecievedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1669838422]
 stream = ExtResource("8_hdt1t")
 
-[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=752457235]
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=978601137]
 stream = ExtResource("10_u0ahf")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]

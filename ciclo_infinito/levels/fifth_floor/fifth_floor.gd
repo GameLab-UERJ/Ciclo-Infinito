@@ -13,6 +13,7 @@ var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
 @onready var barreira_boss: Barrier = $BarreiraBoss
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
 @onready var enemies: Label = $player/enemies
+@onready var camera_focus: Marker2D = $Barreira/CameraFocus
 
 
 var missoes = [
@@ -120,7 +121,7 @@ func _on_inimigo_derrotado():
 
 
 func _on_barreira_started_opening() -> void:
-	await player.pan_camera_to(barreira)
+	await player.pan_camera_to(camera_focus)
 
 
 func _on_any_barreira_finished_opening() -> void:

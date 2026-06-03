@@ -1195,14 +1195,13 @@ debug_color = Color(0.95932, 0.105688, 0.437158, 0.42)
 [node name="AttackCooldown" type="Timer" parent="." unique_id=1802921343]
 wait_time = 1.5
 
-[node name="attack_sfx" type="AudioStreamPlayer" parent="." unique_id=766749998]
+[node name="attack_sfx" type="AudioStreamPlayer2D" parent="." unique_id=1532088178]
 stream = ExtResource("7_2loqd")
-volume_db = -6.308
 
-[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=670377616]
+[node name="DamageRecievedSFX" type="AudioStreamPlayer2D" parent="." unique_id=424069968]
 stream = ExtResource("8_yqgpa")
 
-[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=1730507240]
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=899827381]
 stream = ExtResource("10_u7vxu")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]

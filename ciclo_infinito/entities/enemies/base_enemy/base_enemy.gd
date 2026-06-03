@@ -8,7 +8,7 @@ signal defeated ##Contador para a tela de vitória
 @export_category("Objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null
-@onready var damage_recieved_sfx: AudioStreamPlayer = null
+@onready var damage_recieved_sfx: AudioStreamPlayer2D = null
 
 @export_category("Movement")
 @export var move_speed: float = 100.0
@@ -37,13 +37,13 @@ var detect_area: Area2D
 var alive: bool = true
 
 
-@onready var attack_sfx: AudioStreamPlayer = $attack_sfx
+@onready var attack_sfx: AudioStreamPlayer2D = $attack_sfx
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
-@onready var death_sfx: AudioStreamPlayer = $DeathSFX
+@onready var death_sfx: AudioStreamPlayer2D = $DeathSFX
 
 
 func _ready() -> void:
-	death_sfx.volume_db = -25.0
+	death_sfx.volume_db = -5.0
 	current_health = max_health
 	attack_cooldown_timer.wait_time = attack_cooldown
 
@@ -80,7 +80,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if !alive:
 		return
-	
+	print(collision_mask)
 	if player_ref == null or not is_instance_valid(player_ref):
 		_stop()
 		return

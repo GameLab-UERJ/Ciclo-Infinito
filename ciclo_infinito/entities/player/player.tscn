@@ -1442,6 +1442,7 @@ scale = Vector2(1.1, 1.1)
 collision_layer = 2
 collision_mask = 29
 motion_mode = 1
+platform_on_leave = 2
 script = ExtResource("1_wq0jh")
 dash_duracao = 0.1
 metadata/_custom_type_script = "uid://dbg05n786rg21"
@@ -1536,3 +1537,4 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [connection signal="frame_changed" from="animacoes" to="." method="_on_animacoes_frame_changed"]
+[connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

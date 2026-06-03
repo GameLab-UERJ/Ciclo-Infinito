@@ -39,6 +39,9 @@ scale = Vector2(2, 2)
 opener_node = NodePath("..")
 opener_method_name = "libera_barreira"
 
+[node name="CameraFocus" type="Marker2D" parent="Barreira" unique_id=863896918]
+position = Vector2(28.170258, 1.721489)
+
 [node name="Barreira2" parent="." unique_id=1157678233 node_paths=PackedStringArray("opener_node") instance=ExtResource("3_yw1aw")]
 z_index = 1
 position = Vector2(626, -2)
@@ -77,25 +80,6 @@ text = "Pedro"
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
 material = SubResource("ShaderMaterial_yw1aw")
 position = Vector2(573, -235)
-max_health = 120.0
-attack1_damage = 15.0
-attack2_damage = 15.0
-move_speed = 240.0
-invinciblity_duration = 0.3
-attack_cooldown = 0.15
-combo_window = 0.21
-hit1_active_time = 0.12
-attack1_lock_time = 0.22
-hit2_active_time = 0.14
-attack2_lock_time = 0.28
-hitbox_size_right = Vector2(50, 25)
-hitbox_size_left = Vector2(50, 25)
-hitbox_size_up = Vector2(50, 40)
-hitbox_size_down = Vector2(50, 40)
-hitbox_offset_right = Vector2(18, 0)
-hitbox_offset_left = Vector2(-18, 0)
-hitbox_offset_up = Vector2(0, -18)
-hitbox_offset_down = Vector2(0, 18)
 
 [node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
 anchors_preset = 0

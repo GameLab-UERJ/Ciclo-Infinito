@@ -78,6 +78,7 @@ func applies_damage_received_effect() -> void:
 
 
 func die() -> void:
+	await player.pan_camera_to(self.camera_focus)
 	sprites.play("death")
 	death_sfx.play()
 	create_tween().tween_property(shadow,"self_modulate",Color.TRANSPARENT,sprites.sprite_frames.get_frame_count("death")/sprites.sprite_frames.get_animation_speed("death"))

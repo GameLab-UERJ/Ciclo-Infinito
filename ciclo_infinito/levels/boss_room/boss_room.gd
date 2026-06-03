@@ -62,6 +62,7 @@ func end_game() -> void:
 	SceneTransition.fade_out()
 	var victory_scene = load("res://menus/end_scenes/victory/victory_screen.tscn").instantiate()
 	await get_tree().create_timer(1.5).timeout
+	player.current_state = player.State.DIALOG
 	get_tree().root.add_child(victory_scene)
 	victory_scene.set_layer(100)
 
@@ -77,5 +78,11 @@ func _on_cutscene_area_body_entered(_body: Node2D) -> void:
 
 
 func _on_end_cutscene_area_body_entered(body: Node2D) -> void:
-	if body is Player:
-		end_game()
+	if not body is Player:
+		return
+	player.current_state = player.State.CUTSCENE
+	var tween : Tween = create_tween()
+	tween.tween_property(player.anim,"scale",Vector2.ZERO,1)
+	tween.parallel().tween_property(player.shadow,"scale",Vector2.ZERO,1)
+	await tween.parallel().tween_property(player.footsteps_sfx,"volume_db",-50,1).finished
+	end_game()

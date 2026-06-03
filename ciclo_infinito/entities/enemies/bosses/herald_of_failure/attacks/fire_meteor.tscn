@@ -559,6 +559,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_yj0aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwgsm")
 }],
 "loop": false,
 "name": &"explode",
@@ -573,6 +576,7 @@ height = 22.0
 script = ExtResource("1_fbmj5")
 initial_y_position = -200.0
 total_drop_time = 0.5
+total_damage_time_after_drop = 2.0
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1189333717]
 scale = Vector2(3, 3)
@@ -618,7 +622,7 @@ one_shot = true
 stream = ExtResource("66_7vibg")
 max_distance = 300.0
 
-[connection signal="frame_changed" from="Explosion" to="." method="_on_explosion_frame_changed"]
+[connection signal="animation_finished" from="Explosion" to="." method="_on_impact_finished"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
 [connection signal="timeout" from="EndLifetimeTimer" to="." method="_on_end_lifetime_timer_timeout"]
