@@ -59,10 +59,10 @@ func _on_herald_of_failure_died() -> void:
 func end_game() -> void:
 	if mission_label:
 		mission_label.text = "Todas as missões concluídas!"
+	player.current_state = player.State.DIALOG
 	SceneTransition.fade_out()
 	var victory_scene = load("res://menus/end_scenes/victory/victory_screen.tscn").instantiate()
 	await get_tree().create_timer(1.5).timeout
-	player.current_state = player.State.DIALOG
 	get_tree().root.add_child(victory_scene)
 	victory_scene.set_layer(100)
 

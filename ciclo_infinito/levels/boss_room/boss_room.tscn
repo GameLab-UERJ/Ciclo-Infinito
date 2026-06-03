@@ -3387,7 +3387,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_5h65r"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 16
 sources/0 = SubResource("TileSetAtlasSource_ylewp")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ft18b"]
@@ -3399,7 +3400,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_0sjjc"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 16
 sources/0 = SubResource("TileSetAtlasSource_ft18b")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i271w"]
@@ -3412,7 +3414,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_yfq71"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 16
 sources/0 = SubResource("TileSetAtlasSource_i271w")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0wd4m"]
@@ -3428,7 +3431,8 @@ texture_region_size = Vector2i(32, 32)
 
 [sub_resource type="TileSet" id="TileSet_72lgo"]
 tile_size = Vector2i(32, 32)
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 16
+physics_layer_0/collision_mask = 16
 sources/0 = SubResource("TileSetAtlasSource_vi0a6")
 
 [node name="BossRoom" type="Node2D" unique_id=110532816]
@@ -3718,8 +3722,9 @@ scale = Vector2(1.74863, 0.959864)
 position = Vector2(134, -102)
 scale = Vector2(3, 3)
 collision_mask = 0
+speed = 300.0
 player = NodePath("../player")
-max_health = 20.0
+max_health = 1000.0
 chance_of_attacking_after_moving = 0.85
 top_left_corner = NodePath("Marker2D")
 bottom_right_corner = NodePath("Marker2D2")
