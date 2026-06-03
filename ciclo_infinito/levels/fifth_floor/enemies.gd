@@ -11,16 +11,11 @@ var total_inimigos: int = 0
 func _ready() -> void:
 	total_inimigos = get_child_count()
 	
-	print("Nível iniciado com ", total_inimigos, " inimigos.")
-
-	
 	_atualizar_label()
 
 	if total_inimigos == 0:
-		print("Aviso: Nenhum inimigo encontrado como filho.")
 		if label_contador:
 			label_contador.text = "Inimigos mortos: N/A" 
-		#vitoria()
 		return
 
 	for inimigo in get_children():
@@ -37,7 +32,6 @@ func _ready() -> void:
 
 func _on_inimigo_derrotado() -> void:
 	inimigos_mortos += 1
-	print("Um inimigo morreu! Contagem: ", inimigos_mortos, " / ", total_inimigos)
 	if inimigos_mortos == total_inimigos:
 		get_parent().proxima_missao()
 	
@@ -50,5 +44,4 @@ func _atualizar_label() -> void:
 
 
 func vitoria() -> void:
-	print("🎉 Vitória! Todos os inimigos foram derrotados!")
 	get_tree().change_scene_to_file("res://scene/vitoria.tscn")

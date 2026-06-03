@@ -80,7 +80,7 @@ func _ready() -> void:
 func _physics_process(_delta: float) -> void:
 	if !alive:
 		return
-	print(collision_mask)
+	
 	if player_ref == null or not is_instance_valid(player_ref):
 		_stop()
 		return
@@ -126,13 +126,11 @@ func apply_attack_damage() -> void:
 		return
 	var bodies_in_area := attack_area.get_overlapping_bodies()
 	if bodies_in_area.is_empty():
-		print("  -> AttackArea vazia no momento do golpe.")
 		return
 	for body in bodies_in_area:
 		if body.has_method("take_damage"):
 			var hit_direction := (body.global_position - global_position).normalized()
 			body.take_damage(attack_damage, hit_direction)
-			print("Dano aplicado em ", body.name)
 
 
 # ======== Vida / Morte ========
@@ -141,12 +139,10 @@ func take_damage(damage: float, hit_direction: Vector2) -> void:
 		return
 	
 	current_health -= damage
-	print("Inimigo recebeu dano de ", damage, ". Vida restante: ", current_health)
 
 	var knockback_force: float = 300.0
 	velocity = hit_direction * knockback_force
 
-	# --- NOVO: Aplica efeito de dano recebido ---
 	applies_damage_received_effect()
 
 	if current_health <= 0:

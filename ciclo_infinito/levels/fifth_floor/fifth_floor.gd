@@ -51,11 +51,6 @@ func conectar_sinais():
 			enemy.inimigo_derrotado.connect(_on_inimigo_derrotado)
 
 
-func _physics_process(delta: float) -> void:
-	if (player.collision_layer == 25):
-		print(player.dash_frame_count)
-
-
 func _process(_delta):
 	
 	if Input.is_action_just_pressed("pause"):

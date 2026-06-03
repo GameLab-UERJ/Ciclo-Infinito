@@ -41,7 +41,10 @@ var attack_facing: String = "down"
 var is_dashing := false
 var can_dash := true
 var dash_dir: Vector2 = Vector2.ZERO
-var current_state: int = State.IDLE
+var current_state: int = State.IDLE:
+	set(value):
+		print(State.find_key(current_state), " -> ", State.find_key(value))
+		current_state = value
 var next_direction: Vector2 = Vector2(0,1)
 var can_attack := true
 var combo_step := 0
@@ -98,9 +101,12 @@ func _ready():
 	
 	# --- NOVO: Função para receber dano ---
 func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
-	if current_state == State.DASH or current_state == State.DEATH or is_invincible:
+	if (current_state == State.DASH or 
+		current_state == State.DEATH or 
+		current_state == State.DIALOG or 
+		is_invincible):
 		return
-
+	print('player took damage while in state '+State.find_key(current_state))
 	current_health -= damage_amount
 	current_health = clamp(current_health, 0.0, max_health)
 
@@ -141,18 +147,18 @@ func die() -> void:
 
 
 # --- NOVO: Deixa o player imortal por um determinado tempo ---
-func start_invincibility(duration: float) -> void:
+func start_invincibility(duration: float, is_dash : bool = false) -> void:
 	is_invincible = true
 	if Util.is_collision_mask_layer_set(self,"Enemy"):
 		set_deferred("collision_mask",collision_mask^Util.collision_layer_values["Enemy"])
-	if Util.is_collision_mask_layer_set(self,"Static Interactive"):
-		set_deferred("collision_mask",collision_mask^24)
+	if is_dash and Util.is_collision_mask_layer_set(self,"Static Interactive"):
+		set_deferred("collision_mask",collision_mask^16)
 	state_label.set_deferred("text","%x" % (collision_mask))
 	await get_tree().create_timer(duration).timeout
 	
 	if not Util.is_collision_mask_layer_set(self,"Enemy"):
 		set_deferred("collision_mask",collision_mask^Util.collision_layer_values["Enemy"])
-	if not Util.is_collision_mask_layer_set(self,"Static Interactive"):
+	if is_dash and not Util.is_collision_mask_layer_set(self,"Static Interactive"):
 		set_deferred("collision_mask",collision_mask^24)
 	state_label.set_deferred("text","%x" % (collision_mask))
 	is_invincible = false
@@ -187,7 +193,7 @@ func get_input_direction() -> Vector2:
 	return Input.get_vector("run_left","run_right","run_up","run_down")
 
 func can_start_attack() -> bool:
-	return current_state != State.DASH and can_attack
+	return current_state != State.DASH and current_state != State.DIALOG and can_attack
 
 func _idle_state() -> void:
 	velocity = Vector2.ZERO
@@ -236,7 +242,7 @@ func _dash_state():
 			dash_direction = in_dir
 			next_direction = in_dir
 		dash_dir = dash_direction.normalized()
-		await start_invincibility(invinciblity_duration)
+		await start_invincibility(invinciblity_duration,true)
 	velocity = dash_dir * dash_speed
 
 
@@ -330,7 +336,9 @@ func _start_attack2() -> void: # Mesma lógica do ataque 1
 
 func _finish_attack_sequence() -> void: # Restaura variáveis de controle e devolve para outro estado
 	combo_step = 0
-	if get_input_direction() != Vector2.ZERO:
+	if current_state == State.DIALOG:
+		pass
+	elif get_input_direction() != Vector2.ZERO:
 		current_state = State.RUN
 	else:
 		current_state = State.IDLE
