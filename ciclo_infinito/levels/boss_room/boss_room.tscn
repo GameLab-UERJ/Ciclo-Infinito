@@ -12,7 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://dyjwfrwsly7lx" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.tscn" id="11_nhjq1"]
 [ext_resource type="Texture2D" uid="uid://bta6ohxvy2jdk" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar1.png" id="11_weo27"]
 [ext_resource type="Texture2D" uid="uid://bbhbdqv0ch5hn" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar2.png" id="12_ktetc"]
-[ext_resource type="Script" uid="uid://dhwy74dwvwl1k" path="res://levels/boss_room/transparent_area.gd" id="13_3mmng"]
+[ext_resource type="Script" uid="uid://dhwy74dwvwl1k" path="res://entities/interactables/transparent_area.gd" id="13_3mmng"]
 [ext_resource type="Texture2D" uid="uid://dvavbjhis12il" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar3.png" id="13_hsv8e"]
 [ext_resource type="Texture2D" uid="uid://dumg0b73ao01j" path="res://assets/art/tilesets/Itens_da_sala_do_boss/arma2.png" id="15_61hjj"]
 [ext_resource type="Texture2D" uid="uid://yl5xs7y6l16n" path="res://assets/art/tilesets/Itens_da_sala_do_boss/arma1.png" id="16_s8h4i"]
@@ -3681,8 +3681,10 @@ shape = SubResource("RectangleShape2D_ps1ce")
 
 [node name="player" parent="." unique_id=1305817267 instance=ExtResource("18_d40j6")]
 position = Vector2(141, 669.00006)
+scale = Vector2(1, 1)
 
 [node name="pause" parent="player" unique_id=204471871 instance=ExtResource("19_ps1ce")]
+z_index = 5
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -3695,10 +3697,10 @@ grow_vertical = 1
 scale = Vector2(0.5, 0.5)
 
 [node name="Missions" type="TextureRect" parent="player" unique_id=2094797383]
-offset_left = 120.909
-offset_top = -153.636
-offset_right = 654.909
-offset_bottom = 131.364
+offset_left = 146.909
+offset_top = -167.63599
+offset_right = 680.909
+offset_bottom = 117.36401
 scale = Vector2(0.284224, 0.275615)
 texture = ExtResource("20_3mmng")
 expand_mode = 1

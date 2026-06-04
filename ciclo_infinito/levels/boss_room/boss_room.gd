@@ -28,9 +28,27 @@ func _ready():
 	mission_label.get_parent().reparent(player.camera)
 
 
+func _process(_delta):
+	if Input.is_action_just_pressed("pause"):
+		if get_tree().paused:
+			_resume_game()
+		else:
+			_pause_game()
+
+
 func configurar_label():
 	mission_label.autowrap_mode=TextServer.AUTOWRAP_WORD
 	mission_label.add_theme_font_size_override("font_size", 24)
+
+
+func _pause_game():
+	get_tree().paused = true
+	pause_menu.show()
+
+
+func _resume_game():
+	get_tree().paused = false
+	pause_menu.hide()
 
 
 func _atualizar_texto_missao():
@@ -60,11 +78,9 @@ func end_game() -> void:
 	if mission_label:
 		mission_label.text = "Todas as missões concluídas!"
 	player.current_state = player.State.DIALOG
-	SceneTransition.fade_out()
 	var victory_scene = load("res://menus/end_scenes/victory/victory_screen.tscn").instantiate()
-	await get_tree().create_timer(1.5).timeout
-	get_tree().root.add_child(victory_scene)
-	victory_scene.set_layer(100)
+	#victory_scene.previous_scene = self
+	EasyTransition.transition_to_node(victory_scene,1.5,EasyTransition.TransitionAnim.FADE)
 
 
 func _on_cutscene_area_body_entered(_body: Node2D) -> void:

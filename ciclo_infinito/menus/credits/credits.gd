@@ -12,7 +12,7 @@ var main_menu : PackedScene = load("uid://downt2rxxaqaf")
 
 
 func _ready() -> void:
-	MusicManager.increase_volume(-10)
+	MusicManager.play_music(preload("uid://dmmu2rejtiqf2"),0,-25)
 	var text_node := margin.get_node_or_null("RichTextLabel")
 	if text_node == null:
 		text_node = _find_first_richtextlabel(margin)
@@ -37,6 +37,7 @@ func _ready() -> void:
 
 
 func _acabou() -> void:
+	await MusicManager.stop_music(2)
 	EasyTransition.transition_to_scene(main_menu,1.5,EasyTransition.TransitionAnim.FADE)
 
 

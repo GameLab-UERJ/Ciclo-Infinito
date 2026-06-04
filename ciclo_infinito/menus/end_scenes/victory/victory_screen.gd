@@ -18,11 +18,11 @@ func _on_any_button_pressed() -> void:
 
 func _on_jogar_novamente_button_pressed() -> void:
 	await _on_any_button_pressed()
-	get_tree().reload_current_scene()
+	EasyTransition.transition_to_scene(load("uid://laif38pcjfq7"),1.5,EasyTransition.TransitionAnim.FADE)
 
 
 func _on_menu_iniciar_button_pressed() -> void:
-	_on_any_button_pressed()
+	await _on_any_button_pressed()
 	EasyTransition.transition_to_scene(main_menu,1.5,EasyTransition.TransitionAnim.FADE)
 
 

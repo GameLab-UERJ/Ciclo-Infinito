@@ -12,7 +12,6 @@ signal finished
 
 
 var _final_y_position : float = -10
-var _final_impact_scale : Vector2
 var _final_shadow_scale : Vector2
 var _player_damageable : bool = false
 var _has_damaged_player : bool = false
@@ -31,7 +30,7 @@ func _ready() -> void:
 	reset()
 
 #Only for testing. To be removed
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if _has_damaged_player:
 		return
 
