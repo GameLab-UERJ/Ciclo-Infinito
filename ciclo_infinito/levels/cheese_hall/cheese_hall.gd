@@ -14,7 +14,6 @@ var missoes = [
 @onready var pause_menu = $player/pause
 @onready var mission_label = $Hud/TextureRect/Label
 @onready var fade_in_component: FadeComponent = $player/FadeInComponent
-@onready var fade_out_component: FadeComponent = $player/FadeOutComponent
 @onready var jose: CheeseNpc = $Jose
 @onready var left: Marker2D = $CameraLimits/Left
 @onready var right: Marker2D = $CameraLimits/Right
@@ -55,7 +54,7 @@ func _resume_game():
 	pause_menu.hide()
 
 
-func atualizar_missao(novo_texto: String = ""):
+func atualizar_missao():
 	if mission_label:
 		mission_label.text = missoes[indice_missao_atual]
 
@@ -69,15 +68,8 @@ func proxima_missao():
 func mudar_de_cena():
 	if target_scene == null:
 		print("ERRO: A cena de destino (Target Scene) não foi definida no inspetor!")
-		return
-	var terrain_manager = get_tree().get_current_scene()
-	terrain_manager.atualizar_missao("Missão: \nFale com o Pedro.")
-	fade_out_component.fade()
+	EasyTransition.transition_to_scene(target_scene,1.5,EasyTransition.TransitionAnim.FADE)
 
 
-func _on_fade_out_component_fade_finished() -> void:
-	get_tree().change_scene_to_packed(target_scene)
-
-
-func _on_jose_was_talked_to(npc: CheeseNpc) -> void:
+func _on_jose_was_talked_to(_npc: CheeseNpc) -> void:
 	proxima_missao()

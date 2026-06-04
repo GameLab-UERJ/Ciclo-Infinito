@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://b31qbydqhwrwt" path="res://assets/art/npcs/pedro/pedro_idle.png" id="2_74uy2"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_f6j54"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
-size = Vector2(77, 49)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
 atlas = ExtResource("2_74uy2")
 region = Rect2(0, 0, 128, 128)
@@ -54,11 +51,13 @@ animations = [{
 font_size = 8
 shadow_color = Color(0, 0, 0, 1)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g03qy"]
+size = Vector2(69.9, 69)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
-size = Vector2(25, 71)
+size = Vector2(19, 13)
 
 [node name="Pedro" type="CharacterBody2D" unique_id=1993631793]
-position = Vector2(0.9, 0)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_f6j54")
@@ -67,7 +66,7 @@ metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1560247652]
-position = Vector2(-4.8999996, 50.000008)
+position = Vector2(-1, -7.9999995)
 scale = Vector2(2.125, 1.421875)
 texture = ExtResource("2_f6j54")
 
@@ -75,12 +74,8 @@ texture = ExtResource("2_f6j54")
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1867660891]
-visible = false
-position = Vector2(-4.5, 24.5)
-shape = SubResource("RectangleShape2D_gu3sj")
-
 [node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1546663399]
+position = Vector2(0, -57)
 sprite_frames = SubResource("SpriteFrames_cgete")
 animation = &"idle Vamp"
 autoplay = "idle Vamp"
@@ -92,9 +87,11 @@ offset_right = 37.0
 label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1437696156]
+shape = SubResource("RectangleShape2D_g03qy")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=49316292]
-visible = false
-position = Vector2(-5.5, 26.5)
+position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)
 

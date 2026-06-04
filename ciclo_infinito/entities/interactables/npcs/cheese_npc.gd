@@ -35,6 +35,7 @@ var is_moving: bool = false
 #region Built-in
 
 func _ready() -> void:
+	sprite.material = preload("uid://c146kddj2hvtf")
 	DialogueManager.dialogue_ended.connect(encerra_dialogo)
 
 	if ponto_patrulha_a and ponto_patrulha_b:
@@ -95,6 +96,7 @@ func encerra_dialogo(dialogue : DialogueResource) -> void:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "player":
 		player_in_area = true
+		sprite.material.set("shader_parameter/width",2)
 		label_interacao.text = "Pressione 'E' para interagir"
 		label_interacao.visible = true
 
@@ -102,5 +104,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.name == "player":
 		player_in_area = false
+		sprite.material.set("shader_parameter/width",0)
 		label_interacao.visible = false
 #endregion

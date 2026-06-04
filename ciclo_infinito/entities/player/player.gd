@@ -412,10 +412,10 @@ func pan_camera_back() -> void:
 
 
 func set_camera_limits(left : Node2D, right : Node2D, bottom : Node2D, top : Node2D) -> void:
-	camera.limit_bottom = bottom.global_position.y
-	camera.limit_top 	= top.global_position.y
-	camera.limit_left 	= left.global_position.x
-	camera.limit_right 	= right.global_position.x
+	camera.limit_bottom = ceil(bottom.global_position.y)
+	camera.limit_top 	= ceil(top.global_position.y)
+	camera.limit_left 	= ceil(left.global_position.x)
+	camera.limit_right 	= ceil(right.global_position.x)
 
 
 func _on_animacoes_frame_changed() -> void:

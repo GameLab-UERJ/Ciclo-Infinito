@@ -6,7 +6,7 @@
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="4_see4r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
-size = Vector2(77, 49)
+size = Vector2(69.9, 69)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xumeu"]
 atlas = ExtResource("2_bv1l4")
@@ -63,10 +63,9 @@ font_size = 8
 shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
-size = Vector2(25, 43)
+size = Vector2(25, 16.5)
 
 [node name="Jose" type="CharacterBody2D" unique_id=1159699131]
-position = Vector2(0.9, 0)
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_hfcox")
@@ -75,7 +74,7 @@ metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1580327972]
-position = Vector2(-2.8999996, 48)
+position = Vector2(-1, -10)
 scale = Vector2(2.4375, 1.546875)
 texture = ExtResource("2_hfcox")
 
@@ -84,11 +83,10 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2061759812]
-visible = false
-position = Vector2(-4.5, 24.5)
 shape = SubResource("RectangleShape2D_gu3sj")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1775995246]
+position = Vector2(1, -58)
 sprite_frames = SubResource("SpriteFrames_cgete")
 animation = &"idle"
 autoplay = "idle"
@@ -105,7 +103,7 @@ label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1709931667]
-position = Vector2(-5.5, 22.5)
+position = Vector2(0.099998474, -0.75)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)
 

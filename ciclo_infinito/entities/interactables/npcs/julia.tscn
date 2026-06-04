@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_2b3ct"]
 [ext_resource type="Texture2D" uid="uid://05mguym0tfks" path="res://assets/art/npcs/other/spuud_idle.png" id="2_ghj3v"]
 [ext_resource type="Texture2D" uid="uid://cw5k3pfja14yo" path="res://assets/art/npcs/other/spuud_walk.png" id="2_r72a0"]
+[ext_resource type="Material" uid="uid://c146kddj2hvtf" path="res://resources/shaders/outline_material.tres" id="3_j6417"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2b3ct"]
 atlas = ExtResource("2_ghj3v")
@@ -165,15 +166,16 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_decul"]
-size = Vector2(111, 80)
-
 [sub_resource type="LabelSettings" id="LabelSettings_o4hm0"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6417"]
+size = Vector2(69.9, 69)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfyt3"]
-size = Vector2(34, 72.75)
+size = Vector2(19, 16)
 
 [node name="Julia" type="CharacterBody2D" unique_id=1354297474]
+material = ExtResource("3_j6417")
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1
@@ -181,7 +183,7 @@ script = ExtResource("1_tu2hi")
 metadata/_custom_type_script = "uid://crikhcj4uvp0e"
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=614643943]
-position = Vector2(16.000002, 51.000004)
+position = Vector2(0, -7.0000005)
 scale = Vector2(2.0625, 1.421875)
 texture = ExtResource("2_2b3ct")
 
@@ -190,17 +192,12 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1982530203]
-position = Vector2(17, 3)
+position = Vector2(1, -56)
 sprite_frames = SubResource("SpriteFrames_aniso")
 animation = &"idle"
 autoplay = "walk"
 frame = 2
 frame_progress = 0.0035015477
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2127824784]
-visible = false
-position = Vector2(24.5, 30)
-shape = SubResource("RectangleShape2D_decul")
 
 [node name="LabelInteracao" type="Label" parent="Area2D" unique_id=13117033]
 offset_left = -25.0
@@ -209,14 +206,16 @@ offset_right = 35.0
 offset_bottom = -9.0
 label_settings = SubResource("LabelSettings_o4hm0")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1356880636]
+shape = SubResource("RectangleShape2D_j6417")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6731502]
-visible = false
-position = Vector2(17, 31.375)
+position = Vector2(1.5, 0)
 shape = SubResource("RectangleShape2D_dfyt3")
 debug_color = Color(0.505315, 0.0268385, 0.069401, 0.42)
 
 [node name="PontoPatrulhaA" type="Marker2D" parent="." unique_id=1920794671]
-position = Vector2(257, 94)
+position = Vector2(257, 95)
 
 [node name="PontoPatrulhaB" type="Marker2D" parent="." unique_id=421245924]
 position = Vector2(56, 333)

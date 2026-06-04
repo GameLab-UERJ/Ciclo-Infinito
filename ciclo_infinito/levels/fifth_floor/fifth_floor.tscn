@@ -72,9 +72,9 @@ dialogo = ExtResource("5_yw1aw")
 
 [node name="Label" type="Label" parent="Pedro" unique_id=312686080]
 offset_left = -26.5
-offset_top = -33.3333
+offset_top = -94.999954
 offset_right = 19.5
-offset_bottom = -10.3333
+offset_bottom = -71.999954
 text = "Pedro"
 
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
