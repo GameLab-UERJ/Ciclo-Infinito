@@ -21,6 +21,7 @@
 [ext_resource type="Resource" uid="uid://735hp7k64lwt" path="res://dialogue/jose.dialogue" id="14_dgs87"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_v1y88"]
 [ext_resource type="AudioStream" uid="uid://cq14taynk4t07" path="res://assets/music/Hades - House of Hades - Supergiant Games (youtube).mp3" id="15_7nto0"]
+[ext_resource type="Material" uid="uid://c146kddj2hvtf" path="res://resources/shaders/outline_material.tres" id="20_auhs2"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_inj64"]
 texture = ExtResource("1_h2ksd")
@@ -482,11 +483,24 @@ theme_override_font_sizes/font_size = 22
 text = "Maria"
 
 [node name="ElevadorInterativo" parent="." unique_id=595449376 instance=ExtResource("3_p3xb5")]
-position = Vector2(517.429, -111.571)
+z_index = 3
+material = ExtResource("20_auhs2")
+position = Vector2(542.50006, -106.00001)
 scale = Vector2(0.99999994, 0.99999994)
 
+[node name="LabelInteração" type="Label" parent="ElevadorInterativo" unique_id=792904934]
+offset_left = -24.857399
+offset_top = -35.428894
+offset_right = 26.142601
+offset_bottom = -12.428879
+theme_override_constants/outline_size = 4
+theme_override_fonts/font = ExtResource("14_4j66v")
+theme_override_font_sizes/font_size = 16
+text = "Maria"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Hud" type="CanvasLayer" parent="." unique_id=1878532527]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="Hud" unique_id=290005524]
 offset_left = 682.0
