@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://05mguym0tfks" path="res://assets/art/npcs/other/spuud_idle.png" id="2_ghj3v"]
 [ext_resource type="Texture2D" uid="uid://cw5k3pfja14yo" path="res://assets/art/npcs/other/spuud_walk.png" id="2_r72a0"]
 [ext_resource type="Material" uid="uid://c146kddj2hvtf" path="res://resources/shaders/outline_material.tres" id="3_j6417"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="6_5stjy"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2b3ct"]
 atlas = ExtResource("2_ghj3v")
@@ -166,10 +167,17 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_o4hm0"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6417"]
 size = Vector2(69.9, 69)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x3chd"]
+font = ExtResource("6_5stjy")
+font_size = 32
+font_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
+shadow_color = Color(0, 0, 0, 1)
+stacked_outline_count = 1
+stacked_outline_0/size = 8
+stacked_outline_0/color = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfyt3"]
 size = Vector2(19, 16)
@@ -199,15 +207,20 @@ autoplay = "walk"
 frame = 2
 frame_progress = 0.0035015477
 
-[node name="LabelInteracao" type="Label" parent="Area2D" unique_id=13117033]
-offset_left = -25.0
-offset_top = -37.0
-offset_right = 35.0
-offset_bottom = -9.0
-label_settings = SubResource("LabelSettings_o4hm0")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1356880636]
 shape = SubResource("RectangleShape2D_j6417")
+
+[node name="LabelInteracao" type="Label" parent="Area2D" unique_id=2034788721]
+visible = false
+offset_left = -30.0
+offset_top = -123.0
+offset_right = 31.0
+offset_bottom = -89.0
+text = "E"
+label_settings = SubResource("LabelSettings_x3chd")
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=6731502]
 position = Vector2(1.5, 0)

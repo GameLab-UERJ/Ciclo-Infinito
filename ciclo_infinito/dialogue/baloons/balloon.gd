@@ -94,10 +94,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if is_instance_valid(dialogue_line):
 		progress.visible = not dialogue_label.is_typing and dialogue_line.responses.size() == 0 and not dialogue_line.has_tag("voice")
-	if progress.visible:
-		talking_sfx.play()
-	else:
-		talking_sfx.stop()
 
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -223,3 +219,15 @@ func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
 
 
 #endregion
+
+
+func _on_dialogue_label_finished_typing() -> void:
+	talking_sfx.stop()
+
+
+func _on_dialogue_label_skipped_typing() -> void:
+	pass # Replace with function body.
+
+
+func _on_dialogue_label_started_typing() -> void:
+	talking_sfx.play()

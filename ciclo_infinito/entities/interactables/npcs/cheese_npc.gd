@@ -83,11 +83,12 @@ func encerra_dialogo(dialogue : DialogueResource) -> void:
 	if not dialogue == dialogo:
 		return
 	
-	falando = false
 	if player:
 		player._on_dialogo_encerrado()
 		player_has_talked_with = true
 		was_talked_to.emit(self)
+	await get_tree().create_timer(0.5).timeout
+	falando = false
 #endregion
 
 
@@ -97,7 +98,6 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "player":
 		player_in_area = true
 		sprite.material.set("shader_parameter/width",2)
-		label_interacao.text = "Pressione 'E' para interagir"
 		label_interacao.visible = true
 
 
