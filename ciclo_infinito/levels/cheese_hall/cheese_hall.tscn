@@ -11,14 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://12i1ywgpw05p" path="res://entities/interactables/npcs/julia.tscn" id="6_dw1uh"]
 [ext_resource type="Texture2D" uid="uid://dslkbgs4suie3" path="res://assets/art/tilesets/trash_right.png" id="7_v1y88"]
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="8_7nto0"]
-[ext_resource type="Resource" uid="uid://7lcd48ifqwik" path="res://dialogue/maria.dialogue" id="8_daq30"]
-[ext_resource type="Resource" uid="uid://os4wg6oi2kp3" path="res://dialogue/julia.dialogue" id="8_nli6l"]
+[ext_resource type="Resource" uid="uid://bknr3kx6tuqqa" path="res://dialogue/maria.dialogue" id="8_daq30"]
+[ext_resource type="Resource" uid="uid://coj6yk4yalr01" path="res://dialogue/julia.dialogue" id="8_nli6l"]
 [ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose.tscn" id="10_p3xb5"]
 [ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria.tscn" id="11_td228"]
 [ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/screen_transition/fade_component.gd" id="13_pfwt5"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="13_v1y88"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="14_4j66v"]
-[ext_resource type="Resource" uid="uid://735hp7k64lwt" path="res://dialogue/jose.dialogue" id="14_dgs87"]
+[ext_resource type="Resource" uid="uid://dile7qs30igoc" path="res://dialogue/jose.dialogue" id="14_dgs87"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_v1y88"]
 [ext_resource type="AudioStream" uid="uid://cq14taynk4t07" path="res://assets/music/Hades - House of Hades - Supergiant Games (youtube).mp3" id="15_7nto0"]
 [ext_resource type="Material" uid="uid://c146kddj2hvtf" path="res://resources/shaders/outline_material.tres" id="20_auhs2"]
@@ -301,6 +301,15 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_bvks6")
 sources/1 = SubResource("TileSetAtlasSource_qy7ad")
 
+[sub_resource type="LabelSettings" id="LabelSettings_auhs2"]
+font = ExtResource("14_4j66v")
+font_size = 32
+font_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
+shadow_color = Color(0, 0, 0, 1)
+stacked_outline_count = 1
+stacked_outline_0/size = 8
+stacked_outline_0/color = Color(1, 1, 1, 1)
+
 [node name="CheeseHall" type="Node2D" unique_id=481706482]
 y_sort_enabled = true
 script = ExtResource("1_dw1uh")
@@ -488,17 +497,16 @@ material = ExtResource("20_auhs2")
 position = Vector2(542.50006, -106.00001)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="LabelInteração" type="Label" parent="ElevadorInterativo" unique_id=792904934]
-offset_left = -24.857399
-offset_top = -35.428894
-offset_right = 26.142601
-offset_bottom = -12.428879
-theme_override_constants/outline_size = 4
-theme_override_fonts/font = ExtResource("14_4j66v")
-theme_override_font_sizes/font_size = 16
-text = "Maria"
+[node name="LabelInteracao" type="Label" parent="ElevadorInterativo" unique_id=68701821]
+offset_left = -28.0
+offset_top = -69.0
+offset_right = 33.0
+offset_bottom = -35.0
+text = "E"
+label_settings = SubResource("LabelSettings_auhs2")
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=1878532527]
 
