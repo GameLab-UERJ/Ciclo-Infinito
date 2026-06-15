@@ -135,7 +135,7 @@ func spawn_meteor_at_player(amount : float = 1, time_to_drop : float = 0.3, offs
 
 
 func damage_player() -> void:
-	player.take_damage(attack_damage,Vector2.ZERO)
+	player.health_component.take_damage(attack_damage,Vector2.ZERO)
 
 
 func make_noise() -> void:

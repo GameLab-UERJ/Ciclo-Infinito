@@ -44,7 +44,7 @@ var is_dead : bool = false
 var last_facing: String = "down"
 var attack_facing: String = "down"
 var is_dashing : bool = false
-var can_dash : bool= true
+var is_dash_on_cooldown : bool = false
 var dash_dir: Vector2 = Vector2.ZERO
 var current_state: int = State.IDLE
 var next_direction: Vector2 = Vector2(0,1)
@@ -68,12 +68,12 @@ var vida_textures = [
 @onready var dash_timer = $dash_timer
 @onready var dash_cooldown = $dash_cooldown
 @onready var area_attack = $attack_area
-@onready var dash_sfx = $dash_sfx
 @onready var player_colision: CollisionShape2D = $player_colision
-@onready var damage_recieved_sfx: AudioStreamPlayer = $DamageRecievedSFX
-@onready var death_sfx: AudioStreamPlayer = $DeathSFX
-@onready var attack_sfxplay: AudioStreamPlayer = $attack_sfxplay
-@onready var footsteps_sfx: AudioStreamPlayer2D = $FootstepsSfx
+@onready var dash_sfx = $SoundEffects/dash_sfx
+@onready var damage_recieved_sfx: AudioStreamPlayer = $SoundEffects/DamageRecievedSFX
+@onready var death_sfx: AudioStreamPlayer = $SoundEffects/DeathSFX
+@onready var attack_sfxplay: AudioStreamPlayer = $SoundEffects/attack_sfxplay
+@onready var footsteps_sfx: AudioStreamPlayer2D = $SoundEffects/FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
 @onready var shadow: Sprite2D = $Shadow
 @onready var health_component: Node = %HealthComponent
@@ -88,7 +88,7 @@ func _ready():
 func _physics_process(delta: float):
 	if is_dead:
 		return
-	
+	state_label.text = State.find_key(current_state)
 	match current_state:
 		State.IDLE:
 			_idle_state()
@@ -100,12 +100,10 @@ func _physics_process(delta: float):
 			_dash_state()
 		State.DIALOG:
 			_dialog_state()
+	
 	move_and_slide()
 	_update_attack_area_anchor()
 	update_animation()
-	
-	%ProgressBar.value = health_component.current_health
-	%ProgressBar.max_value = 100.0
 
 
 func get_input_direction() -> Vector2:
@@ -116,15 +114,23 @@ func can_start_attack() -> bool:
 	return current_state != State.DASH and current_state != State.DIALOG and can_attack
 
 
+func can_dash() -> bool:
+	print("state:",current_state == State.RUN," on cd: ",not is_dash_on_cooldown," not dashing: ",not is_dashing)
+	
+	return current_state == State.RUN and not is_dash_on_cooldown and not is_dashing
+
+
 func _idle_state() -> void:
 	velocity = Vector2.ZERO
 	if Input.is_action_just_pressed("attack"):
 		if can_start_attack():
 			_start_attack1()
 	elif Input.is_action_just_pressed("dash"):
-		current_state = State.DASH
+		if can_dash():
+			current_state = State.DASH
 	elif get_input_direction() != Vector2.ZERO:
-		current_state = State.RUN
+		if current_state != State.DASH:
+			current_state = State.RUN
 
 
 func _run_state(_delta: float) :    
@@ -134,7 +140,8 @@ func _run_state(_delta: float) :
 		if can_start_attack():
 			_start_attack1()
 	elif Input.is_action_just_pressed("dash"):
-		current_state = State.DASH
+		if can_dash():
+			current_state = State.DASH
 
 	if input_direction == Vector2.ZERO:
 		current_state = State.IDLE
@@ -156,19 +163,22 @@ func _attack_state():
 
 
 func _dash_state():
-	if not can_dash and dash_timer.is_stopped():
-		return
-	if dash_timer.is_stopped():
+	if not is_dashing:
+		is_dashing = true
 		anim.play( "dash_" + get_direction_string(next_direction))
 		dash_sfx.play(0.4)
 		dash_timer.start()
+		is_dash_on_cooldown = true
+		
 		var dash_direction: Vector2 = next_direction
 		var in_dir: Vector2 = get_input_direction()
 		if in_dir != Vector2.ZERO:
 			dash_direction = in_dir
 			next_direction = in_dir
 		dash_dir = dash_direction.normalized()
+		
 		await health_component.start_invincibility(invinciblity_duration,true)
+	
 	velocity = dash_dir * move_speed * dash_speed_multiplier
 
 
@@ -177,17 +187,17 @@ func _dialog_state():
 
 
 func _on_dash_timer_timeout() -> void:
-	velocity = Vector2.ZERO
 	if  get_input_direction() != Vector2.ZERO:
 		current_state = State.RUN
 	else:
 		current_state = State.IDLE
+	is_dashing = false
+	is_dash_on_cooldown = true
 	dash_cooldown.start(dash_cooldown_time)
-	can_dash = false
 
 
 func _on_dash_cooldown_timeout() -> void:
-	can_dash = true
+	is_dash_on_cooldown = false
 
 
 func _on_area_attack_body_entered(body: Node2D) -> void:

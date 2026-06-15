@@ -1424,20 +1424,6 @@ size = Vector2(100, 100)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4ja17"]
 size = Vector2(10.90909, 8.244316)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhcba"]
-bg_color = Color(0.29219, 0.29219, 0.29219, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgi3f"]
-bg_color = Color(1.13589e-05, 0.744101, 0.0629717, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
 [node name="player" type="CharacterBody2D" unique_id=1305817267 groups=["player"]]
 scale = Vector2(1.1, 1.1)
 collision_layer = 2
@@ -1487,17 +1473,6 @@ position = Vector2(-1.6255811e-07, -2.2414787)
 shape = SubResource("RectangleShape2D_4ja17")
 debug_color = Color(0.9817937, 0, 0.37205806, 0.41960785)
 
-[node name="ProgressBar" type="ProgressBar" parent="." unique_id=165336263]
-unique_name_in_owner = true
-visible = false
-offset_left = -70.0
-offset_top = -78.0
-offset_right = 69.0
-offset_bottom = -55.0
-theme_override_styles/background = SubResource("StyleBoxFlat_xhcba")
-theme_override_styles/fill = SubResource("StyleBoxFlat_qgi3f")
-value = 100.0
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=452761772]
 z_index = 1000
 zoom = Vector2(1.6, 1.6)
@@ -1508,32 +1483,7 @@ position = Vector2(-228.62474, -151.81866)
 scale = Vector2(0.112718, 0.113636)
 texture = ExtResource("26_arp52")
 
-[node name="attack_sfxplay" type="AudioStreamPlayer" parent="." unique_id=1830921781]
-stream = ExtResource("27_jjk8f")
-volume_db = -10.0
-pitch_scale = 1.19
-mix_target = 1
-
-[node name="dash_sfx" type="AudioStreamPlayer" parent="." unique_id=315505597]
-stream = ExtResource("30_2soq1")
-volume_db = -8.0
-
-[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=1941439101]
-stream = ExtResource("30_24ehl")
-volume_db = 8.0
-
-[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=559540639]
-stream = ExtResource("32_vewsg")
-volume_db = -5.0
-pitch_scale = 1.96
-
-[node name="FootstepsSfx" type="AudioStreamPlayer2D" parent="." unique_id=843265607]
-scale = Vector2(0.9090909, 0.9090909)
-stream = ExtResource("33_2soq1")
-volume_db = -10.0
-
 [node name="StateLabel" type="Label" parent="." unique_id=79007232]
-visible = false
 offset_left = -19.090908
 offset_top = -35.454548
 offset_right = 20.909092
@@ -1541,6 +1491,32 @@ offset_bottom = -12.454548
 theme_override_font_sizes/font_size = 6
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SoundEffects" type="Node2D" parent="." unique_id=1176100439]
+
+[node name="attack_sfxplay" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1830921781]
+stream = ExtResource("27_jjk8f")
+volume_db = -10.0
+pitch_scale = 1.19
+mix_target = 1
+
+[node name="dash_sfx" type="AudioStreamPlayer" parent="SoundEffects" unique_id=315505597]
+stream = ExtResource("30_2soq1")
+volume_db = -8.0
+
+[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1941439101]
+stream = ExtResource("30_24ehl")
+volume_db = 8.0
+
+[node name="DeathSFX" type="AudioStreamPlayer" parent="SoundEffects" unique_id=559540639]
+stream = ExtResource("32_vewsg")
+volume_db = -5.0
+pitch_scale = 1.96
+
+[node name="FootstepsSfx" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=843265607]
+scale = Vector2(0.9090909, 0.9090909)
+stream = ExtResource("33_2soq1")
+volume_db = -10.0
 
 [connection signal="animation_finished" from="animacoes" to="." method="_on_animacoes_animation_finished"]
 [connection signal="frame_changed" from="animacoes" to="." method="_on_animacoes_frame_changed"]

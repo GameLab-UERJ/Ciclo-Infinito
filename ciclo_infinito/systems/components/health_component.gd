@@ -67,11 +67,11 @@ func die() -> void:
 
 func start_invincibility(duration: float, is_dash : bool = false) -> void:
 	is_invincible = true
+	
 	if Util.is_collision_mask_layer_set(player,"Enemy"):
 		player.set_deferred("collision_mask",player.collision_mask^Util.collision_layer_values["Enemy"])
 	if is_dash and Util.is_collision_mask_layer_set(player,"Static Interactive"):
 		player.set_deferred("collision_mask",player.collision_mask^16)
-	player.state_label.set_deferred("text","%x" % (player.collision_mask))
 	
 	await get_tree().create_timer(duration).timeout
 	
@@ -79,5 +79,5 @@ func start_invincibility(duration: float, is_dash : bool = false) -> void:
 		player.set_deferred("collision_mask",player.collision_mask^Util.collision_layer_values["Enemy"])
 	if is_dash and not Util.is_collision_mask_layer_set(player,"Static Interactive"):
 		player.set_deferred("collision_mask",player.collision_mask^24)
-	player.state_label.set_deferred("text","%x" % (player.collision_mask))
+	
 	is_invincible = false
