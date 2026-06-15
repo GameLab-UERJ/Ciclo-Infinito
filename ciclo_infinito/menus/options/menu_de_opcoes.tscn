@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cid6bl0ejesbj" path="res://menus/options/menu_de_opcoes.gd" id="1_68aqc"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_c01ij"]
 [ext_resource type="Texture2D" uid="uid://n6opr2ssjnv5" path="res://assets/art/menus/main_menu/university_front_view.png" id="2_ecyp8"]
+[ext_resource type="AudioStream" uid="uid://wfe6wpmf80cv" path="res://assets/sfx/player/soundreality-whoosh-velocity-383019.mp3" id="4_t8t3c"]
+[ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="5_pcr62"]
 
 [node name="Menu de opcoes" type="Control" unique_id=1635085087]
 layout_mode = 3
@@ -102,5 +104,17 @@ theme_override_fonts/font = ExtResource("2_c01ij")
 theme_override_font_sizes/font_size = 32
 text = "Voltar"
 
+[node name="HoverSfx" type="AudioStreamPlayer" parent="." unique_id=292845625]
+stream = ExtResource("4_t8t3c")
+volume_db = -20.0
+pitch_scale = 2.0
+max_polyphony = 6
+
+[node name="PressedSfx" type="AudioStreamPlayer" parent="." unique_id=1454004362]
+stream = ExtResource("5_pcr62")
+volume_db = -10.0
+
+[connection signal="mouse_entered" from="MarginContainer2/VBoxContainer/Alternar tela cheia" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/Alternar tela cheia" to="." method="_on_alternar_tela_cheia_pressed"]
+[connection signal="mouse_entered" from="MarginContainer2/VBoxContainer/voltar_button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer2/VBoxContainer/voltar_button" to="." method="_on_voltar_button_pressed"]

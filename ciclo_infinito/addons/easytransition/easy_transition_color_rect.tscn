@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://cokt7yp4h3rju"]
+
+[ext_resource type="Shader" uid="uid://4teeu7a435vp" path="res://addons/easytransition/transition.gdshader" id="1_n0t84"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_el85c"]
+shader = ExtResource("1_n0t84")
+shader_parameter/animation = 0
+shader_parameter/progress = 0.0
+shader_parameter/transition_color = Color(0, 0, 0, 1)
+shader_parameter/wave_frequency = 8.0
+shader_parameter/wave_amplitude = 0.08
+shader_parameter/spiral_tightness = 2.0
+shader_parameter/dither_enabled = false
+shader_parameter/dither_intensity = 0.5
+shader_parameter/dither_scale = 2.0
+
+[node name="ColorRect" type="ColorRect" unique_id=1603460029]
+z_index = 99
+material = SubResource("ShaderMaterial_el85c")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

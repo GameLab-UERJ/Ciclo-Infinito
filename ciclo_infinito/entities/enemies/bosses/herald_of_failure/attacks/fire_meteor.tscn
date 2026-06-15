@@ -64,6 +64,8 @@
 [ext_resource type="Texture2D" uid="uid://qfdcxh65i62w" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/59.png" id="61_kon4m"]
 [ext_resource type="Texture2D" uid="uid://d3i0soxy6vrtg" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/60.png" id="62_cuop1"]
 [ext_resource type="Texture2D" uid="uid://bgqayqjgmc75d" path="res://assets/art/attacks/bosses/herald_of_failure/small_fire_ball/impact_frame.png" id="63_6tc2q"]
+[ext_resource type="Texture2D" uid="uid://c8kqlfgxj8n5m" path="res://assets/art/attacks/explosion-b.png" id="65_kip3t"]
+[ext_resource type="AudioStream" uid="uid://3rhbq6y211ex" path="res://assets/sfx/herald_of_failure/soundreality-explosion-fx-343683.mp3" id="66_7vibg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7vibg"]
 atlas = ExtResource("3_kip3t")
@@ -464,14 +466,117 @@ animations = [{
 "speed": 15.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_rwgsm"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(0, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0v8sl"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(80, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycid8"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(160, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvdcl"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(240, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jlldo"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(320, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0vusw"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(400, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jobve"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(480, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k3vrd"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(560, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c170a"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(640, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_34wx0"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(720, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm3ul"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(800, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_la5bf"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(880, 0, 80, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yj0aa"]
+atlas = ExtResource("65_kip3t")
+region = Rect2(960, 0, 80, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ietdt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwgsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0v8sl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycid8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvdcl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jlldo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0vusw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jobve")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k3vrd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c170a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_34wx0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm3ul")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_la5bf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj0aa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rwgsm")
+}],
+"loop": false,
+"name": &"explode",
+"speed": 15.0
+}]
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dsv3r"]
-radius = 6.0
-height = 16.800003
+radius = 7.333336
+height = 22.0
 
 [node name="FireMeteor" type="Node2D" unique_id=1857492451]
 script = ExtResource("1_fbmj5")
 initial_y_position = -200.0
 total_drop_time = 0.5
+total_damage_time_after_drop = 2.0
 
 [node name="ShadowSprite" type="Sprite2D" parent="." unique_id=1189333717]
 scale = Vector2(3, 3)
@@ -479,13 +584,14 @@ texture = ExtResource("2_6tc2q")
 offset = Vector2(-0.5, -10)
 
 [node name="ImpactSprite" type="Sprite2D" parent="." unique_id=1557395758]
+visible = false
 position = Vector2(-0.39999607, -0.2999999)
 scale = Vector2(3, 2.19)
 texture = ExtResource("63_6tc2q")
 
 [node name="FireBallSprite" type="AnimatedSprite2D" parent="." unique_id=2142317343]
 texture_filter = 1
-position = Vector2(0, -100)
+position = Vector2(0, -103)
 rotation = 1.5707964
 scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_l1c2m")
@@ -493,6 +599,12 @@ animation = &"disappear"
 autoplay = "drop"
 frame = 29
 frame_progress = 1.0
+
+[node name="Explosion" type="AnimatedSprite2D" parent="." unique_id=385141010]
+position = Vector2(-1, -6)
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_ietdt")
+animation = &"explode"
 
 [node name="DamageArea" type="Area2D" parent="." unique_id=685072364]
 collision_layer = 0
@@ -506,6 +618,11 @@ shape = SubResource("CapsuleShape2D_dsv3r")
 [node name="EndLifetimeTimer" type="Timer" parent="." unique_id=814060201]
 one_shot = true
 
+[node name="ImpactSfx" type="AudioStreamPlayer2D" parent="." unique_id=845941662]
+stream = ExtResource("66_7vibg")
+max_distance = 300.0
+
+[connection signal="animation_finished" from="Explosion" to="." method="_on_impact_finished"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_exited" from="DamageArea" to="." method="_on_damage_area_body_exited"]
 [connection signal="timeout" from="EndLifetimeTimer" to="." method="_on_end_lifetime_timer_timeout"]

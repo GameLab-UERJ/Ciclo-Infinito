@@ -1,13 +1,18 @@
 extends ScrollContainer
 
+
 @export_range(1,10000,0.1) var credits_time : float = 28.0
 @export_range(0,10000,0.1) var margin_increment : float = 0
 
+
 var main_menu : PackedScene = load("uid://downt2rxxaqaf")
+
 
 @onready var margin : MarginContainer = $MarginContainer
 
+
 func _ready() -> void:
+	MusicManager.play_music(load("uid://dmmu2rejtiqf2"),0,-25)
 	var text_node := margin.get_node_or_null("RichTextLabel")
 	if text_node == null:
 		text_node = _find_first_richtextlabel(margin)
@@ -30,10 +35,11 @@ func _ready() -> void:
 	tween.finished.connect(_acabou)
 	tween.play()
 
+
 func _acabou() -> void:
-	print("acabou!")
-	get_tree().change_scene_to_packed(main_menu)
-	pass
+	await MusicManager.stop_music(2)
+	EasyTransition.transition_to_scene(main_menu,1.5,EasyTransition.TransitionAnim.FADE)
+
 
 func _find_first_richtextlabel(node: Node) -> RichTextLabel:
 	for child in node.get_children():

@@ -8,7 +8,7 @@ signal defeated ##Contador para a tela de vitória
 @export_category("Objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null
-@onready var damage_recieved_sfx: AudioStreamPlayer = null
+@onready var damage_recieved_sfx: AudioStreamPlayer2D = null
 
 @export_category("Movement")
 @export var move_speed: float = 100.0
@@ -37,13 +37,13 @@ var detect_area: Area2D
 var alive: bool = true
 
 
-@onready var attack_sfx: AudioStreamPlayer = $attack_sfx
+@onready var attack_sfx: AudioStreamPlayer2D = $attack_sfx
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
-@onready var death_sfx: AudioStreamPlayer = $DeathSFX
+@onready var death_sfx: AudioStreamPlayer2D = $DeathSFX
 
 
 func _ready() -> void:
-	death_sfx.volume_db = -25.0
+	death_sfx.volume_db = -5.0
 	current_health = max_health
 	attack_cooldown_timer.wait_time = attack_cooldown
 
@@ -126,13 +126,11 @@ func apply_attack_damage() -> void:
 		return
 	var bodies_in_area := attack_area.get_overlapping_bodies()
 	if bodies_in_area.is_empty():
-		print("  -> AttackArea vazia no momento do golpe.")
 		return
 	for body in bodies_in_area:
-		if body.has_method("take_damage"):
+		if body.has_node("HealthComponent"):
 			var hit_direction := (body.global_position - global_position).normalized()
-			body.take_damage(attack_damage, hit_direction)
-			print("Dano aplicado em ", body.name)
+			body.health_component.take_damage(attack_damage, hit_direction)
 
 
 # ======== Vida / Morte ========
@@ -141,12 +139,10 @@ func take_damage(damage: float, hit_direction: Vector2) -> void:
 		return
 	
 	current_health -= damage
-	print("Inimigo recebeu dano de ", damage, ". Vida restante: ", current_health)
 
 	var knockback_force: float = 300.0
 	velocity = hit_direction * knockback_force
 
-	# --- NOVO: Aplica efeito de dano recebido ---
 	applies_damage_received_effect()
 
 	if current_health <= 0:

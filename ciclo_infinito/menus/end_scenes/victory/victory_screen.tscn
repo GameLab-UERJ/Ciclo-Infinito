@@ -3,6 +3,14 @@
 [ext_resource type="Script" uid="uid://b4knutnoii2mc" path="res://menus/end_scenes/victory/victory_screen.gd" id="1_ftuty"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_iu1fh"]
 [ext_resource type="AudioStream" uid="uid://baahyl5ijlsmf" path="res://assets/sfx/Victory.mp3" id="3_3edvs"]
+[ext_resource type="AudioStream" uid="uid://wfe6wpmf80cv" path="res://assets/sfx/player/soundreality-whoosh-velocity-383019.mp3" id="4_q4wxq"]
+[ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="5_e1y7l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4wxq"]
+bg_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e1y7l"]
+bg_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" unique_id=1248596979]
 script = ExtResource("1_ftuty")
@@ -39,14 +47,15 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -90.0
-offset_top = -157.0
-offset_right = 90.0
-offset_bottom = -123.0
+offset_left = -162.0
+offset_top = -215.0
+offset_right = 162.0
+offset_bottom = -160.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_iu1fh")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 46
+theme_override_styles/hover = SubResource("StyleBoxFlat_q4wxq")
 text = "Jogar novamente"
 
 [node name="menu_iniciar_button" type="Button" parent="." unique_id=547012295]
@@ -62,12 +71,25 @@ offset_bottom = -75.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_iu1fh")
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 46
+theme_override_styles/hover = SubResource("StyleBoxFlat_e1y7l")
 text = "Voltar ao menu iniciar"
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1641084495]
 stream = ExtResource("3_3edvs")
 autoplay = true
 
+[node name="HoverSfx" type="AudioStreamPlayer" parent="." unique_id=368827873]
+stream = ExtResource("4_q4wxq")
+volume_db = -20.0
+pitch_scale = 2.0
+max_polyphony = 6
+
+[node name="PressedSfx" type="AudioStreamPlayer" parent="." unique_id=359227080]
+stream = ExtResource("5_e1y7l")
+volume_db = -10.0
+
+[connection signal="mouse_entered" from="jogar_novamente_button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="jogar_novamente_button" to="." method="_on_jogar_novamente_button_pressed"]
+[connection signal="mouse_entered" from="menu_iniciar_button" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="menu_iniciar_button" to="." method="_on_menu_iniciar_button_pressed"]

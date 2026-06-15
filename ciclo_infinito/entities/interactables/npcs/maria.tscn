@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlo38mh7ugqax" path="res://assets/art/npcs/maria/maria_idle.png" id="2_6kxhb"]
 [ext_resource type="Texture2D" uid="uid://2y8phasy63w" path="res://assets/art/npcs/maria/maira_walk.png" id="2_coxnl"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_y5mj7"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="5_d58jv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_y5mj7"]
 atlas = ExtResource("2_6kxhb")
@@ -123,32 +124,32 @@ animations = [{
 "speed": 6.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
-size = Vector2(77, 49)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shueu"]
+size = Vector2(69.9, 69)
 
-[sub_resource type="Theme" id="Theme_ytjd8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hivs1"]
-bg_color = Color(0.187176, 0.187176, 0.187176, 0.552941)
-
-[sub_resource type="LabelSettings" id="LabelSettings_faxwa"]
-font_size = 8
+[sub_resource type="LabelSettings" id="LabelSettings_hqejr"]
+font = ExtResource("5_d58jv")
+font_size = 32
+font_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
 shadow_color = Color(0, 0, 0, 1)
+stacked_outline_count = 1
+stacked_outline_0/size = 8
+stacked_outline_0/color = Color(1, 1, 1, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
-size = Vector2(25, 43)
+size = Vector2(25, 20)
 
-[node name="Maria" type="CharacterBody2D" unique_id=1331639435]
-position = Vector2(0.9, 0)
+[node name="Maria" type="CharacterBody2D" unique_id=2057248949]
 collision_layer = 4
 collision_mask = 3
 motion_mode = 1
 script = ExtResource("1_6p6a1")
+metadata/_custom_type_script = "uid://crikhcj4uvp0e"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1882064076]
-position = Vector2(-0.8999996, 47)
+position = Vector2(0, -11)
 scale = Vector2(2.5625, 1.609375)
 texture = ExtResource("2_y5mj7")
 
@@ -157,55 +158,28 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=2029837772]
+position = Vector2(-2, -58)
 sprite_frames = SubResource("SpriteFrames_cgete")
 animation = &"idle"
 autoplay = "walk"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2032086527]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=347086705]
+shape = SubResource("RectangleShape2D_shueu")
+
+[node name="LabelInteracao" type="Label" parent="Area2D" unique_id=1925701743]
 visible = false
-position = Vector2(-4.5, 24.5)
-shape = SubResource("RectangleShape2D_gu3sj")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1781990066]
-layer = 2
-
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=650642623]
-offset_left = 68.0
-offset_top = 61.0
-offset_right = 768.0
-offset_bottom = 161.0
-theme = SubResource("Theme_ytjd8")
-theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=819735323]
-offset_left = 84.0
-offset_top = 74.0
-offset_right = 751.0
-offset_bottom = 150.0
-theme_override_font_sizes/font_size = 15
+offset_left = -31.0
+offset_top = -122.0
+offset_right = 30.0
+offset_bottom = -88.0
+text = "E"
+label_settings = SubResource("LabelSettings_hqejr")
+horizontal_alignment = 1
 vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=862139719]
-
-[node name="PularDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=1224178449]
-offset_left = 516.0
-offset_top = 138.0
-offset_right = 767.0
-offset_bottom = 161.0
-
-[node name="LabelInteracao" type="Label" parent="Area2D" unique_id=916829660]
-offset_left = -24.0
-offset_top = -34.0
-offset_right = 37.0
-label_settings = SubResource("LabelSettings_faxwa")
 metadata/_edit_use_anchors_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=230494016]
-visible = false
-position = Vector2(-5.5, 22.5)
+position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)
 

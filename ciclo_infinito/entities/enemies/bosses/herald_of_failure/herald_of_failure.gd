@@ -33,6 +33,13 @@ var _moving_limits : Rect2
 @onready var shadow: Sprite2D = $Shadow
 @onready var state_machine_manager: Node = $StateMachineManager
 @onready var meteor_timer: Timer = $MeteorTimer
+@onready var noises_sfx: AudioStreamPlayer2D = $NoisesSfx
+@onready var hurt_sfx: AudioStreamPlayer2D = $HurtSfx
+@onready var death_sfx: AudioStreamPlayer2D = $DeathSfx
+@onready var attack_1_sfx: AudioStreamPlayer2D = $Attack1Sfx
+@onready var attack_2_sfx: AudioStreamPlayer2D = $Attack2Sfx
+@onready var camera_focus: Marker2D = $CameraFocus
+@onready var attack_sfx : Dictionary = {"attack_1":attack_1_sfx,"attack_2":attack_2_sfx}
 
 
 func _ready() -> void:
@@ -64,15 +71,17 @@ func take_damage(damage_amount: float, _hit_direction: Vector2 = Vector2.ZERO) -
 
 
 func applies_damage_received_effect() -> void:	
+	hurt_sfx.play(0.01)
 	sprites.material.set_shader_parameter("redden", true)
 	await get_tree().create_timer(DAMAGE_TAKEN_EFFECT_DURATION).timeout
 	sprites.material.set_shader_parameter("redden", false)
 
 
 func die() -> void:
+	await player.pan_camera_to(self.camera_focus)
 	sprites.play("death")
+	death_sfx.play()
 	create_tween().tween_property(shadow,"self_modulate",Color.TRANSPARENT,sprites.sprite_frames.get_frame_count("death")/sprites.sprite_frames.get_animation_speed("death"))
-	is_dead = true
 
 
 func get_valid_next_position(minimum_distance : float = 50) -> void:
@@ -126,4 +135,23 @@ func spawn_meteor_at_player(amount : float = 1, time_to_drop : float = 0.3, offs
 
 
 func damage_player() -> void:
-	player.take_damage(attack_damage,Vector2.ZERO)
+	player.health_component.take_damage(attack_damage,Vector2.ZERO)
+
+
+func make_noise() -> void:
+	noises_sfx.play()
+
+
+func _on_sprites_frame_changed() -> void:
+	if not sprites:
+		return 
+	
+	match sprites.animation:
+		"attack_1":
+			match sprites.frame:
+				7: 
+					attack_1_sfx.play()
+		"attack_2":
+			match sprites.frame:
+				4: 
+					attack_2_sfx.play()

@@ -865,21 +865,26 @@ size = Vector2(57, 19)
 script = ExtResource("1_o3tjr")
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="." unique_id=706971468]
+position = Vector2(0, -22)
 sprite_frames = SubResource("SpriteFrames_0ouwx")
 animation = &"open"
 
 [node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1906950435]
-position = Vector2(0, 21.5)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_5wpop")
 
 [node name="RumblingSfx" type="AudioStreamPlayer2D" parent="." unique_id=1050507880]
+position = Vector2(0, -22)
 stream = ExtResource("3_rt6f4")
-volume_db = -5.0
+volume_db = 10.0
+pitch_scale = 0.5
 max_distance = 100.0
 max_polyphony = 2
 
 [node name="OpenSfx" type="AudioStreamPlayer2D" parent="." unique_id=707725224]
+position = Vector2(0, -22)
 stream = ExtResource("4_l1lpa")
+volume_db = 10.0
 max_distance = 100.0
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animated_sprite_animation_finished"]

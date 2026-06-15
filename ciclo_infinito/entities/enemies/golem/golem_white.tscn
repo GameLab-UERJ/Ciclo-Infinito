@@ -1150,18 +1150,20 @@ size = Vector2(20, 12)
 [sub_resource type="CircleShape2D" id="CircleShape2D_m5yr5"]
 radius = 276.11
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_m1c6a"]
-radius = 39.012817
+[sub_resource type="CircleShape2D" id="CircleShape2D_qs847"]
+radius = 31.575966
 
 [node name="GolemWhite" type="CharacterBody2D" unique_id=349012999]
+disable_mode = 1
 collision_layer = 8
-collision_mask = 3
+collision_mask = 27
 motion_mode = 1
 script = ExtResource("1_fnxjb")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1272685203]
 material = ExtResource("2_nohhn")
+position = Vector2(0, -10)
 texture = ExtResource("2_1pue7")
 hframes = 9
 vframes = 4
@@ -1170,15 +1172,8 @@ vframes = 4
 libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=900871294]
-visible = false
 show_behind_parent = true
-position = Vector2(0, 7)
-shape = SubResource("RectangleShape2D_i5vqd")
-debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
-
-[node name="Colisiondano2" type="CollisionShape2D" parent="." unique_id=508228306]
-show_behind_parent = true
-position = Vector2(-0.5, 7)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_i5vqd")
 debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
@@ -1189,26 +1184,28 @@ collision_mask = 3
 [node name="Detectionarea" type="CollisionShape2D" parent="detectionarea" unique_id=1477158817]
 shape = SubResource("CircleShape2D_m5yr5")
 
-[node name="AttackArea" type="Area2D" parent="." unique_id=1471319950]
+[node name="AttackArea" type="Area2D" parent="." unique_id=1011107176]
 visible = false
-collision_layer = 16
+collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=716505937]
-shape = SubResource("CircleShape2D_m1c6a")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=322999475]
+shape = SubResource("CircleShape2D_qs847")
 debug_color = Color(0.95932, 0.105688, 0.437158, 0.42)
 
 [node name="AttackCooldown" type="Timer" parent="." unique_id=155333760]
 wait_time = 1.5
 
-[node name="attack_sfx" type="AudioStreamPlayer" parent="." unique_id=1046028221]
+[node name="attack_sfx" type="AudioStreamPlayer2D" parent="." unique_id=544124557]
+position = Vector2(0, -10)
 stream = ExtResource("8_lix03")
-volume_db = -11.857
 
-[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=1985334455]
+[node name="DamageRecievedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1881011775]
+position = Vector2(0, -10)
 stream = ExtResource("9_1pue7")
 
-[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=1389674318]
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=338520283]
+position = Vector2(0, -10)
 stream = ExtResource("11_qs847")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]

@@ -3,6 +3,10 @@
 [ext_resource type="Script" uid="uid://bfn1d3joscoxf" path="res://dialogue/baloons/balloon.gd" id="1_36de5"]
 [ext_resource type="PackedScene" uid="uid://ckvgyvclnwggo" path="res://addons/dialogue_manager/dialogue_label.tscn" id="2_a8ve6"]
 [ext_resource type="Script" uid="uid://bb52rsfwhkxbn" path="res://addons/dialogue_manager/dialogue_responses_menu.gd" id="3_72ixx"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="3_uuhsa"]
+[ext_resource type="AudioStream" uid="uid://hms3wn74lbgw" path="res://assets/sfx/herald_of_failure/herald_noises.wav" id="4_aq20s"]
+[ext_resource type="AudioStream" uid="uid://7c5fg8duknch" path="res://assets/sfx/ui/creatorshome-select-003-337609.mp3" id="5_oetrw"]
+[ext_resource type="AudioStream" uid="uid://c5qrf5ciowbht" path="res://assets/sfx/ui/666herohero-rpg-text-speech-sound-131477.mp3" id="6_7nhov"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_spyqn"]
 bg_color = Color(0, 0, 0, 1)
@@ -99,9 +103,11 @@ _data = {
 &"progress": SubResource("Animation_qkmqt")
 }
 
-[node name="ExampleBalloon" type="CanvasLayer" unique_id=1434168376]
+[node name="DialogLayer" type="CanvasLayer" unique_id=1434168376]
 layer = 100
 script = ExtResource("1_36de5")
+next_action = &"interact"
+skip_action = &"interact"
 
 [node name="Balloon" type="Control" parent="." unique_id=359403728]
 unique_name_in_owner = true
@@ -160,6 +166,17 @@ size_flags_vertical = 8
 unique_name_in_owner = true
 polygon = PackedVector2Array(0, 0, 10, 10, 20, 0)
 
+[node name="Label" type="Label" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control/Progress" unique_id=619963371]
+offset_left = -10.0
+offset_top = -27.0
+offset_right = 30.0
+offset_bottom = 5.0
+theme_override_fonts/font = ExtResource("3_uuhsa")
+theme_override_font_sizes/font_size = 32
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/Control" unique_id=452325722]
 libraries/ = SubResource("AnimationLibrary_1337t")
 autoplay = &"progress"
@@ -190,6 +207,19 @@ text = "Response example"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1116280512]
 unique_name_in_owner = true
+stream = ExtResource("4_aq20s")
+
+[node name="SelectedSfx" type="AudioStreamPlayer" parent="." unique_id=1723681757]
+stream = ExtResource("5_oetrw")
+volume_db = -8.0
+pitch_scale = 0.7
+
+[node name="TalkingSfx" type="AudioStreamPlayer" parent="." unique_id=1422479246]
+stream = ExtResource("6_7nhov")
+pitch_scale = 2.0
 
 [connection signal="gui_input" from="Balloon" to="." method="_on_balloon_gui_input"]
+[connection signal="finished_typing" from="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/DialogueLabel" to="." method="_on_dialogue_label_finished_typing"]
+[connection signal="skipped_typing" from="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/DialogueLabel" to="." method="_on_dialogue_label_skipped_typing"]
+[connection signal="started_typing" from="Balloon/MarginContainer/PanelContainer/MarginContainer/HBoxContainer/VBoxContainer/DialogueLabel" to="." method="_on_dialogue_label_started_typing"]
 [connection signal="response_selected" from="Balloon/ResponsesMenu" to="." method="_on_responses_menu_response_selected"]

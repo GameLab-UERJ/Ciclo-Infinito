@@ -27,7 +27,7 @@ func happened(trigger : String) -> void:
 	state_machine_player.set_trigger(trigger)
 
 
-func _on_state_machine_player_transited(_from: Variant, to: Variant) -> void:
+func _on_state_machine_player_transited(from: Variant, to: Variant) -> void:
 	current_state = to
 	debug_label.text = to
 	
@@ -35,9 +35,19 @@ func _on_state_machine_player_transited(_from: Variant, to: Variant) -> void:
 		boss.current_direction = Vector2.ZERO
 	
 	match to:
+		"Cutscene":
+			boss.sprites.play("talk") 
+			boss.noises_sfx.play()
+			await get_tree().create_timer(3.5).timeout
+			happened("cutscene_over")
+			boss.player.pan_camera_back()
 		"WaitingPlayer":
 			boss.sprites.play("idle")
 		"Idle":
+			if from == "TryAttacking":
+				boss.sprites.play("talk")
+				boss.noises_sfx.play()
+				await boss.noises_sfx.finished
 			boss.sprites.play("idle")
 			timer.start(1-0.8*randi_range(0,1))
 			await timer.timeout
@@ -54,11 +64,13 @@ func _on_state_machine_player_transited(_from: Variant, to: Variant) -> void:
 			happened("attack_ended")
 		"Running":
 			boss.get_valid_next_position()
+			boss.sprites.play("move") 
 		"TryAttacking":
 			if randf() <= boss.chance_of_attacking_after_moving:
 				happened("chose_to_attack")
 			else:
 				happened("chose_not_to_attack")
+				
 		"Dead":
 			boss.die()
 

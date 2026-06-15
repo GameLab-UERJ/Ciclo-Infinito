@@ -71,6 +71,8 @@ var mutation_cooldown: Timer = Timer.new()
 ## Indicator to show that player can progress dialogue.
 @onready var progress: Polygon2D = %Progress
 
+@onready var talking_sfx: AudioStreamPlayer = $TalkingSfx
+@onready var selected_sfx: AudioStreamPlayer = $SelectedSfx
 
 func _ready() -> void:
 	balloon.hide()
@@ -212,7 +214,20 @@ func _on_balloon_gui_input(event: InputEvent) -> void:
 
 
 func _on_responses_menu_response_selected(response: DialogueResponse) -> void:
+	selected_sfx.play()
 	next(response.next_id)
 
 
 #endregion
+
+
+func _on_dialogue_label_finished_typing() -> void:
+	talking_sfx.stop()
+
+
+func _on_dialogue_label_skipped_typing() -> void:
+	pass # Replace with function body.
+
+
+func _on_dialogue_label_started_typing() -> void:
+	talking_sfx.play()

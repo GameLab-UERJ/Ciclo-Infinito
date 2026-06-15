@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://bubtax7ha8ijd" path="res://menus/controls/menu_controles.gd" id="1_hnxwp"]
 [ext_resource type="Texture2D" uid="uid://n6opr2ssjnv5" path="res://assets/art/menus/main_menu/university_front_view.png" id="2_opgxd"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="3_oqebd"]
+[ext_resource type="AudioStream" uid="uid://wfe6wpmf80cv" path="res://assets/sfx/player/soundreality-whoosh-velocity-383019.mp3" id="4_plkh0"]
+[ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="5_o32d8"]
 
 [node name="MenuControles" type="Control" unique_id=388669314]
 process_mode = 3
@@ -32,122 +34,161 @@ texture = ExtResource("2_opgxd")
 expand_mode = 1
 
 [node name="ColorRect" type="ColorRect" parent="TextureRect" unique_id=1374080318]
-layout_mode = 0
-offset_right = 1536.0
-offset_bottom = 1024.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -768.0
+offset_top = -512.0
+offset_right = 768.0
+offset_bottom = 512.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.4117647, 0.4117647, 0.4117647, 0.5019608)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/ColorRect" unique_id=898731452]
-layout_mode = 0
-offset_left = 735.0
-offset_top = 300.0
-offset_right = 904.0
-offset_bottom = 575.0
+[node name="Panel" type="Panel" parent="TextureRect/ColorRect" unique_id=2047297630]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -225.0
+offset_top = 365.0
+offset_right = 175.0
+offset_bottom = 605.0
+grow_horizontal = 2
 
-[node name="A" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=1405046451]
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/ColorRect/Panel" unique_id=477990522]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 100
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/ColorRect/Panel/VBoxContainer" unique_id=1470141332]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_constants/separation = 7
+
+[node name="ColorRect" type="ColorRect" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer" unique_id=870029434]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer" unique_id=898731452]
+layout_mode = 2
+
+[node name="A" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1405046451]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "A"
 
-[node name="D" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=1649616519]
+[node name="D" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1649616519]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "D"
 
-[node name="W" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=192741996]
+[node name="W" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=192741996]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "W"
 
-[node name="S" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=627413529]
+[node name="S" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=627413529]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "S"
 
-[node name="Space" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=1527023623]
+[node name="Space" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1527023623]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Space"
 
-[node name="Left_Mouse" type="Label" parent="TextureRect/ColorRect/VBoxContainer" unique_id=6067225]
+[node name="Left_Mouse" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer" unique_id=6067225]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Left Mouse"
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="TextureRect/ColorRect" unique_id=1451424201]
-layout_mode = 0
-offset_left = 332.0
-offset_top = 300.0
-offset_right = 501.0
-offset_bottom = 536.0
-
-[node name="Move_left" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=1449700252]
+[node name="ColorRect2" type="ColorRect" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer" unique_id=330870858]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+color = Color(1, 1, 1, 0)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer" unique_id=1451424201]
+layout_mode = 2
+
+[node name="Move_left" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1449700252]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Move Left"
 
-[node name="Move_Right" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=2022711848]
+[node name="Move_Right" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=2022711848]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Move Right"
 
-[node name="Move_Up" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=148752357]
+[node name="Move_Up" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=148752357]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Move Up"
 
-[node name="Move_Down" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=1397644265]
+[node name="Move_Down" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1397644265]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Move Down"
 
-[node name="Dash" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=1188692537]
+[node name="Dash" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=1188692537]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Dash"
 
-[node name="Attack" type="Label" parent="TextureRect/ColorRect/VBoxContainer2" unique_id=894154808]
+[node name="Attack" type="Label" parent="TextureRect/ColorRect/Panel/VBoxContainer/HBoxContainer/VBoxContainer2" unique_id=894154808]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Attack"
 
-[node name="Voltar" type="Button" parent="." unique_id=2049924230]
-layout_mode = 0
-offset_left = 33.0
-offset_top = 326.0
-offset_right = 168.0
-offset_bottom = 381.0
-theme_override_colors/font_color = Color(0.94509804, 0.8901961, 1, 1)
+[node name="Voltar" type="Button" parent="TextureRect/ColorRect/Panel/VBoxContainer" unique_id=2049924230]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.76862746, 0.72156864, 0.6156863, 1)
 theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_oqebd")
 theme_override_font_sizes/font_size = 36
 text = "Voltar"
 
-[connection signal="pressed" from="Voltar" to="." method="_on_voltar_pressed"]
+[node name="HoverSfx" type="AudioStreamPlayer" parent="." unique_id=1406612909]
+stream = ExtResource("4_plkh0")
+volume_db = -20.0
+pitch_scale = 2.0
+max_polyphony = 6
+
+[node name="PressedSfx" type="AudioStreamPlayer" parent="." unique_id=1457671053]
+stream = ExtResource("5_o32d8")
+volume_db = -10.0
+
+[connection signal="mouse_entered" from="TextureRect/ColorRect/Panel/VBoxContainer/Voltar" to="." method="_on_voltar_mouse_entered"]
+[connection signal="pressed" from="TextureRect/ColorRect/Panel/VBoxContainer/Voltar" to="." method="_on_voltar_pressed"]

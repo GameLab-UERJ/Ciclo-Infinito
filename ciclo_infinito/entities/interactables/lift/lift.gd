@@ -5,11 +5,15 @@ extends Area2D
 var player_in_area = false
 
 
-@onready var label_interação: Label = $LabelInteração
+@onready var label_interação: Label = $LabelInteracao
 @onready var cheese_hall : Cheesehall = $".."
+@onready var sprite: Sprite2D = $Sprite
 
 
 func _ready() -> void:
+	sprite.material = ShaderMaterial.new()
+	sprite.material.shader = load("uid://i8xl186i1o18")
+	sprite.material.set("shader_parameter/outline_color",Color.hex(0x7702eaff))
 	label_interação.visible = false
 
 func _process(_delta) -> void:
@@ -17,18 +21,14 @@ func _process(_delta) -> void:
 		cheese_hall.mudar_de_cena()
 
 func _on_body_entered(body: Node2D) -> void:
-	print("---ALGO ENTROU NO ELEVADOR!---")
-	print("Nome do corpo detectado: ", body.name)
 	
 	if body.is_in_group("player") and cheese_hall.jose.player_has_talked_with: 
-		print("... e é o jogador!")
 		player_in_area = true
-		label_interação.text = "Pressione 'E' para usar"
+		sprite.material.set("shader_parameter/width",2)
 		label_interação.visible = true
-	else:
-		print("... mas NÃO é o jogador. Grupo do corpo: ", body.get_groups())
 
 func _on_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_in_area = false
+		sprite.material.set("shader_parameter/width",0)
 		label_interação.visible = false

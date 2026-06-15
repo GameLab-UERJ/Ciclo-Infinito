@@ -1205,14 +1205,16 @@ radius = 31.575966
 
 [node name="GolemBrown" type="CharacterBody2D" unique_id=1589772853]
 scale = Vector2(1.3, 1.3)
+disable_mode = 1
 collision_layer = 8
-collision_mask = 3
+collision_mask = 27
 motion_mode = 1
 script = ExtResource("1_u6quf")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1403493714]
 material = ExtResource("2_usmjb")
+position = Vector2(0, -9.230751)
 texture = ExtResource("2_n5ed3")
 hframes = 4
 vframes = 4
@@ -1229,7 +1231,7 @@ debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
 [node name="Colisiondano2" type="CollisionShape2D" parent="." unique_id=207680780]
 show_behind_parent = true
-position = Vector2(0, 5.1923094)
+position = Vector2(0, -4.038437)
 shape = SubResource("RectangleShape2D_i5vqd")
 debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
@@ -1242,7 +1244,7 @@ shape = SubResource("CircleShape2D_m5yr5")
 
 [node name="AttackArea" type="Area2D" parent="." unique_id=615768062]
 visible = false
-collision_layer = 16
+collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=512161656]
@@ -1252,14 +1254,16 @@ debug_color = Color(0.95932, 0.105688, 0.437158, 0.42)
 [node name="AttackCooldown" type="Timer" parent="." unique_id=1417055500]
 wait_time = 1.5
 
-[node name="attack_sfx" type="AudioStreamPlayer" parent="." unique_id=2130441512]
+[node name="attack_sfx" type="AudioStreamPlayer2D" parent="." unique_id=337811673]
+position = Vector2(0, -9.230751)
 stream = ExtResource("7_vt84j")
-volume_db = -10.592
 
-[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="." unique_id=1073650730]
+[node name="DamageRecievedSFX" type="AudioStreamPlayer2D" parent="." unique_id=507144654]
+position = Vector2(0, -9.230751)
 stream = ExtResource("8_n5ed3")
 
-[node name="DeathSFX" type="AudioStreamPlayer" parent="." unique_id=1911733183]
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=1269272670]
+position = Vector2(0, -9.230751)
 stream = ExtResource("10_4yiy6")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]

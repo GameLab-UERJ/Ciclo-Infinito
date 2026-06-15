@@ -6,11 +6,14 @@ var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
 
 
 @onready var pause_menu = $player/pause
-@onready var mission_label = $player/TextureRect/Label
+@onready var mission_label = $player/Missions/Label
 @onready var pedro: CheeseNpc = $Pedro
 @onready var player: Player = $player
 @onready var barreira: Barrier = $Barreira
 @onready var barreira_boss: Barrier = $BarreiraBoss
+@onready var music_player: AudioStreamPlayer = $MusicPlayer
+@onready var enemies: Label = $player/enemies
+@onready var camera_focus: Marker2D = $Barreira/CameraFocus
 
 
 var missoes = [
@@ -30,6 +33,8 @@ func _ready():
 	configurar_label()
 	_atualizar_texto_missao()
 	conectar_sinais()
+	mission_label.get_parent().reparent(player.camera)
+	enemies.reparent(player.camera)
 
 
 func configurar_label():
@@ -40,13 +45,13 @@ func configurar_label():
 func conectar_sinais():
 	if pedro:
 		pedro.was_talked_to.connect(_on_falou_com_pedro)
-	var enemies = $player/enemies
 	if enemies:
 		for enemy in enemies.get_children():
 			enemy.inimigo_derrotado.connect(_on_inimigo_derrotado)
-	
-	
+
+
 func _process(_delta):
+	
 	if Input.is_action_just_pressed("pause"):
 		if get_tree().paused:
 			_resume_game()
@@ -67,16 +72,8 @@ func _resume_game():
 func _atualizar_texto_missao():
 	if mission_label:
 		mission_label.text = missoes[GameState.fifth_floor_state]
-	
-	if GameState.fifth_floor_state == GameState.FifthFloorState.FINISHED:
-		mission_label.text = "Todas as missões concluídas!"
-		SceneTransition.fade_out()
-		GameState.fifth_floor_state = GameState.FifthFloorState.FIRST_TALK
-		var victory_scene = preload("res://menus/end_scenes/victory/victory_screen.tscn").instantiate()
-		await get_tree().create_timer(1.5).timeout
-		get_tree().root.add_child(victory_scene)
-		victory_scene.set_layer(100)
-		
+
+
 func proxima_missao():
 	GameState.fifth_floor_state += 1
 	_atualizar_texto_missao()
@@ -104,17 +101,16 @@ func _on_falou_com_pedro(npc : CheeseNpc):
 func _on_inimigo_derrotado():
 	inimigos_derrotados += 1
 	if GameState.fifth_floor_state == GameState.FifthFloorState.BEFORE_KILLING and inimigos_derrotados >= inimigos_totais:
-		print("vasco")
-		print("Todos os inimigos derrotados — avançando missão.")
 		proxima_missao()
 
 
 func _on_barreira_started_opening() -> void:
-	await player.pan_camera_to(barreira)
+	await player.pan_camera_to(camera_focus)
 
 
 func _on_any_barreira_finished_opening() -> void:
 	await player.pan_camera_back()
+	enemies.show()
 
 
 func _on_barreira_boss_started_opening() -> void:
@@ -124,10 +120,13 @@ func _on_barreira_boss_started_opening() -> void:
 func _on_cutscene_area_body_entered(body: Node2D) -> void:
 	if not body is Player:
 		return
-	player.current_state = player.State.CUTSCENE
-	await create_tween().tween_property(player.anim,"scale",Vector2.ZERO,1).finished
-	
+	player.current_state = player.State.CUTSCENE	
 	mission_label.text = "Todas as missões concluídas!"
+	var tween : Tween = create_tween()
+	tween.tween_property(player.anim,"scale",Vector2.ZERO,1)
+	tween.parallel().tween_property(player.shadow,"scale",Vector2.ZERO,1)
+	await tween.parallel().tween_property(player.footsteps_sfx,"volume_db",-50,1).finished
+	player.current_state = player.State.DIALOG
 	SceneTransition.fade_out()
 	var boss_scene = load("uid://laif38pcjfq7").instantiate()
 	await get_tree().create_timer(1.5).timeout

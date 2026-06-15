@@ -1,11 +1,17 @@
 extends Control
 
+
 var main_menu : PackedScene = load("uid://downt2rxxaqaf")
+
 
 @onready var volume_slider: HSlider = $"MarginContainer/HBoxContainerGeral/volume_slider"
 @onready var volume_label: Label = $"MarginContainer/HBoxContainerGeral/Volume"
+@onready var hover_sfx: AudioStreamPlayer = $HoverSfx
+@onready var pressed_sfx: AudioStreamPlayer = $PressedSfx
+
 
 func _ready() -> void:
+	MusicManager.increase_volume(-10)
 	var master_idx = AudioServer.get_bus_index("Master")
 
 	volume_slider.min_value = 0.0
@@ -21,6 +27,7 @@ func _ready() -> void:
 		func(value): _on_volume_changed(value, master_idx)
 	)
 
+
 func _on_volume_changed(value: float, bus_idx: int) -> void:
 	var linear = value/100
 	var db = linear_to_db(linear)
@@ -28,21 +35,26 @@ func _on_volume_changed(value: float, bus_idx: int) -> void:
 	AudioServer.set_bus_volume_db(bus_idx, db)
 	_update_label(db)
 
+
 func _update_label(db_value: float) -> void:
 	var amp = db_to_linear(db_value)
 	var percent = int(round(amp * 100.0))
-	
 	volume_label.text = "Volume: %d%%" % clamp(percent, 0, 100)
 
+
 func _on_voltar_button_pressed() -> void:
-	get_tree().change_scene_to_packed(main_menu)
-	
-	pass
+	pressed_sfx.play(0.15)
+	MusicManager.increase_volume(10)
+	EasyTransition.transition_to_scene(main_menu,1.5,EasyTransition.TransitionAnim.WIPE_LINEAR)
 
 
 func _on_alternar_tela_cheia_pressed() -> void:
+	pressed_sfx.play(0.15)
 	if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	else:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	pass # Replace with function body.
+
+
+func _on_button_mouse_entered() -> void:
+	hover_sfx.play(0.37)

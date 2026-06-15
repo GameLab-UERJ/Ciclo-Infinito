@@ -3,9 +3,7 @@
 [ext_resource type="Script" uid="uid://crikhcj4uvp0e" path="res://entities/interactables/npcs/cheese_npc.gd" id="1_f6j54"]
 [ext_resource type="Texture2D" uid="uid://b31qbydqhwrwt" path="res://assets/art/npcs/pedro/pedro_idle.png" id="2_74uy2"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_f6j54"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gu3sj"]
-size = Vector2(77, 49)
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="4_s2dbo"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kh24r"]
 atlas = ExtResource("2_74uy2")
@@ -50,28 +48,31 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Theme" id="Theme_ytjd8"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hivs1"]
-bg_color = Color(0.187176, 0.187176, 0.187176, 0.552941)
-
 [sub_resource type="LabelSettings" id="LabelSettings_faxwa"]
-font_size = 8
+font = ExtResource("4_s2dbo")
+font_size = 32
+font_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
 shadow_color = Color(0, 0, 0, 1)
+stacked_outline_count = 1
+stacked_outline_0/size = 8
+stacked_outline_0/color = Color(1, 1, 1, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g03qy"]
+size = Vector2(69.9, 69)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xxcha"]
-size = Vector2(25, 71)
+size = Vector2(19, 13)
 
-[node name="Pedro" type="CharacterBody2D" unique_id=1951016626]
-position = Vector2(0.9, 0)
+[node name="Pedro" type="CharacterBody2D" unique_id=1993631793]
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_f6j54")
+metadata/_custom_type_script = "uid://crikhcj4uvp0e"
 metadata/_edit_vertical_guides_ = [84.0, 768.0, 68.0, 752.0]
 metadata/_edit_horizontal_guides_ = [73.0, 61.0, 161.0, 149.0]
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1560247652]
-position = Vector2(-4.8999996, 50.000008)
+position = Vector2(-1, -7.9999995)
 scale = Vector2(2.125, 1.421875)
 texture = ExtResource("2_f6j54")
 
@@ -79,56 +80,29 @@ texture = ExtResource("2_f6j54")
 collision_layer = 0
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1867660891]
-visible = false
-position = Vector2(-4.5, 24.5)
-shape = SubResource("RectangleShape2D_gu3sj")
-
 [node name="Sprite" type="AnimatedSprite2D" parent="Area2D" unique_id=1546663399]
+position = Vector2(0, -57)
 sprite_frames = SubResource("SpriteFrames_cgete")
 animation = &"idle Vamp"
 autoplay = "idle Vamp"
 
-[node name="CanvasLayer" type="CanvasLayer" parent="Area2D" unique_id=1283099891]
-layer = 2
-
-[node name="CaixaDeDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=351317161]
-offset_left = 68.0
-offset_top = 61.0
-offset_right = 768.0
-offset_bottom = 161.0
-theme = SubResource("Theme_ytjd8")
-theme_override_styles/normal = SubResource("StyleBoxFlat_hivs1")
-autowrap_mode = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="TextoDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=804664432]
-offset_left = 84.0
-offset_top = 74.0
-offset_right = 751.0
-offset_bottom = 150.0
-theme_override_font_sizes/font_size = 15
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="Timer" type="Timer" parent="Area2D/CanvasLayer" unique_id=356194070]
-
-[node name="PularDialogo" type="Label" parent="Area2D/CanvasLayer" unique_id=104532168]
-offset_left = 516.0
-offset_top = 138.0
-offset_right = 767.0
-offset_bottom = 161.0
-
 [node name="LabelInteracao" type="Label" parent="Area2D" unique_id=623400268]
-offset_left = -24.0
-offset_top = -34.0
-offset_right = 37.0
+visible = false
+offset_left = -34.0
+offset_top = -122.0
+offset_right = 27.0
+offset_bottom = -88.0
+text = "E"
 label_settings = SubResource("LabelSettings_faxwa")
+horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1437696156]
+shape = SubResource("RectangleShape2D_g03qy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=49316292]
-visible = false
-position = Vector2(-5.5, 26.5)
+position = Vector2(-0.5, 1.5)
 shape = SubResource("RectangleShape2D_xxcha")
 debug_color = Color(0.96602, 0, 0.483122, 0.42)
 
