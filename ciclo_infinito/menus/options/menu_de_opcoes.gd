@@ -44,6 +44,7 @@ func _update_label(db_value: float) -> void:
 
 func _on_voltar_button_pressed() -> void:
 	pressed_sfx.play(0.15)
+	MusicManager.increase_volume(10)
 	EasyTransition.transition_to_scene(main_menu,1.5,EasyTransition.TransitionAnim.WIPE_LINEAR)
 
 

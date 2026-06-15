@@ -1161,6 +1161,7 @@ metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1001324020]
 material = ExtResource("2_7axup")
+position = Vector2(0, -24)
 texture = ExtResource("3_7axup")
 hframes = 9
 vframes = 4
@@ -1196,12 +1197,15 @@ debug_color = Color(0.95932, 0.105688, 0.437158, 0.42)
 wait_time = 1.5
 
 [node name="attack_sfx" type="AudioStreamPlayer2D" parent="." unique_id=1532088178]
+position = Vector2(0, -24)
 stream = ExtResource("7_2loqd")
 
 [node name="DamageRecievedSFX" type="AudioStreamPlayer2D" parent="." unique_id=424069968]
+position = Vector2(0, -24)
 stream = ExtResource("8_yqgpa")
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=899827381]
+position = Vector2(0, -24)
 stream = ExtResource("10_u7vxu")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]

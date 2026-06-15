@@ -14,10 +14,8 @@ var _something_was_selected : bool = false
 
 func _ready() -> void:
 	if not MusicManager.is_playing():
-		MusicManager.play_music(preload("uid://c8ag6husw1v2"),12,0,false)
+		MusicManager.play_music(load("uid://c8ag6husw1v2"),12,0,false)
 		MusicManager.increase_volume(-5)
-	else:
-		MusicManager.increase_volume(10)
 
 
 func _on_any_button_pressed() -> void:

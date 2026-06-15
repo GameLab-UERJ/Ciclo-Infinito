@@ -1163,6 +1163,7 @@ metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1272685203]
 material = ExtResource("2_nohhn")
+position = Vector2(0, -10)
 texture = ExtResource("2_1pue7")
 hframes = 9
 vframes = 4
@@ -1172,13 +1173,7 @@ libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=900871294]
 show_behind_parent = true
-position = Vector2(0, 7)
-shape = SubResource("RectangleShape2D_i5vqd")
-debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
-
-[node name="Colisiondano2" type="CollisionShape2D" parent="." unique_id=508228306]
-show_behind_parent = true
-position = Vector2(-0.5, 7)
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_i5vqd")
 debug_color = Color(0.348661, 0.50626, 0.934198, 0.42)
 
@@ -1202,12 +1197,15 @@ debug_color = Color(0.95932, 0.105688, 0.437158, 0.42)
 wait_time = 1.5
 
 [node name="attack_sfx" type="AudioStreamPlayer2D" parent="." unique_id=544124557]
+position = Vector2(0, -10)
 stream = ExtResource("8_lix03")
 
 [node name="DamageRecievedSFX" type="AudioStreamPlayer2D" parent="." unique_id=1881011775]
+position = Vector2(0, -10)
 stream = ExtResource("9_1pue7")
 
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=338520283]
+position = Vector2(0, -10)
 stream = ExtResource("11_qs847")
 
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]

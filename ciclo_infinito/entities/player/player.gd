@@ -115,8 +115,6 @@ func can_start_attack() -> bool:
 
 
 func can_dash() -> bool:
-	print("state:",current_state == State.RUN," on cd: ",not is_dash_on_cooldown," not dashing: ",not is_dashing)
-	
 	return current_state == State.RUN and not is_dash_on_cooldown and not is_dashing
 
 
@@ -177,7 +175,7 @@ func _dash_state():
 			next_direction = in_dir
 		dash_dir = dash_direction.normalized()
 		
-		await health_component.start_invincibility(invinciblity_duration,true)
+		await health_component.start_invincibility(dash_timer.wait_time,true)
 	
 	velocity = dash_dir * move_speed * dash_speed_multiplier
 

@@ -13,6 +13,7 @@ func _ready() -> void:
 
 func _on_voltar_pressed() -> void:
 	pressed_sfx.play(0.15)
+	MusicManager.increase_volume(10)
 	if get_parent() == get_tree().root:
 		EasyTransition.transition_to_scene(main_menu,1.5,EasyTransition.TransitionAnim.WIPE_LINEAR)
 		return

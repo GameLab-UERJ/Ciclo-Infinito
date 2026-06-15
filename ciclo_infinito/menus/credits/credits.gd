@@ -12,7 +12,7 @@ var main_menu : PackedScene = load("uid://downt2rxxaqaf")
 
 
 func _ready() -> void:
-	MusicManager.play_music(preload("uid://dmmu2rejtiqf2"),0,-25)
+	MusicManager.play_music(load("uid://dmmu2rejtiqf2"),0,-25)
 	var text_node := margin.get_node_or_null("RichTextLabel")
 	if text_node == null:
 		text_node = _find_first_richtextlabel(margin)

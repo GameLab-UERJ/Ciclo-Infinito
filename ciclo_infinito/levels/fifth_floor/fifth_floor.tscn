@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vxp7ft6bj5g5" path="res://levels/barrier.tscn" id="3_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://djrevjgpeak50" path="res://entities/enemies/golem/golem_white.tscn" id="4_wyqw4"]
 [ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="5_vl0w6"]
-[ext_resource type="Resource" uid="uid://b2lai2jwynri4" path="res://dialogue/pedro.dialogue" id="5_yw1aw"]
+[ext_resource type="Resource" uid="uid://dumym8tg7uleq" path="res://dialogue/pedro.dialogue" id="5_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://deyn0aff4vkxb" path="res://entities/enemies/beholder/beholder_orange.tscn" id="6_3nscd"]
 [ext_resource type="Shader" uid="uid://b4ecm70ug50ju" path="res://resources/shaders/redden.gdshader" id="6_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://c80omegwkn2ei" path="res://entities/enemies/beholder/beholder_white.tscn" id="7_ancri"]
@@ -27,6 +27,7 @@ shader = ExtResource("6_yw1aw")
 shader_parameter/redden = false
 
 [node name="QuintoAndar" type="Node2D" unique_id=1838089692]
+y_sort_enabled = true
 script = ExtResource("1_u87vb")
 
 [node name="TerrainManager" parent="." unique_id=468786021 instance=ExtResource("8_wow6u")]
@@ -34,7 +35,7 @@ position = Vector2(-1, 45)
 
 [node name="Barreira" parent="." unique_id=1095351611 node_paths=PackedStringArray("opener_node") instance=ExtResource("3_yw1aw")]
 z_index = 1
-position = Vector2(512, -2)
+position = Vector2(512, 38)
 scale = Vector2(2, 2)
 opener_node = NodePath("..")
 opener_method_name = "libera_barreira"
@@ -44,19 +45,20 @@ position = Vector2(28.170258, 1.721489)
 
 [node name="Barreira2" parent="." unique_id=1157678233 node_paths=PackedStringArray("opener_node") instance=ExtResource("3_yw1aw")]
 z_index = 1
-position = Vector2(626, -2)
+position = Vector2(626, 38)
 scale = Vector2(2, 2)
 opener_node = NodePath("..")
 opener_method_name = "libera_barreira"
 
 [node name="BarreiraBoss" parent="." unique_id=142702593 node_paths=PackedStringArray("opener_node") instance=ExtResource("3_yw1aw")]
-position = Vector2(76, -1)
+z_index = 1
+position = Vector2(76, 41)
 scale = Vector2(2, 2)
 opener_node = NodePath("..")
 opener_method_name = "libera_barreira_boss"
 
 [node name="CutsceneArea" type="Area2D" parent="." unique_id=176385997]
-position = Vector2(76, -1)
+position = Vector2(76, -2)
 scale = Vector2(2, 2)
 collision_mask = 2
 
@@ -66,6 +68,7 @@ shape = SubResource("RectangleShape2D_yw1aw")
 debug_color = Color(0.8475721, 0.00095953466, 0.90705407, 0.41960785)
 
 [node name="Pedro" parent="." unique_id=531889216 instance=ExtResource("10_x1c7k")]
+z_index = 1
 position = Vector2(510.9, -118)
 scale = Vector2(0.6, 0.6)
 dialogo = ExtResource("5_yw1aw")
@@ -78,6 +81,7 @@ offset_bottom = -71.999954
 text = "Pedro"
 
 [node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
+z_index = 1
 material = SubResource("ShaderMaterial_yw1aw")
 position = Vector2(573, -235)
 scale = Vector2(1, 1)
@@ -128,7 +132,9 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(1.74863, 0.959864)
 
-[node name="Enemies" type="Node" parent="." unique_id=1015743081 node_paths=PackedStringArray("label_contador")]
+[node name="Enemies" type="Node2D" parent="." unique_id=1456136322 node_paths=PackedStringArray("label_contador")]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("2_tprnl")
 label_contador = NodePath("../player/enemies")
 
