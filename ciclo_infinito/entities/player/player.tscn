@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://3qoae7f6uh8o"]
 
 [ext_resource type="Script" uid="uid://dbg05n786rg21" path="res://entities/player/player.gd" id="1_wq0jh"]
+[ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://systems/components/health_component.gd" id="2_8q4fm"]
 [ext_resource type="Material" uid="uid://bk3kiethktv7y" path="res://resources/shaders/whiten.tres" id="2_24ehl"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://cw6rmtpf160hr" path="res://assets/art/player/ATTACK 1/attack1_down.png" id="2_gt4e4"]
@@ -1444,8 +1445,13 @@ collision_mask = 29
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_wq0jh")
+invinciblity_duration = 0.5
 dash_duracao = 0.1
 metadata/_custom_type_script = "uid://dbg05n786rg21"
+
+[node name="HealthComponent" type="Node" parent="." unique_id=1599392653]
+unique_name_in_owner = true
+script = ExtResource("2_8q4fm")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1059278900]
 position = Vector2(-0.90909195, -9.999992)
@@ -1536,6 +1542,7 @@ theme_override_font_sizes/font_size = 6
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[connection signal="animation_finished" from="animacoes" to="." method="_on_animacoes_animation_finished"]
 [connection signal="frame_changed" from="animacoes" to="." method="_on_animacoes_frame_changed"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

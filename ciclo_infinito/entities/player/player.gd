@@ -5,7 +5,11 @@ extends CharacterBody2D
 enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG, CUTSCENE}
 
 
-@export var max_health: float = 120.0
+@export var max_health: float = 120.0:
+	set(value):
+		max_health = value
+		if health_component:
+			health_component.max_health = max_health
 @export var attack1_damage: float = 15.0 ## Dano do primeiro golpe
 @export var attack2_damage: float = 15.0 ## Dano do segundo golpe
 @export var move_speed: float = 240.00
@@ -20,7 +24,8 @@ enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG, CUTSCENE}
 @export var hit2_active_time := 0.14
 @export var attack2_lock_time := 0.28
 @export_group("Dash")
-@export var dash_multiplier: float = 3
+@export var dash_cooldown_time: float = 1
+@export var dash_speed_multiplier: float = 3
 @export var dash_duracao  = 0.2
 @export_group("Hitboxes")
 @export_subgroup("Hitbox sizes")
@@ -38,17 +43,15 @@ enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG, CUTSCENE}
 var is_dead : bool = false
 var last_facing: String = "down"
 var attack_facing: String = "down"
-var is_dashing := false
-var can_dash := true
+var is_dashing : bool = false
+var can_dash : bool= true
 var dash_dir: Vector2 = Vector2.ZERO
 var current_state: int = State.IDLE
 var next_direction: Vector2 = Vector2(0,1)
-var can_attack := true
-var combo_step := 0
+var can_attack : bool = true
+var combo_step : int = 0
 var combo_window_open := false
 var combo_buffered := false
-var current_health: float
-var is_invincible = false
 var vida_textures = [
 	preload("uid://d04wn5x7fupjs"),#vida -1
 	preload("uid://dus84fjy3186o"),#vida -2
@@ -73,11 +76,12 @@ var vida_textures = [
 @onready var footsteps_sfx: AudioStreamPlayer2D = $FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
 @onready var shadow: Sprite2D = $Shadow
+@onready var health_component: Node = %HealthComponent
 
 
 func _ready():
-	current_health = max_health
-	update_health_bar()
+	max_health = max_health
+	health_component.update_health_bar()
 	dash_timer.wait_time = dash_duracao
 
 
@@ -100,75 +104,13 @@ func _physics_process(delta: float):
 	_update_attack_area_anchor()
 	update_animation()
 	
-	%ProgressBar.value = current_health
+	%ProgressBar.value = health_component.current_health
 	%ProgressBar.max_value = 100.0
-
-
-func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
-	if (current_state == State.DASH or 
-		current_state == State.DEATH or 
-		current_state == State.DIALOG or 
-		is_invincible):
-		return
-	
-	current_health -= damage_amount
-	current_health = clamp(current_health, 0.0, max_health)
-
-	update_health_bar()
-
-	var knockback_force: float = 350.0
-	velocity = hit_direction * knockback_force
-
-	applies_damage_received_effect()
-
-	start_invincibility(invinciblity_duration)
-	
-	if current_health <= 0.0:
-		die()
-
-
-func update_health_bar():
-	var ratio=current_health/max_health
-	var filled_heart=int(round(ratio*6))
-	filled_heart=clamp(filled_heart,0,6)
-	vida_cheia.texture=vida_textures[filled_heart]
-
-
-func die() -> void:
-	is_dead = true
-	current_state = State.DEATH
-	collision_layer = 0
-	
-	update_animation()
-	death_sfx.play(0.3)
-	
-	await get_tree().create_timer(2.0).timeout
-	await SceneTransition.fade_out()
-	
-	var death_scene = preload("uid://b7qoxm33b5qxt").instantiate()#death_screen.tscn
-	get_tree().root.add_child(death_scene)
-	death_scene.set_layer(100)
-
-
-func start_invincibility(duration: float, is_dash : bool = false) -> void:
-	is_invincible = true
-	if Util.is_collision_mask_layer_set(self,"Enemy"):
-		set_deferred("collision_mask",collision_mask^Util.collision_layer_values["Enemy"])
-	if is_dash and Util.is_collision_mask_layer_set(self,"Static Interactive"):
-		set_deferred("collision_mask",collision_mask^16)
-	state_label.set_deferred("text","%x" % (collision_mask))
-	await get_tree().create_timer(duration).timeout
-	
-	if not Util.is_collision_mask_layer_set(self,"Enemy"):
-		set_deferred("collision_mask",collision_mask^Util.collision_layer_values["Enemy"])
-	if is_dash and not Util.is_collision_mask_layer_set(self,"Static Interactive"):
-		set_deferred("collision_mask",collision_mask^24)
-	state_label.set_deferred("text","%x" % (collision_mask))
-	is_invincible = false
 
 
 func get_input_direction() -> Vector2:
 	return Input.get_vector("run_left","run_right","run_up","run_down")
+
 
 func can_start_attack() -> bool:
 	return current_state != State.DASH and current_state != State.DIALOG and can_attack
@@ -214,7 +156,10 @@ func _attack_state():
 
 
 func _dash_state():
+	if not can_dash and dash_timer.is_stopped():
+		return
 	if dash_timer.is_stopped():
+		anim.play( "dash_" + get_direction_string(next_direction))
 		dash_sfx.play(0.4)
 		dash_timer.start()
 		var dash_direction: Vector2 = next_direction
@@ -223,8 +168,8 @@ func _dash_state():
 			dash_direction = in_dir
 			next_direction = in_dir
 		dash_dir = dash_direction.normalized()
-		await start_invincibility(invinciblity_duration,true)
-	velocity = dash_dir * move_speed * dash_multiplier
+		await health_component.start_invincibility(invinciblity_duration,true)
+	velocity = dash_dir * move_speed * dash_speed_multiplier
 
 
 func _dialog_state():
@@ -237,8 +182,8 @@ func _on_dash_timer_timeout() -> void:
 		current_state = State.RUN
 	else:
 		current_state = State.IDLE
-	if dash_cooldown and dash_cooldown.is_stopped():
-		dash_cooldown.start()
+	dash_cooldown.start(dash_cooldown_time)
+	can_dash = false
 
 
 func _on_dash_cooldown_timeout() -> void:
@@ -368,7 +313,7 @@ func _on_dialogo_encerrado():
 
 func update_animation() -> void:
 	var anim_name := ""
-	var direction_str: String = attack_facing if current_state == State.ATTACK else get_direction_string(next_direction)
+	var direction_str: String = get_direction_string(next_direction)
 	match current_state:
 		State.IDLE,State.DIALOG:
 			anim_name = "idle_" + direction_str
@@ -376,13 +321,16 @@ func update_animation() -> void:
 			anim_name = "run_" + direction_str
 		State.ATTACK:
 			anim_name = ( "attack2_" if combo_step == 2 else "attack1_" ) + attack_facing
-		State.DASH:
-			anim_name = "dash_" + direction_str
 		State.DEATH:
 			anim_name = "death_" + direction_str
+		State.DASH:
+			return
 	if anim.animation != anim_name:
 		if current_state == State.ATTACK:
 			anim.stop(); anim.frame = 0
+		if anim_name.begins_with("dash") and not dash_cooldown.is_stopped():
+			anim.animation = anim_name
+			return
 		anim.play(anim_name)
 
 
@@ -426,3 +374,8 @@ func _on_animacoes_frame_changed() -> void:
 		match anim.frame:
 			3,7:
 				footsteps_sfx.play()
+
+
+func _on_animacoes_animation_finished() -> void:
+	if anim.animation.begins_with("dash"):
+		current_state = State.IDLE

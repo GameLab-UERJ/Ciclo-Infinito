@@ -128,9 +128,9 @@ func apply_attack_damage() -> void:
 	if bodies_in_area.is_empty():
 		return
 	for body in bodies_in_area:
-		if body.has_method("take_damage"):
+		if body.has_node("HealthComponent"):
 			var hit_direction := (body.global_position - global_position).normalized()
-			body.take_damage(attack_damage, hit_direction)
+			body.health_component.take_damage(attack_damage, hit_direction)
 
 
 # ======== Vida / Morte ========
