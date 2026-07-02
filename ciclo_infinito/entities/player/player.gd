@@ -100,7 +100,9 @@ func _physics_process(delta: float):
 			_dash_state()
 		State.DIALOG:
 			_dialog_state()
-	
+	if combo_buffered and combo_step == 0 and can_start_attack():
+		combo_buffered = false
+		_start_attack1()
 	move_and_slide()
 	_update_attack_area_anchor()
 	update_animation()
@@ -239,6 +241,7 @@ func _open_combo_window() -> void: # Espera a janela de combo e, se houve um ata
 	await get_tree().create_timer(combo_window).timeout
 	combo_window_open = false
 	if combo_step == 1 and combo_buffered:
+		combo_buffered = false
 		_start_attack2()
 
 
