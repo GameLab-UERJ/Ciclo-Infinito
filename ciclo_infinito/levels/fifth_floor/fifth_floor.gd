@@ -31,11 +31,13 @@ func _ready():
 	pause_menu.hide()
 	inimigos_totais = $player/enemies.get_child_count() if $player/enemies else 0
 	configurar_label()
-	_atualizar_texto_missao()
 	conectar_sinais()
 	mission_label.get_parent().reparent(player.camera)
 	enemies.reparent(player.camera)
-
+	if pedro:
+		pedro.player_has_talked_with = false
+	GameState.fifth_floor_state = GameState.FifthFloorState.FIRST_TALK
+	_atualizar_texto_missao()
 
 func configurar_label():
 	mission_label.autowrap_mode=TextServer.AUTOWRAP_WORD
