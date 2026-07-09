@@ -41,9 +41,9 @@ texture_region_size = Vector2i(32, 32)
 1:11/0/physics_layer_0/polygon_1/points = PackedVector2Array(-104.19226, -22.304157, -84.75579, -21.985527, -84.43716, 10.514809, -104.510895, 10.514809)
 1:1/size_in_atlas = Vector2i(7, 9)
 1:1/0 = 0
-1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-90.035904, -89.80265, 98.899536, -88.86964, 99.36606, -45.48446, -90.035904, -45.017952)
-1:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(-99.36606, -42.685417, -77.69357, -42.328854, -77.475945, 144.39688, -99.27587, 143.12051)
-1:1/0/physics_layer_0/polygon_2/points = PackedVector2Array(86.372635, -42.79132, 104.857635, -42.89631, 104.8295, 142.58727, 86.89931, 142.85718)
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-90.035904, -89.80265, 98.899536, -88.86964, 99.36606, -45.48446, 80.29495, -34.09349, -68.505615, -34.73075, -90.035904, -45.017952)
+1:1/0/physics_layer_0/polygon_1/points = PackedVector2Array(-99.36606, -42.685417, -77.42728, -44.608307, -77.475945, 144.39688, -99.27587, 143.12051)
+1:1/0/physics_layer_0/polygon_2/points = PackedVector2Array(86.66757, -45.564198, 104.857635, -42.89631, 104.8295, 142.58727, 86.89931, 142.85718)
 
 [sub_resource type="TileSet" id="TileSet_fibss"]
 tile_size = Vector2i(32, 32)
