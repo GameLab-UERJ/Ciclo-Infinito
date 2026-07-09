@@ -18,7 +18,7 @@ func _on_any_button_pressed() -> void:
 
 func _on_jogar_novamente_button_pressed() -> void:
 	await _on_any_button_pressed()
-	EasyTransition.transition_to_scene(load("uid://laif38pcjfq7"),1.5,EasyTransition.TransitionAnim.FADE)
+	EasyTransition.transition_to_scene(load("uid://bgv1wic2ps8oa"),1.5,EasyTransition.TransitionAnim.FADE)
 
 
 func _on_menu_iniciar_button_pressed() -> void:
