@@ -36,7 +36,6 @@ func _ready():
 	enemies.reparent(player.camera)
 	if pedro:
 		pedro.player_has_talked_with = false
-	GameState.fifth_floor_state = GameState.FifthFloorState.FIRST_TALK
 	_atualizar_texto_missao()
 
 func configurar_label():
@@ -133,4 +132,3 @@ func _on_cutscene_area_body_entered(body: Node2D) -> void:
 	var boss_scene = load("uid://laif38pcjfq7").instantiate()
 	await get_tree().create_timer(1.5).timeout
 	get_tree().change_scene_to_node(boss_scene)
-	
