@@ -10,14 +10,14 @@
 [ext_resource type="PackedScene" uid="uid://12i1ywgpw05p" path="res://entities/interactables/npcs/julia.tscn" id="6_dw1uh"]
 [ext_resource type="Texture2D" uid="uid://dslkbgs4suie3" path="res://assets/art/tilesets/trash_right.png" id="7_v1y88"]
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="8_7nto0"]
-[ext_resource type="Resource" uid="uid://7lcd48ifqwik" path="res://dialogue/maria.dialogue" id="8_daq30"]
-[ext_resource type="Resource" uid="uid://os4wg6oi2kp3" path="res://dialogue/julia.dialogue" id="8_nli6l"]
+[ext_resource type="Resource" uid="uid://bknr3kx6tuqqa" path="res://dialogue/maria.dialogue" id="8_daq30"]
+[ext_resource type="Resource" uid="uid://coj6yk4yalr01" path="res://dialogue/julia.dialogue" id="8_nli6l"]
 [ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose.tscn" id="10_p3xb5"]
 [ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria.tscn" id="11_td228"]
 [ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/screen_transition/fade_component.gd" id="13_pfwt5"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="13_v1y88"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="14_4j66v"]
-[ext_resource type="Resource" uid="uid://735hp7k64lwt" path="res://dialogue/jose.dialogue" id="14_dgs87"]
+[ext_resource type="Resource" uid="uid://dile7qs30igoc" path="res://dialogue/jose.dialogue" id="14_dgs87"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="14_v1y88"]
 [ext_resource type="AudioStream" uid="uid://cq14taynk4t07" path="res://assets/music/Hades - House of Hades - Supergiant Games (youtube).mp3" id="15_7nto0"]
 [ext_resource type="Material" uid="uid://c146kddj2hvtf" path="res://resources/shaders/outline_material.tres" id="20_auhs2"]
@@ -53,13 +53,15 @@ margins = Vector2i(19, 1)
 texture_region_size = Vector2i(32, 32)
 46:6/size_in_atlas = Vector2i(7, 8)
 46:6/0 = 0
-46:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-103.564606, -63.9115, -81.175644, -64.4182, -80.95801, 128.18352, -103.564606, 128.2895)
-46:6/0/physics_layer_0/polygon_1/points = PackedVector2Array(86.361694, -64.00017, 111.20844, -63.765316, 111.20212, -30.90718, 111.861336, 128.18352, 85.590576, 128.3859)
-46:6/0/physics_layer_0/polygon_2/points = PackedVector2Array(-88.579346, -109.60898, 93.358826, -109.92761, 93.99606, -77.7459, -89.216606, -78.38316)
+46:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-104.82953, -77.586586, -81.25084, -77.90522, -80.95801, 128.18352, -103.564606, 128.2895)
+46:6/0/physics_layer_0/polygon_1/points = PackedVector2Array(85.393036, -77.90522, 110.883484, -77.90522, 111.20212, -30.90718, 111.861336, 128.18352, 85.590576, 128.3859)
+46:6/0/physics_layer_0/polygon_2/points = PackedVector2Array(-88.579346, -109.60898, 93.358826, -109.92761, 93.67743, -65.47862, -89.85388, -67.39041)
+46:6/0/physics_layer_0/polygon_3/points = PackedVector2Array(-73.28508, -66.43451, -73.92235, -57.831482, 78.70178, -57.19422, 77.74591, -64.52273)
 46:15/size_in_atlas = Vector2i(7, 2)
 46:15/0 = 0
 46:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-108, -32, -90, -32, -90, 32, -108, 32)
 46:15/0/physics_layer_0/polygon_1/points = PackedVector2Array(95, -32, 112, -32, 112, 32, 95, 32)
+48:17/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_xg1u2"]
 tile_size = Vector2i(32, 32)
@@ -506,7 +508,6 @@ vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Hud" type="CanvasLayer" parent="." unique_id=1878532527]
-visible = false
 
 [node name="TextureRect" type="TextureRect" parent="Hud" unique_id=290005524]
 offset_left = 682.0
