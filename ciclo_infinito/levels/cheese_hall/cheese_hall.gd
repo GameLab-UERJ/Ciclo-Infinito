@@ -23,6 +23,7 @@ var missoes = [
 
 func _ready():
 	await get_tree().process_frame
+	GameState.fifth_floor_state = GameState.FifthFloorState.FIRST_TALK
 	player.set_camera_limits(left,right,bottom,top)
 	player.camera.zoom = Vector2.ONE*2
 	pause_menu.hide()

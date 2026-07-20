@@ -31,11 +31,12 @@ func _ready():
 	pause_menu.hide()
 	inimigos_totais = $player/enemies.get_child_count() if $player/enemies else 0
 	configurar_label()
-	_atualizar_texto_missao()
 	conectar_sinais()
 	mission_label.get_parent().reparent(player.camera)
 	enemies.reparent(player.camera)
-
+	if pedro:
+		pedro.player_has_talked_with = false
+	_atualizar_texto_missao()
 
 func configurar_label():
 	mission_label.autowrap_mode=TextServer.AUTOWRAP_WORD
@@ -131,4 +132,3 @@ func _on_cutscene_area_body_entered(body: Node2D) -> void:
 	var boss_scene = load("uid://laif38pcjfq7").instantiate()
 	await get_tree().create_timer(1.5).timeout
 	get_tree().change_scene_to_node(boss_scene)
-	
