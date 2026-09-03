@@ -5,14 +5,14 @@ extends Node2D
 var victory_screen : PackedScene = preload("uid://5ijqxhw23bqd")
 
 
-@onready var pause_menu = $player/pause
-@onready var mission_label = $player/Missions/Label
+@onready var pause_menu = $Player/pause
+@onready var mission_label = $Player/Missions/Label
 @onready var pedro: CheeseNpc = $Pedro
-@onready var player: Player = $player
+@onready var player: Player = $Player
 @onready var barreira: Barrier = $Barreira
 @onready var barreira_boss: Barrier = $BarreiraBoss
 @onready var music_player: AudioStreamPlayer = $MusicPlayer
-@onready var enemies: Label = $player/enemies
+@onready var enemies: Label = $Player/enemies
 @onready var camera_focus: Marker2D = $Barreira/CameraFocus
 
 
@@ -29,7 +29,7 @@ var inimigos_derrotados = 0
 func _ready():
 	SceneTransition.fade_in()
 	pause_menu.hide()
-	inimigos_totais = $player/enemies.get_child_count() if $player/enemies else 0
+	inimigos_totais = $Player/enemies.get_child_count() if $Player/enemies else 0
 	configurar_label()
 	_atualizar_texto_missao()
 	conectar_sinais()

@@ -11,15 +11,15 @@ var missoes = [
 ]
 
 
-@onready var pause_menu = $player/pause
+@onready var pause_menu = $Player/pause
 @onready var mission_label = $Hud/TextureRect/Label
-@onready var fade_in_component: FadeComponent = $player/FadeInComponent
+@onready var fade_in_component: FadeComponent = $Player/FadeInComponent
 @onready var jose: CheeseNpc = $Jose
 @onready var left: Marker2D = $CameraLimits/Left
 @onready var right: Marker2D = $CameraLimits/Right
 @onready var top: Marker2D = $CameraLimits/Top
 @onready var bottom: Marker2D = $CameraLimits/Bottom
-@onready var player: Player = $player
+@onready var player: Player = $Player
 
 func _ready():
 	await get_tree().process_frame

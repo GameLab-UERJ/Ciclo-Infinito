@@ -1,5 +1,5 @@
 extends Node2D
-@onready var enemies: Label = $"../player/enemies"
+@onready var enemies: Label = $"../Player/enemies"
 
 
 @export var label_contador: Label
