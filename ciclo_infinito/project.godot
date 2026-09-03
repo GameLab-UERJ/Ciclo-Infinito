@@ -53,7 +53,7 @@ window/stretch/mode="canvas_items"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/easytransition/plugin.cfg", "res://addons/imjp94.yafsm/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/easytransition/plugin.cfg")
 
 [file_customization]
 

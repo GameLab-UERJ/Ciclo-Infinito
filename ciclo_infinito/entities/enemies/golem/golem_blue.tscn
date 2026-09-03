@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_5uxnx"]
 [ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_gnbg4"]
 [ext_resource type="Texture2D" uid="uid://d36oybg1drgsf" path="res://assets/art/enemies/golem/golem_blue/Attack/Golem3_Attack_full.png" id="2_hdt1t"]
+[ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="2_jt4v6"]
 [ext_resource type="Texture2D" uid="uid://5quxkg8t3k3c" path="res://assets/art/enemies/golem/golem_blue/Death/Golem3_Death_full.png" id="3_gnbg4"]
 [ext_resource type="Texture2D" uid="uid://cv23km6qh6qdy" path="res://assets/art/enemies/golem/golem_blue/Idle/Golem3_Idle_full.png" id="4_u0ahf"]
 [ext_resource type="Texture2D" uid="uid://criuj5hluaw4s" path="res://assets/art/enemies/golem/golem_blue/Walk/Golem3_Walk_full.png" id="5_jt4v6"]
@@ -1164,6 +1165,13 @@ motion_mode = 1
 script = ExtResource("1_5uxnx")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
+[node name="HealthComponent" type="Node" parent="." unique_id=1667215622 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
+unique_name_in_owner = true
+script = ExtResource("2_jt4v6")
+max_health = 50.0
+damage_recieved_sfx = NodePath("../DamageRecievedSFX")
+sprite = NodePath("../texture")
+
 [node name="texture" type="Sprite2D" parent="." unique_id=1019330262]
 material = ExtResource("2_gnbg4")
 position = Vector2(0, -10)
@@ -1211,6 +1219,7 @@ stream = ExtResource("8_hdt1t")
 position = Vector2(0, -10)
 stream = ExtResource("10_u0ahf")
 
+[connection signal="died" from="HealthComponent" to="." method="die"]
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

@@ -8,7 +8,6 @@ signal defeated ##Contador para a tela de vitória
 @export_category("Objects")
 @export var sprite: Sprite2D = null
 @export var anim: AnimationPlayer = null
-@onready var damage_recieved_sfx: AudioStreamPlayer2D = null
 
 @export_category("Movement")
 @export var move_speed: float = 100.0
@@ -18,13 +17,6 @@ signal defeated ##Contador para a tela de vitória
 @export_category("Combat")
 @export var attack_damage: float = 20.0
 @export var attack_cooldown: float = 1.5
-
-@export_category("Health")
-@export var max_health: float = 50.0
-
-
-# --- NOVO: Constante de duração de efeito de dano recebido ---
-const DAMAGE_TAKEN_EFFECT_DURATION: float = 0.3
 
 
 var can_attack: bool = true	
@@ -40,19 +32,17 @@ var alive: bool = true
 @onready var attack_sfx: AudioStreamPlayer2D = $attack_sfx
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
 @onready var death_sfx: AudioStreamPlayer2D = $DeathSFX
+@onready var health_component: HealthComponent = %HealthComponent
 
 
 func _ready() -> void:
 	death_sfx.volume_db = -5.0
-	current_health = max_health
 	attack_cooldown_timer.wait_time = attack_cooldown
 
 	if sprite == null and has_node("texture"):
 		sprite = $texture
 	if anim == null and has_node("AnimationPlayer"):
 		anim = $AnimationPlayer
-	if damage_recieved_sfx == null and has_node("DamageRecievedSFX"):
-		damage_recieved_sfx = $DamageRecievedSFX
 
 	attack_area = _resolve_area2d("AttackArea")
 	if attack_area == null:
@@ -133,32 +123,15 @@ func apply_attack_damage() -> void:
 			body.health_component.take_damage(attack_damage, hit_direction)
 
 
-# ======== Vida / Morte ========
-func take_damage(damage: float, hit_direction: Vector2) -> void:
-	if !alive:
-		return
-	
-	current_health -= damage
-
-	var knockback_force: float = 300.0
-	velocity = hit_direction * knockback_force
-
-	applies_damage_received_effect()
-
-	if current_health <= 0:
-		die()
-
-
 func die() -> void:
 	defeated.emit()
 	alive = false
 	
 	_play_anim("death_%s" %_dir_string_from_vector(velocity))
 	collision_layer = 0
+	
 	death_sfx.play()
-	
 	await get_tree().create_timer(1.0).timeout
-	
 	death_sfx.stop()
 	
 	sprite.material = null
@@ -200,16 +173,6 @@ func _play_anim(animation_name: String) -> void:
 		return
 	if anim.has_animation(animation_name) and anim.current_animation != animation_name:
 		anim.play(animation_name)
-
-
-# --- NOVA FUNÇÃO: Aplica efeito visual e sonoro ao receber dano ---
-func applies_damage_received_effect() -> void:
-	damage_recieved_sfx.play()
-	
-	if sprite.material != null and current_health > 0:
-		sprite.material.set_shader_parameter("redden", true)
-		await get_tree().create_timer(DAMAGE_TAKEN_EFFECT_DURATION).timeout
-		sprite.material.set_shader_parameter("redden", false)
 
 
 # ======== Util ========

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dfda1r1btgkpl"]
 
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_u6quf"]
+[ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="2_f65k0"]
 [ext_resource type="Texture2D" uid="uid://cf5ullo2tpjcs" path="res://assets/art/enemies/golem/golem_brown/Idle/Golem1_Idle_full.png" id="2_n5ed3"]
 [ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_usmjb"]
 [ext_resource type="Texture2D" uid="uid://ctu3ws6b1xcme" path="res://assets/art/enemies/golem/golem_brown/Attack/Golem1_Attack_full.png" id="3_usmjb"]
@@ -1212,6 +1213,13 @@ motion_mode = 1
 script = ExtResource("1_u6quf")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
+[node name="HealthComponent" type="Node" parent="." unique_id=767524277 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
+unique_name_in_owner = true
+script = ExtResource("2_f65k0")
+max_health = 50.0
+damage_recieved_sfx = NodePath("../DamageRecievedSFX")
+sprite = NodePath("../texture")
+
 [node name="texture" type="Sprite2D" parent="." unique_id=1403493714]
 material = ExtResource("2_usmjb")
 position = Vector2(0, -9.230751)
@@ -1266,6 +1274,7 @@ stream = ExtResource("8_n5ed3")
 position = Vector2(0, -9.230751)
 stream = ExtResource("10_4yiy6")
 
+[connection signal="died" from="HealthComponent" to="." method="die"]
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]

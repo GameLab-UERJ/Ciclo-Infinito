@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_xgoio"]
 [ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_7axup"]
+[ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="2_f8hu2"]
 [ext_resource type="Texture2D" uid="uid://bybr7omrihpw1" path="res://assets/art/enemies/beholder/beholder_brown/Attack/Beholder2_Attack_full.png" id="2_yqgpa"]
 [ext_resource type="Texture2D" uid="uid://djtpyjtxvh75n" path="res://assets/art/enemies/beholder/beholder_brown/Death/Beholder2_Death_full.png" id="3_7axup"]
 [ext_resource type="Texture2D" uid="uid://bgn3gj8ixtee0" path="res://assets/art/enemies/beholder/beholder_brown/Hurt/Beholder2_Hurt_full.png" id="4_u7vxu"]
@@ -1159,6 +1160,13 @@ motion_mode = 1
 script = ExtResource("1_xgoio")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
+[node name="HealthComponent" type="Node" parent="." unique_id=591147532 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
+unique_name_in_owner = true
+script = ExtResource("2_f8hu2")
+max_health = 50.0
+damage_recieved_sfx = NodePath("../DamageRecievedSFX")
+sprite = NodePath("../texture")
+
 [node name="texture" type="Sprite2D" parent="." unique_id=1001324020]
 material = ExtResource("2_7axup")
 position = Vector2(0, -24)
@@ -1208,6 +1216,7 @@ stream = ExtResource("8_yqgpa")
 position = Vector2(0, -24)
 stream = ExtResource("10_u7vxu")
 
+[connection signal="died" from="HealthComponent" to="." method="die"]
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
