@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d36oybg1drgsf" path="res://assets/art/enemies/golem/golem_blue/Attack/Golem3_Attack_full.png" id="2_hdt1t"]
 [ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="2_jt4v6"]
 [ext_resource type="Texture2D" uid="uid://5quxkg8t3k3c" path="res://assets/art/enemies/golem/golem_blue/Death/Golem3_Death_full.png" id="3_gnbg4"]
+[ext_resource type="Script" uid="uid://cijgg0vu4npal" path="res://entities/components/chase_component.gd" id="3_hexj7"]
 [ext_resource type="Texture2D" uid="uid://cv23km6qh6qdy" path="res://assets/art/enemies/golem/golem_blue/Idle/Golem3_Idle_full.png" id="4_u0ahf"]
 [ext_resource type="Texture2D" uid="uid://criuj5hluaw4s" path="res://assets/art/enemies/golem/golem_blue/Walk/Golem3_Walk_full.png" id="5_jt4v6"]
 [ext_resource type="Texture2D" uid="uid://b5ipk3flgmyfx" path="res://assets/art/enemies/golem/golem_brown/Walk/Golem1_Walk_full.png" id="6_hexj7"]
@@ -1157,12 +1158,14 @@ radius = 276.11
 [sub_resource type="CircleShape2D" id="CircleShape2D_m1c6a"]
 radius = 39.051247
 
-[node name="GolemBlue" type="CharacterBody2D" unique_id=875007688]
+[node name="GolemBlue" type="CharacterBody2D" unique_id=875007688 node_paths=PackedStringArray("sprite", "anim")]
 disable_mode = 1
 collision_layer = 8
 collision_mask = 27
 motion_mode = 1
 script = ExtResource("1_5uxnx")
+sprite = NodePath("texture")
+anim = NodePath("AnimationPlayer")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=1667215622 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
@@ -1171,6 +1174,11 @@ script = ExtResource("2_jt4v6")
 max_health = 50.0
 damage_recieved_sfx = NodePath("../DamageRecievedSFX")
 sprite = NodePath("../texture")
+
+[node name="ChaseComponent" type="Node" parent="." unique_id=1718423675]
+unique_name_in_owner = true
+script = ExtResource("3_hexj7")
+metadata/_custom_type_script = "uid://cijgg0vu4npal"
 
 [node name="texture" type="Sprite2D" parent="." unique_id=1019330262]
 material = ExtResource("2_gnbg4")
@@ -1183,7 +1191,6 @@ vframes = 4
 libraries/ = SubResource("AnimationLibrary_0g2he")
 
 [node name="Colisiondano" type="CollisionShape2D" parent="." unique_id=1515401558]
-visible = false
 show_behind_parent = true
 position = Vector2(0, 4)
 shape = SubResource("RectangleShape2D_i5vqd")
@@ -1218,8 +1225,10 @@ stream = ExtResource("8_hdt1t")
 [node name="DeathSFX" type="AudioStreamPlayer2D" parent="." unique_id=978601137]
 position = Vector2(0, -10)
 stream = ExtResource("10_u0ahf")
+volume_db = -5.0
 
 [connection signal="died" from="HealthComponent" to="." method="die"]
+[connection signal="next_chase_point_set" from="ChaseComponent" to="." method="_set_next_move_point"]
 [connection signal="body_entered" from="detectionarea" to="." method="_on_detectionarea_body_entered"]
 [connection signal="body_exited" from="detectionarea" to="." method="_on_detectionarea_body_exited"]
 [connection signal="timeout" from="AttackCooldown" to="." method="_on_attack_cooldown_timeout"]
