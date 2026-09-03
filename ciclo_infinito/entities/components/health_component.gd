@@ -6,6 +6,7 @@ enum COLOR_DAMAGE{Red, White}
 
 
 signal died
+signal lost_health(amount : float)
 
 
 @export var max_health: float = 120.0
@@ -36,16 +37,17 @@ func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	if is_invincible:
 		return
 	
-	current_health -= damage_amount
-	current_health = clamp(current_health, 0.0, max_health)
-
+	var original_health : float = current_health
+	current_health = clamp(current_health - damage_amount, 0.0, max_health)
+	lost_health.emit(original_health - current_health)
+	
 	update_health_bar()
-
+	
 	var knockback_force: float = 350.0
 	entity.velocity = hit_direction * knockback_force
-
+	
 	applies_damage_received_effect()
-
+	
 	start_invincibility(invinciblity_duration)
 	
 	if current_health <= 0.0:
