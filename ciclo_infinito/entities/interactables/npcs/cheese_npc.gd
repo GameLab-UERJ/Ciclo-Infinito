@@ -87,6 +87,7 @@ func encerra_dialogo(dialogue : DialogueResource) -> void:
 		player._on_dialogo_encerrado()
 		player_has_talked_with = true
 		was_talked_to.emit(self)
+		print('talked to',self.name)
 	await get_tree().create_timer(0.5).timeout
 	falando = false
 #endregion
@@ -95,14 +96,14 @@ func encerra_dialogo(dialogue : DialogueResource) -> void:
 #region Area
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.name == "player":
+	if body.name == "Player":
 		player_in_area = true
 		sprite.material.set("shader_parameter/width",2)
 		label_interacao.visible = true
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
-	if body.name == "player":
+	if body.name == "Player":
 		player_in_area = false
 		sprite.material.set("shader_parameter/width",0)
 		label_interacao.visible = false

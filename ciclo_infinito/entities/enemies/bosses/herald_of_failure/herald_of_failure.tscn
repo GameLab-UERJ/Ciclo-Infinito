@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://buu3cajoep4cf" path="res://entities/enemies/bosses/herald_of_failure/herald_of_failure.gd" id="1_nxqky"]
 [ext_resource type="Texture2D" uid="uid://meh1k2jwq368" path="res://assets/art/enemies/herald/necromancer_spritesheet_128x128.png" id="2_5i653"]
 [ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_mypcf"]
+[ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="2_sj6hh"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="3_2k7es"]
 [ext_resource type="PackedScene" uid="uid://bqlqrn7rxiafo" path="res://systems/ui/boss_hud/boss_hud.tscn" id="5_2k7es"]
 [ext_resource type="Script" uid="uid://brs84g6d73rk4" path="res://entities/enemies/bosses/herald_of_failure/state_machine_manager.gd" id="6_mypcf"]
@@ -368,7 +369,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vgm2b")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack_1",
 "speed": 11.0
 }, {
@@ -412,7 +413,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_cakh6")
 }],
-"loop": false,
+"loop": 0,
 "name": &"attack_2",
 "speed": 8.0
 }, {
@@ -447,7 +448,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0t4rt")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death",
 "speed": 6.0
 }, {
@@ -467,7 +468,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_58mc5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"hurt",
 "speed": 6.0
 }, {
@@ -496,7 +497,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1db54")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle",
 "speed": 6.0
 }, {
@@ -525,7 +526,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xiqfj")
 }],
-"loop": true,
+"loop": 1,
 "name": &"move",
 "speed": 6.0
 }, {
@@ -569,7 +570,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ahkj3")
 }],
-"loop": false,
+"loop": 0,
 "name": &"talk",
 "speed": 8.0
 }]
@@ -840,6 +841,14 @@ collision_layer = 32
 script = ExtResource("1_nxqky")
 speed = 200.0
 
+[node name="HealthComponent" type="Node" parent="." unique_id=861637360 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
+script = ExtResource("2_sj6hh")
+max_health = 1600.0
+damage_taken_effect_duration = 0.15
+damage_recieved_sfx = NodePath("../HurtSfx")
+sprite = NodePath("../Sprites")
+metadata/_custom_type_script = "uid://dieqk78hp4xxe"
+
 [node name="Shadow" type="Sprite2D" parent="." unique_id=2076377722]
 position = Vector2(-1, -12)
 scale = Vector2(1.6041666, 1.265625)
@@ -911,6 +920,8 @@ pitch_scale = 1.8
 [node name="CameraFocus" type="Marker2D" parent="." unique_id=215173876]
 position = Vector2(1.675827, -33.242874)
 
+[connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
+[connection signal="lost_health" from="HealthComponent" to="." method="_on_health_component_lost_health"]
 [connection signal="animation_finished" from="Sprites" to="." method="_on_sprites_animation_finished"]
 [connection signal="frame_changed" from="Sprites" to="." method="_on_sprites_frame_changed"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_entered_visible_on_screen"]

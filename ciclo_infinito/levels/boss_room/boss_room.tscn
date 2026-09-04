@@ -5,18 +5,18 @@
 [ext_resource type="Texture2D" uid="uid://c10aolb6l4jkt" path="res://assets/art/tilesets/wall_uerj.png" id="4_3mmng"]
 [ext_resource type="Texture2D" uid="uid://bmt1gflfrowu6" path="res://assets/art/tilesets/wall_fractal.png" id="5_nhjq1"]
 [ext_resource type="Texture2D" uid="uid://dh3kb5log8pjr" path="res://assets/art/tilesets/boss_door.png" id="6_mtko6"]
-[ext_resource type="Texture2D" uid="uid://e345bsev8fuy" path="res://assets/art/tilesets/Itens_da_sala_do_boss/Torch Animated.png" id="7_fupb7"]
-[ext_resource type="Texture2D" uid="uid://bltky00w7yru1" path="res://assets/art/tilesets/Itens_da_sala_do_boss/caveira_e_ossos.png" id="8_od868"]
-[ext_resource type="Texture2D" uid="uid://c1opt1xefobbk" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pisotalvezpng.png" id="9_3sdgd"]
-[ext_resource type="Texture2D" uid="uid://c17cm1cr0rxqo" path="res://assets/art/tilesets/Itens_da_sala_do_boss/Pilarmuro.png" id="10_f4nee"]
+[ext_resource type="Texture2D" uid="uid://bgc071cowjgcv" path="res://assets/art/tilesets/Itens_da_sala_do_boss/Torch Animated.png" id="7_fupb7"]
+[ext_resource type="Texture2D" uid="uid://kfu7sgct01yh" path="res://assets/art/tilesets/Itens_da_sala_do_boss/caveira_e_ossos.png" id="8_od868"]
+[ext_resource type="Texture2D" uid="uid://ca8r1e5t0448k" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pisotalvezpng.png" id="9_3sdgd"]
+[ext_resource type="Texture2D" uid="uid://gavytm1uo4ws" path="res://assets/art/tilesets/Itens_da_sala_do_boss/Pilarmuro.png" id="10_f4nee"]
 [ext_resource type="PackedScene" uid="uid://dyjwfrwsly7lx" path="res://entities/enemies/bosses/herald_of_failure/attacks/fire_meteor.tscn" id="11_nhjq1"]
-[ext_resource type="Texture2D" uid="uid://bta6ohxvy2jdk" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar1.png" id="11_weo27"]
-[ext_resource type="Texture2D" uid="uid://bbhbdqv0ch5hn" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar2.png" id="12_ktetc"]
+[ext_resource type="Texture2D" uid="uid://6chdpggcn75h" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar1.png" id="11_weo27"]
+[ext_resource type="Texture2D" uid="uid://bvog8wkq54clt" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar2.png" id="12_ktetc"]
 [ext_resource type="Script" uid="uid://dhwy74dwvwl1k" path="res://entities/interactables/transparent_area.gd" id="13_3mmng"]
-[ext_resource type="Texture2D" uid="uid://dvavbjhis12il" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar3.png" id="13_hsv8e"]
-[ext_resource type="Texture2D" uid="uid://dumg0b73ao01j" path="res://assets/art/tilesets/Itens_da_sala_do_boss/arma2.png" id="15_61hjj"]
-[ext_resource type="Texture2D" uid="uid://yl5xs7y6l16n" path="res://assets/art/tilesets/Itens_da_sala_do_boss/arma1.png" id="16_s8h4i"]
-[ext_resource type="Texture2D" uid="uid://cnp7tqsjvs70k" path="res://assets/art/tilesets/Itens_da_sala_do_boss/escudo.png" id="17_tk42g"]
+[ext_resource type="Texture2D" uid="uid://cdjldjjdol0p3" path="res://assets/art/tilesets/Itens_da_sala_do_boss/pilar3.png" id="13_hsv8e"]
+[ext_resource type="Texture2D" uid="uid://b1w1q7eygmwiu" path="res://assets/art/tilesets/Itens_da_sala_do_boss/arma2.png" id="15_61hjj"]
+[ext_resource type="Texture2D" uid="uid://qnq3vrrubos1" path="res://assets/art/tilesets/Itens_da_sala_do_boss/arma1.png" id="16_s8h4i"]
+[ext_resource type="Texture2D" uid="uid://8du2782jkuv7" path="res://assets/art/tilesets/Itens_da_sala_do_boss/escudo.png" id="17_tk42g"]
 [ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="18_d40j6"]
 [ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="19_ps1ce"]
 [ext_resource type="PackedScene" uid="uid://daxs4d78svouo" path="res://entities/enemies/bosses/herald_of_failure/herald_of_failure.tscn" id="19_sdsns"]
@@ -3356,7 +3356,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_3sdgd")
 }],
-"loop": true,
+"loop": 1,
 "name": &"default",
 "speed": 5.0
 }]
@@ -3679,11 +3679,11 @@ script = ExtResource("13_3mmng")
 position = Vector2(-684, -32)
 shape = SubResource("RectangleShape2D_ps1ce")
 
-[node name="player" parent="." unique_id=1305817267 instance=ExtResource("18_d40j6")]
+[node name="Player" parent="." unique_id=1305817267 instance=ExtResource("18_d40j6")]
 position = Vector2(141, 669.00006)
 scale = Vector2(1, 1)
 
-[node name="pause" parent="player" unique_id=204471871 instance=ExtResource("19_ps1ce")]
+[node name="pause" parent="Player" unique_id=204471871 instance=ExtResource("19_ps1ce")]
 z_index = 5
 anchors_preset = 0
 anchor_right = 0.0
@@ -3696,7 +3696,7 @@ grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(0.5, 0.5)
 
-[node name="Missions" type="TextureRect" parent="player" unique_id=2094797383]
+[node name="Missions" type="TextureRect" parent="Player" unique_id=2094797383]
 offset_left = 146.909
 offset_top = -167.63599
 offset_right = 680.909
@@ -3705,7 +3705,7 @@ scale = Vector2(0.284224, 0.275615)
 texture = ExtResource("20_3mmng")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="player/Missions" unique_id=962012875]
+[node name="Label" type="Label" parent="Player/Missions" unique_id=962012875]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -3725,8 +3725,7 @@ position = Vector2(134, -102)
 scale = Vector2(3, 3)
 collision_mask = 0
 speed = 300.0
-player = NodePath("../player")
-max_health = 1000.0
+player = NodePath("../Player")
 chance_of_attacking_after_moving = 0.85
 top_left_corner = NodePath("Marker2D")
 bottom_right_corner = NodePath("Marker2D2")

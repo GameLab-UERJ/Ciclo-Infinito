@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://3qoae7f6uh8o"]
 
 [ext_resource type="Script" uid="uid://dbg05n786rg21" path="res://entities/player/player.gd" id="1_wq0jh"]
-[ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://systems/components/health_component.gd" id="2_8q4fm"]
+[ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="2_8q4fm"]
 [ext_resource type="Material" uid="uid://bk3kiethktv7y" path="res://resources/shaders/whiten.tres" id="2_24ehl"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://cw6rmtpf160hr" path="res://assets/art/player/ATTACK 1/attack1_down.png" id="2_gt4e4"]
@@ -779,7 +779,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fd7ym")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack1_down",
 "speed": 8.0
 }, {
@@ -808,7 +808,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_i4m4b")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack1_left",
 "speed": 8.0
 }, {
@@ -837,7 +837,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ifikf")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack1_right",
 "speed": 8.0
 }, {
@@ -863,7 +863,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6h4f1")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack1_up",
 "speed": 8.0
 }, {
@@ -892,7 +892,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gof7p")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack2_down",
 "speed": 8.0
 }, {
@@ -921,7 +921,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_akcgn")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack2_left",
 "speed": 8.0
 }, {
@@ -950,7 +950,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_72por")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack2_right",
 "speed": 8.0
 }, {
@@ -979,7 +979,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o1jmc")
 }],
-"loop": true,
+"loop": 1,
 "name": &"attack2_up",
 "speed": 8.0
 }, {
@@ -1005,7 +1005,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_h3knh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dash_down",
 "speed": 8.0
 }, {
@@ -1031,7 +1031,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xj5ck")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dash_left",
 "speed": 8.0
 }, {
@@ -1057,7 +1057,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n8hgv")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dash_right",
 "speed": 8.0
 }, {
@@ -1083,7 +1083,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rtno0")
 }],
-"loop": true,
+"loop": 1,
 "name": &"dash_up",
 "speed": 8.0
 }, {
@@ -1109,7 +1109,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4nkfr")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_down",
 "speed": 5.0
 }, {
@@ -1135,7 +1135,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_er4b4")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_left",
 "speed": 5.0
 }, {
@@ -1161,7 +1161,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_bgtuk")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_right",
 "speed": 5.0
 }, {
@@ -1187,7 +1187,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_n7h2d")
 }],
-"loop": false,
+"loop": 0,
 "name": &"death_up",
 "speed": 5.0
 }, {
@@ -1216,7 +1216,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_q7u3n")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_down",
 "speed": 8.0
 }, {
@@ -1242,7 +1242,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5nkdk")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_left",
 "speed": 8.0
 }, {
@@ -1271,7 +1271,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5rvhh")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_right",
 "speed": 8.0
 }, {
@@ -1297,7 +1297,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_5kjuc")
 }],
-"loop": true,
+"loop": 1,
 "name": &"idle_up",
 "speed": 5.0
 }, {
@@ -1326,7 +1326,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_rd5ui")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_down",
 "speed": 7.0
 }, {
@@ -1355,7 +1355,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_enbx7")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_left",
 "speed": 8.0
 }, {
@@ -1384,7 +1384,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_wuu0t")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_right",
 "speed": 8.0
 }, {
@@ -1413,7 +1413,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_21crx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"run_up",
 "speed": 8.0
 }]
@@ -1431,13 +1431,16 @@ collision_mask = 29
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_wq0jh")
-invinciblity_duration = 0.5
 dash_duracao = 0.1
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
-[node name="HealthComponent" type="Node" parent="." unique_id=1599392653]
+[node name="HealthComponent" type="Node" parent="." unique_id=1599392653 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
 unique_name_in_owner = true
 script = ExtResource("2_8q4fm")
+invinciblity_duration = 0.5
+color_of_damage = 1
+damage_recieved_sfx = NodePath("../SoundEffects/DamageRecievedSFX")
+sprite = NodePath("../animacoes")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1059278900]
 position = Vector2(-0.90909195, -9.999992)
@@ -1495,21 +1498,20 @@ vertical_alignment = 1
 
 [node name="SoundEffects" type="Node2D" parent="." unique_id=1176100439]
 
-[node name="attack_sfxplay" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1830921781]
+[node name="attack_sfxplay" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=547553195]
 stream = ExtResource("27_jjk8f")
 volume_db = -10.0
 pitch_scale = 1.19
-mix_target = 1
 
-[node name="dash_sfx" type="AudioStreamPlayer" parent="SoundEffects" unique_id=315505597]
+[node name="dash_sfx" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=285083010]
 stream = ExtResource("30_2soq1")
 volume_db = -8.0
 
-[node name="DamageRecievedSFX" type="AudioStreamPlayer" parent="SoundEffects" unique_id=1941439101]
+[node name="DamageRecievedSFX" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=2056154407]
 stream = ExtResource("30_24ehl")
 volume_db = 8.0
 
-[node name="DeathSFX" type="AudioStreamPlayer" parent="SoundEffects" unique_id=559540639]
+[node name="DeathSFX" type="AudioStreamPlayer2D" parent="SoundEffects" unique_id=789986525]
 stream = ExtResource("32_vewsg")
 volume_db = -5.0
 pitch_scale = 1.96

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://vxp7ft6bj5g5" path="res://levels/barrier.tscn" id="3_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://djrevjgpeak50" path="res://entities/enemies/golem/golem_white.tscn" id="4_wyqw4"]
 [ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="5_vl0w6"]
-[ext_resource type="Resource" uid="uid://dumym8tg7uleq" path="res://dialogue/pedro.dialogue" id="5_yw1aw"]
+[ext_resource type="Resource" uid="uid://b2lai2jwynri4" path="res://dialogue/pedro.dialogue" id="5_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://deyn0aff4vkxb" path="res://entities/enemies/beholder/beholder_orange.tscn" id="6_3nscd"]
 [ext_resource type="Shader" uid="uid://b4ecm70ug50ju" path="res://resources/shaders/redden.gdshader" id="6_yw1aw"]
 [ext_resource type="PackedScene" uid="uid://c80omegwkn2ei" path="res://entities/enemies/beholder/beholder_white.tscn" id="7_ancri"]
@@ -80,13 +80,13 @@ offset_right = 19.5
 offset_bottom = -71.999954
 text = "Pedro"
 
-[node name="player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
+[node name="Player" parent="." unique_id=657388149 instance=ExtResource("11_friax")]
 z_index = 1
 material = SubResource("ShaderMaterial_yw1aw")
 position = Vector2(573, -235)
 scale = Vector2(1, 1)
 
-[node name="pause" parent="player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
+[node name="pause" parent="Player" unique_id=318316374 instance=ExtResource("12_2g3x2")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -98,7 +98,7 @@ grow_horizontal = 1
 grow_vertical = 1
 scale = Vector2(0.5, 0.5)
 
-[node name="enemies" type="Label" parent="player" unique_id=574180986]
+[node name="enemies" type="Label" parent="Player" unique_id=574180986]
 visible = false
 offset_left = -293.545
 offset_top = -140.455
@@ -108,7 +108,7 @@ theme_override_colors/font_shadow_color = Color(0.662745, 0.027451, 0.933333, 1)
 theme_override_fonts/font = ExtResource("13_ni4lu")
 text = "Inimigos mortos:"
 
-[node name="Missions" type="TextureRect" parent="player" unique_id=1804543002]
+[node name="Missions" type="TextureRect" parent="Player" unique_id=1804543002]
 offset_left = 149.90894
 offset_top = -170.63599
 offset_right = 683.90894
@@ -117,7 +117,7 @@ scale = Vector2(0.284224, 0.275615)
 texture = ExtResource("14_71gwp")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="player/Missions" unique_id=723667528]
+[node name="Label" type="Label" parent="Player/Missions" unique_id=723667528]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -136,7 +136,7 @@ scale = Vector2(1.74863, 0.959864)
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("2_tprnl")
-label_contador = NodePath("../player/enemies")
+label_contador = NodePath("../Player/enemies")
 
 [node name="golem_azul6" parent="Enemies" unique_id=2102620735 instance=ExtResource("3_v3xqr")]
 position = Vector2(730, 344)

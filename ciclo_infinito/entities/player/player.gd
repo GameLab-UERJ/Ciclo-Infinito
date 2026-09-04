@@ -13,7 +13,6 @@ enum State {IDLE, RUN, ATTACK, DASH, DEATH, DIALOG, CUTSCENE}
 @export var attack1_damage: float = 15.0 ## Dano do primeiro golpe
 @export var attack2_damage: float = 15.0 ## Dano do segundo golpe
 @export var move_speed: float = 240.00
-@export var invinciblity_duration : float  = 0.3
 @export_group("Attack")
 @export var attack_cooldown := 0.15
 @export var combo_window := 0.21
@@ -70,9 +69,8 @@ var vida_textures = [
 @onready var area_attack = $attack_area
 @onready var player_colision: CollisionShape2D = $player_colision
 @onready var dash_sfx = $SoundEffects/dash_sfx
-@onready var damage_recieved_sfx: AudioStreamPlayer = $SoundEffects/DamageRecievedSFX
-@onready var death_sfx: AudioStreamPlayer = $SoundEffects/DeathSFX
-@onready var attack_sfxplay: AudioStreamPlayer = $SoundEffects/attack_sfxplay
+@onready var death_sfx: AudioStreamPlayer2D = $SoundEffects/DeathSFX
+@onready var attack_sfxplay: AudioStreamPlayer2D = $SoundEffects/attack_sfxplay
 @onready var footsteps_sfx: AudioStreamPlayer2D = $SoundEffects/FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
 @onready var shadow: Sprite2D = $Shadow
@@ -199,7 +197,7 @@ func _on_dash_cooldown_timeout() -> void:
 
 
 func _on_area_attack_body_entered(body: Node2D) -> void:
-	if not (body is CharacterBody2D and body.has_method("take_damage")):
+	if not body.has_node("HealthComponent"):
 		return
 	
 	var damage_amount: float
@@ -212,7 +210,7 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 		
 	if damage_amount > 0.0:
 		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
-		body.take_damage(damage_amount, knockback_direction)
+		body.get_node("HealthComponent").take_damage(damage_amount, knockback_direction)
 
 
 func _start_attack1() -> void: # Inicia a animação do ataque 1 e ajusta as variáveis de controle
@@ -340,14 +338,6 @@ func update_animation() -> void:
 			anim.animation = anim_name
 			return
 		anim.play(anim_name)
-
-
-func applies_damage_received_effect() -> void:
-	damage_recieved_sfx.play()
-	
-	anim.material.set_shader_parameter("whiten", true)
-	await get_tree().create_timer(invinciblity_duration).timeout
-	anim.material.set_shader_parameter("whiten", false)
 
 
 func get_direction_string(v: Vector2) -> String:

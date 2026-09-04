@@ -2,9 +2,9 @@ extends Node2D
 
 
 @onready var camera_spot_end_cutscene: Marker2D = $Entrada/CameraSpotEndCutscene
-@onready var pause_menu = $player/pause
-@onready var mission_label = $player/Missions/Label
-@onready var player: Player = $player
+@onready var pause_menu = $Player/pause
+@onready var mission_label = $Player/Missions/Label
+@onready var player: Player = $Player
 @onready var herald_of_failure: Boss = $HeraldOfFailure
 @onready var cutscene_area: Area2D = $CutsceneArea
 @onready var barreira_inicio: TileMapLayer = $BarreiraInicio
