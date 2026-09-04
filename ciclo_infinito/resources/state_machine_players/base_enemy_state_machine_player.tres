@@ -1,0 +1,112 @@
+[gd_resource type="Resource" script_class="StateMachine" format=3 uid="uid://bueexrvtkut47"]
+
+[ext_resource type="Script" uid="uid://cste5lmincdqs" path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" id="1_0kp45"]
+[ext_resource type="Script" uid="uid://bhlii08bbnbld" path="res://addons/imjp94.yafsm/src/states/State.gd" id="2_le4s3"]
+[ext_resource type="Script" uid="uid://c35ot44rxnqul" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="3_5falv"]
+[ext_resource type="Script" uid="uid://c8v7jql0ajoyk" path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" id="4_62pla"]
+[ext_resource type="Script" uid="uid://blovpmqtjwas8" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="5_le4s3"]
+
+[sub_resource type="Resource" id="Resource_5jlsa"]
+script = ExtResource("2_le4s3")
+name = "Entry"
+metadata/graph_offset = Vector2(240.5, 182.5)
+
+[sub_resource type="Resource" id="Resource_rxvy8"]
+script = ExtResource("2_le4s3")
+name = "Idle"
+metadata/graph_offset = Vector2(320.5, 182.5)
+
+[sub_resource type="Resource" id="Resource_2y7q2"]
+script = ExtResource("2_le4s3")
+name = "Chasing"
+metadata/graph_offset = Vector2(560.5, 182.5)
+
+[sub_resource type="Resource" id="Resource_vrgrl"]
+script = ExtResource("2_le4s3")
+name = "Attacking"
+metadata/graph_offset = Vector2(800.5, 182.5)
+
+[sub_resource type="Resource" id="Resource_bfj88"]
+script = ExtResource("3_5falv")
+from = "Entry"
+to = "Idle"
+
+[sub_resource type="Resource" id="Resource_20285"]
+script = ExtResource("4_62pla")
+value = true
+name = "is_player_detected"
+
+[sub_resource type="Resource" id="Resource_56b03"]
+script = ExtResource("3_5falv")
+from = "Idle"
+to = "Chasing"
+conditions = {
+"is_player_detected": SubResource("Resource_20285")
+}
+
+[sub_resource type="Resource" id="Resource_3hjs4"]
+script = ExtResource("4_62pla")
+name = "is_player_detected"
+
+[sub_resource type="Resource" id="Resource_ya3jf"]
+script = ExtResource("3_5falv")
+from = "Chasing"
+to = "Idle"
+conditions = {
+"is_player_detected": SubResource("Resource_3hjs4")
+}
+
+[sub_resource type="Resource" id="Resource_s4ij4"]
+script = ExtResource("4_62pla")
+value = true
+name = "is_player_in_range"
+
+[sub_resource type="Resource" id="Resource_e5sqh"]
+script = ExtResource("3_5falv")
+from = "Chasing"
+to = "Attacking"
+conditions = {
+"is_player_in_range": SubResource("Resource_s4ij4")
+}
+
+[sub_resource type="Resource" id="Resource_km7g5"]
+script = ExtResource("4_62pla")
+name = "is_player_in_range"
+
+[sub_resource type="Resource" id="Resource_5falv"]
+script = ExtResource("5_le4s3")
+name = "attack_finished"
+
+[sub_resource type="Resource" id="Resource_lubp8"]
+script = ExtResource("3_5falv")
+from = "Attacking"
+to = "Chasing"
+conditions = {
+"attack_finished": SubResource("Resource_5falv"),
+"is_player_in_range": SubResource("Resource_km7g5")
+}
+
+[resource]
+script = ExtResource("1_0kp45")
+states = {
+"Attacking": SubResource("Resource_vrgrl"),
+"Chasing": SubResource("Resource_2y7q2"),
+"Entry": SubResource("Resource_5jlsa"),
+"Idle": SubResource("Resource_rxvy8")
+}
+transitions = {
+"Attacking": {
+"Chasing": SubResource("Resource_lubp8")
+},
+"Chasing": {
+"Attacking": SubResource("Resource_e5sqh"),
+"Idle": SubResource("Resource_ya3jf")
+},
+"Entry": {
+"Idle": SubResource("Resource_bfj88")
+},
+"Idle": {
+"Chasing": SubResource("Resource_56b03")
+}
+}
+metadata/_custom_type_script = "uid://cste5lmincdqs"

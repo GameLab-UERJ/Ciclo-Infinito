@@ -1,4 +1,4 @@
-extends Node
+extends CharacterComponent
 class_name ChaseComponent
 
 
@@ -9,23 +9,18 @@ signal target_reached
 
 @export var enabled : bool = true
 @export var chased_node: Node2D
+@export var hit_target_distance: float
 
 
 var can_check_target_reached : bool = false
 
 
-@onready var parent: CharacterBody2D = get_parent()
 @onready var path_timer: Timer = get_node_or_null("PathTimer")
 @onready var navigation_agent: NavigationAgent2D = get_node_or_null("NavigationAgent2D")
 
 
 func _ready() -> void:
-	if not parent is CharacterBody2D:
-		push_error("Error: This node must be child of a CharacterBody2D.")
-		
-		set_process(false)
-		set_physics_process(false)
-		queue_free() 
+	super._ready()
 	
 	if not chased_node:
 		chased_node = get_tree().current_scene.find_child("Player")
@@ -81,10 +76,10 @@ func chase() -> void:
 	):
 		return 
 	
-	if can_check_target_reached and navigation_agent.is_target_reached():
+	if (can_check_target_reached and 
+		parent.global_position.distance_to(chased_node.global_position) <= hit_target_distance):
 		can_check_target_reached = false
 		target_reached.emit()
 		return
 	
 	next_chase_point_set.emit(navigation_agent.get_next_path_position())
-	
