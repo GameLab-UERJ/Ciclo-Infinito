@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://dslkbgs4suie3" path="res://assets/art/tilesets/trash_right.png" id="7_v1y88"]
 [ext_resource type="Texture2D" uid="uid://y242jwdjhav0" path="res://assets/art/tilesets/lixeira_left.png" id="8_7nto0"]
 [ext_resource type="Resource" uid="uid://bknr3kx6tuqqa" path="res://dialogue/maria.dialogue" id="8_daq30"]
-[ext_resource type="Resource" uid="uid://coj6yk4yalr01" path="res://dialogue/julia.dialogue" id="8_nli6l"]
+[ext_resource type="Resource" uid="uid://dcfxjm4rr6jlx" path="res://dialogue/julia.dialogue" id="8_nli6l"]
 [ext_resource type="PackedScene" uid="uid://cerom0ls1c2wk" path="res://entities/interactables/npcs/jose.tscn" id="10_p3xb5"]
 [ext_resource type="PackedScene" uid="uid://c8528aoh54ot1" path="res://entities/interactables/npcs/maria.tscn" id="11_td228"]
 [ext_resource type="Script" uid="uid://br6wsqfyc7ush" path="res://systems/screen_transition/fade_component.gd" id="13_pfwt5"]
@@ -415,12 +415,12 @@ z_index = 3
 tile_map_data = PackedByteArray("AAAFABAAAAABAAQAAAALABAAAQABAAEAAAARABAAAAABAAQAAAAXABAAAQABAAEAAAAdABAAAAABAAQAAAAjABAAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_n24co")
 
-[node name="player" parent="." unique_id=415825107 instance=ExtResource("5_inj64")]
+[node name="Player" parent="." unique_id=415825107 instance=ExtResource("5_inj64")]
 z_index = 2
 position = Vector2(152.857, 284.286)
 scale = Vector2(1, 1)
 
-[node name="pause" parent="player" unique_id=2143532255 instance=ExtResource("13_v1y88")]
+[node name="pause" parent="Player" unique_id=2143532255 instance=ExtResource("13_v1y88")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -433,7 +433,7 @@ grow_vertical = 1
 scale = Vector2(0.521822, 0.503862)
 metadata/_edit_use_anchors_ = true
 
-[node name="FadeInComponent" type="ColorRect" parent="player" unique_id=305366240]
+[node name="FadeInComponent" type="ColorRect" parent="Player" unique_id=305366240]
 offset_left = -138.96089
 offset_top = -258.4418
 offset_right = -98.96089
