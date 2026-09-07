@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dmscyy5mheq0d"]
+
+[ext_resource type="Script" uid="uid://bvv303j0fiuly" path="res://tests/test_ui/test_health_bar.gd" id="1_bxrot"]
+[ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="1_ust17"]
+[ext_resource type="Script" uid="uid://b0a5jr6vjdf1x" path="res://entities/components/health_bar_component.gd" id="1_ypk36"]
+
+[node name="TestHealthBar" type="Control" unique_id=1652380241]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bxrot")
+
+[node name="BaseEnemy" type="CharacterBody2D" parent="." unique_id=1101076942]
+
+[node name="HealthComponent" type="Node" parent="BaseEnemy" unique_id=1749998462]
+unique_name_in_owner = true
+script = ExtResource("1_ust17")
+max_health = 200.0
+metadata/_custom_type_script = "uid://dieqk78hp4xxe"
+
+[node name="HealthBarComponent" type="Control" parent="." unique_id=1867645351 node_paths=PackedStringArray("bar_position", "health_component")]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_ypk36")
+bar_size = Vector2(200, 10)
+bar_position = NodePath("../Marker2D")
+health_component = NodePath("../BaseEnemy/HealthComponent")
+metadata/_custom_type_script = "uid://b0a5jr6vjdf1x"
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1159532966]
+position = Vector2(551, 250)

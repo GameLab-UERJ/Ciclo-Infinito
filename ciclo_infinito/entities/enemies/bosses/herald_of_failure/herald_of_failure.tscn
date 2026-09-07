@@ -920,8 +920,8 @@ pitch_scale = 1.8
 [node name="CameraFocus" type="Marker2D" parent="." unique_id=215173876]
 position = Vector2(1.675827, -33.242874)
 
+[connection signal="changed_health" from="HealthComponent" to="." method="_on_health_component_lost_health"]
 [connection signal="died" from="HealthComponent" to="." method="_on_health_component_died"]
-[connection signal="lost_health" from="HealthComponent" to="." method="_on_health_component_lost_health"]
 [connection signal="animation_finished" from="Sprites" to="." method="_on_sprites_animation_finished"]
 [connection signal="frame_changed" from="Sprites" to="." method="_on_sprites_frame_changed"]
 [connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_entered_visible_on_screen"]

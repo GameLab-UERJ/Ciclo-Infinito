@@ -20,7 +20,7 @@ func _ready() -> void:
 
 	for inimigo in get_children():
 		if not inimigo.has_signal("defeated"):
-			print("Erro: O nó ", inimigo.name, " não tem o sinal 'defeated'!")
+			push_warning("Erro: O nó ", inimigo.name, " não tem o sinal 'defeated'!")
 			total_inimigos -= 1
 		else:
 			inimigo.defeated.connect(_on_inimigo_derrotado)

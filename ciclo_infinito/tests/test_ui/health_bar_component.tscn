@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://0d2xvd3xy3j4"]
+
+[ext_resource type="Script" uid="uid://b0a5jr6vjdf1x" path="res://entities/components/health_bar_component.gd" id="1_g41ky"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="2_hovdo"]
+
+[node name="HealthBarComponent" type="Control" unique_id=1452702885]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_g41ky")
+
+[node name="Label" type="Label" parent="." unique_id=571646539]
+layout_mode = 0
+offset_right = 22.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_hovdo")
+text = "20"
+horizontal_alignment = 1
+vertical_alignment = 1

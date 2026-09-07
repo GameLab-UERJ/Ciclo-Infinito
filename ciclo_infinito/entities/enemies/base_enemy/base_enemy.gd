@@ -30,6 +30,7 @@ var alive: bool = true
 @onready var chase_component: ChaseComponent = %ChaseComponent
 @onready var movement_component: MovementComponent = %MovementComponent
 @onready var state_machine_manager: StateMachineManager = $StateMachineManager
+@onready var health_bar_component: HealthBarComponent = %HealthBarComponent
 
 
 func _ready() -> void:
