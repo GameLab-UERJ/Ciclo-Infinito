@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://deyn0aff4vkxb"]
 
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_xgoio"]
+[ext_resource type="Script" uid="uid://b0a5jr6vjdf1x" path="res://entities/components/health_bar_component.gd" id="2_2y7q2"]
 [ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_7axup"]
 [ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="2_f8hu2"]
 [ext_resource type="Texture2D" uid="uid://bybr7omrihpw1" path="res://assets/art/enemies/beholder/beholder_brown/Attack/Beholder2_Attack_full.png" id="2_yqgpa"]
@@ -20,6 +21,16 @@
 [ext_resource type="Script" uid="uid://blovpmqtjwas8" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="10_rxvy8"]
 [ext_resource type="AudioStream" uid="uid://b18ibytgsybsm" path="res://assets/sfx/Boggart_Yell.wav" id="10_u7vxu"]
 
+[sub_resource type="Resource" id="Resource_vrgrl"]
+script = ExtResource("8_2y7q2")
+name = "Attacking"
+metadata/graph_offset = Vector2(800.5, 182.5)
+
+[sub_resource type="Resource" id="Resource_2y7q2"]
+script = ExtResource("8_2y7q2")
+name = "Chasing"
+metadata/graph_offset = Vector2(560.5, 182.5)
+
 [sub_resource type="Resource" id="Resource_rq5cc"]
 script = ExtResource("8_2y7q2")
 name = "Entry"
@@ -30,15 +41,47 @@ script = ExtResource("8_2y7q2")
 name = "Idle"
 metadata/graph_offset = Vector2(320.5, 182.5)
 
-[sub_resource type="Resource" id="Resource_2y7q2"]
-script = ExtResource("8_2y7q2")
-name = "Chasing"
-metadata/graph_offset = Vector2(560.5, 182.5)
+[sub_resource type="Resource" id="Resource_5falv"]
+script = ExtResource("10_rxvy8")
+name = "attack_finished"
 
-[sub_resource type="Resource" id="Resource_vrgrl"]
-script = ExtResource("8_2y7q2")
-name = "Attacking"
-metadata/graph_offset = Vector2(800.5, 182.5)
+[sub_resource type="Resource" id="Resource_km7g5"]
+script = ExtResource("10_bfj88")
+name = "is_player_in_range"
+
+[sub_resource type="Resource" id="Resource_lubp8"]
+script = ExtResource("9_vrgrl")
+from = "Attacking"
+to = "Chasing"
+conditions = {
+"attack_finished": SubResource("Resource_5falv"),
+"is_player_in_range": SubResource("Resource_km7g5")
+}
+
+[sub_resource type="Resource" id="Resource_s4ij4"]
+script = ExtResource("10_bfj88")
+value = true
+name = "is_player_in_range"
+
+[sub_resource type="Resource" id="Resource_e5sqh"]
+script = ExtResource("9_vrgrl")
+from = "Chasing"
+to = "Attacking"
+conditions = {
+"is_player_in_range": SubResource("Resource_s4ij4")
+}
+
+[sub_resource type="Resource" id="Resource_3hjs4"]
+script = ExtResource("10_bfj88")
+name = "is_player_detected"
+
+[sub_resource type="Resource" id="Resource_ya3jf"]
+script = ExtResource("9_vrgrl")
+from = "Chasing"
+to = "Idle"
+conditions = {
+"is_player_detected": SubResource("Resource_3hjs4")
+}
 
 [sub_resource type="Resource" id="Resource_bfj88"]
 script = ExtResource("9_vrgrl")
@@ -56,48 +99,6 @@ from = "Idle"
 to = "Chasing"
 conditions = {
 "is_player_detected": SubResource("Resource_20285")
-}
-
-[sub_resource type="Resource" id="Resource_3hjs4"]
-script = ExtResource("10_bfj88")
-name = "is_player_detected"
-
-[sub_resource type="Resource" id="Resource_ya3jf"]
-script = ExtResource("9_vrgrl")
-from = "Chasing"
-to = "Idle"
-conditions = {
-"is_player_detected": SubResource("Resource_3hjs4")
-}
-
-[sub_resource type="Resource" id="Resource_s4ij4"]
-script = ExtResource("10_bfj88")
-value = true
-name = "is_player_in_range"
-
-[sub_resource type="Resource" id="Resource_e5sqh"]
-script = ExtResource("9_vrgrl")
-from = "Chasing"
-to = "Attacking"
-conditions = {
-"is_player_in_range": SubResource("Resource_s4ij4")
-}
-
-[sub_resource type="Resource" id="Resource_km7g5"]
-script = ExtResource("10_bfj88")
-name = "is_player_in_range"
-
-[sub_resource type="Resource" id="Resource_5falv"]
-script = ExtResource("10_rxvy8")
-name = "attack_finished"
-
-[sub_resource type="Resource" id="Resource_lubp8"]
-script = ExtResource("9_vrgrl")
-from = "Attacking"
-to = "Chasing"
-conditions = {
-"attack_finished": SubResource("Resource_5falv"),
-"is_player_in_range": SubResource("Resource_km7g5")
 }
 
 [sub_resource type="Resource" id="Resource_gexqc"]
@@ -1275,6 +1276,17 @@ sprite = NodePath("texture")
 anim = NodePath("AnimationPlayer")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
+[node name="HealthBarComponent" type="Control" parent="." unique_id=1222222677 node_paths=PackedStringArray("bar_position", "health_component")]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_2y7q2")
+bar_position = NodePath("../HealthBarMarker")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://b0a5jr6vjdf1x"
+
 [node name="HealthComponent" type="Node" parent="." unique_id=591147532 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
 unique_name_in_owner = true
 script = ExtResource("2_f8hu2")
@@ -1295,6 +1307,9 @@ max_speed = 100
 acceleration = 0.18
 hit_target_distance = 40.0
 metadata/_custom_type_script = "uid://rkl4oxtypj0s"
+
+[node name="HealthBarMarker" type="Marker2D" parent="." unique_id=1847044991]
+position = Vector2(0.27000004, -51.000004)
 
 [node name="StateMachineManager" type="Node" parent="." unique_id=779137168]
 script = ExtResource("5_5jlsa")

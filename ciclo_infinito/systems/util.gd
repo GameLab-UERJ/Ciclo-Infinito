@@ -13,8 +13,8 @@ func _ready():
 			if layer_name != "":
 				collision_layer_bits[layer_name] = (i-1)
 				collision_layer_values[layer_name] = 2**(i-1)
-	print(collision_layer_bits)
-	print(collision_layer_values)
+	#print(collision_layer_bits)
+	#print(collision_layer_values)
 
 
 func get_layer_bit(layer_name: String) -> int:

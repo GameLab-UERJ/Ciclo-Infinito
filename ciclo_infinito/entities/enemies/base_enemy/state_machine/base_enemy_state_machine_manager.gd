@@ -52,8 +52,8 @@ func attack() -> void:
 	_update_animation_idle()
 
 
-func _on_transited(from: Variant, to: Variant) -> void:
-	print(parent.name," : ",from,'-->',to)
+func _on_transited(_from: Variant, to: Variant) -> void:
+	#print(parent.name," : ",from,'-->',to)
 	match to:
 		"Idle":
 			(parent as BaseEnemy).chase_component.disable()

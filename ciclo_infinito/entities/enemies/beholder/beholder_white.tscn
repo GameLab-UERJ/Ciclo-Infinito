@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cwb32k80tgxq7" path="res://entities/enemies/base_enemy/base_enemy.gd" id="1_hh56e"]
 [ext_resource type="Script" uid="uid://dieqk78hp4xxe" path="res://entities/components/health_component.gd" id="2_8mewe"]
 [ext_resource type="Material" uid="uid://caca1g8p4dgrq" path="res://resources/shaders/redden.tres" id="2_jabvo"]
+[ext_resource type="Script" uid="uid://b0a5jr6vjdf1x" path="res://entities/components/health_bar_component.gd" id="2_nc7cd"]
 [ext_resource type="Texture2D" uid="uid://bikfhjtyea6h3" path="res://assets/art/enemies/beholder/beholder_white/Attack/Beholder1_Attack_full.png" id="2_yuadt"]
 [ext_resource type="Texture2D" uid="uid://xpi1pihjgyf1" path="res://assets/art/enemies/beholder/beholder_white/Death/Beholder1_Death_full.png" id="3_jabvo"]
 [ext_resource type="Script" uid="uid://cijgg0vu4npal" path="res://entities/components/chase_component.gd" id="3_w3758"]
@@ -1275,6 +1276,17 @@ sprite = NodePath("texture")
 anim = NodePath("AnimationPlayer")
 metadata/_custom_type_script = "uid://cwb32k80tgxq7"
 
+[node name="HealthBarComponent" type="Control" parent="." unique_id=1869604701 node_paths=PackedStringArray("bar_position", "health_component")]
+unique_name_in_owner = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("2_nc7cd")
+bar_position = NodePath("../HealthBarMarker")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://b0a5jr6vjdf1x"
+
 [node name="HealthComponent" type="Node" parent="." unique_id=1935436277 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
 unique_name_in_owner = true
 script = ExtResource("2_8mewe")
@@ -1294,6 +1306,9 @@ max_speed = 100
 acceleration = 0.18
 hit_target_distance = 40.0
 metadata/_custom_type_script = "uid://rkl4oxtypj0s"
+
+[node name="HealthBarMarker" type="Marker2D" parent="." unique_id=40872637]
+position = Vector2(0.27000004, -48.000004)
 
 [node name="StateMachineManager" type="Node" parent="." unique_id=1141262469]
 script = ExtResource("5_sv3ax")

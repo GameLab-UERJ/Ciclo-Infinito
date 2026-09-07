@@ -6,7 +6,7 @@ enum COLOR_DAMAGE{Red, White}
 
 
 signal died
-signal lost_health(current_health : float)
+signal changed_health(current_health : float)
 
 
 @export var max_health: float = 120.0
@@ -26,7 +26,7 @@ func _ready() -> void:
 	current_health = max_health
 
 
-func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
+func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
 	if parent is Player and (parent.current_state == parent.State.DASH or 
 							 parent.current_state == parent.State.DEATH or 
 							 parent.current_state == parent.State.DIALOG):
@@ -35,16 +35,16 @@ func take_damage(damage_amount: float, hit_direction: Vector2) -> void:
 	if is_invincible:
 		return
 	
-	var original_health : float = current_health
 	current_health = clamp(current_health - damage_amount, 0.0, max_health)
-	lost_health.emit(current_health)
+	changed_health.emit(current_health)
 	
 	update_health_bar()
 	
 	var knockback_force: float = 350.0
 	parent.velocity = hit_direction * knockback_force
 	
-	applies_damage_received_effect()
+	if sprite and damage_recieved_sfx:
+		applies_damage_received_effect()
 	
 	start_invincibility(invinciblity_duration)
 	

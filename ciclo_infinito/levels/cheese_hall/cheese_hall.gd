@@ -67,7 +67,7 @@ func proxima_missao():
 
 func mudar_de_cena():
 	if target_scene == null:
-		print("ERRO: A cena de destino (Target Scene) não foi definida no inspetor!")
+		push_warning("ERRO: A cena de destino (Target Scene) não foi definida no inspetor!")
 	EasyTransition.transition_to_scene(target_scene,1.5,EasyTransition.TransitionAnim.FADE)
 
 
