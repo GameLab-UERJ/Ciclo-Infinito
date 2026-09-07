@@ -1287,6 +1287,7 @@ offset_bottom = 40.0
 script = ExtResource("2_fmunj")
 bar_position = NodePath("../HealthBarMarker")
 health_component = NodePath("../HealthComponent")
+is_damage_visible = true
 metadata/_custom_type_script = "uid://b0a5jr6vjdf1x"
 
 [node name="HealthComponent" type="Node" parent="." unique_id=601105609 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
