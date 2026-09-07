@@ -83,8 +83,8 @@ func show_damage(damage : float) -> void:
 		'HEAlED DAMAGE':
 			damage_label.add_theme_color_override("font_color",Color.WEB_GREEN)
 	
-	damage_label.global_position = bar_position.global_position
 	damage_label.text = str(int(abs(round(damage))))
+	damage_label.global_position = bar_position.global_position - Vector2.ONE*len(damage_label.text)*5/2 + Vector2(randf_range(-20,20),0)
 	#await get_tree().create_timer(0.75).timeout
 	await create_tween().tween_property(damage_label,"global_position",damage_label.global_position + Vector2(0,-15),0.5).finished
 	damage_label.queue_free()
