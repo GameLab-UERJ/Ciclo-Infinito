@@ -30,8 +30,14 @@
 [ext_resource type="Texture2D" uid="uid://lhpa3xxkqu33" path="res://assets/art/player/RUN/run_up.png" id="25_a2brg"]
 [ext_resource type="Texture2D" uid="uid://c82joy0gpepr5" path="res://assets/art/menus/hud/3_hearts.png" id="26_arp52"]
 [ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="27_jjk8f"]
+[ext_resource type="Script" uid="uid://d3cochdpn1x1k" path="res://entities/player/state_machine/base_state_machine_manager.gd" id="29_13wue"]
 [ext_resource type="AudioStream" uid="uid://wfe6wpmf80cv" path="res://assets/sfx/player/soundreality-whoosh-velocity-383019.mp3" id="30_2soq1"]
+[ext_resource type="Script" uid="uid://draupyiogryjy" path="res://entities/player/state_machine/enabled_state_machine_manager.gd" id="30_13wue"]
 [ext_resource type="AudioStream" uid="uid://3ydqk3abb8kq" path="res://assets/sfx/Hit4.wav" id="30_24ehl"]
+[ext_resource type="Script" uid="uid://cste5lmincdqs" path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" id="30_wy7bt"]
+[ext_resource type="Script" uid="uid://bhlii08bbnbld" path="res://addons/imjp94.yafsm/src/states/State.gd" id="31_geky7"]
+[ext_resource type="Resource" uid="uid://cl18tr3uqgeyj" path="res://resources/state_machine_players/enabled_player_state_machine_player.tres" id="32_geky7"]
+[ext_resource type="Script" uid="uid://c35ot44rxnqul" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="32_qwspa"]
 [ext_resource type="AudioStream" uid="uid://ekxnyhyvqth0" path="res://assets/sfx/Giant_Grunt.wav" id="32_vewsg"]
 [ext_resource type="AudioStream" uid="uid://3jvf7gkajvqv" path="res://assets/sfx/player/data_pion-st1-footstep-sfx-323053.mp3" id="33_2soq1"]
 
@@ -1418,6 +1424,87 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Resource" id="Resource_r633c"]
+script = ExtResource("31_geky7")
+name = "Entry"
+metadata/graph_offset = Vector2(606, 372.5)
+
+[sub_resource type="Resource" id="Resource_pacje"]
+script = ExtResource("31_geky7")
+name = "Enabled"
+metadata/graph_offset = Vector2(866, 372.5)
+
+[sub_resource type="Resource" id="Resource_2h0qb"]
+script = ExtResource("31_geky7")
+name = "Dead"
+metadata/graph_offset = Vector2(1106, 372.5)
+
+[sub_resource type="Resource" id="Resource_mmk7k"]
+script = ExtResource("31_geky7")
+name = "Dialogue"
+metadata/graph_offset = Vector2(866, 172.5)
+
+[sub_resource type="Resource" id="Resource_g3pa7"]
+script = ExtResource("31_geky7")
+name = "Cutscene"
+metadata/graph_offset = Vector2(866, 572.5)
+
+[sub_resource type="Resource" id="Resource_7otdo"]
+script = ExtResource("32_qwspa")
+from = "Entry"
+to = "Enabled"
+
+[sub_resource type="Resource" id="Resource_c112w"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Dead"
+
+[sub_resource type="Resource" id="Resource_u37te"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Dialogue"
+
+[sub_resource type="Resource" id="Resource_ssgi7"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Cutscene"
+
+[sub_resource type="Resource" id="Resource_rtlkk"]
+script = ExtResource("32_qwspa")
+from = "Dialogue"
+to = "Enabled"
+
+[sub_resource type="Resource" id="Resource_a2brg"]
+script = ExtResource("32_qwspa")
+from = "Cutscene"
+to = "Enabled"
+
+[sub_resource type="Resource" id="Resource_qwspa"]
+script = ExtResource("30_wy7bt")
+states = {
+"Cutscene": SubResource("Resource_g3pa7"),
+"Dead": SubResource("Resource_2h0qb"),
+"Dialogue": SubResource("Resource_mmk7k"),
+"Enabled": SubResource("Resource_pacje"),
+"Entry": SubResource("Resource_r633c")
+}
+transitions = {
+"Cutscene": {
+"Enabled": SubResource("Resource_a2brg")
+},
+"Dialogue": {
+"Enabled": SubResource("Resource_rtlkk")
+},
+"Enabled": {
+"Cutscene": SubResource("Resource_ssgi7"),
+"Dead": SubResource("Resource_c112w"),
+"Dialogue": SubResource("Resource_u37te")
+},
+"Entry": {
+"Enabled": SubResource("Resource_7otdo")
+}
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrjdb"]
 size = Vector2(100, 100)
 
@@ -1460,6 +1547,16 @@ one_shot = true
 
 [node name="dash_cooldown" type="Timer" parent="." unique_id=63024105]
 one_shot = true
+
+[node name="BaseMachineManager" type="Node" parent="." unique_id=1761211567]
+script = ExtResource("29_13wue")
+state_machine = SubResource("Resource_qwspa")
+metadata/_custom_type_script = "uid://cl6riypr4akk3"
+
+[node name="EnabledStateMachineManager" type="Node" parent="BaseMachineManager" unique_id=1448619080]
+script = ExtResource("30_13wue")
+state_machine = ExtResource("32_geky7")
+metadata/_custom_type_script = "uid://cl6riypr4akk3"
 
 [node name="attack_area" type="Area2D" parent="." unique_id=203285202 groups=["player"]]
 collision_layer = 0

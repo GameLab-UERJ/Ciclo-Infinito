@@ -1,0 +1,152 @@
+[gd_resource type="Resource" script_class="StateMachine" format=3 uid="uid://cl18tr3uqgeyj"]
+
+[ext_resource type="Script" uid="uid://cste5lmincdqs" path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" id="1_bq3ss"]
+[ext_resource type="Script" uid="uid://bhlii08bbnbld" path="res://addons/imjp94.yafsm/src/states/State.gd" id="2_wc526"]
+[ext_resource type="Script" uid="uid://c35ot44rxnqul" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="3_csvwv"]
+[ext_resource type="Script" uid="uid://c8v7jql0ajoyk" path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" id="4_yfhvm"]
+
+[sub_resource type="Resource" id="Resource_ixvra"]
+script = ExtResource("2_wc526")
+name = "Entry"
+metadata/graph_offset = Vector2(246, 352.5)
+
+[sub_resource type="Resource" id="Resource_xw42k"]
+script = ExtResource("2_wc526")
+name = "Walking"
+metadata/graph_offset = Vector2(1086, 72.5)
+
+[sub_resource type="Resource" id="Resource_l2wif"]
+script = ExtResource("2_wc526")
+name = "Attack"
+metadata/graph_offset = Vector2(1266, 352.5)
+
+[sub_resource type="Resource" id="Resource_s1i3a"]
+script = ExtResource("2_wc526")
+name = "Dash"
+metadata/graph_offset = Vector2(1086, 792.5)
+
+[sub_resource type="Resource" id="Resource_nh6sv"]
+script = ExtResource("2_wc526")
+name = "Idle"
+metadata/graph_offset = Vector2(566, 352.5)
+
+[sub_resource type="Resource" id="Resource_q4xwd"]
+script = ExtResource("2_wc526")
+name = "DashAttack"
+metadata/graph_offset = Vector2(546.5, 792.5)
+
+[sub_resource type="Resource" id="Resource_vrief"]
+script = ExtResource("3_csvwv")
+from = "Entry"
+to = "Idle"
+
+[sub_resource type="Resource" id="Resource_vuoes"]
+script = ExtResource("3_csvwv")
+from = "Idle"
+to = "Walking"
+
+[sub_resource type="Resource" id="Resource_516wk"]
+script = ExtResource("3_csvwv")
+from = "Idle"
+to = "Attack"
+
+[sub_resource type="Resource" id="Resource_43uh7"]
+script = ExtResource("3_csvwv")
+from = "Idle"
+to = "Dash"
+
+[sub_resource type="Resource" id="Resource_u2b0m"]
+script = ExtResource("4_yfhvm")
+value = true
+name = "attack_finished"
+
+[sub_resource type="Resource" id="Resource_ghrdb"]
+script = ExtResource("3_csvwv")
+from = "Attack"
+to = "Idle"
+conditions = {
+"attack_finished": SubResource("Resource_u2b0m")
+}
+
+[sub_resource type="Resource" id="Resource_p5cfw"]
+script = ExtResource("3_csvwv")
+from = "Walking"
+to = "Dash"
+
+[sub_resource type="Resource" id="Resource_72qu1"]
+script = ExtResource("3_csvwv")
+from = "Walking"
+to = "Attack"
+
+[sub_resource type="Resource" id="Resource_vt3ly"]
+script = ExtResource("3_csvwv")
+from = "Walking"
+to = "Idle"
+
+[sub_resource type="Resource" id="Resource_d8jco"]
+script = ExtResource("3_csvwv")
+from = "Dash"
+to = "Idle"
+
+[sub_resource type="Resource" id="Resource_bjpri"]
+script = ExtResource("4_yfhvm")
+value = true
+name = "can_dash_attack"
+
+[sub_resource type="Resource" id="Resource_d3g52"]
+script = ExtResource("3_csvwv")
+from = "Dash"
+to = "DashAttack"
+conditions = {
+"can_dash_attack": SubResource("Resource_bjpri")
+}
+
+[sub_resource type="Resource" id="Resource_5wnxf"]
+script = ExtResource("4_yfhvm")
+value = true
+name = "dash_attack_finished"
+
+[sub_resource type="Resource" id="Resource_1iam3"]
+script = ExtResource("3_csvwv")
+from = "DashAttack"
+to = "Idle"
+conditions = {
+"dash_attack_finished": SubResource("Resource_5wnxf")
+}
+
+[resource]
+script = ExtResource("1_bq3ss")
+states = {
+"Attack": SubResource("Resource_l2wif"),
+"Dash": SubResource("Resource_s1i3a"),
+"DashAttack": SubResource("Resource_q4xwd"),
+"Entry": SubResource("Resource_ixvra"),
+"Idle": SubResource("Resource_nh6sv"),
+"Walking": SubResource("Resource_xw42k")
+}
+transitions = {
+"Attack": {
+"Idle": SubResource("Resource_ghrdb")
+},
+"Dash": {
+"DashAttack": SubResource("Resource_d3g52"),
+"Idle": SubResource("Resource_d8jco")
+},
+"DashAttack": {
+"Idle": SubResource("Resource_1iam3")
+},
+"Entry": {
+"Idle": SubResource("Resource_vrief")
+},
+"Idle": {
+"Attack": SubResource("Resource_516wk"),
+"Dash": SubResource("Resource_43uh7"),
+"Walking": SubResource("Resource_vuoes")
+},
+"Walking": {
+"Attack": SubResource("Resource_72qu1"),
+"Dash": SubResource("Resource_p5cfw"),
+"Idle": SubResource("Resource_vt3ly")
+}
+}
+metadata/_custom_type_script = "uid://cste5lmincdqs"
