@@ -7,6 +7,7 @@ enum AffectedSkill {PASSIVE, ATTACK1, ATTACK2, DASH, DASH_ATTACK, RANGED, ULTIMA
 
 @export var name : String
 @export var description : String
+@export var sage : Sage
 @export var affected_skill : Array[AffectedSkill]
 @export var common_modifier : AttributeModifier
 @export var uncommon_modifier : AttributeModifier
