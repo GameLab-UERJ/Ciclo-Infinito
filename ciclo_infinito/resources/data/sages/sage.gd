@@ -14,7 +14,6 @@ var boons : Array[Boon] = [] : get = _get_boons
 func _set_boons_path(value : String) -> void:
 	boons_path = value
 	_get_boons() 
-	print(boons)
 
 
 func _get_boons() -> Array[Boon]:
@@ -23,7 +22,5 @@ func _get_boons() -> Array[Boon]:
 	
 	var boon_files : PackedStringArray = DirAccess.get_files_at(boons_path)
 	for file_name in boon_files:
-		print(file_name)
-		print(boons_path + file_name)
 		boons.append(ResourceLoader.load(boons_path + file_name))
 	return boons

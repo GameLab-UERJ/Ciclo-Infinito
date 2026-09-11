@@ -2,7 +2,7 @@ extends Resource
 class_name Boon
 
 
-enum AffectedSkill {PASSIVE, ATTACK1, ATTACK2, DASH, DASH_ATTACK, RANGED, ULTIMATE}
+enum AffectedSkill {PASSIVE, ATTACK1, ATTACK2, DASH, DASH_ATTACK, RANGED, SPECIAL}
 
 
 @export var name : String
