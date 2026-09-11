@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://d3lwafg3p1tk" path="res://tests/test_ui/test_boons/test_boon.gd" id="1_ogkfc"]
 [ext_resource type="Script" uid="uid://b1hyfn481sxha" path="res://resources/data/sages/sage.gd" id="2_5dk11"]
 [ext_resource type="Texture2D" uid="uid://dkeasl22y70n" path="res://assets/art/marie_curie/chatgpt-splash_marie_curie_v1.1.png" id="3_nkoh4"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="4_5dk11"]
 
 [sub_resource type="Resource" id="Resource_q3wmd"]
 script = ExtResource("2_5dk11")
@@ -11,6 +12,21 @@ description = "Marie Curie foi pioneira no estudo da radioatividade (termo que e
 splash = ExtResource("3_nkoh4")
 boons_path = "res://resources/data/boons/marie_curie/"
 metadata/_custom_type_script = "uid://b1hyfn481sxha"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2c7l"]
+bg_color = Color(0.20784314, 0.20784314, 0.20784314, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dk11"]
+bg_color = Color(0.12955844, 0.1295585, 0.12955838, 1)
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkoh4"]
+bg_color = Color(0.6, 0.16862746, 0.9411765, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+corner_detail = 12
 
 [node name="TestBoon" type="Control" unique_id=1052937336]
 layout_mode = 3
@@ -22,7 +38,8 @@ grow_vertical = 2
 script = ExtResource("1_ogkfc")
 sage = SubResource("Resource_q3wmd")
 
-[node name="TextureButton" type="TextureButton" parent="." unique_id=1316208535]
+[node name="SplashArt" type="TextureRect" parent="." unique_id=672775857]
+unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(540, 540)
 custom_maximum_size = Vector2(540, 540)
@@ -32,10 +49,66 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
+offset_left = -270.0
+offset_top = -270.0
+offset_right = 270.0
+offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
 stretch_mode = 4
+
+[node name="BoonsPanel" type="PanelContainer" parent="." unique_id=1864276956]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(640, 0)
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_n2c7l")
+
+[node name="MarginContainer" type="MarginContainer" parent="BoonsPanel" unique_id=1999463943]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 15
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoonsPanel/MarginContainer" unique_id=2011933958]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Boon1" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=1354854313]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_5dk11")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
+theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
+text = "dsadsadas"
+
+[node name="Boon2" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=708352633]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_5dk11")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
+theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
+text = "dsadsadas"
+
+[node name="Boon3" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=1124400237]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_5dk11")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
+theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
+text = "dsadsadas"

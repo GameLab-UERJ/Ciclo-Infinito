@@ -27,3 +27,12 @@ func get_layer_value(layer_name: String) -> int:
 
 func is_collision_mask_layer_set(node: CollisionObject2D, layer_name: String) -> int:
 	return not not node.collision_mask & collision_layer_values[layer_name]
+
+
+func get_random_sample(source_array: Array, sample_size: int) -> Array:
+	sample_size = min(sample_size, source_array.size())
+	
+	var temp_array = source_array.duplicate()
+	temp_array.shuffle()
+	
+	return temp_array.slice(0, sample_size)
