@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Sage" format=3 uid="uid://dgij2nbf3bm0j"]
+
+[ext_resource type="Script" uid="uid://b1hyfn481sxha" path="res://resources/data/sages/sage.gd" id="1_lhdf2"]
+
+[resource]
+script = ExtResource("1_lhdf2")
+metadata/_custom_type_script = "uid://b1hyfn481sxha"
