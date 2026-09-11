@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://7ilotcy8365d"]
+
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_5f030"]
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_7o2l8"]
+
+[sub_resource type="Resource" id="Resource_7o2l8"]
+script = ExtResource("1_5f030")
+type = 1
+magic = 2
+vitality = -10
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_qsb04"]
+script = ExtResource("1_5f030")
+resistence = 5
+magic = 10
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_jvwfa"]
+script = ExtResource("1_5f030")
+resistence = 1
+magic = 5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_5f030"]
+script = ExtResource("1_5f030")
+magic = 4
+vitality = -5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_7o2l8")
+name = "Teste"
+description = "Dádiva de teste"
+affected_skill = Array[int]([1, 2])
+common_modifier = SubResource("Resource_7o2l8")
+uncommon_modifier = SubResource("Resource_5f030")
+rare_modifier = SubResource("Resource_jvwfa")
+legendary_modifier = SubResource("Resource_qsb04")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"
