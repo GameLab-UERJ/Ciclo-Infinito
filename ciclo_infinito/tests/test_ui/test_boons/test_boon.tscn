@@ -89,7 +89,6 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
-text = "dsadsadas"
 
 [node name="Boon2" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=708352633]
 unique_name_in_owner = true
@@ -100,7 +99,6 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
-text = "dsadsadas"
 
 [node name="Boon3" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=1124400237]
 unique_name_in_owner = true
@@ -111,4 +109,3 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
-text = "dsadsadas"
