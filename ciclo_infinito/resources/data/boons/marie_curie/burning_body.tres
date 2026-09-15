@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://dokardtv8vb5y"]
+
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_cy276"]
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_y7d30"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_jrtnt"]
+
+[sub_resource type="Resource" id="Resource_kpx0x"]
+script = ExtResource("1_cy276")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_ovblq"]
+script = ExtResource("1_cy276")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_jrtnt"]
+script = ExtResource("1_cy276")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_cy276"]
+script = ExtResource("1_cy276")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_y7d30")
+name = "Corpo em Chamas"
+description = "Após sofrer dano, emita uma aura de radiação ao redor que aplica Irradiação atodos os inimigos próximos por um curto período.Corpo em Chamas II – Aura dura mais tempo."
+sage = ExtResource("2_jrtnt")
+affected_skill = Array[int]([0])
+common_modifier = SubResource("Resource_kpx0x")
+uncommon_modifier = SubResource("Resource_cy276")
+rare_modifier = SubResource("Resource_jrtnt")
+legendary_modifier = SubResource("Resource_ovblq")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"
