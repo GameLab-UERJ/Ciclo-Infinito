@@ -2,13 +2,23 @@ extends Control
 class_name BoonPicker
 
 
-signal boon_picked(boon : Boon)
+const COMMON_COLOR = Color.WHITE_SMOKE
+const UNCOMMON_COLOR = Color.PALE_GREEN
+const RARE_COLOR = Color.STEEL_BLUE
+const LEGENDARY_COLOR = Color.DARK_GOLDENROD
+
+
+signal boon_picked(boon : Boon, rarity : String)
 
 
 @export var sage : Sage
-
+@export_range(0,100,0.5) var common_chance : float		= 40
+@export_range(0,100,0.5) var uncommon_chance : float	= 30
+@export_range(0,100,0.5) var rare_chance : float		= 20
+@export_range(0,100,0.5) var legendary_chance : float 	= 10
 
 var chosen_boons : Array[Boon]
+var chosen_rarity : String
 
 
 @onready var boon_buttons_parent: VBoxContainer = $BoonsPanel/MarginContainer/VBoxContainer
@@ -34,7 +44,7 @@ func _animate_splash_art() -> void:
 
 func _set_boons() -> void:
 	chosen_boons = Util.get_random_sample(sage.boons,3)
-	boon_1.text = chosen_boons[0].name
+	chosen_rarity = Util.choice(['common','uncommon','rare','legendary'],[common_chance, uncommon_chance, rare_chance, legendary_chance])
 	
 	for i in len(chosen_boons):
 		await _enable_boon(boon_buttons_parent.get_child(i),chosen_boons[i].name)
@@ -42,6 +52,15 @@ func _set_boons() -> void:
 
 func _enable_boon(boon_button : Button, boon_name : String) -> void:
 	boon_button.text = boon_name
+	match chosen_rarity:
+		'common':
+			boon_button.get_theme_stylebox("normal").border_color = COMMON_COLOR
+		'uncommon':
+			boon_button.get_theme_stylebox("normal").border_color = UNCOMMON_COLOR
+		'rare':
+			boon_button.get_theme_stylebox("normal").border_color = RARE_COLOR
+		'legendary':
+			boon_button.get_theme_stylebox("normal").border_color = LEGENDARY_COLOR
 	await create_tween().tween_property(boon_button,"self_modulate",Color.WHITE,0.5).finished
 	boon_button.disabled = false
 
@@ -55,7 +74,7 @@ func pick_boon(position : int) -> Boon:
 	if position < 0 or position >= len(chosen_boons):
 		push_error("Out of range for pick_boon in "+str(self))
 		return null
-	boon_picked.emit(chosen_boons[position])
+	boon_picked.emit(chosen_boons[position],chosen_rarity)
 	return chosen_boons[position]
 
 

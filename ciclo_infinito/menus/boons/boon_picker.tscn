@@ -18,14 +18,19 @@ bg_color = Color(0.20784314, 0.20784314, 0.20784314, 0)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dk11"]
 bg_color = Color(0.12955844, 0.1295585, 0.12955838, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.7176471, 0.7176471, 0.7176471, 1)
 corner_detail = 12
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkoh4"]
 bg_color = Color(0.6, 0.16862746, 0.9411765, 1)
-border_width_left = 3
-border_width_top = 3
-border_width_right = 3
-border_width_bottom = 3
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
 corner_detail = 12
 
 [node name="BoonPicker" type="Control" unique_id=1052937336]
@@ -89,7 +94,7 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
-disabled = true
+text = "sdsadasdasdasdsdasdasd"
 
 [node name="Boon2" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=708352633]
 unique_name_in_owner = true
@@ -100,7 +105,7 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
-disabled = true
+text = "sdsadasdasdasdsdasdasd"
 
 [node name="Boon3" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=1124400237]
 unique_name_in_owner = true
@@ -111,7 +116,7 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
-disabled = true
+text = "sdsadasdasdasdsdasdasd"
 
 [connection signal="pressed" from="BoonsPanel/MarginContainer/VBoxContainer/Boon1" to="." method="_on_boon_1_pressed"]
 [connection signal="pressed" from="BoonsPanel/MarginContainer/VBoxContainer/Boon2" to="." method="_on_boon_2_pressed"]
