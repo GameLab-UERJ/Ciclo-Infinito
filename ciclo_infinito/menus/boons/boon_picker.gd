@@ -11,6 +11,7 @@ signal boon_picked(boon : Boon)
 var chosen_boons : Array[Boon]
 
 
+@onready var boon_buttons_parent: VBoxContainer = $BoonsPanel/MarginContainer/VBoxContainer
 @onready var splash_art: TextureRect = %SplashArt
 @onready var boons_panel: PanelContainer = %BoonsPanel
 @onready var boon_1: Button = %Boon1
@@ -34,12 +35,20 @@ func _animate_splash_art() -> void:
 func _set_boons() -> void:
 	chosen_boons = Util.get_random_sample(sage.boons,3)
 	boon_1.text = chosen_boons[0].name
-	boon_2.text = chosen_boons[1].name
-	boon_3.text = chosen_boons[2].name
-	#await create_tween().tween_property(boons_panel,"modulate",Color.WHITE,1.0).finished
-	await create_tween().tween_property(boon_1,"self_modulate",Color.WHITE,0.5).finished
-	await create_tween().tween_property(boon_2,"self_modulate",Color.WHITE,0.5).finished
-	await create_tween().tween_property(boon_3,"self_modulate",Color.WHITE,0.5).finished
+	
+	for i in len(chosen_boons):
+		await _enable_boon(boon_buttons_parent.get_child(i),chosen_boons[i].name)
+
+
+func _enable_boon(boon_button : Button, boon_name : String) -> void:
+	boon_button.text = boon_name
+	await create_tween().tween_property(boon_button,"self_modulate",Color.WHITE,0.5).finished
+	boon_button.disabled = false
+
+
+func _disable_boon(boon_button : Button) -> void:
+	boon_button.text = ''
+	boon_button.disabled = true
 
 
 func pick_boon(position : int) -> Boon:

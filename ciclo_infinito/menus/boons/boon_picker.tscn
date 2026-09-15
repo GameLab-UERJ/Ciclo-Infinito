@@ -89,6 +89,7 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
+disabled = true
 
 [node name="Boon2" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=708352633]
 unique_name_in_owner = true
@@ -99,6 +100,7 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
+disabled = true
 
 [node name="Boon3" type="Button" parent="BoonsPanel/MarginContainer/VBoxContainer" unique_id=1124400237]
 unique_name_in_owner = true
@@ -109,6 +111,7 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
+disabled = true
 
 [connection signal="pressed" from="BoonsPanel/MarginContainer/VBoxContainer/Boon1" to="." method="_on_boon_1_pressed"]
 [connection signal="pressed" from="BoonsPanel/MarginContainer/VBoxContainer/Boon2" to="." method="_on_boon_2_pressed"]
