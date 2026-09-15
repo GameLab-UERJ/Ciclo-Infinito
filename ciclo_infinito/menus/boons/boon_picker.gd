@@ -1,7 +1,14 @@
 extends Control
+class_name BoonPicker
+
+
+signal boon_picked(boon : Boon)
 
 
 @export var sage : Sage
+
+
+var chosen_boons : Array[Boon]
 
 
 @onready var splash_art: TextureRect = %SplashArt
@@ -25,7 +32,7 @@ func _animate_splash_art() -> void:
 
 
 func _set_boons() -> void:
-	var chosen_boons : Array[Boon] = Util.get_random_sample(sage.boons,3)
+	chosen_boons = Util.get_random_sample(sage.boons,3)
 	boon_1.text = chosen_boons[0].name
 	boon_2.text = chosen_boons[1].name
 	boon_3.text = chosen_boons[2].name
@@ -33,3 +40,23 @@ func _set_boons() -> void:
 	await create_tween().tween_property(boon_1,"self_modulate",Color.WHITE,0.5).finished
 	await create_tween().tween_property(boon_2,"self_modulate",Color.WHITE,0.5).finished
 	await create_tween().tween_property(boon_3,"self_modulate",Color.WHITE,0.5).finished
+
+
+func pick_boon(position : int) -> Boon:
+	if position < 0 or position >= len(chosen_boons):
+		push_error("Out of range for pick_boon in "+str(self))
+		return null
+	boon_picked.emit(chosen_boons[position])
+	return chosen_boons[position]
+
+
+func _on_boon_1_pressed() -> void:
+	pick_boon(0)
+
+
+func _on_boon_2_pressed() -> void:
+	pick_boon(1)
+
+
+func _on_boon_3_pressed() -> void:
+	pick_boon(2)

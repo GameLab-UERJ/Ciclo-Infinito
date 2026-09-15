@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bs0y10jxqfofw"]
 
-[ext_resource type="Script" uid="uid://d3lwafg3p1tk" path="res://tests/test_ui/test_boons/test_boon.gd" id="1_ogkfc"]
+[ext_resource type="Script" uid="uid://d3lwafg3p1tk" path="res://menus/boons/boon_picker.gd" id="1_ogkfc"]
 [ext_resource type="Script" uid="uid://b1hyfn481sxha" path="res://resources/data/sages/sage.gd" id="2_5dk11"]
 [ext_resource type="Texture2D" uid="uid://dkeasl22y70n" path="res://assets/art/marie_curie/chatgpt-splash_marie_curie_v1.1.png" id="3_nkoh4"]
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="4_5dk11"]
@@ -28,7 +28,7 @@ border_width_right = 3
 border_width_bottom = 3
 corner_detail = 12
 
-[node name="TestBoon" type="Control" unique_id=1052937336]
+[node name="BoonPicker" type="Control" unique_id=1052937336]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,3 +109,7 @@ theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
 theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
+
+[connection signal="pressed" from="BoonsPanel/MarginContainer/VBoxContainer/Boon1" to="." method="_on_boon_1_pressed"]
+[connection signal="pressed" from="BoonsPanel/MarginContainer/VBoxContainer/Boon2" to="." method="_on_boon_2_pressed"]
+[connection signal="pressed" from="BoonsPanel/MarginContainer/VBoxContainer/Boon3" to="." method="_on_boon_3_pressed"]
