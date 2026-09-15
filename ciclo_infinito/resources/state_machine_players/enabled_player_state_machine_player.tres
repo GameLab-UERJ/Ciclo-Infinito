@@ -3,17 +3,8 @@
 [ext_resource type="Script" uid="uid://cste5lmincdqs" path="res://addons/imjp94.yafsm/src/states/StateMachine.gd" id="1_bq3ss"]
 [ext_resource type="Script" uid="uid://bhlii08bbnbld" path="res://addons/imjp94.yafsm/src/states/State.gd" id="2_wc526"]
 [ext_resource type="Script" uid="uid://c35ot44rxnqul" path="res://addons/imjp94.yafsm/src/transitions/Transition.gd" id="3_csvwv"]
+[ext_resource type="Script" uid="uid://blovpmqtjwas8" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="4_wc526"]
 [ext_resource type="Script" uid="uid://c8v7jql0ajoyk" path="res://addons/imjp94.yafsm/src/conditions/BooleanCondition.gd" id="4_yfhvm"]
-
-[sub_resource type="Resource" id="Resource_ixvra"]
-script = ExtResource("2_wc526")
-name = "Entry"
-metadata/graph_offset = Vector2(246, 352.5)
-
-[sub_resource type="Resource" id="Resource_xw42k"]
-script = ExtResource("2_wc526")
-name = "Walking"
-metadata/graph_offset = Vector2(1086, 72.5)
 
 [sub_resource type="Resource" id="Resource_l2wif"]
 script = ExtResource("2_wc526")
@@ -23,37 +14,27 @@ metadata/graph_offset = Vector2(1266, 352.5)
 [sub_resource type="Resource" id="Resource_s1i3a"]
 script = ExtResource("2_wc526")
 name = "Dash"
-metadata/graph_offset = Vector2(1086, 792.5)
+metadata/graph_offset = Vector2(966, 812.5)
+
+[sub_resource type="Resource" id="Resource_q4xwd"]
+script = ExtResource("2_wc526")
+name = "DashAttack"
+metadata/graph_offset = Vector2(546.5, 812.5)
+
+[sub_resource type="Resource" id="Resource_ixvra"]
+script = ExtResource("2_wc526")
+name = "Entry"
+metadata/graph_offset = Vector2(246, 352.5)
 
 [sub_resource type="Resource" id="Resource_nh6sv"]
 script = ExtResource("2_wc526")
 name = "Idle"
 metadata/graph_offset = Vector2(566, 352.5)
 
-[sub_resource type="Resource" id="Resource_q4xwd"]
+[sub_resource type="Resource" id="Resource_xw42k"]
 script = ExtResource("2_wc526")
-name = "DashAttack"
-metadata/graph_offset = Vector2(546.5, 792.5)
-
-[sub_resource type="Resource" id="Resource_vrief"]
-script = ExtResource("3_csvwv")
-from = "Entry"
-to = "Idle"
-
-[sub_resource type="Resource" id="Resource_vuoes"]
-script = ExtResource("3_csvwv")
-from = "Idle"
-to = "Walking"
-
-[sub_resource type="Resource" id="Resource_516wk"]
-script = ExtResource("3_csvwv")
-from = "Idle"
-to = "Attack"
-
-[sub_resource type="Resource" id="Resource_43uh7"]
-script = ExtResource("3_csvwv")
-from = "Idle"
-to = "Dash"
+name = "Walking"
+metadata/graph_offset = Vector2(966, 72.5)
 
 [sub_resource type="Resource" id="Resource_u2b0m"]
 script = ExtResource("4_yfhvm")
@@ -68,37 +49,29 @@ conditions = {
 "attack_finished": SubResource("Resource_u2b0m")
 }
 
-[sub_resource type="Resource" id="Resource_p5cfw"]
-script = ExtResource("3_csvwv")
-from = "Walking"
-to = "Dash"
-
-[sub_resource type="Resource" id="Resource_72qu1"]
-script = ExtResource("3_csvwv")
-from = "Walking"
-to = "Attack"
-
-[sub_resource type="Resource" id="Resource_vt3ly"]
-script = ExtResource("3_csvwv")
-from = "Walking"
-to = "Idle"
-
-[sub_resource type="Resource" id="Resource_d8jco"]
-script = ExtResource("3_csvwv")
-from = "Dash"
-to = "Idle"
-
-[sub_resource type="Resource" id="Resource_bjpri"]
-script = ExtResource("4_yfhvm")
-value = true
-name = "can_dash_attack"
+[sub_resource type="Resource" id="Resource_u6pdc"]
+script = ExtResource("4_wc526")
+name = "dash_attack"
 
 [sub_resource type="Resource" id="Resource_d3g52"]
 script = ExtResource("3_csvwv")
 from = "Dash"
 to = "DashAttack"
 conditions = {
-"can_dash_attack": SubResource("Resource_bjpri")
+"dash_attack": SubResource("Resource_u6pdc")
+}
+
+[sub_resource type="Resource" id="Resource_it2sd"]
+script = ExtResource("4_yfhvm")
+value = true
+name = "dash_finished"
+
+[sub_resource type="Resource" id="Resource_d8jco"]
+script = ExtResource("3_csvwv")
+from = "Dash"
+to = "Idle"
+conditions = {
+"dash_finished": SubResource("Resource_it2sd")
 }
 
 [sub_resource type="Resource" id="Resource_5wnxf"]
@@ -112,6 +85,84 @@ from = "DashAttack"
 to = "Idle"
 conditions = {
 "dash_attack_finished": SubResource("Resource_5wnxf")
+}
+
+[sub_resource type="Resource" id="Resource_vrief"]
+script = ExtResource("3_csvwv")
+from = "Entry"
+to = "Idle"
+
+[sub_resource type="Resource" id="Resource_yfhvm"]
+script = ExtResource("4_wc526")
+name = "attack"
+
+[sub_resource type="Resource" id="Resource_516wk"]
+script = ExtResource("3_csvwv")
+from = "Idle"
+to = "Attack"
+conditions = {
+"attack": SubResource("Resource_yfhvm")
+}
+
+[sub_resource type="Resource" id="Resource_bjpri"]
+script = ExtResource("4_wc526")
+name = "dash"
+
+[sub_resource type="Resource" id="Resource_43uh7"]
+script = ExtResource("3_csvwv")
+from = "Idle"
+to = "Dash"
+conditions = {
+"dash": SubResource("Resource_bjpri")
+}
+
+[sub_resource type="Resource" id="Resource_csvwv"]
+script = ExtResource("4_wc526")
+name = "walk"
+
+[sub_resource type="Resource" id="Resource_vuoes"]
+script = ExtResource("3_csvwv")
+from = "Idle"
+to = "Walking"
+conditions = {
+"walk": SubResource("Resource_csvwv")
+}
+
+[sub_resource type="Resource" id="Resource_aqjjb"]
+script = ExtResource("4_wc526")
+name = "attack"
+
+[sub_resource type="Resource" id="Resource_72qu1"]
+script = ExtResource("3_csvwv")
+from = "Walking"
+to = "Attack"
+conditions = {
+"attack": SubResource("Resource_aqjjb")
+}
+
+[sub_resource type="Resource" id="Resource_otdgy"]
+script = ExtResource("4_wc526")
+name = "dash"
+
+[sub_resource type="Resource" id="Resource_p5cfw"]
+script = ExtResource("3_csvwv")
+from = "Walking"
+to = "Dash"
+conditions = {
+"dash": SubResource("Resource_otdgy")
+}
+
+[sub_resource type="Resource" id="Resource_tb802"]
+script = ExtResource("4_yfhvm")
+value = true
+name = "stopped_walking"
+
+[sub_resource type="Resource" id="Resource_vt3ly"]
+script = ExtResource("3_csvwv")
+from = "Walking"
+to = "Idle"
+conditions = {
+"stopped_walking": SubResource("Resource_tb802")
 }
 
 [resource]
