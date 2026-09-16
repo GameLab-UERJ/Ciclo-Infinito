@@ -18,7 +18,7 @@ signal boon_picked(boon : Boon, rarity : String)
 @export_range(0,100,0.5) var legendary_chance : float 	= 10
 
 var chosen_boons : Array[Boon]
-var chosen_rarity : String
+var chosen_rarity : Array[String]
 
 
 @onready var boon_buttons_parent: VBoxContainer = $BoonsPanel/MarginContainer/VBoxContainer
@@ -44,15 +44,16 @@ func _animate_splash_art() -> void:
 
 func _set_boons() -> void:
 	chosen_boons = Util.get_random_sample(sage.boons,3)
-	chosen_rarity = Util.choice(['common','uncommon','rare','legendary'],[common_chance, uncommon_chance, rare_chance, legendary_chance])
+	for i in 3:
+		chosen_rarity.append(Util.choice(['common','uncommon','rare','legendary'],[common_chance, uncommon_chance, rare_chance, legendary_chance]))
 	
 	for i in len(chosen_boons):
-		await _enable_boon(boon_buttons_parent.get_child(i),chosen_boons[i].name)
+		await _enable_boon(boon_buttons_parent.get_child(i),i)
 
 
-func _enable_boon(boon_button : Button, boon_name : String) -> void:
-	boon_button.text = boon_name
-	match chosen_rarity:
+func _enable_boon(boon_button : Button, boon_number : int) -> void:
+	boon_button.text = chosen_boons[boon_number].name
+	match chosen_rarity[boon_number]:
 		'common':
 			boon_button.get_theme_stylebox("normal").border_color = COMMON_COLOR
 		'uncommon':
@@ -74,7 +75,7 @@ func pick_boon(position : int) -> Boon:
 	if position < 0 or position >= len(chosen_boons):
 		push_error("Out of range for pick_boon in "+str(self))
 		return null
-	boon_picked.emit(chosen_boons[position],chosen_rarity)
+	boon_picked.emit(chosen_boons[position],chosen_rarity[position])
 	return chosen_boons[position]
 
 

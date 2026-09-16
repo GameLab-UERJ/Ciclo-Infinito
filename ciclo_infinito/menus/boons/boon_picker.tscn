@@ -16,7 +16,7 @@ metadata/_custom_type_script = "uid://b1hyfn481sxha"
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n2c7l"]
 bg_color = Color(0.20784314, 0.20784314, 0.20784314, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dk11"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3c3r8"]
 bg_color = Color(0.12955844, 0.1295585, 0.12955838, 1)
 border_width_left = 5
 border_width_top = 5
@@ -31,6 +31,24 @@ border_width_left = 5
 border_width_top = 5
 border_width_right = 5
 border_width_bottom = 5
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gonse"]
+bg_color = Color(0.12955844, 0.1295585, 0.12955838, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.7176471, 0.7176471, 0.7176471, 1)
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dk11"]
+bg_color = Color(0.12955844, 0.1295585, 0.12955838, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.7176471, 0.7176471, 0.7176471, 1)
 corner_detail = 12
 
 [node name="BoonPicker" type="Control" unique_id=1052937336]
@@ -92,7 +110,7 @@ custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3c3r8")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
 text = "sdsadasdasdasdsdasdasd"
 
@@ -103,7 +121,7 @@ custom_minimum_size = Vector2(0, 160)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_5dk11")
 theme_override_font_sizes/font_size = 48
-theme_override_styles/normal = SubResource("StyleBoxFlat_5dk11")
+theme_override_styles/normal = SubResource("StyleBoxFlat_gonse")
 theme_override_styles/hover = SubResource("StyleBoxFlat_nkoh4")
 text = "sdsadasdasdasdsdasdasd"
 
