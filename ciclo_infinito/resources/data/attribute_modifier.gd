@@ -2,7 +2,7 @@ extends Resource
 class_name AttributeModifier
 
 
-enum Type {MULTIPLIER, ADDEND}
+enum Type {ADDEND, MULTIPLIER}
 
 @export var type : Type
 @export var strength : int 

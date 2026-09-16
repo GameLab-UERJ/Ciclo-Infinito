@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cmg268wjxbrou"]
+
+[ext_resource type="PackedScene" uid="uid://bs0y10jxqfofw" path="res://menus/boons/boon_picker.tscn" id="1_5kjfs"]
+[ext_resource type="Script" uid="uid://bp1twiqmfgva" path="res://tests/test_ui/test_boons/test_boon_picker.gd" id="1_kbko3"]
+
+[node name="TestBoonPicker" type="Control" unique_id=2015848326]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kbko3")
+
+[node name="BoonPicker" parent="." unique_id=1052937336 instance=ExtResource("1_5kjfs")]
+layout_mode = 1
+
+[connection signal="boon_picked" from="BoonPicker" to="." method="_on_boon_picker_boon_picked"]
