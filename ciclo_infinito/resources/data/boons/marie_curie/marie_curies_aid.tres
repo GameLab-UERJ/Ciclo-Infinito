@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="Boon" format=3 uid="uid://cwfw2t8amd2id"]
 
 [ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_eutt4"]
-[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_yrypu"]
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attributes/attribute_modifier.gd" id="1_yrypu"]
 [ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_1jy7p"]
 
 [sub_resource type="Resource" id="Resource_o31px"]
