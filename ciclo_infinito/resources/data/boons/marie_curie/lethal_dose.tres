@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://btnsjjxao1qjr"]
+
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_hp0cu"]
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_ub2rk"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_fnj0l"]
+
+[sub_resource type="Resource" id="Resource_l1t18"]
+script = ExtResource("1_ub2rk")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_hkjho"]
+script = ExtResource("1_ub2rk")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_fnj0l"]
+script = ExtResource("1_ub2rk")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_ub2rk"]
+script = ExtResource("1_ub2rk")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_hp0cu")
+name = "Dose Letal"
+description = "Seus efeitos de Irradiação acumulam até um nível máximo maior.Dose Letal II – Nível máximo ainda maior."
+sage = ExtResource("2_fnj0l")
+affected_skill = Array[int]([0])
+common_modifier = SubResource("Resource_l1t18")
+uncommon_modifier = SubResource("Resource_ub2rk")
+rare_modifier = SubResource("Resource_fnj0l")
+legendary_modifier = SubResource("Resource_hkjho")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"

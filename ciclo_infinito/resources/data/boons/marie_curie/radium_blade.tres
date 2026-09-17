@@ -1,0 +1,47 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://bcqdhix6mdgrv"]
+
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_nci42"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="1_obfid"]
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_phekf"]
+
+[sub_resource type="Resource" id="Resource_phekf"]
+script = ExtResource("1_phekf")
+type = 1
+magic = 5
+vitality = -10
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_huoqd"]
+script = ExtResource("1_phekf")
+type = 1
+resistence = 5
+magic = 12
+vitality = -5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_gj635"]
+script = ExtResource("1_phekf")
+type = 1
+resistence = 2
+magic = 10
+vitality = -5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_qpm05"]
+script = ExtResource("1_phekf")
+type = 1
+magic = 8
+vitality = -5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_nci42")
+name = "Lâmina de Rádio"
+description = "Seu ataque especial libera uma onda energética que causa Decaimento (inimigoperde defesa e vida progressivamente ao longo do tempo).Lâmina de Rádio II – Decaimento se acumula mais rápido"
+sage = ExtResource("1_obfid")
+affected_skill = Array[int]([6])
+common_modifier = SubResource("Resource_phekf")
+uncommon_modifier = SubResource("Resource_qpm05")
+rare_modifier = SubResource("Resource_gj635")
+legendary_modifier = SubResource("Resource_huoqd")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"
