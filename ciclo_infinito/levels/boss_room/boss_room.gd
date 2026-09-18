@@ -77,7 +77,7 @@ func _on_herald_of_failure_died() -> void:
 func end_game() -> void:
 	if mission_label:
 		mission_label.text = "Todas as missões concluídas!"
-	player.current_state = player.State.DIALOG
+	player.enter_dialogue()
 	var victory_scene = load("res://menus/end_scenes/victory/victory_screen.tscn").instantiate()
 	#victory_scene.previous_scene = self
 	EasyTransition.transition_to_node(victory_scene,1.5,EasyTransition.TransitionAnim.FADE)
@@ -96,7 +96,7 @@ func _on_cutscene_area_body_entered(_body: Node2D) -> void:
 func _on_end_cutscene_area_body_entered(body: Node2D) -> void:
 	if not body is Player:
 		return
-	player.current_state = player.State.CUTSCENE
+	player.enter_cutscene()
 	var tween : Tween = create_tween()
 	tween.tween_property(player.anim,"scale",Vector2.ZERO,1)
 	tween.parallel().tween_property(player.shadow,"scale",Vector2.ZERO,1)
