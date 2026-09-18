@@ -1,0 +1,47 @@
+extends Status
+class_name RadiationStatus
+
+
+@export var damage_ticks_per_second : float = 1:
+	set(value):
+		damage_ticks_per_second = value
+		if damage_timer:
+			damage_timer.wait_time = 1/damage_ticks_per_second
+
+
+var affected_health_components : Array = []
+
+
+@onready var damage_timer: Timer = $DamageTimer
+
+
+func _ready() -> void:
+	super._ready()
+	damage_ticks_per_second = damage_ticks_per_second
+
+
+func calculate_damage() -> float:
+	if created_by and created_by.has_node("ProgressionComponent"):
+		return ceil(created_by.get_node("ProgressionComponent").final_attributes.strength * level * 0.1)
+	
+	return 5
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if not body.has_node("HealthComponent"):
+		return
+	
+	affected_health_components.append(body.health_component)
+
+
+func _on_body_exited(body: Node2D) -> void:
+	if not body.has_node("HealthComponent"):
+		return
+	
+	affected_health_components.erase(body.health_component)
+
+
+func _on_damage_timer_timeout() -> void:
+	for health_component in affected_health_components:
+		if health_component.get_parent() is Player and affecting == 'Player' or not health_component.get_parent() is Player and affecting == 'Enemy':
+			health_component.take_damage(calculate_damage())

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="Boon" format=3 uid="uid://7ilotcy8365d"]
 
-[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_acrvk"]
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attributes/attribute_modifier.gd" id="1_acrvk"]
 [ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_sa2gd"]
 [ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="3_c714b"]
 
