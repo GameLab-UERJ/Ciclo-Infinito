@@ -37,9 +37,10 @@ metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 [resource]
 script = ExtResource("1_nci42")
 name = "Lâmina de Rádio"
-description = "Seu ataque especial libera uma onda energética que causa Decaimento (inimigoperde defesa e vida progressivamente ao longo do tempo).Lâmina de Rádio II – Decaimento se acumula mais rápido"
+description = "Seu ataque libera uma onda energética que causa Decaimento (inimigoperde defesa e vida progressivamente ao longo do tempo).Lâmina de Rádio II – Decaimento se acumula mais rápido"
 sage = ExtResource("1_obfid")
-affected_skill = Array[int]([6])
+affected_skill = Array[int]([1])
+applied_statuses = Array[int]([0])
 common_modifier = SubResource("Resource_phekf")
 uncommon_modifier = SubResource("Resource_qpm05")
 rare_modifier = SubResource("Resource_gj635")
