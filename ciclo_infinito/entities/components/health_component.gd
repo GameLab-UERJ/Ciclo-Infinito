@@ -9,7 +9,7 @@ signal died
 signal changed_health(current_health : float)
 
 
-@export var max_health: float = 120.0
+@export var max_health: float = 120.0 : set = _set_max_health
 @export var damage_taken_effect_duration: float = 0.3
 @export var invinciblity_duration : float = 0
 @export var color_of_damage: COLOR_DAMAGE = COLOR_DAMAGE.Red
@@ -17,7 +17,7 @@ signal changed_health(current_health : float)
 @export var sprite: CanvasItem
 
 
-var current_health : float
+var current_health : float: set = _set_current_health
 var is_invincible = false
 
 
@@ -36,6 +36,7 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 	if is_invincible:
 		return
 	
+	#print(parent.name,' took ',damage_amount,'. current health changed from ',current_health,' to ', clamp(current_health - damage_amount, 0.0, max_health)," [max_health=",max_health,"]")
 	current_health = clamp(current_health - damage_amount, 0.0, max_health)
 	changed_health.emit(current_health)
 	
@@ -105,3 +106,19 @@ func start_invincibility(duration: float, is_dash : bool = false) -> void:
 		parent.set_deferred("collision_mask",parent.collision_mask^24)
 	
 	is_invincible = false
+
+
+func _set_max_health(value : float) -> void:
+	#print('old max_health: ',max_health," new max_health: ",value)
+	var difference : float = value - max_health
+	max_health = value
+	if difference > 0:
+		current_health += difference
+	else:
+		current_health = min(current_health, max_health)
+	update_health_bar()
+
+
+func _set_current_health(value : float) -> void:
+	#print('old current_health: ',current_health,' new current_health: ',value)
+	current_health = value

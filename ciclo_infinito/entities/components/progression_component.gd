@@ -70,19 +70,23 @@ func _ready() -> void:
 func recalculate_final_attributes() -> CharacterAttributes:
 	var result = base_attributes.duplicate_attributes()
 	
+	#print('result(vit) pre-equips: ',result.vitality)
 	# Equipamentos:
 	for slot in equipped_items:
 		var item: EquipmentItem = equipped_items[slot]
 		if item and item.modifier:
 			result.apply_modifier(item.modifier)
 	
+	#print('result(vit) pre-boons: ',result.vitality)
 	# Dadivas:
 	for boon in boons:
 		if boon:
+			#print('applied boon(vit): ',boon.common_modifier.vitality)
 			# Aplica o modificador correspondente (padrão ou raridade definida)
 			if boon.common_modifier:
 				result.apply_modifier(boon.common_modifier)
 	
+	#print('result(vit) pre-mods: ',result.vitality)
 	# Modificadores Avulsos / Temporarios:
 	for mod in modifiers:
 		if mod:
@@ -90,6 +94,7 @@ func recalculate_final_attributes() -> CharacterAttributes:
 			
 	final_attributes = result
 	attributes_updated.emit(final_attributes)
+	#print("[",get_parent().name,"] final_attributes: ",final_attributes.vitality)
 	return final_attributes
 
 
