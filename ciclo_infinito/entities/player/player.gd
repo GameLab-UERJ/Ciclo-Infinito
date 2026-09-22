@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-@export var max_health: float = 25.0:
+@export var max_health: float = 120:
 	set(value):
 		max_health = value
 		if health_component:
@@ -107,10 +107,7 @@ func _setup_progression_component() -> void:
 
 func _on_attributes_updated(final_attrs: CharacterAttributes) -> void:
 	if final_attrs and health_component:
-		max_health = final_attrs.vitality
-		health_component.max_health = final_attrs.vitality
-		health_component.current_health = min(health_component.current_health, health_component.max_health)
-		health_component.update_health_bar()
+		max_health = final_attrs.vitality * 5
 
 
 func _physics_process(_delta: float) -> void:
