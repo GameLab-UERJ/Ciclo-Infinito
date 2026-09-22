@@ -31,6 +31,7 @@ var equipped_items: Dictionary = {
 }
 
 var boons: Array[Boon] = []
+var rarities: Array[String] = [] ## Each is a tring os either 'common','uncommon','rare' or 'legendary'
 
 var final_attributes: CharacterAttributes
 
@@ -79,12 +80,23 @@ func recalculate_final_attributes() -> CharacterAttributes:
 	
 	#print('result(vit) pre-boons: ',result.vitality)
 	# Dadivas:
-	for boon in boons:
+	var boon : Boon 
+	var rarity : String	
+	for i in len(boons):
+		boon = boons[i]
+		rarity = rarities[i]
 		if boon:
 			#print('applied boon(vit): ',boon.common_modifier.vitality)
 			# Aplica o modificador correspondente (padrão ou raridade definida)
-			if boon.common_modifier:
-				result.apply_modifier(boon.common_modifier)
+			match rarity:
+				'common':
+					result.apply_modifier(boon.common_modifier)
+				'uncommon':
+					result.apply_modifier(boon.uncommon_modifier)
+				'rare':
+					result.apply_modifier(boon.rare_modifier)
+				'legendary':
+					result.apply_modifier(boon.legendary_modifier)
 	
 	#print('result(vit) pre-mods: ',result.vitality)
 	# Modificadores Avulsos / Temporarios:
@@ -95,6 +107,12 @@ func recalculate_final_attributes() -> CharacterAttributes:
 	final_attributes = result
 	attributes_updated.emit(final_attributes)
 	#print("[",get_parent().name,"] final_attributes: ",final_attributes.vitality)
+	if get_parent() is Player:
+		print("final_attributes:")
+		print("strength: ",final_attributes.strength)
+		print("magic: ",final_attributes.magic)
+		print("resistance: ",final_attributes.resistance)
+		print("vitality: ",final_attributes.vitality)
 	return final_attributes
 
 
@@ -126,10 +144,12 @@ func unequip_item(slot: EquipmentItem.Slot) -> EquipmentItem:
 # ==============================================================================
 # GERENCIAMENTO DE DADIVAS E MODIFICADORES
 # ==============================================================================
-func add_boon(boon: Boon) -> void:
+func add_boon(boon: Boon, rarity : String = 'common') -> void:
 	if boon == null:
 		return
 	boons.append(boon)
+	rarities.append(rarity)
+	print('added ',boon.name.to_upper())
 	recalculate_final_attributes()
 
 
