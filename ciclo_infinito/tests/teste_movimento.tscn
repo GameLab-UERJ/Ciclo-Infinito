@@ -219,3 +219,5 @@ position = Vector2(-30.491943, 157.56412)
 
 [node name="GolemWhite" parent="." unique_id=349012999 instance=ExtResource("8_as8l1")]
 position = Vector2(193.11609, 294.6571)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1943298734]
