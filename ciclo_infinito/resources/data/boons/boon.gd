@@ -36,9 +36,9 @@ func apply_statuses_to(	body : CharacterBody2D,
 			else:
 				affecting = "Enemy"
 		status.init(creator, affecting, duration, level)
-		print(status.name)
+		#print(status.name)
 		var aux = body.get_node_or_null(""+status.name)
-		print("aux: ",aux)
+		#print("aux: ",aux)
 		if aux:
 			aux.level += 1
 		else:
