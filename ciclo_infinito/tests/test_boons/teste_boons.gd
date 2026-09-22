@@ -21,6 +21,8 @@ func _process(_delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("ui_accept"):
+		if boon_picker:
+			return
 		boon_picker = load("res://menus/boons/boon_picker.tscn").instantiate()
 		boon_picker.debug = true
 		boon_picker.guaranteed_boons = [load("res://resources/data/boons/marie_curie/radium_blade.tres")]
