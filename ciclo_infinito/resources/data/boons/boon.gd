@@ -3,7 +3,7 @@ class_name Boon
 
 
 enum AffectedSkill {PASSIVE, ATTACK, DASH, DASH_ATTACK, RANGED, SPECIAL}
-enum StatusName {RADIATION}
+enum StatusName {RADIATION, DECAY}
 
 
 @export var name : String
@@ -48,6 +48,8 @@ func apply_statuses_to(	body : CharacterBody2D,
 func get_status_scene(status_name : StatusName) -> Status:
 	match status_name:
 		StatusName.RADIATION:
-			return load("res://entities/status/radiation_status.tscn").instantiate()
+			return load("uid://cl836qfutxtxw").instantiate()
+		StatusName.DECAY:
+			return load("uid://j4ehnh8camj8").instantiate()
 	push_error("status_name: ",status_name, " not known to Boon.get_status_scene")
 	return null
