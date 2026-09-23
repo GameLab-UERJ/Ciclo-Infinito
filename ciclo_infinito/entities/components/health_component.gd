@@ -33,7 +33,7 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 							 parent.is_in_state("Dialogue")):
 		return 
 	
-	if is_invincible:
+	if is_invincible or parent.is_dead:
 		return
 	
 	#print(parent.name,' took ',damage_amount,'. current health changed from ',current_health,' to ', clamp(current_health - damage_amount, 0.0, max_health)," [max_health=",max_health,"]")
@@ -52,6 +52,22 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 	
 	if current_health <= 0.0:
 		die()
+
+## Takes damage based on a 'percentage' (0.0 <= percentage <= 1.0) of the health.
+## If 'from_max_health' is true, than damage == 'percentage' * max_health.
+## Otherwise, damage == 'percentage' * max_health.
+func take_damage_by_percentage(percentage : float, from_max_health : bool = true) -> void:
+	if percentage < 0:
+		push_warning('take_damage_by_percentage received negative percentage ('+str(percentage)+')')
+		return 
+	
+	if percentage > 1:
+		percentage = 1
+	
+	var damage : float = round(current_health * percentage)
+	if from_max_health:
+		damage = round(max_health *  percentage)
+	take_damage(max(damage,1))
 
 
 func applies_damage_received_effect() -> void:
