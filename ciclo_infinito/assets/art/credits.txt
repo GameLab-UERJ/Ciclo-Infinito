@@ -1,1 +1,2 @@
-Radiation Status adapted from https://frostwindz.itch.io/pixel-art-vfx-smoke-dust-free-version
+gabriel-adpt_frostwindz-radiation.png adapted from https://frostwindz.itch.io/pixel-art-vfx-smoke-dust-free-version
+gabriel-adpt_frostwindz-decay.png adapted from https://frostwindz.itch.io/pixel-art-skill-animations-lightning
