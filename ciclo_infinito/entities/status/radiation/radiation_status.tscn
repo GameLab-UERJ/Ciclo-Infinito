@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cl836qfutxtxw"]
 
 [ext_resource type="Script" uid="uid://bcev61ih7ldrc" path="res://entities/status/radiation/radiation_status.gd" id="1_7xerd"]
-[ext_resource type="Texture2D" uid="uid://0ssjosmt4jmq" path="res://assets/art/status/radiation.png" id="2_tjmne"]
+[ext_resource type="Texture2D" uid="uid://0ssjosmt4jmq" path="res://assets/art/status/gabriel-adpt_frostwindz-radiation.png" id="2_tjmne"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84mpv"]
 atlas = ExtResource("2_tjmne")

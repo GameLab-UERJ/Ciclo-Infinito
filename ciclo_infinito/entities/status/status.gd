@@ -7,6 +7,7 @@ class_name Status
 @export var duration : float
 @export var level : int:
 	set(value):
+		#print(value)
 		level = value
 		if not level:
 			queue_free()
@@ -31,5 +32,12 @@ func _ready() -> void:
 	duration_timer.start(duration)
 
 
+## Is called right before queue_free(). Must be overriden by subclasses.
+func on_ending_lifetime() -> void:
+	push_warning("["+self.get_class()+"] Doing nothing on_ending_lifetime()")
+	pass
+
+
 func _on_duration_timer_timeout() -> void:
+	on_ending_lifetime()
 	queue_free()

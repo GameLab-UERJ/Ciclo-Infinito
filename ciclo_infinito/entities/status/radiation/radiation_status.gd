@@ -21,10 +21,11 @@ func _ready() -> void:
 
 
 func calculate_damage() -> float:
+	var damage_from_magic : int = 0
 	if created_by and created_by.has_node("ProgressionComponent"):
-		return ceil(created_by.get_node("ProgressionComponent").final_attributes.magic * level * 0.2)
+		damage_from_magic = ceil(created_by.get_node("ProgressionComponent").final_attributes.magic * level * 0.2)
 	
-	return 1  
+	return max(damage_from_magic,1*level)  
 
 
 func _on_body_entered(body: Node2D) -> void:
