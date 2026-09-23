@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://j4ehnh8camj8"]
+
+[ext_resource type="Script" uid="uid://byvjc104rrcmk" path="res://entities/status/decay/decay_status.gd" id="1_vi01s"]
+[ext_resource type="Texture2D" uid="uid://bi3c15eknrl3" path="res://assets/art/status/gabriel-adpt_frostwindz-decay.png" id="2_vi01s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spm5r"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0gpap"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijkyv"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7xtug"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mcpln"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sv34t"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6le2j"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiy22"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cqqq1"]
+atlas = ExtResource("2_vi01s")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fdm2o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spm5r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0gpap")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijkyv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7xtug")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mcpln")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sv34t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6le2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wiy22")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqqq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqqq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqqq1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cqqq1")
+}],
+"loop": 2,
+"name": &"default",
+"speed": 15.0
+}]
+
+[node name="DecayStatus" type="Node2D" unique_id=1593967149]
+script = ExtResource("1_vi01s")
+metadata/_custom_type_script = "uid://bcpnf0qwpmngg"
+
+[node name="Animation" type="AnimatedSprite2D" parent="." unique_id=1318057958]
+position = Vector2(0, -16)
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_fdm2o")
+autoplay = "default"
+frame_progress = 0.19894831
+
+[node name="ApplyTimer" type="Timer" parent="." unique_id=72974272]
+autostart = true
+
+[connection signal="timeout" from="ApplyTimer" to="." method="_on_apply_timer_timeout"]
