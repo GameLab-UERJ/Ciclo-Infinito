@@ -1,0 +1,76 @@
+[gd_scene format=3 uid="uid://cl836qfutxtxw"]
+
+[ext_resource type="Script" uid="uid://bcev61ih7ldrc" path="res://entities/status/radiation/radiation_status.gd" id="1_7xerd"]
+[ext_resource type="Texture2D" uid="uid://0ssjosmt4jmq" path="res://assets/art/status/gabriel-adpt_frostwindz-radiation.png" id="2_tjmne"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_84mpv"]
+atlas = ExtResource("2_tjmne")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ee5p3"]
+atlas = ExtResource("2_tjmne")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hnem"]
+atlas = ExtResource("2_tjmne")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_etkvo"]
+atlas = ExtResource("2_tjmne")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apikw"]
+atlas = ExtResource("2_tjmne")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fdm2o"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_84mpv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ee5p3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hnem")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_etkvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apikw")
+}],
+"loop": 2,
+"name": &"default",
+"speed": 5.68
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3c2fn"]
+radius = 25.0
+height = 80.0
+
+[node name="RadiationStatus" type="Node2D" unique_id=1416679694]
+script = ExtResource("1_7xerd")
+metadata/_custom_type_script = "uid://bcev61ih7ldrc"
+
+[node name="Animation" type="AnimatedSprite2D" parent="." unique_id=154069958]
+position = Vector2(-1, -15)
+sprite_frames = SubResource("SpriteFrames_fdm2o")
+autoplay = "default"
+frame_progress = 0.5267213
+
+[node name="Area2D" type="Area2D" parent="." unique_id=42217579]
+collision_layer = 0
+collision_mask = 42
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1447252040]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_3c2fn")
+
+[node name="DamageTimer" type="Timer" parent="." unique_id=1940876462]
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_body_exited"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timer_timeout"]

@@ -20,7 +20,7 @@ var player_ref: Player = null
 var player_in_attack_range : bool = false
 var attack_area: Area2D
 var detect_area: Area2D
-var alive: bool = true
+var is_dead: bool = false
 
 @onready var colision_shape: CollisionShape2D = $Colisiondano
 @onready var attack_sfx: AudioStreamPlayer2D = $attack_sfx
@@ -54,7 +54,7 @@ func apply_attack_damage() -> void:
 
 func die() -> void:
 	defeated.emit()
-	alive = false
+	is_dead = true
 	
 	state_machine_manager.die()
 	colision_shape.set_deferred("disabled",true)

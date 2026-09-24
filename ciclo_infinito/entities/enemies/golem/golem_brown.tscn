@@ -1343,7 +1343,7 @@ metadata/_custom_type_script = "uid://b0a5jr6vjdf1x"
 [node name="HealthComponent" type="Node" parent="." unique_id=767524277 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
 unique_name_in_owner = true
 script = ExtResource("2_f65k0")
-max_health = 50.0
+max_health = 200.0
 damage_recieved_sfx = NodePath("../DamageRecievedSFX")
 sprite = NodePath("../texture")
 
