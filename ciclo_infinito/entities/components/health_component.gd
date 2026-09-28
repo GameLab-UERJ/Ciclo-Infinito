@@ -9,7 +9,7 @@ signal died
 signal changed_health(current_health : float)
 
 
-@export var max_health: float = 120.0
+@export var max_health: float = 120.0 : set = _set_max_health
 @export var damage_taken_effect_duration: float = 0.3
 @export var invinciblity_duration : float = 0
 @export var color_of_damage: COLOR_DAMAGE = COLOR_DAMAGE.Red
@@ -17,7 +17,7 @@ signal changed_health(current_health : float)
 @export var sprite: CanvasItem
 
 
-var current_health : float
+var current_health : float: set = _set_current_health
 var is_invincible = false
 
 
@@ -33,9 +33,10 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 							 parent.is_in_state("Dialogue")):
 		return 
 	
-	if is_invincible:
+	if is_invincible or parent.is_dead:
 		return
 	
+	#print(parent.name,' took ',damage_amount,'. current health changed from ',current_health,' to ', clamp(current_health - damage_amount, 0.0, max_health)," [max_health=",max_health,"]")
 	current_health = clamp(current_health - damage_amount, 0.0, max_health)
 	changed_health.emit(current_health)
 	
@@ -51,6 +52,22 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 	
 	if current_health <= 0.0:
 		die()
+
+## Takes damage based on a 'percentage' (0.0 <= percentage <= 1.0) of the health.
+## If 'from_max_health' is true, than damage == 'percentage' * max_health.
+## Otherwise, damage == 'percentage' * max_health.
+func take_damage_by_percentage(percentage : float, from_max_health : bool = true) -> void:
+	if percentage < 0:
+		push_warning('take_damage_by_percentage received negative percentage ('+str(percentage)+')')
+		return 
+	
+	if percentage > 1:
+		percentage = 1
+	
+	var damage : float = round(current_health * percentage)
+	if from_max_health:
+		damage = round(max_health *  percentage)
+	take_damage(max(damage,1))
 
 
 func applies_damage_received_effect() -> void:
@@ -105,3 +122,19 @@ func start_invincibility(duration: float, is_dash : bool = false) -> void:
 		parent.set_deferred("collision_mask",parent.collision_mask^24)
 	
 	is_invincible = false
+
+
+func _set_max_health(value : float) -> void:
+	#print('old max_health: ',max_health," new max_health: ",value)
+	var difference : float = value - max_health
+	max_health = value
+	if difference > 0:
+		current_health += difference
+	else:
+		current_health = min(current_health, max_health)
+	update_health_bar()
+
+
+func _set_current_health(value : float) -> void:
+	#print('old current_health: ',current_health,' new current_health: ',value)
+	current_health = value

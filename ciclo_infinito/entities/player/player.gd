@@ -1,7 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
-@export var max_health: float = 25.0:
+@export var max_health: float = 120:
 	set(value):
 		max_health = value
 		if health_component:
@@ -107,10 +107,7 @@ func _setup_progression_component() -> void:
 
 func _on_attributes_updated(final_attrs: CharacterAttributes) -> void:
 	if final_attrs and health_component:
-		max_health = final_attrs.vitality
-		health_component.max_health = final_attrs.vitality
-		health_component.current_health = min(health_component.current_health, health_component.max_health)
-		health_component.update_health_bar()
+		max_health = final_attrs.vitality * 5
 
 
 func _physics_process(_delta: float) -> void:
@@ -184,6 +181,9 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 	var final_strength: float = 10.0
 	if progression:
 		final_strength = progression.get_final_attributes().strength
+		for boon in progression.boons:
+			if boon.affected_skill.has(Boon.AffectedSkill.ATTACK):
+				boon.apply_statuses_to(body,self,10,1)
 		
 	var damage_amount: float = 0.0
 	if combo_step == 1:
@@ -192,7 +192,7 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 		damage_amount = attack2_damage + (final_strength * 1.3)
 	elif combo_step == 3:
 		damage_amount = attack1_damage + (final_strength * 1.5)
-		
+	
 	if damage_amount > 0.0:
 		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
 		body.get_node("HealthComponent").take_damage(damage_amount, knockback_direction)

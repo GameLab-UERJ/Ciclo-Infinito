@@ -16,6 +16,9 @@ signal boon_picked(boon : Boon, rarity : String)
 @export_range(0,100,0.5) var uncommon_chance : float	= 30
 @export_range(0,100,0.5) var rare_chance : float		= 20
 @export_range(0,100,0.5) var legendary_chance : float 	= 10
+@export_group("Debug")
+@export var debug : bool = false
+@export var guaranteed_boons : Array[Boon]
 
 var chosen_boons : Array[Boon]
 var chosen_rarity : Array[String]
@@ -47,6 +50,10 @@ func _set_boons() -> void:
 	for i in 3:
 		chosen_rarity.append(Util.choice(['common','uncommon','rare','legendary'],[common_chance, uncommon_chance, rare_chance, legendary_chance]))
 	
+	if debug:
+		for i in min(len(chosen_boons),len(guaranteed_boons)):
+			chosen_boons[i] = guaranteed_boons[i]
+	
 	for i in len(chosen_boons):
 		await _enable_boon(boon_buttons_parent.get_child(i),i)
 
@@ -71,12 +78,12 @@ func _disable_boon(boon_button : Button) -> void:
 	boon_button.disabled = true
 
 
-func pick_boon(position : int) -> Boon:
-	if position < 0 or position >= len(chosen_boons):
+func pick_boon(pos : int) -> Boon:
+	if pos < 0 or pos >= len(chosen_boons):
 		push_error("Out of range for pick_boon in "+str(self))
 		return null
-	boon_picked.emit(chosen_boons[position],chosen_rarity[position])
-	return chosen_boons[position]
+	boon_picked.emit(chosen_boons[pos],chosen_rarity[pos])
+	return chosen_boons[pos]
 
 
 func _on_boon_1_pressed() -> void:

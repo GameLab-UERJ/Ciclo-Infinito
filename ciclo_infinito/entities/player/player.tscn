@@ -44,6 +44,122 @@
 [ext_resource type="Script" uid="uid://4232jtglqdwl" path="res://entities/components/progression_component.gd" id="34_progression"]
 [ext_resource type="Resource" uid="uid://c8j17qf6w7pmu" path="res://resources/data/uriam_base_attributes.tres" id="35_uriam_attrs"]
 
+[sub_resource type="Resource" id="Resource_g3pa7"]
+script = ExtResource("31_geky7")
+name = "Cutscene"
+metadata/graph_offset = Vector2(859, 672.5)
+
+[sub_resource type="Resource" id="Resource_2h0qb"]
+script = ExtResource("31_geky7")
+name = "Dead"
+metadata/graph_offset = Vector2(1106, 372.5)
+
+[sub_resource type="Resource" id="Resource_mmk7k"]
+script = ExtResource("31_geky7")
+name = "Dialogue"
+metadata/graph_offset = Vector2(863, 52.5)
+
+[sub_resource type="Resource" id="Resource_pacje"]
+script = ExtResource("31_geky7")
+name = "Enabled"
+metadata/graph_offset = Vector2(866, 372.5)
+
+[sub_resource type="Resource" id="Resource_r633c"]
+script = ExtResource("31_geky7")
+name = "Entry"
+metadata/graph_offset = Vector2(606, 372.5)
+
+[sub_resource type="Resource" id="Resource_p22ii"]
+script = ExtResource("33_qwspa")
+name = "cutscene_ended"
+
+[sub_resource type="Resource" id="Resource_a2brg"]
+script = ExtResource("32_qwspa")
+from = "Cutscene"
+to = "Enabled"
+conditions = {
+"cutscene_ended": SubResource("Resource_p22ii")
+}
+
+[sub_resource type="Resource" id="Resource_q5bfg"]
+script = ExtResource("33_qwspa")
+name = "dialogue_ended"
+
+[sub_resource type="Resource" id="Resource_rtlkk"]
+script = ExtResource("32_qwspa")
+from = "Dialogue"
+to = "Enabled"
+conditions = {
+"dialogue_ended": SubResource("Resource_q5bfg")
+}
+
+[sub_resource type="Resource" id="Resource_cnswy"]
+script = ExtResource("33_qwspa")
+name = "cutscene_started"
+
+[sub_resource type="Resource" id="Resource_ssgi7"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Cutscene"
+conditions = {
+"cutscene_started": SubResource("Resource_cnswy")
+}
+
+[sub_resource type="Resource" id="Resource_arp52"]
+script = ExtResource("33_qwspa")
+name = "die"
+
+[sub_resource type="Resource" id="Resource_c112w"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Dead"
+conditions = {
+"die": SubResource("Resource_arp52")
+}
+
+[sub_resource type="Resource" id="Resource_jjk8f"]
+script = ExtResource("33_qwspa")
+name = "dialogue_started"
+
+[sub_resource type="Resource" id="Resource_u37te"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Dialogue"
+conditions = {
+"dialogue_started": SubResource("Resource_jjk8f")
+}
+
+[sub_resource type="Resource" id="Resource_7otdo"]
+script = ExtResource("32_qwspa")
+from = "Entry"
+to = "Enabled"
+
+[sub_resource type="Resource" id="Resource_qwspa"]
+script = ExtResource("30_wy7bt")
+states = {
+"Cutscene": SubResource("Resource_g3pa7"),
+"Dead": SubResource("Resource_2h0qb"),
+"Dialogue": SubResource("Resource_mmk7k"),
+"Enabled": SubResource("Resource_pacje"),
+"Entry": SubResource("Resource_r633c")
+}
+transitions = {
+"Cutscene": {
+"Enabled": SubResource("Resource_a2brg")
+},
+"Dialogue": {
+"Enabled": SubResource("Resource_rtlkk")
+},
+"Enabled": {
+"Cutscene": SubResource("Resource_ssgi7"),
+"Dead": SubResource("Resource_c112w"),
+"Dialogue": SubResource("Resource_u37te")
+},
+"Entry": {
+"Enabled": SubResource("Resource_7otdo")
+}
+}
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_govaw"]
 atlas = ExtResource("2_gt4e4")
 region = Rect2(0, 0, 96, 80)
@@ -1427,122 +1543,6 @@ animations = [{
 "speed": 8.0
 }]
 
-[sub_resource type="Resource" id="Resource_g3pa7"]
-script = ExtResource("31_geky7")
-name = "Cutscene"
-metadata/graph_offset = Vector2(859, 672.5)
-
-[sub_resource type="Resource" id="Resource_2h0qb"]
-script = ExtResource("31_geky7")
-name = "Dead"
-metadata/graph_offset = Vector2(1106, 372.5)
-
-[sub_resource type="Resource" id="Resource_mmk7k"]
-script = ExtResource("31_geky7")
-name = "Dialogue"
-metadata/graph_offset = Vector2(863, 52.5)
-
-[sub_resource type="Resource" id="Resource_pacje"]
-script = ExtResource("31_geky7")
-name = "Enabled"
-metadata/graph_offset = Vector2(866, 372.5)
-
-[sub_resource type="Resource" id="Resource_r633c"]
-script = ExtResource("31_geky7")
-name = "Entry"
-metadata/graph_offset = Vector2(606, 372.5)
-
-[sub_resource type="Resource" id="Resource_p22ii"]
-script = ExtResource("33_qwspa")
-name = "cutscene_ended"
-
-[sub_resource type="Resource" id="Resource_a2brg"]
-script = ExtResource("32_qwspa")
-from = "Cutscene"
-to = "Enabled"
-conditions = {
-"cutscene_ended": SubResource("Resource_p22ii")
-}
-
-[sub_resource type="Resource" id="Resource_q5bfg"]
-script = ExtResource("33_qwspa")
-name = "dialogue_ended"
-
-[sub_resource type="Resource" id="Resource_rtlkk"]
-script = ExtResource("32_qwspa")
-from = "Dialogue"
-to = "Enabled"
-conditions = {
-"dialogue_ended": SubResource("Resource_q5bfg")
-}
-
-[sub_resource type="Resource" id="Resource_cnswy"]
-script = ExtResource("33_qwspa")
-name = "cutscene_started"
-
-[sub_resource type="Resource" id="Resource_ssgi7"]
-script = ExtResource("32_qwspa")
-from = "Enabled"
-to = "Cutscene"
-conditions = {
-"cutscene_started": SubResource("Resource_cnswy")
-}
-
-[sub_resource type="Resource" id="Resource_arp52"]
-script = ExtResource("33_qwspa")
-name = "die"
-
-[sub_resource type="Resource" id="Resource_c112w"]
-script = ExtResource("32_qwspa")
-from = "Enabled"
-to = "Dead"
-conditions = {
-"die": SubResource("Resource_arp52")
-}
-
-[sub_resource type="Resource" id="Resource_jjk8f"]
-script = ExtResource("33_qwspa")
-name = "dialogue_started"
-
-[sub_resource type="Resource" id="Resource_u37te"]
-script = ExtResource("32_qwspa")
-from = "Enabled"
-to = "Dialogue"
-conditions = {
-"dialogue_started": SubResource("Resource_jjk8f")
-}
-
-[sub_resource type="Resource" id="Resource_7otdo"]
-script = ExtResource("32_qwspa")
-from = "Entry"
-to = "Enabled"
-
-[sub_resource type="Resource" id="Resource_qwspa"]
-script = ExtResource("30_wy7bt")
-states = {
-"Cutscene": SubResource("Resource_g3pa7"),
-"Dead": SubResource("Resource_2h0qb"),
-"Dialogue": SubResource("Resource_mmk7k"),
-"Enabled": SubResource("Resource_pacje"),
-"Entry": SubResource("Resource_r633c")
-}
-transitions = {
-"Cutscene": {
-"Enabled": SubResource("Resource_a2brg")
-},
-"Dialogue": {
-"Enabled": SubResource("Resource_rtlkk")
-},
-"Enabled": {
-"Cutscene": SubResource("Resource_ssgi7"),
-"Dead": SubResource("Resource_c112w"),
-"Dialogue": SubResource("Resource_u37te")
-},
-"Entry": {
-"Enabled": SubResource("Resource_7otdo")
-}
-}
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrjdb"]
 size = Vector2(100, 100)
 
@@ -1568,8 +1568,25 @@ damage_recieved_sfx = NodePath("../SoundEffects/DamageRecievedSFX")
 sprite = NodePath("../animacoes")
 
 [node name="ProgressionComponent" type="Node" parent="." unique_id=1892019283]
+unique_name_in_owner = true
 script = ExtResource("34_progression")
 base_attributes = ExtResource("35_uriam_attrs")
+
+[node name="BaseMachineManager" type="Node" parent="." unique_id=1761211567]
+script = ExtResource("29_13wue")
+state_machine = SubResource("Resource_qwspa")
+active = null
+autostart = null
+update_process_mode = null
+metadata/_custom_type_script = "uid://cl6riypr4akk3"
+
+[node name="EnabledStateMachineManager" type="Node" parent="BaseMachineManager" unique_id=1448619080]
+script = ExtResource("30_13wue")
+state_machine = ExtResource("32_geky7")
+active = null
+autostart = null
+update_process_mode = null
+metadata/_custom_type_script = "uid://cl6riypr4akk3"
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1059278900]
 position = Vector2(-0.90909195, -9.999992)
@@ -1589,22 +1606,6 @@ one_shot = true
 
 [node name="dash_cooldown" type="Timer" parent="." unique_id=63024105]
 one_shot = true
-
-[node name="BaseMachineManager" type="Node" parent="." unique_id=1761211567]
-script = ExtResource("29_13wue")
-state_machine = SubResource("Resource_qwspa")
-active = null
-autostart = null
-update_process_mode = null
-metadata/_custom_type_script = "uid://cl6riypr4akk3"
-
-[node name="EnabledStateMachineManager" type="Node" parent="BaseMachineManager" unique_id=1448619080]
-script = ExtResource("30_13wue")
-state_machine = ExtResource("32_geky7")
-active = null
-autostart = null
-update_process_mode = null
-metadata/_custom_type_script = "uid://cl6riypr4akk3"
 
 [node name="attack_area" type="Area2D" parent="." unique_id=203285202 groups=["player"]]
 collision_layer = 0
