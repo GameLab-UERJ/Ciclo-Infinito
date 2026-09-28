@@ -33,12 +33,12 @@ func apply_modifier(mod: AttributeModifier) -> void:
 	elif mod.type == AttributeModifier.Type.MULTIPLIER:
 		#print('multiplier')
 		@warning_ignore("incompatible_ternary")
-		strength *= mod.strength if mod.strength != 0 else 1.0
+		strength *= 1 + (mod.strength/100.0)
 		@warning_ignore("incompatible_ternary")
-		magic *= mod.magic if mod.magic != 0 else 1.0
-		resistance *= mod_res if mod_res != 0 else 1.0
+		magic *= 1 + (mod.magic/100.0)
+		resistance *= 1 + (mod_res/100.0)
 		@warning_ignore("incompatible_ternary")
-		vitality *= mod.vitality if mod.vitality != 0 else 1.0
+		vitality *= 1 + (mod.vitality/100.0)
 
 
 func reset_to(other: CharacterAttributes) -> void:
