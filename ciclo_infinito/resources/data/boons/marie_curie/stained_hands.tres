@@ -4,20 +4,24 @@
 [ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attributes/attribute_modifier.gd" id="1_bilap"]
 [ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_0fecd"]
 
-[sub_resource type="Resource" id="Resource_aytkb"]
+[sub_resource type="Resource" id="Resource_1kde1"]
 script = ExtResource("1_bilap")
+magic = 1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_xy2v4"]
 script = ExtResource("1_bilap")
+magic = 10
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_0fecd"]
 script = ExtResource("1_bilap")
+magic = 6
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_bilap"]
 script = ExtResource("1_bilap")
+magic = 3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [resource]
@@ -26,7 +30,8 @@ name = "Mãos Manchadas"
 description = "Efeitos de Irradiação têm chance de se propagar para um inimigo adicionalpróximo ao atingir o acúmulo máximo.Mãos Manchadas II – Maior chance de propagação."
 sage = ExtResource("2_0fecd")
 affected_skill = Array[int]([0])
-common_modifier = SubResource("Resource_aytkb")
+applied_statuses = Array[int]([0])
+common_modifier = SubResource("Resource_1kde1")
 uncommon_modifier = SubResource("Resource_bilap")
 rare_modifier = SubResource("Resource_0fecd")
 legendary_modifier = SubResource("Resource_xy2v4")

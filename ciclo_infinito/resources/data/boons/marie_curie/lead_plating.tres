@@ -31,6 +31,7 @@ script = ExtResource("1_aie8t")
 name = "Blindagem de Chumbo"
 description = "Resista a uma parte do dano causado por inimigos afetadospor Irradiação ou Decaimento.Blindagem de Chumbo II – Resistência ainda maior."
 sage = ExtResource("2_r7ehk")
+affected_skill = Array[int]([0])
 common_modifier = SubResource("Resource_bphol")
 uncommon_modifier = SubResource("Resource_vlnwe")
 rare_modifier = SubResource("Resource_r7ehk")

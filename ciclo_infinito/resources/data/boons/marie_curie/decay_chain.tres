@@ -6,18 +6,34 @@
 
 [sub_resource type="Resource" id="Resource_1a0ou"]
 script = ExtResource("1_7wuss")
+strength = 1
+resistence = 1
+magic = 1
+vitality = 1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_oym0c"]
 script = ExtResource("1_7wuss")
+strength = 5
+resistence = 5
+magic = 5
+vitality = 5
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_uwohf"]
 script = ExtResource("1_7wuss")
+strength = 3
+resistence = 3
+magic = 3
+vitality = 3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_7wuss"]
 script = ExtResource("1_7wuss")
+strength = 2
+resistence = 2
+magic = 2
+vitality = 2
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [resource]
@@ -26,6 +42,7 @@ name = "Cadeia de Decaimento"
 description = "Inimigos com Irradiação também sofrem Decaimento (perda progressiva dedefesa).Cadeia de Decaimento II – Decaimento reduz ainda mais a defesa."
 sage = ExtResource("2_uwohf")
 affected_skill = Array[int]([0])
+applied_statuses = Array[int]([1])
 common_modifier = SubResource("Resource_1a0ou")
 uncommon_modifier = SubResource("Resource_7wuss")
 rare_modifier = SubResource("Resource_uwohf")

@@ -6,26 +6,28 @@
 
 [sub_resource type="Resource" id="Resource_odp2k"]
 script = ExtResource("1_6vrda")
-strength = 3
-magic = 2
+strength = 10
+magic = 3
+vitality = -6
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_qdnda"]
 script = ExtResource("1_6vrda")
-strength = 13
-magic = 8
+strength = 28
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_bcay3"]
 script = ExtResource("1_6vrda")
-strength = 8
-magic = 5
+strength = 21
+magic = 10
+vitality = -1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_6vrda"]
 script = ExtResource("1_6vrda")
-strength = 5
-magic = 3
+strength = 15
+magic = 6
+vitality = -3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [resource]

@@ -6,18 +6,22 @@
 
 [sub_resource type="Resource" id="Resource_8q7ri"]
 script = ExtResource("1_ybol6")
+resistence = 1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_a76oh"]
 script = ExtResource("1_ybol6")
+resistence = 5
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_bwojj"]
 script = ExtResource("1_ybol6")
+resistence = 3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_ybol6"]
 script = ExtResource("1_ybol6")
+resistence = 2
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [resource]
@@ -26,6 +30,7 @@ name = "Legado Silencioso"
 description = "Inimigos derrotados liberam uma nuvem de partículas que aplica Irradiação aosinimigos próximos.Legado Silencioso II – Maior raio da nuvem."
 sage = ExtResource("2_bwojj")
 affected_skill = Array[int]([0])
+applied_statuses = Array[int]([0])
 common_modifier = SubResource("Resource_8q7ri")
 uncommon_modifier = SubResource("Resource_ybol6")
 rare_modifier = SubResource("Resource_bwojj")

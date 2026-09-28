@@ -6,18 +6,26 @@
 
 [sub_resource type="Resource" id="Resource_kpx0x"]
 script = ExtResource("1_cy276")
+resistence = 1
+magic = 1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_ovblq"]
 script = ExtResource("1_cy276")
+resistence = 5
+magic = 10
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_jrtnt"]
 script = ExtResource("1_cy276")
+resistence = 3
+magic = 6
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_cy276"]
 script = ExtResource("1_cy276")
+resistence = 2
+magic = 3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [resource]
@@ -26,6 +34,7 @@ name = "Corpo em Chamas"
 description = "Após sofrer dano, emita uma aura de radiação ao redor que aplica Irradiação atodos os inimigos próximos por um curto período.Corpo em Chamas II – Aura dura mais tempo."
 sage = ExtResource("2_jrtnt")
 affected_skill = Array[int]([0])
+applied_statuses = Array[int]([0])
 common_modifier = SubResource("Resource_kpx0x")
 uncommon_modifier = SubResource("Resource_cy276")
 rare_modifier = SubResource("Resource_jrtnt")

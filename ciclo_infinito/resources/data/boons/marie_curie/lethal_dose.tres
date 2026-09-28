@@ -10,14 +10,26 @@ metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_hkjho"]
 script = ExtResource("1_ub2rk")
+strength = 4
+resistence = 4
+magic = 4
+vitality = 4
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_fnj0l"]
 script = ExtResource("1_ub2rk")
+strength = 2
+resistence = 2
+magic = 2
+vitality = 2
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_ub2rk"]
 script = ExtResource("1_ub2rk")
+strength = 1
+resistence = 1
+magic = 1
+vitality = 1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [resource]

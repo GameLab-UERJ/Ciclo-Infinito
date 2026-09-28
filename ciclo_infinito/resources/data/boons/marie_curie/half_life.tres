@@ -6,18 +6,22 @@
 
 [sub_resource type="Resource" id="Resource_scu6c"]
 script = ExtResource("1_bbgba")
+magic = 1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_mumi0"]
 script = ExtResource("1_bbgba")
+magic = 10
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_mp4cs"]
 script = ExtResource("1_bbgba")
+magic = 6
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_bbgba"]
 script = ExtResource("1_bbgba")
+magic = 3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [resource]

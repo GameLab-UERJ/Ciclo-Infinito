@@ -16,12 +16,12 @@ metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_s1ctu"]
 script = ExtResource("1_c08ts")
-resistence = 4
+resistence = 6
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_c08ts"]
 script = ExtResource("1_c08ts")
-resistence = 2
+resistence = 3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [resource]
@@ -29,7 +29,8 @@ script = ExtResource("1_f0l7n")
 name = "Rastro do Isótopo"
 description = "Seu Dash deixa um rastro brilhante no chão que aplica Irradiação aos inimigosque pisam nele.Rastro do Isótopo II – Rastro mais largo."
 sage = ExtResource("2_xu6tq")
-affected_skill = Array[int]([3])
+affected_skill = Array[int]([2])
+applied_statuses = Array[int]([0])
 common_modifier = SubResource("Resource_d6rj0")
 uncommon_modifier = SubResource("Resource_c08ts")
 rare_modifier = SubResource("Resource_s1ctu")
