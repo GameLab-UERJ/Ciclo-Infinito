@@ -1,6 +1,5 @@
+extends Character
 class_name BaseEnemy
-extends CharacterBody2D
-
 
 signal defeated ##Contador para a tela de vitória
 

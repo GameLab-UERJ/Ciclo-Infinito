@@ -1,5 +1,5 @@
+extends Character
 class_name Player
-extends CharacterBody2D
 
 @export var max_health: float = 120:
 	set(value):
