@@ -1571,6 +1571,7 @@ sprite = NodePath("../animacoes")
 unique_name_in_owner = true
 script = ExtResource("34_progression")
 base_attributes = ExtResource("35_uriam_attrs")
+modifiers = null
 
 [node name="BaseMachineManager" type="Node" parent="." unique_id=1761211567]
 script = ExtResource("29_13wue")

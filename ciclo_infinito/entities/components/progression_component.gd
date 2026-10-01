@@ -36,6 +36,7 @@ var rarities: Array[String] = [] ## Each is a tring os either 'common','uncommon
 var final_attributes: CharacterAttributes
 
 var skills: Dictionary = {}
+var bonuses: Dictionary[Bonus.Type, Array]  = {}
 
 
 const DEFAULT_BASE_ATTRIBUTES = preload("res://resources/data/uriam_base_attributes.tres")
