@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://7g67tywujalm"]
+
+[ext_resource type="Script" uid="uid://ccothyxievc51" path="res://levels/fifth_floor/fifth_floor.gd" id="1_lbg8x"]
+[ext_resource type="PackedScene" uid="uid://bbf6oefdi3vmk" path="res://levels/fifth_floor/fifth_floor_map.tscn" id="2_vnih4"]
+[ext_resource type="PackedScene" uid="uid://vxp7ft6bj5g5" path="res://levels/barrier.tscn" id="3_g7ia7"]
+[ext_resource type="PackedScene" uid="uid://sf0ngt0mifqa" path="res://entities/interactables/npcs/pedro.tscn" id="4_je4e7"]
+[ext_resource type="Resource" uid="uid://b2lai2jwynri4" path="res://dialogue/pedro.dialogue" id="5_ofng8"]
+[ext_resource type="PackedScene" uid="uid://3qoae7f6uh8o" path="res://entities/player/player.tscn" id="6_1de2q"]
+[ext_resource type="Shader" uid="uid://b4ecm70ug50ju" path="res://resources/shaders/redden.gdshader" id="7_bqw07"]
+[ext_resource type="PackedScene" uid="uid://bw0i1wy6c26yp" path="res://menus/pause/pause.tscn" id="8_uydtx"]
+[ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="9_bhj4v"]
+[ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="10_7cl33"]
+[ext_resource type="PackedScene" uid="uid://dr0s7gb32d5vh" path="res://entities/enemies/golem/golem_blue.tscn" id="12_5hbn7"]
+[ext_resource type="Script" uid="uid://cj760tcu5jn5l" path="res://systems/level/level_enemies.gd" id="12_8xgcv"]
+[ext_resource type="Script" uid="uid://c4224jltsesbk" path="res://systems/level/wave.gd" id="13_c2cp3"]
+[ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="14_lnk58"]
+[ext_resource type="Script" uid="uid://5cs7n2uiq7m6" path="res://systems/level/creature_spawn.gd" id="14_mj1lk"]
+[ext_resource type="AudioStream" uid="uid://ce378hasf2vjm" path="res://assets/music/Hades - God of the Dead - Supergiant Games (youtube).mp3" id="17_y6vog"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yw1aw"]
+size = Vector2(24, 27)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_87oky"]
+resource_local_to_scene = true
+shader = ExtResource("7_bqw07")
+shader_parameter/redden = false
+
+[sub_resource type="Resource" id="Resource_87oky"]
+script = ExtResource("14_mj1lk")
+creature_scene = ExtResource("14_lnk58")
+creature_amount = 2.0
+metadata/_custom_type_script = "uid://5cs7n2uiq7m6"
+
+[sub_resource type="Resource" id="Resource_ugk87"]
+script = ExtResource("14_mj1lk")
+creature_scene = ExtResource("12_5hbn7")
+creature_amount = 2.0
+metadata/_custom_type_script = "uid://5cs7n2uiq7m6"
+
+[sub_resource type="Resource" id="Resource_8xgcv"]
+script = ExtResource("13_c2cp3")
+wave_creatures = Array[ExtResource("14_mj1lk")]([SubResource("Resource_87oky"), SubResource("Resource_ugk87")])
+metadata/_custom_type_script = "uid://c4224jltsesbk"
+
+[node name="QuintoAndar" type="Node2D" unique_id=1838089692]
+y_sort_enabled = true
+script = ExtResource("1_lbg8x")
+
+[node name="TerrainManager" parent="." unique_id=468786021 instance=ExtResource("2_vnih4")]
+position = Vector2(-1, 45)
+
+[node name="Barreira" parent="." unique_id=1095351611 node_paths=PackedStringArray("opener_node") instance=ExtResource("3_g7ia7")]
+z_index = 1
+position = Vector2(512, 38)
+scale = Vector2(2, 2)
+opener_node = NodePath("..")
+opener_method_name = "libera_barreira"
+
+[node name="CameraFocus" type="Marker2D" parent="Barreira" unique_id=863896918]
+position = Vector2(28.170258, 1.721489)
+
+[node name="Barreira2" parent="." unique_id=1157678233 node_paths=PackedStringArray("opener_node") instance=ExtResource("3_g7ia7")]
+z_index = 1
+position = Vector2(626, 38)
+scale = Vector2(2, 2)
+opener_node = NodePath("..")
+opener_method_name = "libera_barreira"
+
+[node name="BarreiraBoss" parent="." unique_id=142702593 node_paths=PackedStringArray("opener_node") instance=ExtResource("3_g7ia7")]
+z_index = 1
+position = Vector2(76, 41)
+scale = Vector2(2, 2)
+opener_node = NodePath("..")
+opener_method_name = "libera_barreira_boss"
+
+[node name="CutsceneArea" type="Area2D" parent="." unique_id=176385997]
+position = Vector2(76, -2)
+scale = Vector2(2, 2)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CutsceneArea" unique_id=2138562383]
+position = Vector2(0.5, 8)
+shape = SubResource("RectangleShape2D_yw1aw")
+debug_color = Color(0.8475721, 0.00095953466, 0.90705407, 0.41960785)
+
+[node name="Pedro" parent="." unique_id=531889216 instance=ExtResource("4_je4e7")]
+z_index = 1
+position = Vector2(510.9, -118)
+scale = Vector2(0.6, 0.6)
+dialogo = ExtResource("5_ofng8")
+
+[node name="Label" type="Label" parent="Pedro" unique_id=312686080]
+offset_left = -26.5
+offset_top = -94.999954
+offset_right = 19.5
+offset_bottom = -71.999954
+text = "Pedro"
+
+[node name="Player" parent="." unique_id=657388149 instance=ExtResource("6_1de2q")]
+z_index = 1
+material = SubResource("ShaderMaterial_87oky")
+position = Vector2(573, -235)
+scale = Vector2(1, 1)
+
+[node name="pause" parent="Player" unique_id=318316374 instance=ExtResource("8_uydtx")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = -173.63637
+offset_top = -96.36363
+offset_right = 522.7273
+offset_bottom = 312.7273
+grow_horizontal = 1
+grow_vertical = 1
+scale = Vector2(0.5, 0.5)
+
+[node name="enemies" type="Label" parent="Player" unique_id=574180986]
+visible = false
+offset_left = -293.545
+offset_top = -140.455
+offset_right = -162.545
+offset_bottom = -117.455
+theme_override_colors/font_shadow_color = Color(0.662745, 0.027451, 0.933333, 1)
+theme_override_fonts/font = ExtResource("9_bhj4v")
+text = "Inimigos mortos:"
+
+[node name="Missions" type="TextureRect" parent="Player" unique_id=1804543002]
+offset_left = 149.90894
+offset_top = -170.63599
+offset_right = 683.90894
+offset_bottom = 114.36401
+scale = Vector2(0.284224, 0.275615)
+texture = ExtResource("10_7cl33")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="Player/Missions" unique_id=723667528]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -213.0
+offset_top = -46.5
+offset_right = 32.0
+offset_bottom = 104.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.74863, 0.959864)
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="." unique_id=683724658]
+stream = ExtResource("17_y6vog")
+volume_db = -19.299
+autoplay = true
+
+[node name="LevelEnemies" type="Node" parent="." unique_id=1372668885 node_paths=PackedStringArray("label_contador")]
+script = ExtResource("12_8xgcv")
+level_waves = Array[ExtResource("13_c2cp3")]([SubResource("Resource_8xgcv")])
+spawn_time = 5.0
+label_contador = NodePath("../Player/enemies")
+metadata/_custom_type_script = "uid://cj760tcu5jn5l"
+
+[node name="Markers" type="Node" parent="LevelEnemies" unique_id=186024415]
+
+[node name="Marker2D" type="Marker2D" parent="LevelEnemies/Markers" unique_id=2019250477]
+position = Vector2(201, 177)
+
+[node name="Marker2D1" type="Marker2D" parent="LevelEnemies/Markers" unique_id=11298265]
+position = Vector2(1115, 180)
+
+[node name="Marker2D2" type="Marker2D" parent="LevelEnemies/Markers" unique_id=1393111842]
+position = Vector2(1144, 769)
+
+[node name="Marker2D3" type="Marker2D" parent="LevelEnemies/Markers" unique_id=798941573]
+position = Vector2(213, 734)
+
+[node name="Marker2D4" type="Marker2D" parent="LevelEnemies/Markers" unique_id=818761752]
+position = Vector2(648, 453)
+
+[connection signal="finished_opening" from="Barreira" to="." method="_on_any_barreira_finished_opening"]
+[connection signal="started_opening" from="Barreira" to="." method="_on_barreira_started_opening"]
+[connection signal="finished_opening" from="BarreiraBoss" to="." method="_on_any_barreira_finished_opening"]
+[connection signal="started_opening" from="BarreiraBoss" to="." method="_on_barreira_boss_started_opening"]
+[connection signal="body_entered" from="CutsceneArea" to="." method="_on_cutscene_area_body_entered"]
