@@ -20,6 +20,21 @@ var cena_controles = preload("res://menus/controls/menu_controles.tscn")
 @onready var pressed_sfx: AudioStreamPlayer = $PressedSfx
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		if get_tree().paused:
+			if visible:
+				_on_resumebutton_pressed() # Despausa
+		else:
+			var player = get_parent()
+			if player is Player:
+				if player.get_current_base_state() != "Dialogue":
+					get_tree().paused = true
+					show()
+					if resume_button:
+						resume_button.grab_focus()
+
+
 func _ready():
 	master_idx = AudioServer.get_bus_index("Master")
 	menu_principal.show()
@@ -28,6 +43,9 @@ func _ready():
 	volume_slider.max_value = 100.0
 	volume_slider.step = 1.0
 	_update_volume_slider()
+	
+	if resume_button:
+		resume_button.grab_focus()
 
 
 func _on_resumebutton_pressed():
@@ -40,6 +58,9 @@ func _on_optionsbutton_pressed():
 	_on_any_button_pressed()
 	menu_principal.hide()
 	menu_opcoes.show()
+	
+	if volume_slider:
+		volume_slider.grab_focus()
 
 
 func _on_quitbutton_pressed():
@@ -67,6 +88,9 @@ func _on_backbutton_pressed() -> void:
 	_on_any_button_pressed()
 	menu_opcoes.hide()
 	menu_principal.show()
+	
+	if resume_button:
+		resume_button.grab_focus()
 
 
 func _update_volume_slider()-> void:
