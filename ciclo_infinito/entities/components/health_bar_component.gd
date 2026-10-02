@@ -2,11 +2,13 @@ extends Control
 class_name HealthBarComponent
 
 
-@export var bar_size : Vector2 = Vector2(30,5) :  set = _set_bar_size
-@export var is_health_bar_visible : bool = true:  set = _set_is_health_bar_visible
-@export var bar_position : Marker2D
 @export var health_component : HealthComponent
 @export var is_damage_visible : bool = true
+@export var damage_color : Color = Color.WHITE
+@export_category("Bar")
+@export var is_health_bar_visible : bool = true:  set = _set_is_health_bar_visible
+@export var bar_size : Vector2 = Vector2(30,5) :  set = _set_bar_size
+@export var bar_position : Marker2D
 
 
 var max_health: float : set = _set_max_health
@@ -45,6 +47,8 @@ func create_bars() -> void:
 	#bar.set_anchors_preset(Control.PRESET_CENTER)
 	hurt_bar = bar
 	health_bar = bar.duplicate()
+	health_bar.visible = is_health_bar_visible
+	hurt_bar.visible = is_health_bar_visible
 	add_child(hurt_bar)
 	add_child(health_bar)
 	
@@ -77,14 +81,14 @@ func show_damage(damage : float) -> void:
 	
 	match type_of_damage:
 		'TOOK DAMAGE':
-			damage_label.add_theme_color_override("font_color",Color.WHITE)
+			damage_label.add_theme_color_override("font_color",damage_color)
 		'NO DAMAGE':
 			damage_label.add_theme_color_override("font_color",Color.WHITE)
 		'HEAlED DAMAGE':
 			damage_label.add_theme_color_override("font_color",Color.WEB_GREEN)
 	
 	damage_label.text = str(int(abs(round(damage))))
-	damage_label.global_position = bar_position.global_position - Vector2.ONE*len(damage_label.text)*5/2 + Vector2(randf_range(-20,20),0)
+	damage_label.global_position = bar_position.global_position - Vector2.ONE*len(damage_label.text)*5/2 + Vector2(randf_range(-20,20),0) if bar_position else self.global_position
 	#await get_tree().create_timer(0.75).timeout
 	await create_tween().tween_property(damage_label,"global_position",damage_label.global_position + Vector2(0,-15),0.5).finished
 	damage_label.queue_free()

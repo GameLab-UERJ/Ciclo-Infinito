@@ -5,6 +5,7 @@
 [ext_resource type="Material" uid="uid://bk3kiethktv7y" path="res://resources/shaders/whiten.tres" id="2_24ehl"]
 [ext_resource type="Texture2D" uid="uid://c1ci660h2w2gl" path="res://assets/art/shadow.png" id="2_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://cw6rmtpf160hr" path="res://assets/art/player/ATTACK 1/attack1_down.png" id="2_gt4e4"]
+[ext_resource type="Script" uid="uid://b0a5jr6vjdf1x" path="res://entities/components/health_bar_component.gd" id="3_2h0qb"]
 [ext_resource type="Texture2D" uid="uid://baw5eohono6a1" path="res://assets/art/player/ATTACK 1/attack1_left.png" id="3_24ehl"]
 [ext_resource type="Texture2D" uid="uid://d4nq18t3e7kix" path="res://assets/art/player/ATTACK 1/attack1_right.png" id="4_bwdx1"]
 [ext_resource type="Texture2D" uid="uid://bd3bosxk1g8ed" path="res://assets/art/player/ATTACK 1/attack1_up.png" id="5_vewsg"]
@@ -1567,11 +1568,25 @@ color_of_damage = 1
 damage_recieved_sfx = NodePath("../SoundEffects/DamageRecievedSFX")
 sprite = NodePath("../animacoes")
 
+[node name="HealthBarComponent" type="Control" parent="." unique_id=902051370 node_paths=PackedStringArray("health_component", "bar_position")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_2h0qb")
+health_component = NodePath("../HealthComponent")
+damage_color = Color(0.84, 0.1008, 0.1008, 1)
+is_health_bar_visible = false
+bar_position = NodePath("../Marker2D")
+metadata/_custom_type_script = "uid://b0a5jr6vjdf1x"
+
+[node name="Marker2D" type="Marker2D" parent="." unique_id=1714090578]
+position = Vector2(0.1448614, -32.695534)
+
 [node name="ProgressionComponent" type="Node" parent="." unique_id=1892019283]
 unique_name_in_owner = true
 script = ExtResource("34_progression")
 base_attributes = ExtResource("35_uriam_attrs")
-modifiers = null
 
 [node name="BaseMachineManager" type="Node" parent="." unique_id=1761211567]
 script = ExtResource("29_13wue")
