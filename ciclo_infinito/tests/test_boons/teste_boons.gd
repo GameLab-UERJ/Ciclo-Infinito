@@ -27,6 +27,7 @@ func _input(event: InputEvent) -> void:
 		boon_picker.debug = true
 		boon_picker.guaranteed_boons = [load("res://resources/data/boons/marie_curie/radioactive_strike.tres")]
 		boon_picker.guaranteed_boons.append(load("res://resources/data/boons/marie_curie/radium_blade.tres"))
+		boon_picker.guaranteed_boons.append(load("res://resources/data/boons/marie_curie/lead_plating.tres"))
 		boon_picker.boon_picked.connect(_on_boon_picked)
 		boon_picker_layer.add_child(boon_picker)
 

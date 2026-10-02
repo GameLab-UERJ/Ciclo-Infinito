@@ -36,7 +36,9 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 	if is_invincible or parent.is_dead:
 		return
 	
-	#print(parent.name,' took ',damage_amount,'. current health changed from ',current_health,' to ', clamp(current_health - damage_amount, 0.0, max_health)," [max_health=",max_health,"]")
+	if parent.has_node("ProgressionComponent"):
+		damage_amount -= (parent.get_node("ProgressionComponent") as ProgressionComponent).final_attributes.resistance
+	
 	current_health = clamp(current_health - damage_amount, 0.0, max_health)
 	changed_health.emit(current_health)
 	
