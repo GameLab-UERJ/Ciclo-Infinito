@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://cp7fioxmu2oda" path="res://assets/sfx/rpg-sword-attack-combo-6-388919 (1).mp3" id="5_pcr62"]
 
 [node name="Menu de opcoes" type="Control" unique_id=1635085087]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
