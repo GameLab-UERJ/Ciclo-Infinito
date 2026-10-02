@@ -2,7 +2,8 @@ extends Node2D
 class_name Status
 
 
-@export var created_by : CharacterBody2D
+@export var status_data : StatusData
+@export var created_by : Character
 @export_enum("Player", "Enemy") var affecting : String
 @export var duration : float
 @export var level : int:

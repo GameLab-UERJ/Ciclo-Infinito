@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StatusData" format=3 uid="uid://cg5o61cva5c23"]
+
+[ext_resource type="Script" uid="uid://b2s786kmf0ndm" path="res://resources/data/status/status_data.gd" id="1_xgs2k"]
+
+[resource]
+script = ExtResource("1_xgs2k")
+name = "Decay"
+metadata/_custom_type_script = "uid://b2s786kmf0ndm"

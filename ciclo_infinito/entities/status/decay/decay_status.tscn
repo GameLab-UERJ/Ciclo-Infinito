@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://j4ehnh8camj8"]
 
 [ext_resource type="Script" uid="uid://byvjc104rrcmk" path="res://entities/status/decay/decay_status.gd" id="1_vi01s"]
+[ext_resource type="Script" uid="uid://b2s786kmf0ndm" path="res://resources/data/status/status_data.gd" id="2_spm5r"]
 [ext_resource type="Texture2D" uid="uid://bi3c15eknrl3" path="res://assets/art/status/gabriel-adpt_frostwindz-decay.png" id="2_vi01s"]
+
+[sub_resource type="Resource" id="Resource_spm5r"]
+script = ExtResource("2_spm5r")
+name = "Decay"
+metadata/_custom_type_script = "uid://b2s786kmf0ndm"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_spm5r"]
 atlas = ExtResource("2_vi01s")
@@ -85,6 +91,7 @@ animations = [{
 
 [node name="DecayStatus" type="Node2D" unique_id=1593967149]
 script = ExtResource("1_vi01s")
+status_data = SubResource("Resource_spm5r")
 metadata/_custom_type_script = "uid://bcpnf0qwpmngg"
 
 [node name="Animation" type="AnimatedSprite2D" parent="." unique_id=1318057958]

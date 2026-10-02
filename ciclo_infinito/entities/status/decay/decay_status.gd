@@ -1,4 +1,5 @@
 extends Status
+class_name DecayStatus
 
 
 @export var ticks_per_second : float = 0.5:

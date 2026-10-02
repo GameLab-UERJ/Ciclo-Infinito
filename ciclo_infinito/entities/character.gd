@@ -10,7 +10,7 @@ func has_status(status : Status) -> bool:
 	return false
 
 
-func has_bonus(bonus : Bonus, type : Bonus.Type) -> bool:
+func has_bonus(bonus : Bonus) -> bool:
 	var bonuses : Array[Bonus]		= self.find_children("*", "Bonus", true, false) as Array[Bonus]
 	for bon : Bonus in bonuses:
 		if bon.get_class() == bonus.get_class():

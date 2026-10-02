@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StatusData" format=3 uid="uid://craxu70an72gq"]
+
+[ext_resource type="Script" uid="uid://b2s786kmf0ndm" path="res://resources/data/status/status_data.gd" id="1_h48j1"]
+
+[resource]
+script = ExtResource("1_h48j1")
+name = "Radiation"
+metadata/_custom_type_script = "uid://b2s786kmf0ndm"

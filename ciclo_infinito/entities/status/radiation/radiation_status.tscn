@@ -1,7 +1,13 @@
 [gd_scene format=3 uid="uid://cl836qfutxtxw"]
 
 [ext_resource type="Script" uid="uid://bcev61ih7ldrc" path="res://entities/status/radiation/radiation_status.gd" id="1_7xerd"]
-[ext_resource type="Texture2D" uid="uid://0ssjosmt4jmq" path="res://assets/art/status/gabriel-adpt_frostwindz-radiation.png" id="2_tjmne"]
+[ext_resource type="Script" uid="uid://b2s786kmf0ndm" path="res://resources/data/status/status_data.gd" id="2_quxnr"]
+[ext_resource type="Texture2D" uid="uid://dnd1pkt58ucjs" path="res://assets/art/status/gabriel-adpt_frostwindz-radiation.png" id="2_tjmne"]
+
+[sub_resource type="Resource" id="Resource_ogduk"]
+script = ExtResource("2_quxnr")
+name = "Radiation"
+metadata/_custom_type_script = "uid://b2s786kmf0ndm"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_84mpv"]
 atlas = ExtResource("2_tjmne")
@@ -52,6 +58,7 @@ height = 80.0
 
 [node name="RadiationStatus" type="Node2D" unique_id=1416679694]
 script = ExtResource("1_7xerd")
+status_data = SubResource("Resource_ogduk")
 metadata/_custom_type_script = "uid://bcev61ih7ldrc"
 
 [node name="Animation" type="AnimatedSprite2D" parent="." unique_id=154069958]

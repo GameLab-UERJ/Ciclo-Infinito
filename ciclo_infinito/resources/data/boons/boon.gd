@@ -11,6 +11,7 @@ enum StatusName {RADIATION, DECAY}
 @export var sage : Sage
 @export var affected_skill : Array[AffectedSkill]
 @export var applied_statuses : Array[StatusName]
+@export var added_bonuses : Array[Bonus]
 @export var common_modifier : AttributeModifier
 @export var uncommon_modifier : AttributeModifier
 @export var rare_modifier : AttributeModifier
