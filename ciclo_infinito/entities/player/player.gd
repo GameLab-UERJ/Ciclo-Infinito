@@ -195,7 +195,7 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 	
 	if damage_amount > 0.0:
 		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
-		body.get_node("HealthComponent").take_damage(damage_amount, knockback_direction)
+		body.get_node("HealthComponent").take_damage(self,damage_amount, knockback_direction)
 
 
 func cast_magic_skill(skill_name: String, _target_direction: Vector2 = Vector2.ZERO) -> float:
@@ -222,7 +222,7 @@ func apply_damage_with_resistance(incoming_damage: float, knockback: Vector2 = V
 		
 	var final_damage: float = max(1.0, incoming_damage - final_res)
 	if health_component and health_component.has_method("take_damage"):
-		health_component.take_damage(final_damage, knockback)
+		health_component.take_damage(self,final_damage, knockback)
 
 
 # ACOES DA MAQUINA DE ESTADOS (EnabledStateMachineManager)

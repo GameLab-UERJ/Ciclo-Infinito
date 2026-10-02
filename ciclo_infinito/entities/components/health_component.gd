@@ -26,7 +26,7 @@ func _ready() -> void:
 	current_health = max_health
 
 
-func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
+func take_damage(source : Character, damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
 	if parent is Player and (parent.is_in_state("Dash") or 
 							 parent.is_in_state("DashAttack") or 
 							 parent.is_in_state("Dead") or 
@@ -38,6 +38,12 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 	
 	if parent.has_node("ProgressionComponent"):
 		damage_amount -= (parent.get_node("ProgressionComponent") as ProgressionComponent).final_attributes.resistance
+		if source:
+			for bonus : Bonus in (parent.get_node("ProgressionComponent") as ProgressionComponent).bonuses:
+				if bonus is BonusAgainstStatus:
+					for status_data : StatusData in bonus.statuses:
+						if source.has_status(status_data):
+							damage_amount -= bonus.attribute_bonus.resistence
 	
 	current_health = clamp(current_health - damage_amount, 0.0, max_health)
 	changed_health.emit(current_health)
@@ -58,7 +64,7 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 ## Takes damage based on a 'percentage' (0.0 <= percentage <= 1.0) of the health.
 ## If 'from_max_health' is true, than damage == 'percentage' * max_health.
 ## Otherwise, damage == 'percentage' * max_health.
-func take_damage_by_percentage(percentage : float, from_max_health : bool = true) -> void:
+func take_damage_by_percentage(source : Character, percentage : float, from_max_health : bool = true) -> void:
 	if percentage < 0:
 		push_warning('take_damage_by_percentage received negative percentage ('+str(percentage)+')')
 		return 
@@ -69,7 +75,7 @@ func take_damage_by_percentage(percentage : float, from_max_health : bool = true
 	var damage : float = round(current_health * percentage)
 	if from_max_health:
 		damage = round(max_health *  percentage)
-	take_damage(max(damage,1))
+	take_damage(source, max(damage,1))
 
 
 func applies_damage_received_effect() -> void:

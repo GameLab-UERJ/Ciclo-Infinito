@@ -45,4 +45,4 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_damage_timer_timeout() -> void:
 	for health_component in affected_health_components:
 		if health_component.get_parent() is Player and affecting == 'Player' or not health_component.get_parent() is Player and affecting == 'Enemy':
-			health_component.take_damage(calculate_damage())
+			health_component.take_damage(null,calculate_damage())

@@ -2,10 +2,10 @@ extends CharacterBody2D
 class_name Character
 
 
-func has_status(status : Status) -> bool:
+func has_status(status_data : StatusData) -> bool:
 	var statuses : Array[Status]	= self.find_children("*", "Status", true, false) as Array[Status]
 	for stat : Status in statuses:
-		if stat.get_class() == status.get_class():
+		if stat.status_data == status_data:
 			return true
 	return false
 

@@ -7,4 +7,4 @@ extends Control
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("ui_accept"):
-		health_component.take_damage(10)
+		health_component.take_damage(null,10)

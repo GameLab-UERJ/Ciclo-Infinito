@@ -1563,6 +1563,8 @@ metadata/_custom_type_script = "uid://dbg05n786rg21"
 [node name="HealthComponent" type="Node" parent="." unique_id=1599392653 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
 unique_name_in_owner = true
 script = ExtResource("2_8q4fm")
+max_health = null
+damage_taken_effect_duration = null
 invinciblity_duration = 0.5
 color_of_damage = 1
 damage_recieved_sfx = NodePath("../SoundEffects/DamageRecievedSFX")

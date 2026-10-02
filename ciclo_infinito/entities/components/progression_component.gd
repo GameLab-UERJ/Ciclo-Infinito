@@ -32,11 +32,11 @@ var equipped_items: Dictionary = {
 
 var boons: Array[Boon] = []
 var rarities: Array[String] = [] ## Each is a tring os either 'common','uncommon','rare' or 'legendary'
+var bonuses : Array[Bonus] = []
 
 var final_attributes: CharacterAttributes
 
 var skills: Dictionary = {}
-var bonuses: Dictionary[Bonus.Type, Array]  = {}
 
 
 const DEFAULT_BASE_ATTRIBUTES = preload("res://resources/data/uriam_base_attributes.tres")
@@ -150,6 +150,7 @@ func add_boon(boon: Boon, rarity : String = 'common') -> void:
 		return
 	boons.append(boon)
 	rarities.append(rarity)
+	bonuses += boon.added_bonuses
 	print('added ',boon.name.to_upper())
 	recalculate_final_attributes()
 

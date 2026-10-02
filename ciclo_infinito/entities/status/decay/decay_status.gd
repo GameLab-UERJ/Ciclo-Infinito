@@ -33,4 +33,4 @@ func _on_apply_timer_timeout() -> void:
 	for health_component : HealthComponent in affected_health_components:
 		if  health_component.get_parent() is Player and affecting == 'Player' or \
 		not health_component.get_parent() is Player and affecting == 'Enemy':
-			health_component.take_damage_by_percentage(level * 0.1,false)
+			health_component.take_damage_by_percentage(null,level * 0.1,false)
