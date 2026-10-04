@@ -11,36 +11,48 @@
 [ext_resource type="FontFile" uid="uid://dboxkasdapd73" path="res://assets/fonts/BoldPixels.ttf" id="9_bhj4v"]
 [ext_resource type="Texture2D" uid="uid://djobcv11wiaxa" path="res://assets/art/menus/hud/mission_hud.png" id="10_7cl33"]
 [ext_resource type="PackedScene" uid="uid://dr0s7gb32d5vh" path="res://entities/enemies/golem/golem_blue.tscn" id="12_5hbn7"]
-[ext_resource type="Script" uid="uid://cj760tcu5jn5l" path="res://systems/level/level_enemies.gd" id="12_8xgcv"]
+[ext_resource type="Script" uid="uid://cj760tcu5jn5l" path="res://systems/level/level_waves.gd" id="12_8xgcv"]
+[ext_resource type="Script" uid="uid://boch53d8hoi7d" path="res://systems/level/level_enemies_spawn.gd" id="12_c2cp3"]
 [ext_resource type="Script" uid="uid://c4224jltsesbk" path="res://systems/level/wave.gd" id="13_c2cp3"]
-[ext_resource type="PackedScene" uid="uid://dfda1r1btgkpl" path="res://entities/enemies/golem/golem_brown.tscn" id="14_lnk58"]
-[ext_resource type="Script" uid="uid://5cs7n2uiq7m6" path="res://systems/level/creature_spawn.gd" id="14_mj1lk"]
+[ext_resource type="Script" uid="uid://5cs7n2uiq7m6" path="res://systems/level/wave_creatures.gd" id="14_mj1lk"]
 [ext_resource type="AudioStream" uid="uid://ce378hasf2vjm" path="res://assets/music/Hades - God of the Dead - Supergiant Games (youtube).mp3" id="17_y6vog"]
+[ext_resource type="PackedScene" uid="uid://c80omegwkn2ei" path="res://entities/enemies/beholder/beholder_white.tscn" id="18_fxx3g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yw1aw"]
 size = Vector2(24, 27)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_87oky"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fxx3g"]
 resource_local_to_scene = true
 shader = ExtResource("7_bqw07")
 shader_parameter/redden = false
 
-[sub_resource type="Resource" id="Resource_87oky"]
-script = ExtResource("14_mj1lk")
-creature_scene = ExtResource("14_lnk58")
-creature_amount = 2.0
-metadata/_custom_type_script = "uid://5cs7n2uiq7m6"
-
-[sub_resource type="Resource" id="Resource_ugk87"]
+[sub_resource type="Resource" id="Resource_mj1lk"]
 script = ExtResource("14_mj1lk")
 creature_scene = ExtResource("12_5hbn7")
 creature_amount = 2.0
 metadata/_custom_type_script = "uid://5cs7n2uiq7m6"
 
-[sub_resource type="Resource" id="Resource_8xgcv"]
+[sub_resource type="Resource" id="Resource_c2cp3"]
 script = ExtResource("13_c2cp3")
-wave_creatures = Array[ExtResource("14_mj1lk")]([SubResource("Resource_87oky"), SubResource("Resource_ugk87")])
+wave_creatures = Array[ExtResource("14_mj1lk")]([SubResource("Resource_mj1lk")])
 metadata/_custom_type_script = "uid://c4224jltsesbk"
+
+[sub_resource type="Resource" id="Resource_fxx3g"]
+script = ExtResource("14_mj1lk")
+creature_scene = ExtResource("18_fxx3g")
+creature_amount = 2.0
+metadata/_custom_type_script = "uid://5cs7n2uiq7m6"
+
+[sub_resource type="Resource" id="Resource_ugk87"]
+script = ExtResource("13_c2cp3")
+wave_creatures = Array[ExtResource("14_mj1lk")]([SubResource("Resource_fxx3g")])
+metadata/_custom_type_script = "uid://c4224jltsesbk"
+
+[sub_resource type="Resource" id="Resource_weaoe"]
+script = ExtResource("12_8xgcv")
+spawn_time = 2.0
+waves = Array[ExtResource("13_c2cp3")]([SubResource("Resource_c2cp3"), SubResource("Resource_ugk87")])
+metadata/_custom_type_script = "uid://cj760tcu5jn5l"
 
 [node name="QuintoAndar" type="Node2D" unique_id=1838089692]
 y_sort_enabled = true
@@ -98,7 +110,7 @@ text = "Pedro"
 
 [node name="Player" parent="." unique_id=657388149 instance=ExtResource("6_1de2q")]
 z_index = 1
-material = SubResource("ShaderMaterial_87oky")
+material = SubResource("ShaderMaterial_fxx3g")
 position = Vector2(573, -235)
 scale = Vector2(1, 1)
 
@@ -153,28 +165,27 @@ stream = ExtResource("17_y6vog")
 volume_db = -19.299
 autoplay = true
 
-[node name="LevelEnemies" type="Node" parent="." unique_id=1372668885 node_paths=PackedStringArray("label_contador")]
-script = ExtResource("12_8xgcv")
-level_waves = Array[ExtResource("13_c2cp3")]([SubResource("Resource_8xgcv")])
-spawn_time = 5.0
+[node name="LevelEnemiesSpawn" type="Node" parent="." unique_id=1199601129 node_paths=PackedStringArray("label_contador")]
+script = ExtResource("12_c2cp3")
+level_waves = SubResource("Resource_weaoe")
 label_contador = NodePath("../Player/enemies")
-metadata/_custom_type_script = "uid://cj760tcu5jn5l"
+metadata/_custom_type_script = "uid://boch53d8hoi7d"
 
-[node name="Markers" type="Node" parent="LevelEnemies" unique_id=186024415]
+[node name="Markers" type="Node" parent="LevelEnemiesSpawn" unique_id=186024415]
 
-[node name="Marker2D" type="Marker2D" parent="LevelEnemies/Markers" unique_id=2019250477]
+[node name="Marker2D" type="Marker2D" parent="LevelEnemiesSpawn/Markers" unique_id=2019250477]
 position = Vector2(201, 177)
 
-[node name="Marker2D1" type="Marker2D" parent="LevelEnemies/Markers" unique_id=11298265]
+[node name="Marker2D1" type="Marker2D" parent="LevelEnemiesSpawn/Markers" unique_id=11298265]
 position = Vector2(1115, 180)
 
-[node name="Marker2D2" type="Marker2D" parent="LevelEnemies/Markers" unique_id=1393111842]
+[node name="Marker2D2" type="Marker2D" parent="LevelEnemiesSpawn/Markers" unique_id=1393111842]
 position = Vector2(1144, 769)
 
-[node name="Marker2D3" type="Marker2D" parent="LevelEnemies/Markers" unique_id=798941573]
+[node name="Marker2D3" type="Marker2D" parent="LevelEnemiesSpawn/Markers" unique_id=798941573]
 position = Vector2(213, 734)
 
-[node name="Marker2D4" type="Marker2D" parent="LevelEnemies/Markers" unique_id=818761752]
+[node name="Marker2D4" type="Marker2D" parent="LevelEnemiesSpawn/Markers" unique_id=818761752]
 position = Vector2(648, 453)
 
 [connection signal="finished_opening" from="Barreira" to="." method="_on_any_barreira_finished_opening"]

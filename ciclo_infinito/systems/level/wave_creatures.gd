@@ -1,5 +1,5 @@
 extends Resource
-class_name CreatureSpawn
+class_name WaveCreatures
 
 ## Creature to spawn
 @export var creature_scene: PackedScene
