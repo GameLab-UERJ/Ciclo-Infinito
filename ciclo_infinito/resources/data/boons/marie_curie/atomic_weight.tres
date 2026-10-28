@@ -1,0 +1,40 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://dhqrmswucubss"]
+
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_nmefv"]
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_y4rmy"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_eko7x"]
+
+[sub_resource type="Resource" id="Resource_x08oe"]
+script = ExtResource("1_nmefv")
+strength = 1
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_yej5t"]
+script = ExtResource("1_nmefv")
+strength = 5
+magic = 3
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_eko7x"]
+script = ExtResource("1_nmefv")
+strength = 3
+magic = 2
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_nmefv"]
+script = ExtResource("1_nmefv")
+strength = 2
+magic = 1
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_y4rmy")
+name = "Peso Atômico"
+description = "Seu ataque causa mais danos contra inimigos com acúmulos altos de Irradiação.Peso Atômico II – Bônus de dano maior."
+sage = ExtResource("2_eko7x")
+affected_skill = Array[int]([1, 2, 4, 5, 6])
+common_modifier = SubResource("Resource_x08oe")
+uncommon_modifier = SubResource("Resource_nmefv")
+rare_modifier = SubResource("Resource_eko7x")
+legendary_modifier = SubResource("Resource_yej5t")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"

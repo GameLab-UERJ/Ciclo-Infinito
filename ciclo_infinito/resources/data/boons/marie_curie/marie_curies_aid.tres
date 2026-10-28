@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://cwfw2t8amd2id"]
+
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_eutt4"]
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_yrypu"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_1jy7p"]
+
+[sub_resource type="Resource" id="Resource_o31px"]
+script = ExtResource("1_yrypu")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_gpgdk"]
+script = ExtResource("1_yrypu")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_uebom"]
+script = ExtResource("1_yrypu")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_p5d3w"]
+script = ExtResource("1_yrypu")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_eutt4")
+name = "Auxílio de Marie Curie"
+description = "Seu Chamado libera uma onda massiva de energia radiante queaplica Irradiação máxima e Decaimento a todos os inimigos na sala por váriossegundos.Carga menor: versão reduzida em área ao redor do jogador."
+sage = ExtResource("2_1jy7p")
+affected_skill = Array[int]([6])
+common_modifier = SubResource("Resource_o31px")
+uncommon_modifier = SubResource("Resource_p5d3w")
+rare_modifier = SubResource("Resource_uebom")
+legendary_modifier = SubResource("Resource_gpgdk")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"

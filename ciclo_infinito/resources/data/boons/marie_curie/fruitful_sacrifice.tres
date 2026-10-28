@@ -1,0 +1,41 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://c07yyko41320f"]
+
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_2b82s"]
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_6vrda"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_bcay3"]
+
+[sub_resource type="Resource" id="Resource_odp2k"]
+script = ExtResource("1_6vrda")
+strength = 3
+magic = 2
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_qdnda"]
+script = ExtResource("1_6vrda")
+strength = 13
+magic = 8
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_bcay3"]
+script = ExtResource("1_6vrda")
+strength = 8
+magic = 5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_6vrda"]
+script = ExtResource("1_6vrda")
+strength = 5
+magic = 3
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_2b82s")
+name = "Sacrifício Frutífero"
+description = "Você causa mais dano geral, mas perde uma pequena quantidade de Saúde porsegundo para cada inimigo atualmente afetado por Irradiação.Sacrifício Frutífero II – Dano causado é ainda maior (o custo de vida se mantém)."
+sage = ExtResource("2_bcay3")
+affected_skill = Array[int]([0])
+common_modifier = SubResource("Resource_odp2k")
+uncommon_modifier = SubResource("Resource_6vrda")
+rare_modifier = SubResource("Resource_bcay3")
+legendary_modifier = SubResource("Resource_qdnda")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"

@@ -1,0 +1,45 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://ds3nybqss20um"]
+
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_b5a8v"]
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_gb7dg"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_vtnsp"]
+
+[sub_resource type="Resource" id="Resource_s6sre"]
+script = ExtResource("1_gb7dg")
+type = 1
+strength = 3
+vitality = -10
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_3np5g"]
+script = ExtResource("1_gb7dg")
+type = 1
+strength = 10
+magic = 5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_vtnsp"]
+script = ExtResource("1_gb7dg")
+type = 1
+strength = 7
+vitality = -5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_gb7dg"]
+script = ExtResource("1_gb7dg")
+type = 1
+strength = 5
+vitality = -8
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_b5a8v")
+name = "Núcleo Instável"
+description = "Seu ataque lança um projétil que atravessa inimigos e deixa um rastro luminoso,aplicando Irradiação a quem tocar o rastro.Núcleo Instável II – O rastro dura mais tempo."
+sage = ExtResource("2_vtnsp")
+affected_skill = Array[int]([1])
+common_modifier = SubResource("Resource_s6sre")
+uncommon_modifier = SubResource("Resource_gb7dg")
+rare_modifier = SubResource("Resource_vtnsp")
+legendary_modifier = SubResource("Resource_3np5g")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"

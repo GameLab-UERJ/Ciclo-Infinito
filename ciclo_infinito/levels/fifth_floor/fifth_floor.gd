@@ -120,13 +120,13 @@ func _on_barreira_boss_started_opening() -> void:
 func _on_cutscene_area_body_entered(body: Node2D) -> void:
 	if not body is Player:
 		return
-	player.current_state = player.State.CUTSCENE	
+	player.enter_cutscene()	
 	mission_label.text = "Todas as missões concluídas!"
 	var tween : Tween = create_tween()
 	tween.tween_property(player.anim,"scale",Vector2.ZERO,1)
 	tween.parallel().tween_property(player.shadow,"scale",Vector2.ZERO,1)
 	await tween.parallel().tween_property(player.footsteps_sfx,"volume_db",-50,1).finished
-	player.current_state = player.State.DIALOG
+	player.enter_dialogue()
 	SceneTransition.fade_out()
 	var boss_scene = load("uid://laif38pcjfq7").instantiate()
 	await get_tree().create_timer(1.5).timeout

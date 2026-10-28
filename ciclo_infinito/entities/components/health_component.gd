@@ -27,9 +27,10 @@ func _ready() -> void:
 
 
 func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
-	if parent is Player and (parent.current_state == parent.State.DASH or 
-							 parent.current_state == parent.State.DEATH or 
-							 parent.current_state == parent.State.DIALOG):
+	if parent is Player and (parent.is_in_state("Dash") or 
+							 parent.is_in_state("DashAttack") or 
+							 parent.is_in_state("Dead") or 
+							 parent.is_in_state("Dialogue")):
 		return 
 	
 	if is_invincible:
@@ -77,12 +78,8 @@ func die() -> void:
 	if not (parent is Player):
 		return
 	
-	parent.is_dead = true
-	parent.current_state = parent.State.DEATH
 	parent.collision_layer = 0
-	
-	parent.update_animation()
-	parent.death_sfx.play(0.3)
+	parent.die()
 	
 	await get_tree().create_timer(2.0).timeout
 	await SceneTransition.fade_out()

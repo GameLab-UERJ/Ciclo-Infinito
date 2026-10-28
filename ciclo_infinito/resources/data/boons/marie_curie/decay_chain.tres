@@ -1,0 +1,33 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://0mks26stdbuh"]
+
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_7wuss"]
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_ec24s"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_uwohf"]
+
+[sub_resource type="Resource" id="Resource_1a0ou"]
+script = ExtResource("1_7wuss")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_oym0c"]
+script = ExtResource("1_7wuss")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_uwohf"]
+script = ExtResource("1_7wuss")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_7wuss"]
+script = ExtResource("1_7wuss")
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_ec24s")
+name = "Cadeia de Decaimento"
+description = "Inimigos com Irradiação também sofrem Decaimento (perda progressiva dedefesa).Cadeia de Decaimento II – Decaimento reduz ainda mais a defesa."
+sage = ExtResource("2_uwohf")
+affected_skill = Array[int]([0])
+common_modifier = SubResource("Resource_1a0ou")
+uncommon_modifier = SubResource("Resource_7wuss")
+rare_modifier = SubResource("Resource_uwohf")
+legendary_modifier = SubResource("Resource_oym0c")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"

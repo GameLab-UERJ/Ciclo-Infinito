@@ -1,0 +1,38 @@
+[gd_resource type="Resource" script_class="Boon" format=3 uid="uid://5k7od6gds25"]
+
+[ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_aie8t"]
+[ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attribute_modifier.gd" id="1_vlnwe"]
+[ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_r7ehk"]
+
+[sub_resource type="Resource" id="Resource_bphol"]
+script = ExtResource("1_vlnwe")
+resistence = 3
+vitality = -5
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_oov0m"]
+script = ExtResource("1_vlnwe")
+resistence = 12
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_r7ehk"]
+script = ExtResource("1_vlnwe")
+resistence = 8
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[sub_resource type="Resource" id="Resource_vlnwe"]
+script = ExtResource("1_vlnwe")
+resistence = 5
+vitality = -2
+metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
+
+[resource]
+script = ExtResource("1_aie8t")
+name = "Blindagem de Chumbo"
+description = "Resista a uma parte do dano causado por inimigos afetadospor Irradiação ou Decaimento.Blindagem de Chumbo II – Resistência ainda maior."
+sage = ExtResource("2_r7ehk")
+common_modifier = SubResource("Resource_bphol")
+uncommon_modifier = SubResource("Resource_vlnwe")
+rare_modifier = SubResource("Resource_r7ehk")
+legendary_modifier = SubResource("Resource_oov0m")
+metadata/_custom_type_script = "uid://he3d4nihbgsy"
