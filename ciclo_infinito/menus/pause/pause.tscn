@@ -9,7 +9,7 @@
 bg_color = Color(0.46666667, 0.007843138, 0.91764706, 1)
 
 [node name="Control" type="Control" unique_id=204471871]
-process_mode = 2
+process_mode = 3
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 3
 anchors_preset = 15
