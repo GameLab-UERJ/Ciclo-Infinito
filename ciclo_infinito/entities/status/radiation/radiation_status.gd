@@ -20,7 +20,7 @@ func _ready() -> void:
 	damage_ticks_per_second = damage_ticks_per_second
 
 
-func calculate_damage() -> float:
+func calculate_damage(body : Character) -> float:
 	var damage_from_magic : int = 0
 	if created_by and created_by.has_node("ProgressionComponent"):
 		damage_from_magic = ceil(created_by.get_node("ProgressionComponent").final_attributes.magic * level * 0.2)
@@ -45,4 +45,4 @@ func _on_body_exited(body: Node2D) -> void:
 func _on_damage_timer_timeout() -> void:
 	for health_component in affected_health_components:
 		if health_component.get_parent() is Player and affecting == 'Player' or not health_component.get_parent() is Player and affecting == 'Enemy':
-			health_component.take_damage(null,calculate_damage())
+			health_component.take_damage(null,calculate_damage(health_component.get_parent()))

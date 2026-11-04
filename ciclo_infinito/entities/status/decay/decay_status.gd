@@ -24,7 +24,6 @@ func _ready() -> void:
 func reduce_resistance() -> float:
 	if get_parent().has_node("ProgressionComponent"):
 		return ceil(get_parent().get_node("ProgressionComponent").final_attributes.resistance * (1-level * 0.1))
-	
 	return 1  
 
 

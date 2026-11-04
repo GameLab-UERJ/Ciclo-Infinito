@@ -48,7 +48,11 @@ func apply_attack_damage() -> void:
 	for body in bodies_in_area:
 		if body.has_node("HealthComponent"):
 			var hit_direction := (body.global_position - global_position).normalized()
-			body.health_component.take_damage(self,attack_damage, hit_direction)
+			body.health_component.take_damage(self,calculate_damage(body), hit_direction)
+
+
+func calculate_damage(body : Character) -> float:
+	return attack_damage
 
 
 func die() -> void:

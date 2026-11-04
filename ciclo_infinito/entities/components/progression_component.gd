@@ -66,9 +66,7 @@ func _ready() -> void:
 	recalculate_final_attributes()
 
 
-# ==============================================================================
-# CALCULO DOS ATRIBUTOS: Status Base -> Equipamentos -> Dádivas -> Status Finais
-# ==============================================================================
+#region CALCULO DOS ATRIBUTOS: Status Base -> Equipamentos -> Dádivas -> Status Finais
 func recalculate_final_attributes() -> CharacterAttributes:
 	var result = base_attributes.duplicate_attributes()
 	
@@ -121,11 +119,10 @@ func get_final_attributes() -> CharacterAttributes:
 	if final_attributes == null:
 		recalculate_final_attributes()
 	return final_attributes
+#endregion
 
 
-# ==============================================================================
-# GERENCIAMENTO DE EQUIPAMENTOS
-# ==============================================================================
+#region GERENCIAMENTO DE EQUIPAMENTOS
 func equip_item(item: EquipmentItem) -> EquipmentItem:
 	if item == null:
 		return null
@@ -140,11 +137,9 @@ func unequip_item(slot: EquipmentItem.Slot) -> EquipmentItem:
 	equipped_items[slot] = null
 	recalculate_final_attributes()
 	return old_item
+#endregion
 
-
-# ==============================================================================
-# GERENCIAMENTO DE DADIVAS E MODIFICADORES
-# ==============================================================================
+#region GERENCIAMENTO DE DADIVAS E MODIFICADORES
 func add_boon(boon: Boon, rarity : String = 'common') -> void:
 	if boon == null:
 		return
@@ -165,12 +160,9 @@ func add_modifier(mod: AttributeModifier) -> void:
 func remove_modifier(mod: AttributeModifier) -> void:
 	modifiers.erase(mod)
 	recalculate_final_attributes()
+#endregion
 
-
-# ==============================================================================
-# SISTEMA DE HABILIDADES
-# Permite desbloquear ou modificar habilidades sem alterar a maquina de estados
-# ==============================================================================
+#region SISTEMA DE HABILIDADES
 func register_skill(skill_name: String, skill_data: Dictionary) -> void:
 	skills[skill_name] = skill_data
 	skill_unlocked.emit(skill_name)
@@ -188,7 +180,7 @@ func modify_skill(skill_name: String, key: String, value: Variant) -> void:
 	if skills.has(skill_name):
 		skills[skill_name][key] = value
 		skill_modified.emit(skill_name, key, value)
-
+#endregion
 
 # Exemplo de execucao centralizada de habilidade magica que escala com Magia
 func get_magic_damage(base_power: float = 10.0, multiplier: float = 1.0) -> float:
