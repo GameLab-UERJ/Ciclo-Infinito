@@ -7,9 +7,10 @@ enum COLOR_DAMAGE{Red, White}
 
 signal died
 signal changed_health(current_health : float)
+signal changed_max_health(max_health : float)
 
 
-@export var max_health: float = 120.0
+@export var max_health: float = 120.0 : set = _set_max_health
 @export var damage_taken_effect_duration: float = 0.3
 @export var invinciblity_duration : float = 0
 @export var color_of_damage: COLOR_DAMAGE = COLOR_DAMAGE.Red
@@ -17,7 +18,7 @@ signal changed_health(current_health : float)
 @export var sprite: CanvasItem
 
 
-var current_health : float
+var current_health : float: set = _set_current_health
 var is_invincible = false
 
 
@@ -26,20 +27,23 @@ func _ready() -> void:
 	current_health = max_health
 
 
-func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
+func take_damage(source : Character, damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
 	if parent is Player and (parent.is_in_state("Dash") or 
 							 parent.is_in_state("DashAttack") or 
 							 parent.is_in_state("Dead") or 
 							 parent.is_in_state("Dialogue")):
 		return 
 	
-	if is_invincible:
+	if is_invincible or parent.is_dead:
 		return
+	
+	if parent.has_node("ProgressionComponent"):
+		damage_amount = parent.get_node("ProgressionComponent").apply_damage_reduction(source,damage_amount)
 	
 	current_health = clamp(current_health - damage_amount, 0.0, max_health)
 	changed_health.emit(current_health)
 	
-	update_health_bar()
+	update_health_bar()#HAS TO BE ALTERED TO USE HEALTHBARCOMPONENT
 	
 	var knockback_force: float = 350.0
 	parent.velocity = hit_direction * knockback_force
@@ -51,6 +55,22 @@ func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) ->
 	
 	if current_health <= 0.0:
 		die()
+
+## Takes damage based on a 'percentage' (0.0 <= percentage <= 1.0) of the health.
+## If 'from_max_health' is true, than damage == 'percentage' * max_health.
+## Otherwise, damage == 'percentage' * max_health.
+func take_damage_by_percentage(source : Character, percentage : float, from_max_health : bool = true) -> void:
+	if percentage < 0:
+		push_warning('take_damage_by_percentage received negative percentage ('+str(percentage)+')')
+		return 
+	
+	if percentage > 1:
+		percentage = 1
+	
+	var damage : float = round(current_health * percentage)
+	if from_max_health:
+		damage = round(max_health *  percentage)
+	take_damage(source, max(damage,1))
 
 
 func applies_damage_received_effect() -> void:
@@ -105,3 +125,19 @@ func start_invincibility(duration: float, is_dash : bool = false) -> void:
 		parent.set_deferred("collision_mask",parent.collision_mask^24)
 	
 	is_invincible = false
+
+
+func _set_max_health(value : float) -> void:
+	var difference : float = value - max_health
+	max_health = value
+	if difference > 0:
+		current_health += difference
+	else:
+		current_health = min(current_health, max_health)
+	update_health_bar()
+	changed_max_health.emit(max_health)
+
+
+func _set_current_health(value : float) -> void:
+	#print('old current_health: ',current_health,' new current_health: ',value)
+	current_health = value

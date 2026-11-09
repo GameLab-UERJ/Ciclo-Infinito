@@ -1,11 +1,11 @@
+extends Character
 class_name Player
-extends CharacterBody2D
 
-@export var max_health: float = 25.0:
+@export var base_attributes: CharacterAttributes:
 	set(value):
-		max_health = value
-		if health_component:
-			health_component.max_health = max_health
+		base_attributes = value
+		if progression:
+			progression.base_attributes = base_attributes
 
 @export var attack1_damage: float = 5.0 ## Dano base do 1º golpe (escalará com Força)
 @export var attack2_damage: float = 5.0 ## Dano base do 2º golpe (escalará com Força)
@@ -73,7 +73,7 @@ var vida_textures = [
 @onready var footsteps_sfx: AudioStreamPlayer2D = $SoundEffects/FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
 @onready var shadow: Sprite2D = $Shadow
-@onready var health_component: Node = %HealthComponent
+@onready var health_component: HealthComponent = %HealthComponent
 
 # Nodes da Maquina de Estados
 @onready var base_machine_manager: BasePlayerStateMachineManager = get_node_or_null("BaseMachineManager")
@@ -85,6 +85,7 @@ var vida_textures = [
 func _ready() -> void:
 	_setup_progression_component()
 	dash_timer.wait_time = dash_duracao
+	base_attributes = base_attributes
 	
 	if not dash_timer.timeout.is_connected(_on_dash_timer_timeout):
 		dash_timer.timeout.connect(_on_dash_timer_timeout)
@@ -100,17 +101,6 @@ func _setup_progression_component() -> void:
 		progression = ProgressionComponent.new()
 		progression.name = "ProgressionComponent"
 		add_child(progression)
-	
-	progression.attributes_updated.connect(_on_attributes_updated)
-	_on_attributes_updated(progression.get_final_attributes())
-
-
-func _on_attributes_updated(final_attrs: CharacterAttributes) -> void:
-	if final_attrs and health_component:
-		max_health = final_attrs.vitality
-		health_component.max_health = final_attrs.vitality
-		health_component.current_health = min(health_component.current_health, health_component.max_health)
-		health_component.update_health_bar()
 
 
 func _physics_process(_delta: float) -> void:
@@ -181,10 +171,22 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 	if not body.has_node("HealthComponent"):
 		return
 	
-	var final_strength: float = 10.0
+	var damage_amount: float = calculate_damage(body)
+	
+	if damage_amount > 0.0:
+		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
+		body.get_node("HealthComponent").take_damage(self,damage_amount, knockback_direction)
+
+
+func calculate_damage(body : Character) -> float:
+	var final_strength: float = attack1_damage
+	
 	if progression:
 		final_strength = progression.get_final_attributes().strength
-		
+		for boon in progression.boons:
+			if boon.affected_skill.has(Boon.AffectedSkill.ATTACK):
+				boon.apply_statuses_to(body,self,10,1)
+	
 	var damage_amount: float = 0.0
 	if combo_step == 1:
 		damage_amount = attack1_damage + (final_strength * 1.0)
@@ -192,37 +194,7 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 		damage_amount = attack2_damage + (final_strength * 1.3)
 	elif combo_step == 3:
 		damage_amount = attack1_damage + (final_strength * 1.5)
-		
-	if damage_amount > 0.0:
-		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
-		body.get_node("HealthComponent").take_damage(damage_amount, knockback_direction)
-
-
-func cast_magic_skill(skill_name: String, _target_direction: Vector2 = Vector2.ZERO) -> float:
-	if progression == null:
-		return 0.0
-	var magic_dmg = progression.get_magic_damage(15.0, 1.0)
-	if progression.has_skill(skill_name):
-		var skill_info = progression.get_skill(skill_name)
-		var school = skill_info.get("school", "Tesla")
-		match school:
-			"Tesla":
-				pass
-			"Newtoniana":
-				pass
-			"Curie":
-				pass
-	return magic_dmg
-
-
-func apply_damage_with_resistance(incoming_damage: float, knockback: Vector2 = Vector2.ZERO) -> void:
-	var final_res: float = 0.0
-	if progression:
-		final_res = progression.get_final_attributes().resistance
-		
-	var final_damage: float = max(1.0, incoming_damage - final_res)
-	if health_component and health_component.has_method("take_damage"):
-		health_component.take_damage(final_damage, knockback)
+	return damage_amount
 
 
 # ACOES DA MAQUINA DE ESTADOS (EnabledStateMachineManager)
@@ -473,3 +445,10 @@ func _on_animacoes_animation_finished() -> void:
 	if anim.animation.begins_with("dash"):
 		if enabled_machine_manager:
 			enabled_machine_manager.notify_dash_finished()
+
+
+func _on_progression_component_attributes_updated(final_attributes: CharacterAttributes) -> void:
+	if not health_component or health_component.max_health == final_attributes.vitality*5:
+		return
+	
+	health_component.max_health = final_attributes.vitality*5
