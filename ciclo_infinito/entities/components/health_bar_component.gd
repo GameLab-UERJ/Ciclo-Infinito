@@ -21,6 +21,7 @@ func _ready() -> void:
 	
 	max_health = health_component.max_health
 	health_component.changed_health.connect(change_health)
+	health_component.changed_max_health.connect(_set_max_health)
 	health_component.died.connect(hide)
 	
 	if bar_position:
@@ -78,7 +79,7 @@ func show_damage(damage : float) -> void:
 		type_of_damage = 'HEAlED DAMAGE'
 	elif damage > 0:  
 		type_of_damage = 'TOOK DAMAGE'
-	
+	print(str(damage)+ ' ' + type_of_damage)
 	match type_of_damage:
 		'TOOK DAMAGE':
 			damage_label.add_theme_color_override("font_color",damage_color)

@@ -1,11 +1,11 @@
 extends Character
 class_name Player
 
-@export var max_health: float = 120:
+@export var base_attributes: CharacterAttributes:
 	set(value):
-		max_health = value
-		if health_component:
-			health_component.max_health = max_health
+		base_attributes = value
+		if progression:
+			progression.base_attributes = base_attributes
 
 @export var attack1_damage: float = 5.0 ## Dano base do 1º golpe (escalará com Força)
 @export var attack2_damage: float = 5.0 ## Dano base do 2º golpe (escalará com Força)
@@ -73,7 +73,7 @@ var vida_textures = [
 @onready var footsteps_sfx: AudioStreamPlayer2D = $SoundEffects/FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
 @onready var shadow: Sprite2D = $Shadow
-@onready var health_component: Node = %HealthComponent
+@onready var health_component: HealthComponent = %HealthComponent
 
 # Nodes da Maquina de Estados
 @onready var base_machine_manager: BasePlayerStateMachineManager = get_node_or_null("BaseMachineManager")
@@ -85,6 +85,7 @@ var vida_textures = [
 func _ready() -> void:
 	_setup_progression_component()
 	dash_timer.wait_time = dash_duracao
+	base_attributes = base_attributes
 	
 	if not dash_timer.timeout.is_connected(_on_dash_timer_timeout):
 		dash_timer.timeout.connect(_on_dash_timer_timeout)
@@ -100,14 +101,6 @@ func _setup_progression_component() -> void:
 		progression = ProgressionComponent.new()
 		progression.name = "ProgressionComponent"
 		add_child(progression)
-	
-	progression.attributes_updated.connect(_on_attributes_updated)
-	_on_attributes_updated(progression.get_final_attributes())
-
-
-func _on_attributes_updated(final_attrs: CharacterAttributes) -> void:
-	if final_attrs and health_component:
-		max_health = final_attrs.vitality * 5
 
 
 func _physics_process(_delta: float) -> void:
@@ -452,3 +445,10 @@ func _on_animacoes_animation_finished() -> void:
 	if anim.animation.begins_with("dash"):
 		if enabled_machine_manager:
 			enabled_machine_manager.notify_dash_finished()
+
+
+func _on_progression_component_attributes_updated(final_attributes: CharacterAttributes) -> void:
+	if not health_component or health_component.max_health == final_attributes.vitality*5:
+		return
+	
+	health_component.max_health = final_attributes.vitality*5

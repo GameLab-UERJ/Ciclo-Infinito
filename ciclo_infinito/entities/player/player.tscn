@@ -1560,11 +1560,14 @@ script = ExtResource("1_wq0jh")
 dash_duracao = 0.1
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
+[node name="ProgressionComponent" type="Node" parent="." unique_id=1892019283]
+unique_name_in_owner = true
+script = ExtResource("34_progression")
+base_attributes = ExtResource("35_uriam_attrs")
+
 [node name="HealthComponent" type="Node" parent="." unique_id=1599392653 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
 unique_name_in_owner = true
 script = ExtResource("2_8q4fm")
-max_health = null
-damage_taken_effect_duration = null
 invinciblity_duration = 0.5
 color_of_damage = 1
 damage_recieved_sfx = NodePath("../SoundEffects/DamageRecievedSFX")
@@ -1584,11 +1587,6 @@ metadata/_custom_type_script = "uid://b0a5jr6vjdf1x"
 
 [node name="Marker2D" type="Marker2D" parent="." unique_id=1714090578]
 position = Vector2(0.1448614, -32.695534)
-
-[node name="ProgressionComponent" type="Node" parent="." unique_id=1892019283]
-unique_name_in_owner = true
-script = ExtResource("34_progression")
-base_attributes = ExtResource("35_uriam_attrs")
 
 [node name="BaseMachineManager" type="Node" parent="." unique_id=1761211567]
 script = ExtResource("29_13wue")
@@ -1685,6 +1683,7 @@ scale = Vector2(0.9090909, 0.9090909)
 stream = ExtResource("33_2soq1")
 volume_db = -10.0
 
+[connection signal="attributes_updated" from="ProgressionComponent" to="." method="_on_progression_component_attributes_updated"]
 [connection signal="animation_finished" from="animacoes" to="." method="_on_animacoes_animation_finished"]
 [connection signal="frame_changed" from="animacoes" to="." method="_on_animacoes_frame_changed"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]

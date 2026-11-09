@@ -7,8 +7,13 @@ signal skill_unlocked(skill_name: String)
 signal skill_modified(skill_name: String, key: String, value: Variant)
 
 # Status Base padrao
-@export var base_attributes: CharacterAttributes
-
+@export var base_attributes: CharacterAttributes:
+	set(value):
+		if not value: 
+			return
+		
+		base_attributes = value.duplicate_attributes()
+		recalculate_final_attributes()
 # Equipamentos, configuraveis via Inspector para testes
 @export_group("Equipamentos")
 @export var initial_helmet: EquipmentItem
@@ -34,7 +39,7 @@ var boons: Array[Boon] = []
 var rarities: Array[String] = [] ## Each is a tring os either 'common','uncommon','rare' or 'legendary'
 var bonuses : Array[Bonus] = []
 
-var final_attributes: CharacterAttributes
+var final_attributes: CharacterAttributes: get = get_final_attributes
 
 var skills: Dictionary = {}
 
@@ -42,6 +47,7 @@ var skills: Dictionary = {}
 const DEFAULT_BASE_ATTRIBUTES = preload("res://resources/data/uriam_base_attributes.tres")
 
 
+#region built-in functions
 func _init() -> void:
 	if base_attributes == null:
 		base_attributes = DEFAULT_BASE_ATTRIBUTES
@@ -64,7 +70,7 @@ func _ready() -> void:
 		equipped_items[EquipmentItem.Slot.ACCESSORY] = initial_accessory
 	
 	recalculate_final_attributes()
-
+#endregion
 
 #region CALCULO DOS ATRIBUTOS: Status Base -> Equipamentos -> Dádivas -> Status Finais
 func recalculate_final_attributes() -> CharacterAttributes:
@@ -112,6 +118,7 @@ func recalculate_final_attributes() -> CharacterAttributes:
 		print("magic: ",final_attributes.magic)
 		print("resistance: ",final_attributes.resistance)
 		print("vitality: ",final_attributes.vitality)
+	
 	return final_attributes
 
 
@@ -119,8 +126,18 @@ func get_final_attributes() -> CharacterAttributes:
 	if final_attributes == null:
 		recalculate_final_attributes()
 	return final_attributes
-#endregion
 
+
+func apply_damage_reduction(source : Character, damage_amount : float) -> float:
+	damage_amount -= final_attributes.resistance
+	if source:
+		for bonus : Bonus in bonuses:
+			if bonus is BonusAgainstStatus:
+				for status_data : StatusData in bonus.statuses:
+					if source.has_status(status_data):
+						damage_amount -= bonus.attribute_bonus.resistence
+	return max(0,damage_amount)
+#endregion
 
 #region GERENCIAMENTO DE EQUIPAMENTOS
 func equip_item(item: EquipmentItem) -> EquipmentItem:
@@ -181,7 +198,3 @@ func modify_skill(skill_name: String, key: String, value: Variant) -> void:
 		skills[skill_name][key] = value
 		skill_modified.emit(skill_name, key, value)
 #endregion
-
-# Exemplo de execucao centralizada de habilidade magica que escala com Magia
-func get_magic_damage(base_power: float = 10.0, multiplier: float = 1.0) -> float:
-	return (base_power + get_final_attributes().magic * 1.5) * multiplier

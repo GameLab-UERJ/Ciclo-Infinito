@@ -3,4 +3,4 @@ class_name BonusAgainstStatus
 
 
 @export var attribute_bonus : AttributeModifier
-@export var statuses : StatusData
+@export var statuses : Array[StatusData]

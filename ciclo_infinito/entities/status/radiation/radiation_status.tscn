@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bcev61ih7ldrc" path="res://entities/status/radiation/radiation_status.gd" id="1_7xerd"]
 [ext_resource type="Script" uid="uid://b2s786kmf0ndm" path="res://resources/data/status/status_data.gd" id="2_quxnr"]
-[ext_resource type="Texture2D" uid="uid://dnd1pkt58ucjs" path="res://assets/art/status/gabriel-adpt_frostwindz-radiation.png" id="2_tjmne"]
+[ext_resource type="Texture2D" uid="uid://0ssjosmt4jmq" path="res://assets/art/status/gabriel-adpt_frostwindz-radiation.png" id="2_tjmne"]
 
 [sub_resource type="Resource" id="Resource_ogduk"]
 script = ExtResource("2_quxnr")

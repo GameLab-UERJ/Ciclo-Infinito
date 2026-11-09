@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Character
 class_name Boss
 
 
@@ -118,6 +118,7 @@ func damage_player() -> void:
 
 
 func calculate_damage(body : Character) -> float:
+	#return progression_component.apply_damage_reduction(body, attack_damage)
 	return attack_damage
 
 
