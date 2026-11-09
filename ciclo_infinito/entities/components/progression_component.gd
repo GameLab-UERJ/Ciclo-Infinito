@@ -135,7 +135,7 @@ func apply_damage_reduction(source : Character, damage_amount : float) -> float:
 			if bonus is BonusAgainstStatus:
 				for status_data : StatusData in bonus.statuses:
 					if source.has_status(status_data):
-						damage_amount -= bonus.attribute_bonus.resistence
+						damage_amount -= bonus.attribute_bonus.resistance
 	return max(0,damage_amount)
 #endregion
 

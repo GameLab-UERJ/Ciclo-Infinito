@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_2b82s"]
 [ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attributes/attribute_modifier.gd" id="1_6vrda"]
+[ext_resource type="Script" uid="uid://cdtckbj7jqirl" path="res://resources/data/bonus/bonus.gd" id="1_bcay3"]
 [ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_bcay3"]
 
 [sub_resource type="Resource" id="Resource_odp2k"]
@@ -14,6 +15,7 @@ metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 [sub_resource type="Resource" id="Resource_qdnda"]
 script = ExtResource("1_6vrda")
 strength = 28
+magic = 15
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_bcay3"]

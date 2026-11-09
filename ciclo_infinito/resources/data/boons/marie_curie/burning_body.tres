@@ -7,25 +7,25 @@
 
 [sub_resource type="Resource" id="Resource_kpx0x"]
 script = ExtResource("1_cy276")
-resistence = 1
+resistance = 1
 magic = 1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_ovblq"]
 script = ExtResource("1_cy276")
-resistence = 5
+resistance = 5
 magic = 10
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_jrtnt"]
 script = ExtResource("1_cy276")
-resistence = 3
+resistance = 3
 magic = 6
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 
 [sub_resource type="Resource" id="Resource_cy276"]
 script = ExtResource("1_cy276")
-resistence = 2
+resistance = 2
 magic = 3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 

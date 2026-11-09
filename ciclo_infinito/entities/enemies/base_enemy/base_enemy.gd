@@ -51,7 +51,7 @@ func apply_attack_damage() -> void:
 			body.health_component.take_damage(self,calculate_damage(body), hit_direction)
 
 
-func calculate_damage(body : Character) -> float:
+func calculate_damage(_body : Character) -> float:
 	return attack_damage
 
 

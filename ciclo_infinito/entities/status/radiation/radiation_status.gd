@@ -20,7 +20,7 @@ func _ready() -> void:
 	damage_ticks_per_second = damage_ticks_per_second
 
 
-func calculate_damage(body : Character) -> float:
+func calculate_damage(_body : Character) -> float:
 	var damage_from_magic : int = 0
 	if created_by and created_by.has_node("ProgressionComponent"):
 		damage_from_magic = ceil(created_by.get_node("ProgressionComponent").final_attributes.magic * level * 0.2)
@@ -40,6 +40,10 @@ func _on_body_exited(body: Node2D) -> void:
 		return
 	
 	affected_health_components.erase(body.health_component)
+
+
+func on_ending_lifetime() -> void:
+	pass
 
 
 func _on_damage_timer_timeout() -> void:

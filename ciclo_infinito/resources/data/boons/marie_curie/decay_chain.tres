@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://bpxatw5nx3qxk" path="res://resources/data/attributes/attribute_modifier.gd" id="1_7wuss"]
 [ext_resource type="Script" uid="uid://he3d4nihbgsy" path="res://resources/data/boons/boon.gd" id="1_ec24s"]
+[ext_resource type="Script" uid="uid://cdtckbj7jqirl" path="res://resources/data/bonus/bonus.gd" id="1_uwohf"]
 [ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_uwohf"]
 
 [sub_resource type="Resource" id="Resource_1a0ou"]
 script = ExtResource("1_7wuss")
 strength = 1
-resistence = 1
+resistance = 1
 magic = 1
 vitality = 1
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
@@ -15,7 +16,7 @@ metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 [sub_resource type="Resource" id="Resource_oym0c"]
 script = ExtResource("1_7wuss")
 strength = 5
-resistence = 5
+resistance = 5
 magic = 5
 vitality = 5
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
@@ -23,7 +24,7 @@ metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 [sub_resource type="Resource" id="Resource_uwohf"]
 script = ExtResource("1_7wuss")
 strength = 3
-resistence = 3
+resistance = 3
 magic = 3
 vitality = 3
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
@@ -31,7 +32,7 @@ metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
 [sub_resource type="Resource" id="Resource_7wuss"]
 script = ExtResource("1_7wuss")
 strength = 2
-resistence = 2
+resistance = 2
 magic = 2
 vitality = 2
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"

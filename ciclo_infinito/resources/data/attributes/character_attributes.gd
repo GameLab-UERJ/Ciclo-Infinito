@@ -21,8 +21,7 @@ func apply_modifier(mod: AttributeModifier) -> void:
 	if mod == null:
 		return
 	
-	# Suporta tanto 'resistence' quanto 'resistance' no resource mod
-	var mod_res = mod.get("resistance") if "resistance" in mod else (mod.get("resistence") if "resistence" in mod else 0)
+	var mod_res = mod.get("resistance")
 	
 	if mod.type == AttributeModifier.Type.ADDEND:
 		#print('addend')
