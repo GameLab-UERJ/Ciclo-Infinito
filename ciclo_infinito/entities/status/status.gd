@@ -35,7 +35,7 @@ func _ready() -> void:
 
 ## Is called right before queue_free(). Must be overriden by subclasses.
 func on_ending_lifetime() -> void:
-	push_warning("["+self.get_class()+"] Doing nothing on_ending_lifetime()")
+	push_warning("["+self.name+"] Doing nothing on_ending_lifetime()")
 	pass
 
 

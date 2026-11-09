@@ -79,7 +79,7 @@ func show_damage(damage : float) -> void:
 		type_of_damage = 'HEAlED DAMAGE'
 	elif damage > 0:  
 		type_of_damage = 'TOOK DAMAGE'
-	print(str(damage)+ ' ' + type_of_damage)
+	
 	match type_of_damage:
 		'TOOK DAMAGE':
 			damage_label.add_theme_color_override("font_color",damage_color)

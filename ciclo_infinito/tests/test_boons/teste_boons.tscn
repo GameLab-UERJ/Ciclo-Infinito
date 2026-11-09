@@ -210,25 +210,6 @@ tile_set = SubResource("TileSet_fdm2o")
 [node name="Player" parent="." unique_id=1555171060 instance=ExtResource("3_jv72f")]
 position = Vector2(346.452, 196.03673)
 base_attributes = SubResource("Resource_epw8h")
-attack1_damage = 5.0
-attack2_damage = 5.0
-move_speed = 240.0
-attack_cooldown = 0.15
-combo_window = 0.21
-hit1_active_time = 0.12
-attack1_lock_time = 0.22
-hit2_active_time = 0.14
-attack2_lock_time = 0.28
-dash_cooldown_time = 1.0
-dash_speed_multiplier = 3.0
-hitbox_size_right = Vector2(50, 25)
-hitbox_size_left = Vector2(50, 25)
-hitbox_size_up = Vector2(50, 40)
-hitbox_size_down = Vector2(50, 40)
-hitbox_offset_right = Vector2(18, 0)
-hitbox_offset_left = Vector2(-18, 0)
-hitbox_offset_up = Vector2(0, -18)
-hitbox_offset_down = Vector2(0, 18)
 
 [node name="BeholderOrange" parent="." unique_id=960144527 instance=ExtResource("4_m1n1a")]
 position = Vector2(-148.95096, 35.11209)

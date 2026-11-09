@@ -3,9 +3,10 @@ class_name Character
 
 
 func has_status(status_data : StatusData) -> bool:
-	var statuses : Array[Status]	= self.find_children("*", "Status", true, false) as Array[Status]
+	var statuses : Array = self.find_children("*", "Status", true, false)
+	
 	for stat : Status in statuses:
-		if stat.status_data == status_data:
+		if stat.status_data.name == status_data.name:
 			return true
 	return false
 

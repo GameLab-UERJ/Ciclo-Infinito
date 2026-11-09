@@ -6,21 +6,18 @@
 [ext_resource type="Resource" uid="uid://dgij2nbf3bm0j" path="res://resources/data/sages/marie_curie.tres" id="2_r7ehk"]
 [ext_resource type="Script" uid="uid://u5smwd2iv564" path="res://resources/data/bonus/bonus_against_status.gd" id="3_t1j0r"]
 [ext_resource type="Script" uid="uid://b2s786kmf0ndm" path="res://resources/data/status/status_data.gd" id="4_hpsd6"]
+[ext_resource type="Resource" uid="uid://craxu70an72gq" path="res://resources/data/status/radiation_data.tres" id="5_t1j0r"]
 
 [sub_resource type="Resource" id="Resource_psuo6"]
 script = ExtResource("1_vlnwe")
+type = 1
 resistence = 10
 metadata/_custom_type_script = "uid://bpxatw5nx3qxk"
-
-[sub_resource type="Resource" id="Resource_a7w85"]
-script = ExtResource("4_hpsd6")
-name = "Radiation"
-metadata/_custom_type_script = "uid://b2s786kmf0ndm"
 
 [sub_resource type="Resource" id="Resource_0yio1"]
 script = ExtResource("3_t1j0r")
 attribute_bonus = SubResource("Resource_psuo6")
-statuses = SubResource("Resource_a7w85")
+statuses = Array[ExtResource("4_hpsd6")]([ExtResource("5_t1j0r")])
 metadata/_custom_type_script = "uid://u5smwd2iv564"
 
 [sub_resource type="Resource" id="Resource_bphol"]

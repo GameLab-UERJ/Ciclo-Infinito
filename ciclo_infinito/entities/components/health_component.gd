@@ -128,7 +128,6 @@ func start_invincibility(duration: float, is_dash : bool = false) -> void:
 
 
 func _set_max_health(value : float) -> void:
-	print('old max_health: ',max_health," new max_health: ",value)
 	var difference : float = value - max_health
 	max_health = value
 	if difference > 0:
