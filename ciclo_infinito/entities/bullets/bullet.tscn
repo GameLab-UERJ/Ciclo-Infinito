@@ -6,4 +6,6 @@
 collision_layer = 0
 collision_mask = 0
 script = ExtResource("1_5hax7")
-can_hit = Array[int]([2])
+direction = Vector2(0, 1)
+
+[connection signal="life_ended" from="." to="." method="_on_life_ended"]

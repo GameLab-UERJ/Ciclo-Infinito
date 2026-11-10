@@ -25,7 +25,6 @@ var is_dead: bool = false
 @onready var attack_sfx: AudioStreamPlayer2D = $attack_sfx
 @onready var attack_cooldown_timer: Timer = $AttackCooldown
 @onready var death_sfx: AudioStreamPlayer2D = $DeathSFX
-@onready var health_component: HealthComponent = %HealthComponent
 @onready var chase_component: ChaseComponent = %ChaseComponent
 @onready var movement_component: MovementComponent = %MovementComponent
 @onready var state_machine_manager: StateMachineManager = $StateMachineManager

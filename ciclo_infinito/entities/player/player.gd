@@ -73,7 +73,6 @@ var vida_textures = [
 @onready var footsteps_sfx: AudioStreamPlayer2D = $SoundEffects/FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
 @onready var shadow: Sprite2D = $Shadow
-@onready var health_component: HealthComponent = %HealthComponent
 
 # Nodes da Maquina de Estados
 @onready var base_machine_manager: BasePlayerStateMachineManager = get_node_or_null("BaseMachineManager")
