@@ -3,4 +3,7 @@
 [ext_resource type="Script" uid="uid://deae1gna78vm" path="res://entities/bullets/bullet.gd" id="1_5hax7"]
 
 [node name="Bullet" type="Area2D" unique_id=921239924]
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_5hax7")
+can_hit = Array[int]([2])
