@@ -75,6 +75,13 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_327xx")
 text = "Controles
 "
 
+[node name="ReportBugButton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=122495471]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_327xx")
+theme_override_font_sizes/font_size = 26
+theme_override_styles/hover = SubResource("StyleBoxFlat_327xx")
+text = "Reportar um bug"
+
 [node name="quitbutton" type="Button" parent="MarginContainer/VBoxContainer/MenuPrincipal" unique_id=780739351]
 layout_mode = 2
 theme_override_fonts/font = ExtResource("2_327xx")
@@ -133,6 +140,8 @@ volume_db = -10.0
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/optionsbutton" to="." method="_on_optionsbutton_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuPrincipal/Controles" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/Controles" to="." method="_on_controles_pressed"]
+[connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuPrincipal/ReportBugButton" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/ReportBugButton" to="." method="_on_report_bug_button_pressed"]
 [connection signal="mouse_entered" from="MarginContainer/VBoxContainer/MenuPrincipal/quitbutton" to="." method="_on_button_mouse_entered"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/MenuPrincipal/quitbutton" to="." method="_on_quitbutton_pressed"]
 [connection signal="value_changed" from="MarginContainer/VBoxContainer/MenuOpcoes/HBoxContainer/VolumeSlider" to="." method="_on_volume_changed"]
