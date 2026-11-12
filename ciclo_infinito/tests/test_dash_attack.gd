@@ -3,7 +3,7 @@ extends Node
 class DamageRecorder extends Node:
 	var hits: int = 0
 
-	func take_damage(_amount: float, _direction: Vector2) -> void:
+	func take_damage(_source: Character, _amount: float, _direction: Vector2) -> void:
 		hits += 1
 
 
@@ -39,13 +39,15 @@ func _ready() -> void:
 	var high_str_dmg = player.calculate_dash_attack_damage(20.0)
 	assert(high_str_dmg > base_dmg, "Higher strength must produce higher damage")
 	
-	var atomic_weight_boon = load("res://resources/data/boons/marie_curie/atomic_weight.tres") as Boon
-	assert(atomic_weight_boon != null, "atomic_weight.tres must exist")
-	assert(Boon.AffectedSkill.DASH_ATTACK in atomic_weight_boon.affected_skill, "atomic_weight must affect DASH_ATTACK")
-	
-	player.progression.add_boon(atomic_weight_boon)
+	# Fixture independente do balanceamento dos recursos de dádivas da main.
+	var dash_boon: Boon = Boon.new()
+	dash_boon.name = "Test Dash Boon"
+	dash_boon.affected_skill = [Boon.AffectedSkill.DASH_ATTACK]
+	dash_boon.common_modifier = AttributeModifier.new()
+	dash_boon.common_modifier.strength = 1
+	player.progression.add_boon(dash_boon)
 	var boon_dmg = player.calculate_dash_attack_damage(player.progression.get_final_attributes().strength)
-	print("  -> Damage with Atomic Weight boon: ", boon_dmg)
+	print("  -> Damage with dash boon: ", boon_dmg)
 	assert(boon_dmg > base_dmg, "Boon with DASH_ATTACK must increase dash attack damage")
 	
 	# 3. Physics and Deceleration
@@ -112,7 +114,7 @@ func _ready() -> void:
 	assert(col.shape is CircleShape2D, "Spin must hit around the player")
 	assert(col.position == Vector2.ZERO, "Spin hitbox must be centered")
 
-	var enemy: CharacterBody2D = CharacterBody2D.new()
+	var enemy: Character = Character.new()
 	var recorder: DamageRecorder = DamageRecorder.new()
 	recorder.name = "HealthComponent"
 	enemy.add_child(recorder)

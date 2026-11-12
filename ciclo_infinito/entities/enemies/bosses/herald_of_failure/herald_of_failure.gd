@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Character
 class_name Boss
 
 
@@ -114,7 +114,12 @@ func spawn_meteor_at_player(amount : float = 1, time_to_drop : float = 0.3, offs
 
 
 func damage_player() -> void:
-	player.health_component.take_damage(attack_damage,Vector2.ZERO)
+	player.health_component.take_damage(self,calculate_damage(player),Vector2.ZERO)
+
+
+func calculate_damage(body : Character) -> float:
+	#return progression_component.apply_damage_reduction(body, attack_damage)
+	return attack_damage
 
 
 func make_noise() -> void:

@@ -28,12 +28,6 @@ func _ready():
 	mission_label.get_parent().reparent(player.camera)
 
 
-func _process(_delta):
-	if Input.is_action_just_pressed("pause"):
-		if get_tree().paused:
-			_resume_game()
-		else:
-			_pause_game()
 
 
 func configurar_label():
@@ -41,14 +35,7 @@ func configurar_label():
 	mission_label.add_theme_font_size_override("font_size", 24)
 
 
-func _pause_game():
-	get_tree().paused = true
-	pause_menu.show()
 
-
-func _resume_game():
-	get_tree().paused = false
-	pause_menu.hide()
 
 
 func _atualizar_texto_missao():

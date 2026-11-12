@@ -1,11 +1,11 @@
+extends Character
 class_name Player
-extends CharacterBody2D
 
-@export var max_health: float = 25.0:
+@export var base_attributes: CharacterAttributes:
 	set(value):
-		max_health = value
-		if health_component and "max_health" in health_component:
-			health_component.max_health = max_health
+		base_attributes = value
+		if progression:
+			progression.base_attributes = base_attributes
 
 @export var attack1_damage: float = 5.0 ## Dano base do 1º golpe (escalará com Força)
 @export var attack2_damage: float = 5.0 ## Dano base do 2º golpe (escalará com Força)
@@ -80,7 +80,7 @@ var vida_textures = [
 
 @onready var state_label: Label = get_node_or_null("StateLabel")
 @onready var vida_cheia = get_node_or_null("Camera2D/VidaCheia")
-@onready var anim: AnimatedSprite2D = $animacoes  
+@onready var anim: AnimatedSprite2D = $animacoes
 @onready var dash_timer: Timer = $dash_timer
 @onready var dash_cooldown: Timer = $dash_cooldown
 @onready var area_attack: Area2D = $attack_area
@@ -91,7 +91,7 @@ var vida_textures = [
 @onready var footsteps_sfx: AudioStreamPlayer2D = $SoundEffects/FootstepsSfx
 @onready var camera: Camera2D = $Camera2D
 @onready var shadow: Sprite2D = $Shadow
-@onready var health_component: Node = %HealthComponent
+@onready var health_component: HealthComponent = %HealthComponent
 
 # Nodes da Maquina de Estados
 @onready var base_machine_manager: BasePlayerStateMachineManager = get_node_or_null("BaseMachineManager")
@@ -105,12 +105,14 @@ func _ready() -> void:
 	process_physics_priority = 1
 	_setup_progression_component()
 	dash_timer.wait_time = dash_duracao
-	
+	base_attributes = base_attributes
+	_on_progression_component_attributes_updated(progression.get_final_attributes())
+
 	if not dash_timer.timeout.is_connected(_on_dash_timer_timeout):
 		dash_timer.timeout.connect(_on_dash_timer_timeout)
 	if not dash_cooldown.timeout.is_connected(_on_dash_cooldown_timeout):
 		dash_cooldown.timeout.connect(_on_dash_cooldown_timeout)
-		
+
 	if not area_attack.body_entered.is_connected(_on_area_attack_body_entered):
 		area_attack.body_entered.connect(_on_area_attack_body_entered)
 
@@ -120,29 +122,16 @@ func _setup_progression_component() -> void:
 		progression = ProgressionComponent.new()
 		progression.name = "ProgressionComponent"
 		add_child(progression)
-	
-	progression.attributes_updated.connect(_on_attributes_updated)
-	_on_attributes_updated(progression.get_final_attributes())
-
-
-func _on_attributes_updated(final_attrs: CharacterAttributes) -> void:
-	if final_attrs and health_component:
-		max_health = final_attrs.vitality
-		if "max_health" in health_component:
-			health_component.max_health = final_attrs.vitality
-			health_component.current_health = min(health_component.current_health, health_component.max_health)
-			if health_component.has_method("update_health_bar"):
-				health_component.update_health_bar()
 
 
 func _physics_process(_delta: float) -> void:
 	if is_dead:
 		return
-	
+
 	if state_label and state_label.visible:
 		var base_st = get_current_base_state()
 		state_label.text = get_current_gameplay_state() if base_st == "Enabled" else base_st
-		
+
 	move_and_slide()
 	_update_attack_area_anchor()
 	update_animation()
@@ -212,13 +201,27 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 		if dash_attack_targets.has(body.get_instance_id()):
 			return
 		dash_attack_targets[body.get_instance_id()] = true
-	if not body.has_node("HealthComponent"):
+	if not body is Character or not body.has_node("HealthComponent"):
 		return
-	
-	var final_strength: float = 10.0
+
+	var damage_amount: float = calculate_damage(body)
+
+	if damage_amount > 0.0:
+		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
+		body.get_node("HealthComponent").take_damage(self,damage_amount, knockback_direction)
+
+
+func calculate_damage(body : Character) -> float:
+	var final_strength: float = attack1_damage
+
 	if progression:
 		final_strength = progression.get_final_attributes().strength
-		
+		for boon in progression.boons:
+			var skill: Boon.AffectedSkill = (Boon.AffectedSkill.DASH_ATTACK
+					if is_dash_attacking else Boon.AffectedSkill.ATTACK)
+			if boon.affected_skill.has(skill):
+				boon.apply_statuses_to(body,self,10,1)
+
 	var damage_amount: float = 0.0
 	if combo_step == 1:
 		damage_amount = attack1_damage + (final_strength * 1.0)
@@ -228,10 +231,8 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 		damage_amount = attack1_damage + (final_strength * 1.5)
 	elif is_dash_attacking:
 		damage_amount = calculate_dash_attack_damage(final_strength)
-		
-	if damage_amount > 0.0:
-		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
-		body.get_node("HealthComponent").take_damage(damage_amount, knockback_direction)
+
+	return damage_amount
 
 
 func calculate_dash_attack_damage(final_strength: float) -> float:
@@ -259,13 +260,8 @@ func cast_magic_skill(skill_name: String, _target_direction: Vector2 = Vector2.Z
 
 
 func apply_damage_with_resistance(incoming_damage: float, knockback: Vector2 = Vector2.ZERO) -> void:
-	var final_res: float = 0.0
-	if progression:
-		final_res = progression.get_final_attributes().resistance
-		
-	var final_damage: float = max(1.0, incoming_damage - final_res)
-	if health_component and health_component.has_method("take_damage"):
-		health_component.take_damage(final_damage, knockback)
+	if health_component:
+		health_component.take_damage(null, incoming_damage, knockback)
 
 
 # ACOES DA MAQUINA DE ESTADOS (EnabledStateMachineManager)
@@ -351,7 +347,7 @@ func start_dash_sequence() -> void:
 	dash_sfx.play(0.4)
 	dash_timer.start()
 	is_dash_on_cooldown = true
-	
+
 	var dash_direction: Vector2 = next_direction
 	var in_dir: Vector2 = get_input_direction()
 	if in_dir != Vector2.ZERO:
@@ -359,7 +355,7 @@ func start_dash_sequence() -> void:
 		next_direction = in_dir
 	dash_dir = dash_direction.normalized()
 	anim.play("dash_" + get_direction_string(dash_dir))
-	
+
 	if health_component and health_component.has_method("start_invincibility"):
 		health_component.start_invincibility(dash_invincibility_time, true)
 
@@ -582,7 +578,7 @@ func update_animation() -> void:
 	var gp_st := get_current_gameplay_state()
 	var direction_str: String = get_direction_string(next_direction)
 	var anim_name := ""
-	
+
 	match base_st:
 		"Dialogue":
 			anim_name = "idle_" + direction_str
@@ -600,7 +596,7 @@ func update_animation() -> void:
 					anim_name = ("attack2_" if combo_step == 2 else "attack1_") + attack_facing
 				"Dash", "DashAttack":
 					return
-					
+
 	if anim.animation != anim_name:
 		if gp_st == "Attack":
 			anim.stop()
@@ -622,3 +618,10 @@ func _on_animacoes_frame_changed() -> void:
 		match anim.frame:
 			3, 7:
 				footsteps_sfx.play()
+
+
+func _on_progression_component_attributes_updated(final_attributes: CharacterAttributes) -> void:
+	if not health_component or health_component.max_health == final_attributes.vitality*5:
+		return
+
+	health_component.max_health = final_attributes.vitality*5

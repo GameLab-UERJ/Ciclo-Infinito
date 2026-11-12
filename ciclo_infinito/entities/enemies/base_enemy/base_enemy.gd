@@ -1,6 +1,5 @@
+extends Character
 class_name BaseEnemy
-extends CharacterBody2D
-
 
 signal defeated ##Contador para a tela de vitória
 
@@ -20,7 +19,7 @@ var player_ref: Player = null
 var player_in_attack_range : bool = false
 var attack_area: Area2D
 var detect_area: Area2D
-var alive: bool = true
+var is_dead: bool = false
 
 @onready var colision_shape: CollisionShape2D = $Colisiondano
 @onready var attack_sfx: AudioStreamPlayer2D = $attack_sfx
@@ -49,12 +48,16 @@ func apply_attack_damage() -> void:
 	for body in bodies_in_area:
 		if body.has_node("HealthComponent"):
 			var hit_direction := (body.global_position - global_position).normalized()
-			body.health_component.take_damage(attack_damage, hit_direction)
+			body.health_component.take_damage(self,calculate_damage(body), hit_direction)
+
+
+func calculate_damage(_body : Character) -> float:
+	return attack_damage
 
 
 func die() -> void:
 	defeated.emit()
-	alive = false
+	is_dead = true
 	
 	state_machine_manager.die()
 	colision_shape.set_deferred("disabled",true)

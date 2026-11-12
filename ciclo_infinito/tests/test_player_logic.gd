@@ -23,19 +23,24 @@ func _ready() -> void:
 	var health: HealthComponent = player.health_component
 	var fsm: EnabledPlayerStateMachineManager = player.enabled_machine_manager
 	var original_mask: int = player.collision_mask
+	var resistance_modifier: AttributeModifier = AttributeModifier.new()
+	resistance_modifier.resistance = 2
+	player.progression.add_modifier(resistance_modifier)
+	check(health.max_health == player.progression.get_final_attributes().vitality * 5.0,
+			"Main vitality scaling must be preserved")
 	var initial_health: float = health.current_health
 
 	fsm.happened("dash")
 	await settle()
-	health.take_damage(1.0)
+	health.take_damage(null, player.progression.get_final_attributes().resistance + 1.0)
 	check(health.current_health == initial_health, "Dash must block damage")
 	fsm.happened("dash_attack")
 	await settle()
-	health.take_damage(1.0)
+	health.take_damage(null, player.progression.get_final_attributes().resistance + 1.0)
 	check(health.current_health == initial_health, "Spin entry must block damage")
 	await get_tree().create_timer(0.12).timeout
 	check(player.is_dash_attacking, "Damage test must run during the spin")
-	health.take_damage(1.0)
+	health.take_damage(null, player.progression.get_final_attributes().resistance + 1.0)
 	check(health.current_health == initial_health - 1.0, "Spin must become vulnerable")
 	await get_tree().create_timer(0.65).timeout
 	check(player.collision_mask == original_mask, "Collision mask must be restored exactly")
@@ -100,7 +105,7 @@ func _ready() -> void:
 	await get_tree().create_timer(0.04).timeout
 	check(player.is_dashing, "Short protection test must still be dashing")
 	initial_health = health.current_health
-	health.take_damage(1.0)
+	health.take_damage(null, player.progression.get_final_attributes().resistance + 1.0)
 	check(health.current_health == initial_health - 1.0, "Dash state cannot override its timer")
 	await get_tree().create_timer(1.4).timeout
 
