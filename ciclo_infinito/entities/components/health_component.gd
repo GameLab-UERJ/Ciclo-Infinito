@@ -19,7 +19,11 @@ signal changed_max_health(max_health : float)
 
 
 var current_health : float: set = _set_current_health
-var is_invincible = false
+var is_invincible: bool = false
+var _damage_invincibility_left: float = 0.0
+var _dash_invincibility_left: float = 0.0
+var _suppressed_collision_bits: int = 0
+var _requested_collision_mask: int = -1
 
 
 func _ready() -> void:
@@ -27,32 +31,38 @@ func _ready() -> void:
 	current_health = max_health
 
 
-func take_damage(source : Character, damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
-	if parent is Player and (parent.is_in_state("Dash") or 
-							 parent.is_in_state("DashAttack") or 
-							 parent.is_in_state("Dead") or 
-							 parent.is_in_state("Dialogue")):
-		return 
-	
-	if is_invincible or parent.is_dead:
+func _physics_process(delta: float) -> void:
+	_damage_invincibility_left = maxf(0.0, _damage_invincibility_left - delta)
+	_dash_invincibility_left = maxf(0.0, _dash_invincibility_left - delta)
+	_sync_invincibility()
+
+
+func take_damage(source: Character, damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
+	if current_health <= 0.0:
 		return
-	
+	if parent is Player and (parent.is_dead or parent.get_current_base_state() in [
+			"Dead", "Dialogue", "Cutscene"]):
+		return
+
+	if is_invincible or ("is_dead" in parent and parent.is_dead):
+		return
+
 	if parent.has_node("ProgressionComponent"):
 		damage_amount = parent.get_node("ProgressionComponent").apply_damage_reduction(source,damage_amount)
-	
+
 	current_health = clamp(current_health - damage_amount, 0.0, max_health)
 	changed_health.emit(current_health)
-	
+
 	update_health_bar()#HAS TO BE ALTERED TO USE HEALTHBARCOMPONENT
-	
+
 	var knockback_force: float = 350.0
 	parent.velocity = hit_direction * knockback_force
-	
+
 	if sprite and damage_recieved_sfx:
 		applies_damage_received_effect()
-	
+
 	start_invincibility(invinciblity_duration)
-	
+
 	if current_health <= 0.0:
 		die()
 
@@ -62,11 +72,11 @@ func take_damage(source : Character, damage_amount: float, hit_direction: Vector
 func take_damage_by_percentage(source : Character, percentage : float, from_max_health : bool = true) -> void:
 	if percentage < 0:
 		push_warning('take_damage_by_percentage received negative percentage ('+str(percentage)+')')
-		return 
-	
+		return
+
 	if percentage > 1:
 		percentage = 1
-	
+
 	var damage : float = round(current_health * percentage)
 	if from_max_health:
 		damage = round(max_health *  percentage)
@@ -76,7 +86,7 @@ func take_damage_by_percentage(source : Character, percentage : float, from_max_
 func applies_damage_received_effect() -> void:
 	var color_name : String = "redden" if color_of_damage == COLOR_DAMAGE.Red else 'whiten'
 	damage_recieved_sfx.play()
-	
+
 	if sprite.material and current_health > 0:
 		sprite.material.set_shader_parameter(color_name, true)
 		await get_tree().create_timer(damage_taken_effect_duration).timeout
@@ -86,7 +96,7 @@ func applies_damage_received_effect() -> void:
 func update_health_bar():
 	if not parent is Player or not parent.vida_cheia:
 		return
-	
+
 	var ratio=current_health/max_health
 	var filled_heart=int(round(ratio*6))
 	filled_heart=clamp(filled_heart,0,6)
@@ -97,34 +107,47 @@ func die() -> void:
 	died.emit()
 	if not (parent is Player):
 		return
-	
+
 	parent.collision_layer = 0
 	parent.die()
-	
+
 	await get_tree().create_timer(2.0).timeout
 	await SceneTransition.fade_out()
-	
+
 	var death_scene = preload("uid://b7qoxm33b5qxt").instantiate()#death_screen.tscn
 	get_tree().root.add_child(death_scene)
 	death_scene.set_layer(100)
 
 
-func start_invincibility(duration: float, is_dash : bool = false) -> void:
-	is_invincible = true
-	
-	if Util.is_collision_mask_layer_set(parent,"Enemy"):
-		parent.set_deferred("collision_mask",parent.collision_mask^Util.collision_layer_values["Enemy"])
-	if is_dash and Util.is_collision_mask_layer_set(parent,"Static Interactive"):
-		parent.set_deferred("collision_mask",parent.collision_mask^16)
-	
-	await get_tree().create_timer(duration).timeout
-	
-	if not Util.is_collision_mask_layer_set(parent,"Enemy"):
-		parent.set_deferred("collision_mask",parent.collision_mask^Util.collision_layer_values["Enemy"])
-	if is_dash and not Util.is_collision_mask_layer_set(parent,"Static Interactive"):
-		parent.set_deferred("collision_mask",parent.collision_mask^24)
-	
-	is_invincible = false
+func start_invincibility(duration: float, is_dash: bool = false) -> void:
+	if is_dash:
+		# O dash e a transição para o giro têm janelas independentes do dano recebido.
+		_dash_invincibility_left = maxf(0.0, duration)
+	else:
+		_damage_invincibility_left = maxf(_damage_invincibility_left, duration)
+	_sync_invincibility()
+
+
+func end_dash_invincibility() -> void:
+	_dash_invincibility_left = 0.0
+	_sync_invincibility()
+
+
+func _sync_invincibility() -> void:
+	is_invincible = _damage_invincibility_left > 0.0 or _dash_invincibility_left > 0.0
+	var ignored_bits: int = 0
+	if is_invincible:
+		ignored_bits |= int(Util.collision_layer_values.get("Enemy", 0))
+	if _dash_invincibility_left > 0.0:
+		ignored_bits |= int(Util.collision_layer_values.get("Static Interactive", 0))
+
+	# Restaura apenas bits que esta proteção removeu; nunca adiciona camadas ausentes.
+	var original_mask: int = parent.collision_mask | _suppressed_collision_bits
+	_suppressed_collision_bits = original_mask & ignored_bits
+	var next_mask: int = original_mask & ~ignored_bits
+	if parent.collision_mask != next_mask or _requested_collision_mask != next_mask:
+		_requested_collision_mask = next_mask
+		parent.set_deferred("collision_mask", next_mask)
 
 
 func _set_max_health(value : float) -> void:

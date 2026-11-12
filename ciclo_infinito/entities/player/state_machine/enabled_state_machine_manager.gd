@@ -6,6 +6,8 @@ class_name EnabledPlayerStateMachineManager
 
 var current_state: String = "Entry"
 var player: Player
+var dash_attack_queued: bool = false
+var dash_attack_grace_left: float = 0.0
 
 
 func _ready() -> void:
@@ -35,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	if not active or player == null or player.is_dead:
 		return
 	
+	dash_attack_grace_left = maxf(0.0, dash_attack_grace_left - delta)
 	_update_fsm_parameters()
 	_handle_input_triggers()
 	
@@ -55,24 +58,23 @@ func _handle_input_triggers() -> void:
 	match state_str:
 		"Entry":
 			pass
-		"Idle":
-			if Input.is_action_just_pressed("attack") and player.can_start_attack():
-				happened("attack")
-			elif Input.is_action_just_pressed("dash") and player.can_dash():
+		"Idle", "Walking":
+			if Input.is_action_just_pressed("dash") and player.can_dash():
+				dash_attack_queued = Input.is_action_just_pressed("attack")
 				happened("dash")
-			elif input_dir != Vector2.ZERO:
+			elif Input.is_action_just_pressed("attack") and player.can_start_attack():
+				if dash_attack_grace_left > 0.0:
+					happened("dash_attack")
+				else:
+					happened("attack")
+			elif state_str == "Idle" and input_dir != Vector2.ZERO:
 				happened("walk")
-		
-		"Walking":
-			if Input.is_action_just_pressed("attack") and player.can_start_attack():
-				happened("attack")
-			elif Input.is_action_just_pressed("dash") and player.can_dash():
-				happened("dash")
-					
 		"Dash":
-			if Input.is_action_just_pressed("attack"):
+			dash_attack_grace_left = player.dash_attack_input_grace
+			if dash_attack_queued or Input.is_action_just_pressed("attack"):
+				dash_attack_queued = false
 				happened("dash_attack")
-				
+
 		"Attack":
 			if Input.is_action_just_pressed("attack") and player.combo_step == 1 and player.combo_window_open:
 				player.combo_buffered = true
@@ -114,6 +116,8 @@ func _on_transited(_from: Variant, to: Variant) -> void:
 			player.start_dash_sequence()
 			
 		"DashAttack":
+			dash_attack_grace_left = 0.0
+			set_param("dash_attack_finished", false)
 			player.start_dash_attack_sequence()
 
 

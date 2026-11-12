@@ -44,122 +44,10 @@
 [ext_resource type="Script" uid="uid://blovpmqtjwas8" path="res://addons/imjp94.yafsm/src/conditions/Condition.gd" id="33_qwspa"]
 [ext_resource type="Script" uid="uid://4232jtglqdwl" path="res://entities/components/progression_component.gd" id="34_progression"]
 [ext_resource type="Resource" uid="uid://c8j17qf6w7pmu" path="res://resources/data/uriam_base_attributes.tres" id="35_uriam_attrs"]
-
-[sub_resource type="Resource" id="Resource_g3pa7"]
-script = ExtResource("31_geky7")
-name = "Cutscene"
-metadata/graph_offset = Vector2(859, 672.5)
-
-[sub_resource type="Resource" id="Resource_2h0qb"]
-script = ExtResource("31_geky7")
-name = "Dead"
-metadata/graph_offset = Vector2(1106, 372.5)
-
-[sub_resource type="Resource" id="Resource_mmk7k"]
-script = ExtResource("31_geky7")
-name = "Dialogue"
-metadata/graph_offset = Vector2(863, 52.5)
-
-[sub_resource type="Resource" id="Resource_pacje"]
-script = ExtResource("31_geky7")
-name = "Enabled"
-metadata/graph_offset = Vector2(866, 372.5)
-
-[sub_resource type="Resource" id="Resource_r633c"]
-script = ExtResource("31_geky7")
-name = "Entry"
-metadata/graph_offset = Vector2(606, 372.5)
-
-[sub_resource type="Resource" id="Resource_p22ii"]
-script = ExtResource("33_qwspa")
-name = "cutscene_ended"
-
-[sub_resource type="Resource" id="Resource_a2brg"]
-script = ExtResource("32_qwspa")
-from = "Cutscene"
-to = "Enabled"
-conditions = {
-"cutscene_ended": SubResource("Resource_p22ii")
-}
-
-[sub_resource type="Resource" id="Resource_q5bfg"]
-script = ExtResource("33_qwspa")
-name = "dialogue_ended"
-
-[sub_resource type="Resource" id="Resource_rtlkk"]
-script = ExtResource("32_qwspa")
-from = "Dialogue"
-to = "Enabled"
-conditions = {
-"dialogue_ended": SubResource("Resource_q5bfg")
-}
-
-[sub_resource type="Resource" id="Resource_cnswy"]
-script = ExtResource("33_qwspa")
-name = "cutscene_started"
-
-[sub_resource type="Resource" id="Resource_ssgi7"]
-script = ExtResource("32_qwspa")
-from = "Enabled"
-to = "Cutscene"
-conditions = {
-"cutscene_started": SubResource("Resource_cnswy")
-}
-
-[sub_resource type="Resource" id="Resource_arp52"]
-script = ExtResource("33_qwspa")
-name = "die"
-
-[sub_resource type="Resource" id="Resource_c112w"]
-script = ExtResource("32_qwspa")
-from = "Enabled"
-to = "Dead"
-conditions = {
-"die": SubResource("Resource_arp52")
-}
-
-[sub_resource type="Resource" id="Resource_jjk8f"]
-script = ExtResource("33_qwspa")
-name = "dialogue_started"
-
-[sub_resource type="Resource" id="Resource_u37te"]
-script = ExtResource("32_qwspa")
-from = "Enabled"
-to = "Dialogue"
-conditions = {
-"dialogue_started": SubResource("Resource_jjk8f")
-}
-
-[sub_resource type="Resource" id="Resource_7otdo"]
-script = ExtResource("32_qwspa")
-from = "Entry"
-to = "Enabled"
-
-[sub_resource type="Resource" id="Resource_qwspa"]
-script = ExtResource("30_wy7bt")
-states = {
-"Cutscene": SubResource("Resource_g3pa7"),
-"Dead": SubResource("Resource_2h0qb"),
-"Dialogue": SubResource("Resource_mmk7k"),
-"Enabled": SubResource("Resource_pacje"),
-"Entry": SubResource("Resource_r633c")
-}
-transitions = {
-"Cutscene": {
-"Enabled": SubResource("Resource_a2brg")
-},
-"Dialogue": {
-"Enabled": SubResource("Resource_rtlkk")
-},
-"Enabled": {
-"Cutscene": SubResource("Resource_ssgi7"),
-"Dead": SubResource("Resource_c112w"),
-"Dialogue": SubResource("Resource_u37te")
-},
-"Entry": {
-"Enabled": SubResource("Resource_7otdo")
-}
-}
+[ext_resource type="Texture2D" uid="uid://cs56gljsjt3q5" path="res://assets/art/player/DASH ATTACK/dash_attack_down.png" id="36_da_down"]
+[ext_resource type="Texture2D" uid="uid://b1iemhonod7bp" path="res://assets/art/player/DASH ATTACK/dash_attack_left.png" id="37_da_left"]
+[ext_resource type="Texture2D" uid="uid://bxs17hnnj72vs" path="res://assets/art/player/DASH ATTACK/dash_attack_right.png" id="38_da_right"]
+[ext_resource type="Texture2D" uid="uid://b5xn06fiyhxmw" path="res://assets/art/player/DASH ATTACK/dash_attack_up.png" id="39_da_up"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_govaw"]
 atlas = ExtResource("2_gt4e4")
@@ -408,6 +296,150 @@ region = Rect2(576, 0, 96, 80)
 [sub_resource type="AtlasTexture" id="AtlasTexture_o1jmc"]
 atlas = ExtResource("9_0eo6o")
 region = Rect2(672, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_0"]
+atlas = ExtResource("36_da_down")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_1"]
+atlas = ExtResource("36_da_down")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_2"]
+atlas = ExtResource("36_da_down")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_3"]
+atlas = ExtResource("36_da_down")
+region = Rect2(288, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_4"]
+atlas = ExtResource("36_da_down")
+region = Rect2(384, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_5"]
+atlas = ExtResource("36_da_down")
+region = Rect2(480, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_6"]
+atlas = ExtResource("36_da_down")
+region = Rect2(576, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_7"]
+atlas = ExtResource("36_da_down")
+region = Rect2(672, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dad_8"]
+atlas = ExtResource("36_da_down")
+region = Rect2(768, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_0"]
+atlas = ExtResource("37_da_left")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_1"]
+atlas = ExtResource("37_da_left")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_2"]
+atlas = ExtResource("37_da_left")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_3"]
+atlas = ExtResource("37_da_left")
+region = Rect2(288, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_4"]
+atlas = ExtResource("37_da_left")
+region = Rect2(384, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_5"]
+atlas = ExtResource("37_da_left")
+region = Rect2(480, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_6"]
+atlas = ExtResource("37_da_left")
+region = Rect2(576, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_7"]
+atlas = ExtResource("37_da_left")
+region = Rect2(672, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dal_8"]
+atlas = ExtResource("37_da_left")
+region = Rect2(768, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_0"]
+atlas = ExtResource("38_da_right")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_1"]
+atlas = ExtResource("38_da_right")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_2"]
+atlas = ExtResource("38_da_right")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_3"]
+atlas = ExtResource("38_da_right")
+region = Rect2(288, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_4"]
+atlas = ExtResource("38_da_right")
+region = Rect2(384, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_5"]
+atlas = ExtResource("38_da_right")
+region = Rect2(480, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_6"]
+atlas = ExtResource("38_da_right")
+region = Rect2(576, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_7"]
+atlas = ExtResource("38_da_right")
+region = Rect2(672, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dar_8"]
+atlas = ExtResource("38_da_right")
+region = Rect2(768, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_0"]
+atlas = ExtResource("39_da_up")
+region = Rect2(0, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_1"]
+atlas = ExtResource("39_da_up")
+region = Rect2(96, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_2"]
+atlas = ExtResource("39_da_up")
+region = Rect2(192, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_3"]
+atlas = ExtResource("39_da_up")
+region = Rect2(288, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_4"]
+atlas = ExtResource("39_da_up")
+region = Rect2(384, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_5"]
+atlas = ExtResource("39_da_up")
+region = Rect2(480, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_6"]
+atlas = ExtResource("39_da_up")
+region = Rect2(576, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_7"]
+atlas = ExtResource("39_da_up")
+region = Rect2(672, 0, 96, 80)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dau_8"]
+atlas = ExtResource("39_da_up")
+region = Rect2(768, 0, 96, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qucqc"]
 atlas = ExtResource("10_ttr27")
@@ -1111,6 +1143,106 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_8")
+}],
+"loop": 0,
+"name": &"dash_attack",
+"speed": 12.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dad_8")
+}],
+"loop": 0,
+"name": &"dash_attack_down",
+"speed": 12.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dal_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dal_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dal_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dal_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dal_8")
+}],
+"loop": 0,
+"name": &"dash_attack_left",
+"speed": 12.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dar_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dar_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dar_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dar_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dar_8")
+}],
+"loop": 0,
+"name": &"dash_attack_right",
+"speed": 12.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dau_4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dau_5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dau_6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dau_7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dau_8")
+}],
+"loop": 0,
+"name": &"dash_attack_up",
+"speed": 12.5
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_qucqc")
 }, {
 "duration": 1.0,
@@ -1544,6 +1676,149 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="Resource" id="Resource_g3pa7"]
+script = ExtResource("31_geky7")
+name = "Cutscene"
+metadata/graph_offset = Vector2(859, 672.5)
+
+[sub_resource type="Resource" id="Resource_2h0qb"]
+script = ExtResource("31_geky7")
+name = "Dead"
+metadata/graph_offset = Vector2(1106, 372.5)
+
+[sub_resource type="Resource" id="Resource_mmk7k"]
+script = ExtResource("31_geky7")
+name = "Dialogue"
+metadata/graph_offset = Vector2(863, 52.5)
+
+[sub_resource type="Resource" id="Resource_pacje"]
+script = ExtResource("31_geky7")
+name = "Enabled"
+metadata/graph_offset = Vector2(866, 372.5)
+
+[sub_resource type="Resource" id="Resource_r633c"]
+script = ExtResource("31_geky7")
+name = "Entry"
+metadata/graph_offset = Vector2(606, 372.5)
+
+[sub_resource type="Resource" id="Resource_p22ii"]
+script = ExtResource("33_qwspa")
+name = "cutscene_ended"
+
+[sub_resource type="Resource" id="Resource_a2brg"]
+script = ExtResource("32_qwspa")
+from = "Cutscene"
+to = "Enabled"
+conditions = {
+"cutscene_ended": SubResource("Resource_p22ii")
+}
+
+[sub_resource type="Resource" id="Resource_q5bfg"]
+script = ExtResource("33_qwspa")
+name = "dialogue_ended"
+
+[sub_resource type="Resource" id="Resource_rtlkk"]
+script = ExtResource("32_qwspa")
+from = "Dialogue"
+to = "Enabled"
+conditions = {
+"dialogue_ended": SubResource("Resource_q5bfg")
+}
+
+[sub_resource type="Resource" id="Resource_cnswy"]
+script = ExtResource("33_qwspa")
+name = "cutscene_started"
+
+[sub_resource type="Resource" id="Resource_ssgi7"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Cutscene"
+conditions = {
+"cutscene_started": SubResource("Resource_cnswy")
+}
+
+[sub_resource type="Resource" id="Resource_arp52"]
+script = ExtResource("33_qwspa")
+name = "die"
+
+[sub_resource type="Resource" id="Resource_c112w"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Dead"
+conditions = {
+"die": SubResource("Resource_arp52")
+}
+
+[sub_resource type="Resource" id="Resource_jjk8f"]
+script = ExtResource("33_qwspa")
+name = "dialogue_started"
+
+[sub_resource type="Resource" id="Resource_u37te"]
+script = ExtResource("32_qwspa")
+from = "Enabled"
+to = "Dialogue"
+conditions = {
+"dialogue_started": SubResource("Resource_jjk8f")
+}
+
+[sub_resource type="Resource" id="Resource_7otdo"]
+script = ExtResource("32_qwspa")
+from = "Entry"
+to = "Enabled"
+
+[sub_resource type="Resource" id="Transition_Dialogue_death"]
+script = ExtResource("32_qwspa")
+from = "Dialogue"
+to = "Dead"
+conditions = {
+"die": SubResource("Resource_arp52")
+}
+
+[sub_resource type="Resource" id="Transition_Cutscene_death"]
+script = ExtResource("32_qwspa")
+from = "Cutscene"
+to = "Dead"
+conditions = {
+"die": SubResource("Resource_arp52")
+}
+
+[sub_resource type="Resource" id="Transition_Entry_death"]
+script = ExtResource("32_qwspa")
+from = "Entry"
+to = "Dead"
+conditions = {
+"die": SubResource("Resource_arp52")
+}
+
+[sub_resource type="Resource" id="Resource_qwspa"]
+script = ExtResource("30_wy7bt")
+states = {
+"Cutscene": SubResource("Resource_g3pa7"),
+"Dead": SubResource("Resource_2h0qb"),
+"Dialogue": SubResource("Resource_mmk7k"),
+"Enabled": SubResource("Resource_pacje"),
+"Entry": SubResource("Resource_r633c")
+}
+transitions = {
+"Cutscene": {
+"Dead": SubResource("Transition_Cutscene_death"),
+"Enabled": SubResource("Resource_a2brg")
+},
+"Dialogue": {
+"Dead": SubResource("Transition_Dialogue_death"),
+"Enabled": SubResource("Resource_rtlkk")
+},
+"Enabled": {
+"Dead": SubResource("Resource_c112w"),
+"Cutscene": SubResource("Resource_ssgi7"),
+"Dialogue": SubResource("Resource_u37te")
+},
+"Entry": {
+"Dead": SubResource("Transition_Entry_death"),
+"Enabled": SubResource("Resource_7otdo")
+}
+}
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jrjdb"]
 size = Vector2(100, 100)
 
@@ -1557,7 +1832,7 @@ collision_mask = 29
 motion_mode = 1
 platform_on_leave = 2
 script = ExtResource("1_wq0jh")
-dash_duracao = 0.1
+dash_duracao = 0.18
 metadata/_custom_type_script = "uid://dbg05n786rg21"
 
 [node name="ProgressionComponent" type="Node" parent="." unique_id=1892019283]
@@ -1684,7 +1959,6 @@ stream = ExtResource("33_2soq1")
 volume_db = -10.0
 
 [connection signal="attributes_updated" from="ProgressionComponent" to="." method="_on_progression_component_attributes_updated"]
-[connection signal="animation_finished" from="animacoes" to="." method="_on_animacoes_animation_finished"]
 [connection signal="frame_changed" from="animacoes" to="." method="_on_animacoes_frame_changed"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]

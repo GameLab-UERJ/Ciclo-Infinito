@@ -165,6 +165,22 @@ conditions = {
 "stopped_walking": SubResource("Resource_tb802")
 }
 
+[sub_resource type="Resource" id="Transition_Idle_spin"]
+script = ExtResource("3_csvwv")
+from = "Idle"
+to = "DashAttack"
+conditions = {
+"dash_attack": SubResource("Resource_u6pdc")
+}
+
+[sub_resource type="Resource" id="Transition_Walking_spin"]
+script = ExtResource("3_csvwv")
+from = "Walking"
+to = "DashAttack"
+conditions = {
+"dash_attack": SubResource("Resource_u6pdc")
+}
+
 [resource]
 script = ExtResource("1_bq3ss")
 states = {
@@ -190,11 +206,13 @@ transitions = {
 "Idle": SubResource("Resource_vrief")
 },
 "Idle": {
+"DashAttack": SubResource("Transition_Idle_spin"),
 "Attack": SubResource("Resource_516wk"),
 "Dash": SubResource("Resource_43uh7"),
 "Walking": SubResource("Resource_vuoes")
 },
 "Walking": {
+"DashAttack": SubResource("Transition_Walking_spin"),
 "Attack": SubResource("Resource_72qu1"),
 "Dash": SubResource("Resource_p5cfw"),
 "Idle": SubResource("Resource_vt3ly")

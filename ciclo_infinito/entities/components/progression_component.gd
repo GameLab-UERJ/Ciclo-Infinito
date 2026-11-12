@@ -9,9 +9,9 @@ signal skill_modified(skill_name: String, key: String, value: Variant)
 # Status Base padrao
 @export var base_attributes: CharacterAttributes:
 	set(value):
-		if not value: 
+		if not value:
 			return
-		
+
 		base_attributes = value.duplicate_attributes()
 		recalculate_final_attributes()
 # Equipamentos, configuraveis via Inspector para testes
@@ -68,25 +68,25 @@ func _ready() -> void:
 		equipped_items[EquipmentItem.Slot.PANTS] = initial_pants
 	if initial_accessory:
 		equipped_items[EquipmentItem.Slot.ACCESSORY] = initial_accessory
-	
+
 	recalculate_final_attributes()
 #endregion
 
 #region CALCULO DOS ATRIBUTOS: Status Base -> Equipamentos -> Dádivas -> Status Finais
 func recalculate_final_attributes() -> CharacterAttributes:
 	var result = base_attributes.duplicate_attributes()
-	
+
 	#print('result(vit) pre-equips: ',result.vitality)
 	# Equipamentos:
 	for slot in equipped_items:
 		var item: EquipmentItem = equipped_items[slot]
 		if item and item.modifier:
 			result.apply_modifier(item.modifier)
-	
+
 	#print('result(vit) pre-boons: ',result.vitality)
 	# Dadivas:
-	var boon : Boon 
-	var rarity : String	
+	var boon : Boon
+	var rarity : String
 	for i in len(boons):
 		boon = boons[i]
 		rarity = rarities[i]
@@ -102,13 +102,13 @@ func recalculate_final_attributes() -> CharacterAttributes:
 					result.apply_modifier(boon.rare_modifier)
 				'legendary':
 					result.apply_modifier(boon.legendary_modifier)
-	
+
 	#print('result(vit) pre-mods: ',result.vitality)
 	# Modificadores Avulsos / Temporarios:
 	for mod in modifiers:
 		if mod:
 			result.apply_modifier(mod)
-			
+
 	final_attributes = result
 	attributes_updated.emit(final_attributes)
 	#print("[",get_parent().name,"] final_attributes: ",final_attributes.vitality)
@@ -118,7 +118,7 @@ func recalculate_final_attributes() -> CharacterAttributes:
 		print("magic: ",final_attributes.magic)
 		print("resistance: ",final_attributes.resistance)
 		print("vitality: ",final_attributes.vitality)
-	
+
 	return final_attributes
 
 
@@ -197,4 +197,35 @@ func modify_skill(skill_name: String, key: String, value: Variant) -> void:
 	if skills.has(skill_name):
 		skills[skill_name][key] = value
 		skill_modified.emit(skill_name, key, value)
+
+
+# Exemplo de execucao centralizada de habilidade magica que escala com Magia
+func get_magic_damage(base_power: float = 10.0, multiplier: float = 1.0) -> float:
+	return (base_power + get_final_attributes().magic * 1.5) * multiplier
+
+
+func get_boons_for_skill(skill: Boon.AffectedSkill) -> Array[Boon]:
+	var result: Array[Boon] = []
+	for boon in boons:
+		if boon and skill in boon.affected_skill:
+			result.append(boon)
+	return result
+
+
+func has_boon_for_skill(skill: Boon.AffectedSkill) -> bool:
+	for boon in boons:
+		if boon and skill in boon.affected_skill:
+			return true
+	return false
+
+
+func get_dash_attack_damage_bonus() -> float:
+	var bonus: float = 0.0
+	for boon in get_boons_for_skill(Boon.AffectedSkill.DASH_ATTACK):
+		if boon.common_modifier and boon.common_modifier.strength > 0:
+			bonus += float(boon.common_modifier.strength) * 1.5
+	if skills.has("dash_attack"):
+		bonus += float(skills["dash_attack"].get("bonus_damage", 0.0))
+	return bonus
+
 #endregion
