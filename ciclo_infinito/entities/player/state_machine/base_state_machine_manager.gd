@@ -57,7 +57,7 @@ func trigger_die() -> void:
 
 
 # TRANSICAO DE ESTADOS
-func _on_transited(_from: Variant, to: Variant) -> void:
+func _on_transited(from: Variant, to: Variant) -> void:
 	current_state = str(to)
 	if debug_label:
 		debug_label.text = current_state
@@ -70,14 +70,19 @@ func _on_transited(_from: Variant, to: Variant) -> void:
 	match str(to):
 		"Enabled":
 			if enabled_machine_manager:
-				enabled_machine_manager.set_active(true)
-				if enabled_machine_manager.get_current() == "":
-					enabled_machine_manager.start()
+				if str(from) in ["Dialogue", "Cutscene"]:
+					enabled_machine_manager.restart()
+				else:
+					enabled_machine_manager.set_active(true)
+					if enabled_machine_manager.get_current() == "":
+						enabled_machine_manager.start()
 		"Dialogue":
+			player.cancel_gameplay_actions()
 			if enabled_machine_manager:
 				enabled_machine_manager.set_active(false)
 			player.velocity = Vector2.ZERO
 		"Cutscene":
+			player.cancel_gameplay_actions()
 			if enabled_machine_manager:
 				enabled_machine_manager.set_active(false)
 			player.velocity = Vector2.ZERO

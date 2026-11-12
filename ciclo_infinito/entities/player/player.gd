@@ -27,10 +27,12 @@ extends CharacterBody2D
 @export var dash_cooldown_time: float = 1.0
 @export var dash_speed_multiplier: float = 3.0
 @export var dash_duracao := 0.2
+@export var dash_invincibility_time: float = 0.18 ## Janela de esquiva independente da animação
 
 @export_group("Dash Attack")
 @export var dash_attack_speed_multiplier: float = 1.5 ## Velocidade inicial do deslize
 @export var dash_attack_friction: float = 1200.0 ## Desaceleração durante o deslize
+@export var dash_attack_invincibility_time: float = 0.08 ## Proteção só na entrada do giro
 @export var dash_attack_duration: float = 0.4 ## Duração do giro e da janela de dano
 @export var dash_attack_control: float = 0.65 ## Fração da velocidade normal ao guiar o giro
 @export var dash_attack_input_grace: float = 0.1 ## Tolerância de ataque após o dash
@@ -51,6 +53,7 @@ extends CharacterBody2D
 
 var dash_attack_targets: Dictionary = {}
 var hitbox_generation: int = 0
+var action_generation: int = 0
 
 var is_dead: bool = false
 var last_facing: String = "down"
@@ -98,6 +101,8 @@ var vida_textures = [
 
 
 func _ready() -> void:
+	# Aplica o movimento depois que as máquinas atualizam a velocidade.
+	process_physics_priority = 1
 	_setup_progression_component()
 	dash_timer.wait_time = dash_duracao
 	
@@ -152,7 +157,9 @@ func get_current_gameplay_state() -> String:
 
 
 func is_in_state(state_name: String) -> bool:
-	return get_current_gameplay_state() == state_name or get_current_base_state() == state_name
+	var base_state: String = get_current_base_state()
+	return base_state == state_name or (
+		base_state in ["Enabled", "Entry", ""] and get_current_gameplay_state() == state_name)
 
 
 func enter_dialogue() -> void:
@@ -176,21 +183,25 @@ func exit_cutscene() -> void:
 
 
 func die() -> void:
+	if is_dead:
+		return
+	handle_death()
 	if base_machine_manager:
 		base_machine_manager.trigger_die()
-	else:
-		handle_death()
+
 
 func get_input_direction() -> Vector2:
 	return Input.get_vector("run_left", "run_right", "run_up", "run_down")
 
 
 func can_start_attack() -> bool:
-	return not is_dashing and can_attack and not is_dead and (base_machine_manager == null or base_machine_manager.get_current() in ["Enabled", "Entry"])
+	return (not is_dashing and not is_dash_attacking and can_attack and not is_dead
+			and get_current_base_state() in ["Enabled", "Entry", ""])
 
 
 func can_dash() -> bool:
-	return not is_dash_on_cooldown and not is_dashing and not is_dead and (base_machine_manager == null or base_machine_manager.get_current() in ["Enabled", "Entry"])
+	return (not is_dash_on_cooldown and not is_dashing and not is_dash_attacking
+			and not is_dead and get_current_base_state() in ["Enabled", "Entry", ""])
 
 
 # COMBATE E DANO (Agora utilizando os atributos Força, Magia e Resistencia)
@@ -259,6 +270,7 @@ func apply_damage_with_resistance(incoming_damage: float, knockback: Vector2 = V
 
 # ACOES DA MAQUINA DE ESTADOS (EnabledStateMachineManager)
 func start_attack_sequence() -> void:
+	action_generation += 1
 	attack_facing = get_direction_string(next_direction)
 	can_attack = false
 	combo_step = 1
@@ -274,25 +286,30 @@ func start_attack_sequence() -> void:
 		anim.play(a)
 		attack_sfxplay.play()
 
-	_open_combo_window()
-	_end_attack1_after_lock()
+	_open_combo_window(action_generation)
+	_end_attack1_after_lock(action_generation)
 
 
-func _open_combo_window() -> void:
+func _open_combo_window(generation: int) -> void:
 	combo_window_open = true
-	await get_tree().create_timer(combo_window).timeout
+	await get_tree().create_timer(combo_window, false).timeout
+	if generation != action_generation:
+		return
 	combo_window_open = false
 	if combo_step == 1 and combo_buffered:
 		_start_attack2()
 
 
-func _end_attack1_after_lock() -> void:
-	await get_tree().create_timer(attack1_lock_time).timeout
+func _end_attack1_after_lock(generation: int) -> void:
+	await get_tree().create_timer(attack1_lock_time, false).timeout
+	if generation != action_generation:
+		return
 	if combo_step == 1:
 		_finish_attack_sequence()
 
 
 func _start_attack2() -> void:
+	var generation: int = action_generation
 	combo_step = 2
 	_apply_attack_hitbox_for_facing(attack_facing)
 	_enable_attack_hitbox_for(hit2_active_time)
@@ -304,15 +321,20 @@ func _start_attack2() -> void:
 		anim.frame = 0
 		anim.play(a)
 
-	await get_tree().create_timer(attack2_lock_time).timeout
+	await get_tree().create_timer(attack2_lock_time, false).timeout
+	if generation != action_generation:
+		return
 	_finish_attack_sequence()
 
 
 func _finish_attack_sequence() -> void:
+	var generation: int = action_generation
 	combo_step = 0
 	if enabled_machine_manager:
 		enabled_machine_manager.notify_attack_finished()
-	await get_tree().create_timer(attack_cooldown).timeout
+	await get_tree().create_timer(attack_cooldown, false).timeout
+	if generation != action_generation:
+		return
 	can_attack = true
 
 
@@ -339,7 +361,7 @@ func start_dash_sequence() -> void:
 	anim.play("dash_" + get_direction_string(dash_dir))
 	
 	if health_component and health_component.has_method("start_invincibility"):
-		await health_component.start_invincibility(dash_timer.wait_time, true)
+		health_component.start_invincibility(dash_invincibility_time, true)
 
 
 func update_dash_physics(_delta: float) -> void:
@@ -347,6 +369,10 @@ func update_dash_physics(_delta: float) -> void:
 
 
 func start_dash_attack_sequence() -> void:
+	action_generation += 1
+	var generation: int = action_generation
+	if health_component:
+		health_component.start_invincibility(dash_attack_invincibility_time, true)
 	if dash_timer and not dash_timer.is_stopped():
 		dash_timer.stop()
 	is_dashing = false
@@ -384,12 +410,15 @@ func start_dash_attack_sequence() -> void:
 			animation_duration += frames.get_frame_duration(anim_to_play, frame_index)
 		animation_duration /= frames.get_animation_speed(anim_to_play)
 		anim.play(anim_to_play, animation_duration / dash_attack_duration)
-	await get_tree().create_timer(dash_attack_duration).timeout
+	await get_tree().create_timer(dash_attack_duration, false).timeout
+	if generation != action_generation:
+		return
 
 	_finish_dash_attack_sequence()
 
 
 func _finish_dash_attack_sequence() -> void:
+	var generation: int = action_generation
 	is_dash_attacking = false
 	if enabled_machine_manager:
 		enabled_machine_manager.notify_dash_attack_finished()
@@ -397,7 +426,9 @@ func _finish_dash_attack_sequence() -> void:
 	is_dash_on_cooldown = true
 	dash_cooldown.start(dash_cooldown_time)
 
-	await get_tree().create_timer(attack_cooldown).timeout
+	await get_tree().create_timer(attack_cooldown, false).timeout
+	if generation != action_generation:
+		return
 	can_attack = true
 
 
@@ -411,6 +442,10 @@ func update_dash_attack_physics(delta: float) -> void:
 
 
 func _on_dash_timer_timeout() -> void:
+	if not is_dashing:
+		return
+	if health_component:
+		health_component.end_dash_invincibility()
 	is_dashing = false
 	is_dash_on_cooldown = true
 	dash_cooldown.start(dash_cooldown_time)
@@ -430,7 +465,7 @@ func _enable_attack_hitbox_for(dur: float) -> void:
 	hitbox_generation += 1
 	var generation: int = hitbox_generation
 	col.disabled = false
-	await get_tree().create_timer(dur).timeout
+	await get_tree().create_timer(dur, false).timeout
 	if generation == hitbox_generation:
 		col.disabled = true
 
@@ -506,8 +541,34 @@ func set_camera_limits(left: Node2D, right: Node2D, bottom: Node2D, top: Node2D)
 	camera.limit_right = ceil(right.global_position.x)
 
 
+func cancel_gameplay_actions() -> void:
+	action_generation += 1
+	hitbox_generation += 1
+	if is_dashing or is_dash_attacking:
+		is_dash_on_cooldown = true
+		dash_cooldown.start(dash_cooldown_time)
+	dash_timer.stop()
+	is_dashing = false
+	is_dash_attacking = false
+	combo_step = 0
+	combo_window_open = false
+	combo_buffered = false
+	can_attack = not is_dead
+	velocity = Vector2.ZERO
+	var col: CollisionShape2D = area_attack.get_node("attack_colison")
+	col.set_deferred("disabled", true)
+	if health_component:
+		health_component.end_dash_invincibility()
+	if enabled_machine_manager:
+		enabled_machine_manager.dash_attack_queued = false
+		enabled_machine_manager.dash_attack_grace_left = 0.0
+
+
 func handle_death() -> void:
+	if is_dead:
+		return
 	is_dead = true
+	cancel_gameplay_actions()
 	velocity = Vector2.ZERO
 	player_colision.set_deferred("disabled", true)
 	if death_sfx:
@@ -561,9 +622,3 @@ func _on_animacoes_frame_changed() -> void:
 		match anim.frame:
 			3, 7:
 				footsteps_sfx.play()
-
-
-func _on_animacoes_animation_finished() -> void:
-	if anim.animation.begins_with("dash_") and not anim.animation.begins_with("dash_attack"):
-		if enabled_machine_manager:
-			enabled_machine_manager.notify_dash_finished()

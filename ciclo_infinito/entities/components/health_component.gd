@@ -18,7 +18,11 @@ signal changed_health(current_health : float)
 
 
 var current_health : float
-var is_invincible = false
+var is_invincible: bool = false
+var _damage_invincibility_left: float = 0.0
+var _dash_invincibility_left: float = 0.0
+var _suppressed_collision_bits: int = 0
+var _requested_collision_mask: int = -1
 
 
 func _ready() -> void:
@@ -26,13 +30,19 @@ func _ready() -> void:
 	current_health = max_health
 
 
+func _physics_process(delta: float) -> void:
+	_damage_invincibility_left = maxf(0.0, _damage_invincibility_left - delta)
+	_dash_invincibility_left = maxf(0.0, _dash_invincibility_left - delta)
+	_sync_invincibility()
+
+
 func take_damage(damage_amount: float, hit_direction: Vector2 = Vector2.ZERO) -> void:
-	if parent is Player and (parent.is_in_state("Dash") or 
-							 parent.is_in_state("DashAttack") or 
-							 parent.is_in_state("Dead") or 
-							 parent.is_in_state("Dialogue")):
-		return 
-	
+	if current_health <= 0.0:
+		return
+	if parent is Player and (parent.is_dead or parent.get_current_base_state() in [
+			"Dead", "Dialogue", "Cutscene"]):
+		return
+
 	if is_invincible:
 		return
 	
@@ -89,19 +99,32 @@ func die() -> void:
 	death_scene.set_layer(100)
 
 
-func start_invincibility(duration: float, is_dash : bool = false) -> void:
-	is_invincible = true
-	
-	if Util.is_collision_mask_layer_set(parent,"Enemy"):
-		parent.set_deferred("collision_mask",parent.collision_mask^Util.collision_layer_values["Enemy"])
-	if is_dash and Util.is_collision_mask_layer_set(parent,"Static Interactive"):
-		parent.set_deferred("collision_mask",parent.collision_mask^16)
-	
-	await get_tree().create_timer(duration).timeout
-	
-	if not Util.is_collision_mask_layer_set(parent,"Enemy"):
-		parent.set_deferred("collision_mask",parent.collision_mask^Util.collision_layer_values["Enemy"])
-	if is_dash and not Util.is_collision_mask_layer_set(parent,"Static Interactive"):
-		parent.set_deferred("collision_mask",parent.collision_mask^24)
-	
-	is_invincible = false
+func start_invincibility(duration: float, is_dash: bool = false) -> void:
+	if is_dash:
+		# O dash e a transição para o giro têm janelas independentes do dano recebido.
+		_dash_invincibility_left = maxf(0.0, duration)
+	else:
+		_damage_invincibility_left = maxf(_damage_invincibility_left, duration)
+	_sync_invincibility()
+
+
+func end_dash_invincibility() -> void:
+	_dash_invincibility_left = 0.0
+	_sync_invincibility()
+
+
+func _sync_invincibility() -> void:
+	is_invincible = _damage_invincibility_left > 0.0 or _dash_invincibility_left > 0.0
+	var ignored_bits: int = 0
+	if is_invincible:
+		ignored_bits |= int(Util.collision_layer_values.get("Enemy", 0))
+	if _dash_invincibility_left > 0.0:
+		ignored_bits |= int(Util.collision_layer_values.get("Static Interactive", 0))
+
+	# Restaura apenas bits que esta proteção removeu; nunca adiciona camadas ausentes.
+	var original_mask: int = parent.collision_mask | _suppressed_collision_bits
+	_suppressed_collision_bits = original_mask & ignored_bits
+	var next_mask: int = original_mask & ~ignored_bits
+	if parent.collision_mask != next_mask or _requested_collision_mask != next_mask:
+		_requested_collision_mask = next_mask
+		parent.set_deferred("collision_mask", next_mask)

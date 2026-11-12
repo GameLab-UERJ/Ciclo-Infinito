@@ -1765,6 +1765,30 @@ script = ExtResource("32_qwspa")
 from = "Entry"
 to = "Enabled"
 
+[sub_resource type="Resource" id="Transition_Dialogue_death"]
+script = ExtResource("32_qwspa")
+from = "Dialogue"
+to = "Dead"
+conditions = {
+"die": SubResource("Resource_arp52")
+}
+
+[sub_resource type="Resource" id="Transition_Cutscene_death"]
+script = ExtResource("32_qwspa")
+from = "Cutscene"
+to = "Dead"
+conditions = {
+"die": SubResource("Resource_arp52")
+}
+
+[sub_resource type="Resource" id="Transition_Entry_death"]
+script = ExtResource("32_qwspa")
+from = "Entry"
+to = "Dead"
+conditions = {
+"die": SubResource("Resource_arp52")
+}
+
 [sub_resource type="Resource" id="Resource_qwspa"]
 script = ExtResource("30_wy7bt")
 states = {
@@ -1776,17 +1800,20 @@ states = {
 }
 transitions = {
 "Cutscene": {
+"Dead": SubResource("Transition_Cutscene_death"),
 "Enabled": SubResource("Resource_a2brg")
 },
 "Dialogue": {
+"Dead": SubResource("Transition_Dialogue_death"),
 "Enabled": SubResource("Resource_rtlkk")
 },
 "Enabled": {
-"Cutscene": SubResource("Resource_ssgi7"),
 "Dead": SubResource("Resource_c112w"),
+"Cutscene": SubResource("Resource_ssgi7"),
 "Dialogue": SubResource("Resource_u37te")
 },
 "Entry": {
+"Dead": SubResource("Transition_Entry_death"),
 "Enabled": SubResource("Resource_7otdo")
 }
 }
@@ -1914,7 +1941,6 @@ scale = Vector2(0.9090909, 0.9090909)
 stream = ExtResource("33_2soq1")
 volume_db = -10.0
 
-[connection signal="animation_finished" from="animacoes" to="." method="_on_animacoes_animation_finished"]
 [connection signal="frame_changed" from="animacoes" to="." method="_on_animacoes_frame_changed"]
 [connection signal="timeout" from="dash_timer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="dash_cooldown" to="." method="_on_dash_cooldown_timeout"]
