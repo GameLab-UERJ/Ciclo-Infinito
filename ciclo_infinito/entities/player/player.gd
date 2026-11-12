@@ -4,11 +4,13 @@ extends CharacterBody2D
 @export var max_health: float = 25.0:
 	set(value):
 		max_health = value
-		if health_component:
+		if health_component and "max_health" in health_component:
 			health_component.max_health = max_health
 
 @export var attack1_damage: float = 5.0 ## Dano base do 1º golpe (escalará com Força)
 @export var attack2_damage: float = 5.0 ## Dano base do 2º golpe (escalará com Força)
+@export var dash_attack_damage: float = 7.0 ## Dano base do Dash Attack (escalará com Força)
+@export var dash_attack_strength_multiplier: float = 1.2 ## Escalonamento de Força no Dash Attack
 @export var move_speed: float = 240.00
 
 @export_group("Attack")
@@ -26,6 +28,13 @@ extends CharacterBody2D
 @export var dash_speed_multiplier: float = 3.0
 @export var dash_duracao := 0.2
 
+@export_group("Dash Attack")
+@export var dash_attack_speed_multiplier: float = 1.5 ## Velocidade inicial do deslize
+@export var dash_attack_friction: float = 1200.0 ## Desaceleração durante o deslize
+@export var dash_attack_duration: float = 0.4 ## Duração do giro e da janela de dano
+@export var dash_attack_control: float = 0.65 ## Fração da velocidade normal ao guiar o giro
+@export var dash_attack_input_grace: float = 0.1 ## Tolerância de ataque após o dash
+
 @export_group("Hitboxes")
 @export_subgroup("Hitbox sizes")
 @export var hitbox_size_right: Vector2 = Vector2(50, 25)
@@ -37,11 +46,17 @@ extends CharacterBody2D
 @export var hitbox_offset_left:  Vector2 = Vector2(-18, 0)
 @export var hitbox_offset_up:    Vector2 = Vector2(0, -18)
 @export var hitbox_offset_down:  Vector2 = Vector2(0, 18)
+@export_subgroup("Dash Attack Hitbox")
+@export var dash_attack_radius: float = 28.0
+
+var dash_attack_targets: Dictionary = {}
+var hitbox_generation: int = 0
 
 var is_dead: bool = false
 var last_facing: String = "down"
 var attack_facing: String = "down"
 var is_dashing: bool = false
+var is_dash_attacking: bool = false
 var is_dash_on_cooldown: bool = false
 var dash_dir: Vector2 = Vector2.ZERO
 var next_direction: Vector2 = Vector2(0, 1)
@@ -108,9 +123,11 @@ func _setup_progression_component() -> void:
 func _on_attributes_updated(final_attrs: CharacterAttributes) -> void:
 	if final_attrs and health_component:
 		max_health = final_attrs.vitality
-		health_component.max_health = final_attrs.vitality
-		health_component.current_health = min(health_component.current_health, health_component.max_health)
-		health_component.update_health_bar()
+		if "max_health" in health_component:
+			health_component.max_health = final_attrs.vitality
+			health_component.current_health = min(health_component.current_health, health_component.max_health)
+			if health_component.has_method("update_health_bar"):
+				health_component.update_health_bar()
 
 
 func _physics_process(_delta: float) -> void:
@@ -178,6 +195,12 @@ func can_dash() -> bool:
 
 # COMBATE E DANO (Agora utilizando os atributos Força, Magia e Resistencia)
 func _on_area_attack_body_entered(body: Node2D) -> void:
+	if is_dead or get_current_base_state() not in ["Enabled", "Entry", ""]:
+		return
+	if is_dash_attacking:
+		if dash_attack_targets.has(body.get_instance_id()):
+			return
+		dash_attack_targets[body.get_instance_id()] = true
 	if not body.has_node("HealthComponent"):
 		return
 	
@@ -192,10 +215,19 @@ func _on_area_attack_body_entered(body: Node2D) -> void:
 		damage_amount = attack2_damage + (final_strength * 1.3)
 	elif combo_step == 3:
 		damage_amount = attack1_damage + (final_strength * 1.5)
+	elif is_dash_attacking:
+		damage_amount = calculate_dash_attack_damage(final_strength)
 		
 	if damage_amount > 0.0:
 		var knockback_direction: Vector2 = (body.global_position - global_position).normalized()
 		body.get_node("HealthComponent").take_damage(damage_amount, knockback_direction)
+
+
+func calculate_dash_attack_damage(final_strength: float) -> float:
+	var damage: float = dash_attack_damage + (final_strength * dash_attack_strength_multiplier)
+	if progression and progression.has_method("get_dash_attack_damage_bonus"):
+		damage += progression.get_dash_attack_damage_bonus()
+	return damage
 
 
 func cast_magic_skill(skill_name: String, _target_direction: Vector2 = Vector2.ZERO) -> float:
@@ -294,7 +326,6 @@ func update_attack_physics(_delta: float) -> void:
 
 func start_dash_sequence() -> void:
 	is_dashing = true
-	anim.play("dash_" + get_direction_string(next_direction))
 	dash_sfx.play(0.4)
 	dash_timer.start()
 	is_dash_on_cooldown = true
@@ -305,6 +336,7 @@ func start_dash_sequence() -> void:
 		dash_direction = in_dir
 		next_direction = in_dir
 	dash_dir = dash_direction.normalized()
+	anim.play("dash_" + get_direction_string(dash_dir))
 	
 	if health_component and health_component.has_method("start_invincibility"):
 		await health_component.start_invincibility(dash_timer.wait_time, true)
@@ -315,22 +347,67 @@ func update_dash_physics(_delta: float) -> void:
 
 
 func start_dash_attack_sequence() -> void:
-	# Preparado para a animacao dash_attack)
-	var anim_spin := "dash_attack"
-	if anim.sprite_frames and anim.sprite_frames.has_animation(anim_spin):
-		anim.play(anim_spin)
-		await anim.animation_finished
-	else:
-		# Nao executa nada ainda
-		await get_tree().process_frame
+	if dash_timer and not dash_timer.is_stopped():
+		dash_timer.stop()
+	is_dashing = false
+	is_dash_attacking = true
+	combo_step = 0
+	dash_attack_targets.clear()
+	can_attack = false
 
+	# Garante a direção do ataque alinhada ao dash
+	var attack_dir = dash_dir if dash_dir != Vector2.ZERO else next_direction
+	if attack_dir == Vector2.ZERO:
+		attack_dir = Vector2.DOWN
+	dash_dir = attack_dir.normalized()
+	attack_facing = get_direction_string(dash_dir)
+
+	# Deslize inicial na direção do dash com velocidade controlada
+	velocity = dash_dir * (move_speed * dash_attack_speed_multiplier)
+
+	if attack_sfxplay:
+		attack_sfxplay.play()
+
+	_apply_dash_attack_hitbox()
+	_enable_attack_hitbox_for(dash_attack_duration)
+
+	var anim_to_play := "dash_attack_" + attack_facing
+	if not (anim.sprite_frames and anim.sprite_frames.has_animation(anim_to_play)):
+		anim_to_play = "dash_attack"
+
+	if anim.sprite_frames and anim.sprite_frames.has_animation(anim_to_play):
+		anim.stop()
+		anim.frame = 0
+		var frames: SpriteFrames = anim.sprite_frames
+		var animation_duration: float = 0.0
+		for frame_index in frames.get_frame_count(anim_to_play):
+			animation_duration += frames.get_frame_duration(anim_to_play, frame_index)
+		animation_duration /= frames.get_animation_speed(anim_to_play)
+		anim.play(anim_to_play, animation_duration / dash_attack_duration)
+	await get_tree().create_timer(dash_attack_duration).timeout
+
+	_finish_dash_attack_sequence()
+
+
+func _finish_dash_attack_sequence() -> void:
+	is_dash_attacking = false
 	if enabled_machine_manager:
 		enabled_machine_manager.notify_dash_attack_finished()
 
+	is_dash_on_cooldown = true
+	dash_cooldown.start(dash_cooldown_time)
 
-func update_dash_attack_physics(_delta: float) -> void:
-	# Preparado para controlar a fisica durante o giro do Dash Attack
-	pass
+	await get_tree().create_timer(attack_cooldown).timeout
+	can_attack = true
+
+
+func update_dash_attack_physics(delta: float) -> void:
+	var input_direction: Vector2 = get_input_direction()
+	var target_velocity: Vector2 = input_direction * move_speed * dash_attack_control
+	velocity = velocity.move_toward(target_velocity, dash_attack_friction * delta)
+	if input_direction != Vector2.ZERO:
+		next_direction = input_direction
+		last_facing = get_direction_string(input_direction)
 
 
 func _on_dash_timer_timeout() -> void:
@@ -350,16 +427,30 @@ func _on_dash_cooldown_timeout() -> void:
 # ==============================================================================
 func _enable_attack_hitbox_for(dur: float) -> void:
 	var col: CollisionShape2D = area_attack.get_node("attack_colison")
+	hitbox_generation += 1
+	var generation: int = hitbox_generation
 	col.disabled = false
 	await get_tree().create_timer(dur).timeout
-	col.disabled = true
+	if generation == hitbox_generation:
+		col.disabled = true
+
+
+func _apply_dash_attack_hitbox() -> void:
+	var col: CollisionShape2D = area_attack.get_node("attack_colison")
+	var circle: CircleShape2D = col.shape as CircleShape2D
+	if circle == null:
+		circle = CircleShape2D.new()
+		col.shape = circle
+	circle.radius = dash_attack_radius
+	col.position = Vector2.ZERO
 
 
 func _apply_attack_hitbox_for_facing(facing: String) -> void:
 	var col: CollisionShape2D = area_attack.get_node("attack_colison")
 	var rect := col.shape as RectangleShape2D
 	if rect == null:
-		return
+		rect = RectangleShape2D.new()
+		col.shape = rect
 	match facing:
 		"right":
 			rect.size = hitbox_size_right
@@ -378,6 +469,9 @@ func _apply_attack_hitbox_for_facing(facing: String) -> void:
 func _update_attack_area_anchor() -> void:
 	if combo_step > 0:
 		_apply_attack_hitbox_for_facing(attack_facing)
+		return
+	if is_dash_attacking:
+		_apply_dash_attack_hitbox()
 		return
 	var input_dir: Vector2 = get_input_direction()
 	var facing: String = get_direction_string(input_dir) if input_dir != Vector2.ZERO else last_facing
@@ -470,6 +564,6 @@ func _on_animacoes_frame_changed() -> void:
 
 
 func _on_animacoes_animation_finished() -> void:
-	if anim.animation.begins_with("dash"):
+	if anim.animation.begins_with("dash_") and not anim.animation.begins_with("dash_attack"):
 		if enabled_machine_manager:
 			enabled_machine_manager.notify_dash_finished()

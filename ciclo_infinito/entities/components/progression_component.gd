@@ -166,3 +166,28 @@ func modify_skill(skill_name: String, key: String, value: Variant) -> void:
 # Exemplo de execucao centralizada de habilidade magica que escala com Magia
 func get_magic_damage(base_power: float = 10.0, multiplier: float = 1.0) -> float:
 	return (base_power + get_final_attributes().magic * 1.5) * multiplier
+
+
+func get_boons_for_skill(skill: Boon.AffectedSkill) -> Array[Boon]:
+	var result: Array[Boon] = []
+	for boon in boons:
+		if boon and skill in boon.affected_skill:
+			result.append(boon)
+	return result
+
+
+func has_boon_for_skill(skill: Boon.AffectedSkill) -> bool:
+	for boon in boons:
+		if boon and skill in boon.affected_skill:
+			return true
+	return false
+
+
+func get_dash_attack_damage_bonus() -> float:
+	var bonus: float = 0.0
+	for boon in get_boons_for_skill(Boon.AffectedSkill.DASH_ATTACK):
+		if boon.common_modifier and boon.common_modifier.strength > 0:
+			bonus += float(boon.common_modifier.strength) * 1.5
+	if skills.has("dash_attack"):
+		bonus += float(skills["dash_attack"].get("bonus_damage", 0.0))
+	return bonus
