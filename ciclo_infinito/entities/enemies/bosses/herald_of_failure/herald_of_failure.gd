@@ -38,7 +38,6 @@ var _moving_limits : Rect2
 @onready var attack_2_sfx: AudioStreamPlayer2D = $Attack2Sfx
 @onready var camera_focus: Marker2D = $CameraFocus
 @onready var attack_sfx : Dictionary = {"attack_1":attack_1_sfx,"attack_2":attack_2_sfx}
-@onready var health_component: HealthComponent = $HealthComponent
 
 
 func _ready() -> void:
