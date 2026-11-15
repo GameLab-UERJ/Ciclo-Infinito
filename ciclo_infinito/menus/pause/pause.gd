@@ -126,3 +126,7 @@ func _on_full_screen_button_pressed() -> void:
 
 func _on_button_mouse_entered() -> void:
 	hover_sfx.play(0.37)
+
+
+func _on_report_bug_button_pressed() -> void:
+	OS.shell_open("https://forms.gle/NCdLRCVZu1WebSMy9")
