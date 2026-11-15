@@ -38,7 +38,6 @@ var _moving_limits : Rect2
 @onready var attack_2_sfx: AudioStreamPlayer2D = $Attack2Sfx
 @onready var camera_focus: Marker2D = $CameraFocus
 @onready var attack_sfx : Dictionary = {"attack_1":attack_1_sfx,"attack_2":attack_2_sfx}
-@onready var health_component: HealthComponent = $HealthComponent
 
 
 func _ready() -> void:
@@ -114,11 +113,10 @@ func spawn_meteor_at_player(amount : float = 1, time_to_drop : float = 0.3, offs
 
 
 func damage_player() -> void:
-	player.health_component.take_damage(self,calculate_damage(player),Vector2.ZERO)
+	player.health_component.take_damage(self,calculate_damage(),Vector2.ZERO)
 
 
-func calculate_damage(body : Character) -> float:
-	#return progression_component.apply_damage_reduction(body, attack_damage)
+func calculate_damage() -> float:
 	return attack_damage
 
 
@@ -139,10 +137,6 @@ func _on_sprites_frame_changed() -> void:
 			match sprites.frame:
 				4: 
 					attack_2_sfx.play()
-
-
-func _on_health_component_lost_health(amount: float) -> void:
-	boss_hud.update_health(health_component.current_health)
 
 
 func _on_health_component_died() -> void:

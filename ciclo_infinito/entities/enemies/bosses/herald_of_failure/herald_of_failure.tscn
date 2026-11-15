@@ -842,6 +842,7 @@ script = ExtResource("1_nxqky")
 speed = 200.0
 
 [node name="HealthComponent" type="Node" parent="." unique_id=861637360 node_paths=PackedStringArray("damage_recieved_sfx", "sprite")]
+unique_name_in_owner = true
 script = ExtResource("2_sj6hh")
 max_health = 1600.0
 damage_taken_effect_duration = 0.15
