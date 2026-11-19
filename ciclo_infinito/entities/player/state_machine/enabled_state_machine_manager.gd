@@ -6,6 +6,7 @@ class_name EnabledPlayerStateMachineManager
 
 var current_state: String = "Entry"
 var player: Player
+var dash_attack_grace_left: float = 0.0
 
 
 func _ready() -> void:
@@ -35,6 +36,7 @@ func _physics_process(delta: float) -> void:
 	if not active or player == null or player.is_dead:
 		return
 	
+	dash_attack_grace_left = maxf(0.0, dash_attack_grace_left - delta)
 	_update_fsm_parameters()
 	_handle_input_triggers()
 	
@@ -57,29 +59,29 @@ func _handle_input_triggers() -> void:
 			pass
 		"Idle":
 			if Input.is_action_just_pressed("attack") and player.can_start_attack():
-				happened("attack")
+				happened("dash_attack" if dash_attack_grace_left > 0.0 else "attack")
 			elif Input.is_action_just_pressed("dash") and player.can_dash():
 				happened("dash")
 			elif input_dir != Vector2.ZERO:
 				happened("walk")
-		
+
 		"Walking":
 			if Input.is_action_just_pressed("attack") and player.can_start_attack():
-				happened("attack")
+				happened("dash_attack" if dash_attack_grace_left > 0.0 else "attack")
 			elif Input.is_action_just_pressed("dash") and player.can_dash():
 				happened("dash")
-					
+
 		"Dash":
 			if Input.is_action_just_pressed("attack"):
 				happened("dash_attack")
-				
+
 		"Attack":
 			if Input.is_action_just_pressed("attack") and player.combo_step == 1 and player.combo_window_open:
 				player.combo_buffered = true
 
 
 # TRANSICAO DE ESTADOS
-func _on_transited(_from: Variant, to: Variant) -> void:
+func _on_transited(from: Variant, to: Variant) -> void:
 	current_state = str(to)
 	if debug_label:
 		debug_label.text = current_state
@@ -88,6 +90,9 @@ func _on_transited(_from: Variant, to: Variant) -> void:
 		_resolve_player_ref()
 	if player == null:
 		return
+
+	if str(from) == "Dash" and str(to) != "DashAttack":
+		dash_attack_grace_left = player.dash_attack_input_grace
 
 	match str(to):
 		"Idle":
@@ -114,6 +119,8 @@ func _on_transited(_from: Variant, to: Variant) -> void:
 			player.start_dash_sequence()
 			
 		"DashAttack":
+			dash_attack_grace_left = 0.0
+			set_param("dash_attack_finished", false)
 			player.start_dash_attack_sequence()
 
 
