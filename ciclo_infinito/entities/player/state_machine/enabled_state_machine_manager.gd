@@ -6,7 +6,6 @@ class_name EnabledPlayerStateMachineManager
 
 var current_state: String = "Entry"
 var player: Player
-var dash_attack_queued: bool = false
 var dash_attack_grace_left: float = 0.0
 
 
@@ -58,21 +57,22 @@ func _handle_input_triggers() -> void:
 	match state_str:
 		"Entry":
 			pass
-		"Idle", "Walking":
-			if Input.is_action_just_pressed("dash") and player.can_dash():
-				dash_attack_queued = Input.is_action_just_pressed("attack")
+		"Idle":
+			if Input.is_action_just_pressed("attack") and player.can_start_attack():
+				happened("dash_attack" if dash_attack_grace_left > 0.0 else "attack")
+			elif Input.is_action_just_pressed("dash") and player.can_dash():
 				happened("dash")
-			elif Input.is_action_just_pressed("attack") and player.can_start_attack():
-				if dash_attack_grace_left > 0.0:
-					happened("dash_attack")
-				else:
-					happened("attack")
-			elif state_str == "Idle" and input_dir != Vector2.ZERO:
+			elif input_dir != Vector2.ZERO:
 				happened("walk")
+
+		"Walking":
+			if Input.is_action_just_pressed("attack") and player.can_start_attack():
+				happened("dash_attack" if dash_attack_grace_left > 0.0 else "attack")
+			elif Input.is_action_just_pressed("dash") and player.can_dash():
+				happened("dash")
+
 		"Dash":
-			dash_attack_grace_left = player.dash_attack_input_grace
-			if dash_attack_queued or Input.is_action_just_pressed("attack"):
-				dash_attack_queued = false
+			if Input.is_action_just_pressed("attack"):
 				happened("dash_attack")
 
 		"Attack":
@@ -81,7 +81,7 @@ func _handle_input_triggers() -> void:
 
 
 # TRANSICAO DE ESTADOS
-func _on_transited(_from: Variant, to: Variant) -> void:
+func _on_transited(from: Variant, to: Variant) -> void:
 	current_state = str(to)
 	if debug_label:
 		debug_label.text = current_state
@@ -90,6 +90,9 @@ func _on_transited(_from: Variant, to: Variant) -> void:
 		_resolve_player_ref()
 	if player == null:
 		return
+
+	if str(from) == "Dash" and str(to) != "DashAttack":
+		dash_attack_grace_left = player.dash_attack_input_grace
 
 	match str(to):
 		"Idle":
