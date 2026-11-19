@@ -2,6 +2,9 @@ extends CharacterBody2D
 class_name Character
 
 
+@onready var health_component: HealthComponent = %HealthComponent
+
+
 func has_status(status_data : StatusData) -> bool:
 	var statuses : Array = self.find_children("*", "Status", true, false)
 	
